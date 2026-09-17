@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+.env
+.env.local
+.env.*.local
+*.ps1
+deploy/README.uk.md
+npm-debug.log

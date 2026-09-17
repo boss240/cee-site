@@ -1,0 +1,1953 @@
+{
+  "Nav": {
+    "community": "Communities & utilities",
+    "business": "Business & industry",
+    "osbb": "HOAs",
+    "citizens": "Private owners",
+    "services": "Services",
+    "projects": "Projects",
+    "blog": "Blog",
+    "about": "About CEE",
+    "contacts": "Contacts",
+    "audiences": "Who we serve",
+    "developers": "RES / BESS developers",
+    "donors": "Donors & investors",
+    "knowledge": "Knowledge base"
+  },
+  "Header": {
+    "cta": "Get a consultation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainNav": "Main navigation",
+    "mobileNav": "Mobile navigation",
+    "skipToContent": "Skip to main content",
+    "login": "Sign in",
+    "account": "Account",
+    "admin": "Admin"
+  },
+  "Theme": {
+    "light": "Light theme",
+    "dark": "Dark theme",
+    "toggle": "Toggle theme"
+  },
+  "Language": {
+    "label": "Language",
+    "uk": "Українська",
+    "en": "English"
+  },
+  "Footer": {
+    "title": "Center for Energy Efficiency",
+    "address": "Ladyzhyn, Vinnytsia region",
+    "sectionsTitle": "Sections",
+    "sectionsNav": "Footer navigation",
+    "documentsTitle": "Documents",
+    "documentsNav": "Legal information",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "copyright": "© {year} Center for Energy Efficiency, Ladyzhyn",
+    "writeUs": "Write to us",
+    "audiencesTitle": "Who we serve",
+    "audiencesNav": "Audiences"
+  },
+  "Common": {
+    "detailsMore": "Learn more →",
+    "backToHome": "Back to home",
+    "contactUs": "Contact us",
+    "apologize": "Sorry for the inconvenience, we're changing the world here!",
+    "inWorkDefault": "This section is still in progress. We're preparing it to be useful, not just present."
+  },
+  "HomePage": {
+    "ticker": [
+      "Survey",
+      "Calculation",
+      "Design",
+      "Support"
+    ],
+    "heroTitlePrefix": "A technical expert center",
+    "heroTitleHighlight": "for energy consumption optimization",
+    "heroText": "We survey, calculate, design and carry it through to a working system — ourselves or with partner contractors, while the expert and technical role stays with the Center. A single window instead of five contractors: you get a result, not a folder of documents.",
+    "heroStats": [
+      {
+        "value": "UAH 1,968.95 M",
+        "label": "Ladyzhyn community energy project portfolio"
+      },
+      {
+        "value": "UAH 3 M · 0%",
+        "label": "HOA loan under the 5-7-9 programme, up to 3 years"
+      },
+      {
+        "value": "3–7 years",
+        "label": "typical payback of electricity solutions"
+      }
+    ],
+    "heroStatsSource": "Source: CEE and the Entrepreneurship Development Fund · September 2026",
+    "ctaPrimary": "Get a consultation",
+    "ctaSecondary": "Programs for HOAs",
+    "whyLabel": "Course of action",
+    "whyTitle": "Why we start with electricity",
+    "whyText": "Heat matters too — but it's more expensive, slower and harder to verify. Electricity gives us a foothold: it's visible on the meter, it reacts quickly to changes, and it's felt in the wallet.",
+    "whyItems": [
+      {
+        "title": "Measurable",
+        "text": "The meter shows kilowatt-hours every day. There's a 'before' and 'after' to compare, not a guess. This data builds a calculation you can verify."
+      },
+      {
+        "title": "Faster than other solutions",
+        "text": "Equipment is installed in days or weeks, not a season. No scaffolding, no weather dependency, no disruption to the building's life."
+      },
+      {
+        "title": "Visible on the bill",
+        "text": "The result shows up in the next payment document. That matters when a board makes the decision: people see what they paid for."
+      },
+      {
+        "title": "Life support",
+        "text": "A battery storage system keeps critical loads running during outages: lighting, pumps, communications, elevators. Insulation alone never provides that."
+      }
+    ],
+    "whyFooter": "This doesn't cancel out thermal modernization. It comes as the next stage — once the consumption profile is clear, there's something to confirm the effect with, and a way to fund the co-owners' contribution.",
+    "segmentsLabel": "Directions",
+    "segmentsTitle": "Different groups — different solutions",
+    "segmentsText": "A community, a business, an HOA, a developer, a donor and a private owner all face different constraints: ownership form, decision-making, access to financing and consumption patterns. One-size-fits-all doesn't work here — so each segment has its own entry point.",
+    "segments": [
+      {
+        "href": "/community",
+        "title": "Communities & utilities",
+        "text": "Energy diagnostics, procurement support, grant readiness, feasibility studies and energy management for communities and municipal utilities."
+      },
+      {
+        "href": "/business",
+        "title": "Business & industry",
+        "text": "Cut costs, prepare an investment project, assess BESS feasibility, improve energy resilience."
+      },
+      {
+        "href": "/osbb",
+        "title": "HOAs",
+        "text": "Solar and storage for the building, metering, financing programmes, then thermal solutions."
+      },
+      {
+        "href": "/developers",
+        "title": "RES / BESS developers",
+        "text": "DSO interaction, technical conditions analysis, financial model, specification and investor-ready decisions."
+      },
+      {
+        "href": "/donors",
+        "title": "Donors, NGOs, investors",
+        "text": "Evidence-based projects, a structured project package, a portfolio of opportunities and a bridge to the community on the ground."
+      },
+      {
+        "href": "/citizens",
+        "title": "Private owners",
+        "text": "Solar and storage for a home — from calculation to a working system, turnkey."
+      }
+    ],
+    "competenciesLabel": "Competencies",
+    "competenciesTitle": "What the Center does",
+    "competenciesText": "A full cycle in one circuit — from measurement to a working system confirmed by metering data. What is usually torn between different contractors, we pull together.",
+    "competencies": [
+      {
+        "n": "01",
+        "title": "Survey and measurement",
+        "text": "Consumption profile, load patterns, metering status, connection capacity, heat loss. The baseline data without which any calculation is just a guess."
+      },
+      {
+        "n": "02",
+        "title": "Calculation and modeling",
+        "text": "Sizing generation capacity and storage capacity to the actual profile. Payback assessment based on current tariffs, not average figures."
+      },
+      {
+        "n": "03",
+        "title": "Design solutions",
+        "text": "System architecture, equipment composition, connection scheme, stage sequencing. A technical specification you can take to a contractor or a financing program."
+      },
+      {
+        "n": "04",
+        "title": "Turnkey implementation",
+        "text": "Procurement, partner contractors, compliance control against the design, sign-off and result verification against metering data. Coordination between participants sits with the Center, not with the client."
+      }
+    ],
+    "diagramLabel": "How it's arranged",
+    "diagramTitle": "Elements of the site's energy system",
+    "diagramText": "Click a node to see its role. Order matters: without measuring the consumption profile and checking connection capacity, every other decision is a guess.",
+    "ctaTitle": "Have a question about your site?",
+    "ctaText": "Describe the situation — we'll tell you where to start."
+  },
+  "SystemDiagram": {
+    "ariaLabel": "Diagram of the site's energy system elements",
+    "footer": "This diagram is illustrative. The actual system composition for a specific site is determined after a survey.",
+    "nodes": [
+      {
+        "id": "pv",
+        "label": "Solar",
+        "role": "Generation source",
+        "details": [
+          "Generates energy during the day, depending on sunlight",
+          "Capacity is sized to the consumption profile, not the roof area",
+          "Surplus is either stored or fed back into the grid"
+        ]
+      },
+      {
+        "id": "bess",
+        "label": "Storage",
+        "role": "Energy storage",
+        "details": [
+          "Stores surplus generation and off-peak tariff energy",
+          "Powers critical loads during outages",
+          "Lifespan is measured in cycles, not years"
+        ]
+      },
+      {
+        "id": "load",
+        "label": "Load",
+        "role": "Site consumption",
+        "details": [
+          "Heating, lighting, elevators, pumps, equipment",
+          "The consumption profile determines what's even worth installing",
+          "Without measuring the profile, the payback calculation is unreliable"
+        ]
+      },
+      {
+        "id": "ems",
+        "label": "Control",
+        "role": "Distribution logic",
+        "details": [
+          "Decides when to charge, when to discharge, when to draw from the grid",
+          "Accounts for the tariff, generation forecast, and connection limits",
+          "Without this layer, equipment operates blindly"
+        ]
+      },
+      {
+        "id": "meter",
+        "label": "Metering",
+        "role": "Measurement",
+        "details": [
+          "Records what's consumed and what's fed back into the grid",
+          "The basis for settlements with the supplier",
+          "Metering data is the starting point of any energy audit"
+        ]
+      },
+      {
+        "id": "grid",
+        "label": "Grid",
+        "role": "External connection",
+        "details": [
+          "The distribution system operator, the connection point",
+          "Connection capacity limits everything that can be installed",
+          "Grid feed-in terms are set by contract"
+        ]
+      }
+    ]
+  },
+  "OsbbPage": {
+    "metaTitle": "For HOAs",
+    "metaDescription": "Thermal modernization financing programs for HOAs: terms, requirements, contacts and course of action.",
+    "title": "Financing for HOAs",
+    "intro": "The fastest results for an apartment building come from electricity projects: own generation, storage, and consumption management. Thermal modernization comes next — it's more expensive and pays back slower. Below are the programs currently operating in Ukraine, with their terms, requirements and contacts. We verify the data and note the check date.",
+    "whyTitle": "Why electricity comes first",
+    "whyItems": [
+      {
+        "title": "Measurable",
+        "text": "The meter gives daily data. The effect can be calculated, not just estimated by eye."
+      },
+      {
+        "title": "Fast",
+        "text": "Installation takes days or weeks, no scaffolding and no seasonal dependency."
+      },
+      {
+        "title": "Tangible",
+        "text": "The result shows up on the next bill — that's clear to a board of co-owners."
+      },
+      {
+        "title": "Life support",
+        "text": "A battery keeps lighting, pumps and communications running during outages."
+      }
+    ],
+    "programsTitle": "Financing programs",
+    "programsText": "Program terms change. Before applying, it's worth calling the administrator to confirm the current status.",
+    "stepsTitle": "Course of action",
+    "stepsText": "The sequence is roughly the same for all programs.",
+    "steps": [
+      {
+        "title": "Capture the consumption profile",
+        "text": "How much, when, and on what electricity is spent. Without this data, solar and storage capacity are sized by guesswork, and the payback calculation is unreliable."
+      },
+      {
+        "title": "Check connection capacity",
+        "text": "The grid operator contract terms limit what can be installed at all and how much can be fed back into the grid."
+      },
+      {
+        "title": "Hold a co-owners' meeting",
+        "text": "A board decision is required for any program — grant or loan. No application is accepted without minutes."
+      },
+      {
+        "title": "Prepare documents",
+        "text": "Cost estimate, design documentation, HOA financial statements, association registration documents."
+      },
+      {
+        "title": "Set the work sequence",
+        "text": "Start with what pays off fastest: metering, generation, storage, load management. Thermal modernization comes as the next stage."
+      },
+      {
+        "title": "Choose a funding source",
+        "text": "A grant, a loan, or a combination. The choice depends on the scope of work and the HOA's ability to cover its own share."
+      },
+      {
+        "title": "Apply and support the project",
+        "text": "After approval — choosing a contractor, quality control of the work, reporting to the program."
+      }
+    ],
+    "remindersTitle": "Worth remembering",
+    "reminders": [
+      "The information on this page is for guidance only. Final terms are set by the program administrator.",
+      "Submitting an application doesn't guarantee approval. The decision is made by the program's committee.",
+      "We don't publish approval statistics or savings examples we can't back with a source.",
+      "Before making financial decisions, we recommend confirming the terms directly with the program administrator or bank."
+    ],
+    "ctaTitle": "Not sure where to start?",
+    "ctaText": "Describe the building's condition and what's already been done — we'll suggest the right path for your HOA.",
+    "ctaButton": "Get a consultation"
+  },
+  "ProgramCard": {
+    "amountLabel": "Support amount",
+    "cofinancingLabel": "HOA contribution",
+    "coversLabel": "What it covers",
+    "requirementsLabel": "What's required from the HOA",
+    "contactsLabel": "Program contacts",
+    "sourceLabel": "Source",
+    "checkedLabel": "Checked",
+    "staleWarning": "This data needs confirming — it hasn't been checked in over 60 days."
+  },
+  "AboutPage": {
+    "metaTitle": "About CEE",
+    "metaDescription": "The Ladyzhyn Center for Energy Efficiency — a technical expert center for energy consumption optimization.",
+    "label": "About the Center",
+    "title": "A technical expert center for energy consumption optimization",
+    "intro": "The Center for Energy Efficiency in Ladyzhyn works with community facilities, businesses, HOAs and private owners: it surveys, calculates, designs solutions and carries them through to a working system — ourselves or with partner contractors, while the expert, technical and technological role stays with the Center.",
+    "principlesTitle": "Operating principles",
+    "principles": [
+      {
+        "title": "Measurement first",
+        "text": "No recommendation is made without baseline data. Consumption profile, metering status, connection capacity — that's where any work begins."
+      },
+      {
+        "title": "Solutions built for the site",
+        "text": "No two sites are alike. What paid off in one building might not pay off next door due to a different consumption pattern or grid limits."
+      },
+      {
+        "title": "Sequence, not everything at once",
+        "text": "Work is broken into stages by speed of payback. Metering and electricity first, then thermal solutions and building envelope work."
+      },
+      {
+        "title": "Verifiability",
+        "text": "The effect is confirmed by metering data after implementation. Every figure we publish has a source and a check date."
+      }
+    ],
+    "channelsTitle": "How we work",
+    "channelsText": "The website is one channel, not the service itself. The real work happens on site and in the project materials.",
+    "channels": [
+      {
+        "title": "On-site work",
+        "text": "Surveying, measurement, metering equipment installation, work acceptance."
+      },
+      {
+        "title": "Design materials",
+        "text": "Technical specifications, calculations, diagrams, document packages for financing programs."
+      },
+      {
+        "title": "This website",
+        "text": "An entry point: explaining the process, verified program data, a contact form."
+      },
+      {
+        "title": "Outreach",
+        "text": "Explanations for co-owners' meetings, community gatherings, materials for local government bodies."
+      }
+    ],
+    "ctaTitle": "Describe your site",
+    "ctaText": "Building type, current energy source, what's already been done — that's enough to start a conversation.",
+    "ctaButton": "Get a consultation"
+  },
+  "ContactsPage": {
+    "metaTitle": "Contacts",
+    "metaDescription": "Contact the Center for Energy Efficiency in Ladyzhyn: request form, phone, email, on-site assistant.",
+    "label": "Get in touch",
+    "title": "Contacts",
+    "intro": "Describe your situation — we'll tell you where to start. A few sentences are enough, we'll clarify the rest in a conversation.",
+    "formTitle": "Request form",
+    "detailsTitle": "Other ways to reach us",
+    "addressLabel": "Address",
+    "address": "Ladyzhyn, Vinnytsia region",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "assistantLabel": "Assistant on the site",
+    "assistantText": "The button at the bottom right. It answers general questions and passes your contact to a specialist together with the conversation.",
+    "responseNote": "We reply within one business day via the channel you provided."
+  },
+  "ContactForm": {
+    "segments": [
+      {
+        "value": "osbb",
+        "label": "HOA"
+      },
+      {
+        "value": "business",
+        "label": "Business or industry"
+      },
+      {
+        "value": "community",
+        "label": "Community, utility or NGO"
+      },
+      {
+        "value": "developer",
+        "label": "RES / BESS developer"
+      },
+      {
+        "value": "donor",
+        "label": "Donor or investor"
+      },
+      {
+        "value": "citizen",
+        "label": "Private owner"
+      },
+      {
+        "value": "other",
+        "label": "Other"
+      },
+      {
+        "value": "subscription",
+        "label": "Knowledge base subscription"
+      }
+    ],
+    "nameLabel": "How should we address you",
+    "nameError": "Enter a name (at least 2 characters).",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "contactHint": "One is enough: phone or email — whichever suits you.",
+    "contactError": "Leave a phone or an email — otherwise we can't reply.",
+    "emailError": "Check the email address.",
+    "phoneError": "Check the phone number.",
+    "segmentLabel": "Who you are",
+    "messageLabel": "Describe the situation",
+    "messagePlaceholder": "Type of site, what has been done, what worries you. A few sentences are enough — we'll clarify the rest in a conversation.",
+    "messageError": "Describe the question in more detail (at least 10 characters).",
+    "consent": "I consent to the processing of my personal data to handle this request.",
+    "submit": "Send",
+    "sending": "Sending…",
+    "submitHint": "The button becomes active after you consent to data processing.",
+    "sentTitle": "Thank you, {name}. Request received.",
+    "sentText": "A Center specialist will look at your situation and get back to you within one business day via the channel you provided.",
+    "sentNext": "While you wait, the AI assistant at the bottom right can answer general questions about programmes, process and documents.",
+    "errorHint": "Couldn't send. Try again in a minute — or write to us via the AI assistant at the bottom right, it will pass on your contact.",
+    "subscriptionMessage": "I would like to subscribe to the \"{plan}\" plan of the CEE knowledge base. Please send the terms and price.",
+    "planNames": {
+      "premium": "Premium",
+      "enterprise": "Enterprise"
+    }
+  },
+  "CitizensPage": {
+    "heroLabel": "For Residents",
+    "heroTitle": "Energy under your roof",
+    "heroText": "Solar panels, energy storage, smart control — we size everything for your home, consumption profile, and roof. Lower your electricity bills, gain energy independence, keep the lights on during blackouts.",
+    "ctaPrimary": "Get a consultation",
+    "ctaSecondary": "For HOAs",
+    "whyLabel": "Why consider it",
+    "whyTitle": "Cheaper, more reliable, self-sufficient",
+    "whyText": "For a private house, an energy project isn't a trend — it's a smart way to cut utility costs and have power when the grid goes down.",
+    "whyItems": [
+      {
+        "title": "Lights on during blackouts",
+        "text": "The battery backup powers your home when the grid fails. Fridge, lights, pump, gas boiler — everything works as usual."
+      },
+      {
+        "title": "Pay less for electricity",
+        "text": "Solar generates during the day when you're home or at work. Storage captures that energy and powers the house at night cheaper than buying from the grid."
+      },
+      {
+        "title": "Earn from extra power",
+        "text": "On sunny days, panels produce more than you need. The surplus feeds into the grid — the utility pays you under your agreement."
+      }
+    ],
+    "solutionsLabel": "Options",
+    "solutionsTitle": "What's possible for your home",
+    "solutionsText": "Not everyone needs everything. We explain how to combine components to fit your needs and budget.",
+    "solutions": [
+      {
+        "title": "Solar + net metering",
+        "text": "Panels generate during the day. Surplus feeds to the grid — you receive payments from the utility."
+      },
+      {
+        "title": "Solar + battery storage",
+        "text": "Panels generate, battery stores it. At night you power the house with your own energy — no grid fees."
+      },
+      {
+        "title": "Solar + battery + backup",
+        "text": "Complete independence — during blackouts the battery powers you, during the day panels charge, at night you use stored energy."
+      },
+      {
+        "title": "Battery only without solar",
+        "text": "If location doesn't allow panels — a battery charges from the grid at night rates and powers the house during the day at cheaper cost."
+      }
+    ],
+    "stepsLabel": "Process",
+    "stepsTitle": "How it works",
+    "stepsText": "From first consultation to turning on the lights — 2-4 months depending on complexity and weather.",
+    "steps": [
+      {
+        "title": "Consultation",
+        "text": "We discuss your home, roof, and electricity bills from the past year. We determine what's actually possible."
+      },
+      {
+        "title": "Roof survey",
+        "text": "We inspect your roof, take photos, assess orientation, shade from neighbors, and usable area for panels."
+      },
+      {
+        "title": "Usage profile analysis",
+        "text": "We analyze your bills to see when you use the most energy, and how to combine generation and storage optimally."
+      },
+      {
+        "title": "Preliminary calculation",
+        "text": "Equipment cost, installation complexity, expected annual savings. We calculate exactly how many years until payback."
+      },
+      {
+        "title": "Design documentation",
+        "text": "We prepare connection drawings, diagrams, and calculations. Everything the utility and installers need."
+      },
+      {
+        "title": "Installation & connection",
+        "text": "We install panels, meter, battery, control system. We coordinate with the utility and bring your system online."
+      },
+      {
+        "title": "Training & support",
+        "text": "We explain how to use the system, what to watch for in the app, when to call for maintenance."
+      }
+    ],
+    "ctaTitle": "Ready to see what it costs?",
+    "ctaText": "Tell us about your home, how many people live there, estimated roof area — we calculate the cost and show payback period."
+  },
+  "CommunityPage": {
+    "heroLabel": "For Community & NGOs",
+    "heroTitle": "Community power",
+    "heroText": "For community centers, hospitals, schools, non-profits — we develop solutions accounting for public property specifics, grant opportunities, and energy independence needs.",
+    "ctaPrimary": "Get a consultation",
+    "ctaSecondary": "About CEE",
+    "whyLabel": "Why it matters",
+    "whyTitle": "Reliability + Savings + Grants",
+    "whyText": "For public facilities, energy projects work differently than private sector. There are grants, but also bureaucracy. We understand both.",
+    "whyItems": [
+      {
+        "title": "We understand public property",
+        "text": "Decision-making is different: you need tenders, reports, approvals from authorities. We know how to structure a project so it gets approved."
+      },
+      {
+        "title": "We know the grant programs",
+        "text": "Public facilities have special support programs. We help identify which conditions fit your facility."
+      },
+      {
+        "title": "We ensure energy independence",
+        "text": "Medical clinics, hospitals, evacuation centers need reliable power. We design systems that work 100% during blackouts."
+      }
+    ],
+    "objectsLabel": "Facilities",
+    "objectsTitle": "Who we work with",
+    "objectsText": "Each facility type has different constraints. We design solutions for what you have.",
+    "objects": [
+      {
+        "title": "Medical facilities",
+        "text": "Clinics, practices, small hospitals — need backup power for equipment and refrigeration."
+      },
+      {
+        "title": "Educational institutions",
+        "text": "Schools, gymnasiums, training centers — are heavy energy users with flexible schedules and heating load shifting options."
+      },
+      {
+        "title": "Community centers",
+        "text": "Community centers, libraries, civic buildings dramatically cut utility costs through energy projects."
+      },
+      {
+        "title": "NGOs & volunteer centers",
+        "text": "Organizations working with distributed energy gain autonomy with solar, focusing on their mission instead of electricity bills."
+      }
+    ],
+    "ctaTitle": "Let's figure it out together",
+    "ctaText": "Tell us about your facility, how many people use it, and current energy costs — we'll help identify the most effective solution."
+  },
+  "BusinessPage": {
+    "heroLabel": "For Businesses",
+    "heroTitle": "Energy independence for business",
+    "heroText": "We survey your facility, calculate ROI, design solar, storage, and energy management systems. Scale from 10 kW to several MW to match your needs.",
+    "ctaPrimary": "Get a consultation",
+    "ctaSecondary": "Learn more",
+    "whyLabel": "Why this matters",
+    "whyTitle": "Lower electricity costs + energy reliability",
+    "whyText": "For businesses two metrics matter: production cost and stability. On-site generation delivers both.",
+    "whyItems": [
+      {
+        "title": "Reduces production cost",
+        "text": "Electricity costs more at night and peak hours. On-site generation during the day, storage charging at night rates — baseline electricity cost."
+      },
+      {
+        "title": "Protects from blackouts",
+        "text": "When the grid fails, generation switches to local system. Critical equipment runs, production doesn't stop."
+      },
+      {
+        "title": "Calculate with real numbers",
+        "text": "ROI is based on your actual consumption profile, not averages. You see exactly how many years until payback."
+      }
+    ],
+    "scenariosLabel": "Scenarios",
+    "scenariosTitle": "Typical business challenges",
+    "scenariosText": "Each business has its own schedule and constraints. Here are common problems — here's how to solve them.",
+    "scenarios": [
+      {
+        "title": "Generation and consumption offset in time",
+        "text": "Production runs at night, solar generates only day. Battery stores daytime generation to power nighttime operations."
+      },
+      {
+        "title": "Connection power limits",
+        "text": "The grid operator won't allow higher connection power. Local systems handle peaks, grid supplies base load."
+      },
+      {
+        "title": "Critical load during blackouts",
+        "text": "Equipment is designed for continuous operation — blackouts cause losses. A backup system switches in milliseconds to generation."
+      },
+      {
+        "title": "Understand which projects pay back fast",
+        "text": "Some facilities are built such that energy projects pay back in 1-2 years. Others take 5. We calculate exactly for each site."
+      }
+    ],
+    "ctaTitle": "Ready to get into details?",
+    "ctaText": "Describe your production type, consumption volumes, and grid constraints — we'll prepare a preliminary calculation."
+  },
+  "ServicesPage": {
+    "heroLabel": "Single window",
+    "heroTitle": "A result, not advice and a folder of documents",
+    "heroText": "We see it through to the end — ourselves or with partner contractors, while the expert, technical and technological role stays with the Center. You deal with a single window: survey, calculation, design, procurement, implementation and result verification — inside one circuit of responsibility.",
+    "ctaPrimary": "Get a consultation",
+    "windowLabel": "How it works",
+    "windowTitle": "One circuit instead of five contractors",
+    "windowText": "An energy project is usually torn between different contractors: one surveys, another calculates, a third designs, a fourth installs — and none of them answers for the final result. The Center pulls this into a single circuit.",
+    "window": [
+      {
+        "title": "One point of responsibility",
+        "text": "You talk to the Center, not to five contractors. Coordinating the stages is our job, not yours."
+      },
+      {
+        "title": "The expertise stays with the Center",
+        "text": "Where hands are needed, we bring in partner contractors. The expert, technical and technological role stays with us: we set the requirements, control execution and sign off the work."
+      },
+      {
+        "title": "We close with a result",
+        "text": "A project ends not with a folder handed over, but with a working system whose effect is confirmed by metering data."
+      }
+    ],
+    "formatsLabel": "Ways of working",
+    "formatsTitle": "How deep we go",
+    "formatsText": "By default we carry a project through to the result. But if you only need an idea checked or a single stage covered — that's a normal way in too.",
+    "formatsBadge": "Main format",
+    "formats": [
+      {
+        "title": "One-off consultation or expert opinion",
+        "text": "For a quick check of an idea, a risk or a specific decision.",
+        "main": false
+      },
+      {
+        "title": "Retainer",
+        "text": "For regular monitoring, analytics, procurement or regulatory support.",
+        "main": false
+      },
+      {
+        "title": "Project support",
+        "text": "For a specific stage: audit, feasibility study, specification, grant, procurement, connection or financial model.",
+        "main": false
+      },
+      {
+        "title": "Turnkey project",
+        "text": "From the first survey to a working system. Complex energy, investment and infrastructure projects requiring cross-disciplinary coordination and partner contractors.",
+        "main": true
+      },
+      {
+        "title": "Strategic partnership or consortium",
+        "text": "For long development programmes, building a project portfolio and joint participation in grant or investment initiatives.",
+        "main": false
+      }
+    ],
+    "productsLabel": "What the work consists of",
+    "productsTitle": "Eight blocks",
+    "productsText": "These are stages inside a turnkey project. Each can be taken separately if you have the rest covered — but by default we don't stop at any of them.",
+    "resultLabel": "What this stage produces",
+    "priceNote": "Cost and timelines are set by scope after an initial conversation. There is no standard price list: scope depends on the state of the site, the data available and how deep we go.",
+    "products": [
+      {
+        "name": "Energy Diagnostic Start",
+        "task": "Quickly understand where losses are and where to start",
+        "results": [
+          "Short energy profile",
+          "List of problems",
+          "Quick measures",
+          "Savings roadmap"
+        ]
+      },
+      {
+        "name": "Procurement Office Light",
+        "task": "Prepare a procurement without errors or delays",
+        "results": [
+          "Procurement plan",
+          "Technical specification",
+          "Market analysis",
+          "Document package",
+          "Deadline control"
+        ]
+      },
+      {
+        "name": "Grant Ready / Donor Ready",
+        "task": "Turn an idea into a submission-ready package",
+        "results": [
+          "Project concept",
+          "Budget",
+          "Impact logic",
+          "Full donor material set"
+        ]
+      },
+      {
+        "name": "Feasibility Study Ready",
+        "task": "Obtain a document for a decision and for financing",
+        "results": [
+          "Feasibility study",
+          "Financial model",
+          "Risks",
+          "Scenarios"
+        ]
+      },
+      {
+        "name": "DSO Connection Ready",
+        "task": "Reduce the risks of grid connection and DSO interaction",
+        "results": [
+          "DSO interaction package",
+          "Technical conditions analysis",
+          "Connection risks",
+          "Action plan"
+        ]
+      },
+      {
+        "name": "BESS Ready",
+        "task": "Test whether BESS makes economic sense and prepare the next step",
+        "results": [
+          "Preliminary feasibility",
+          "Operating modes",
+          "Payback scenarios",
+          "Specification for the next stage"
+        ]
+      },
+      {
+        "name": "Energy Manager Outsource",
+        "task": "Get systematic consumption management without building a large in-house team",
+        "results": [
+          "Monthly consumption control",
+          "Reporting",
+          "Savings measures",
+          "Project portfolio"
+        ]
+      },
+      {
+        "name": "HIOS Monitor",
+        "task": "Maintain continuous monitoring of grants, tenders and regulation",
+        "results": [
+          "Digests",
+          "Templates",
+          "Trackers",
+          "Analytics",
+          "Fast access to information"
+        ]
+      }
+    ],
+    "digitalLabel": "Digital circuit · online",
+    "digitalTitle": "Metering, monitoring, energy management",
+    "digitalText": "A project doesn't end when the equipment is switched on. For the result to be visible every day rather than once a year in a report, the site needs metering that collects data and a system that shows it and lets you act. If there isn't one, we set it up. If there is one but it doesn't work, we rebuild it.",
+    "digital": [
+      {
+        "title": "Modern metering systems",
+        "text": "Setting up or upgrading metering: devices, data collection, hourly consumption and generation profile. Without it, any effect is a guess, not a fact."
+      },
+      {
+        "title": "Online tracking and control",
+        "text": "Live data from the site: consumption, generation, battery state, deviations from normal. Alerts when something goes wrong — before it shows up on the bill."
+      },
+      {
+        "title": "Analytics for management",
+        "text": "Dashboards and reports that show exactly where the losses are, how the equipment performs and whether the result matches the calculation. For a director, a board or a donor — in plain form."
+      },
+      {
+        "title": "Applications built for the project",
+        "text": "Software tools developed and adapted to a specific site, client and their processes. Not a generic panel like everyone else's, but something your people will actually use."
+      },
+      {
+        "title": "Energy management system implementation",
+        "text": "Energy management as an ongoing process, not a one-off audit: policy, owners, indicators, regular review. Oriented on ISO 50001 logic, scaled to the size of the site."
+      }
+    ],
+    "digitalFooter": "The digital circuit is what makes the promise \"we close with a result\" verifiable. It is from its data that we confirm the effect after implementation.",
+    "ctaTitle": "Where should you start?",
+    "ctaText": "Describe the site and the task — we'll tell you what's needed at the start and what the path to the result looks like."
+  },
+  "Placeholder": {
+    "business": {
+      "title": "For Business",
+      "hint": "Information about solar plants and battery storage for businesses, lower electricity costs, and funding sources will appear here."
+    },
+    "citizens": {
+      "title": "For Residents",
+      "hint": "Information about solar power and battery storage for a private home, lower electricity bills, and available programs will appear here."
+    },
+    "community": {
+      "title": "For Community & NGOs",
+      "hint": "Solutions for public facilities will appear here: solar plants, backup power, lower electricity costs, and financing programs."
+    },
+    "services": {
+      "title": "CEE Services",
+      "hint": "A list of services with scope of work and timelines will appear here."
+    },
+    "notFound": {
+      "title": "Page not found",
+      "hint": "The address may have been entered incorrectly, or this section hasn't been published yet."
+    }
+  },
+  "Metadata": {
+    "titleDefault": "Center for Energy Efficiency — Ladyzhyn",
+    "titleTemplate": "%s | CEE Ladyzhyn",
+    "description": "Energy efficiency consulting for HOAs, businesses, non-profits and homeowners in Ladyzhyn."
+  },
+  "AIAssistant": {
+    "widgetLabel": "CEE Assistant",
+    "openLabel": "Open assistant",
+    "closeLabel": "Close chat",
+    "homeLabel": "Home",
+    "greeting": "Hi! I'm the Center's assistant. I can tell you where to start, how the programmes work and what your site needs. Pick a question below or type your own.",
+    "pageGreetings": {
+      "home": "Hi! I'm the Center's assistant. Tell me who you are — a community, a business, an HOA, a developer, a donor or a homeowner — and I'll suggest where to start.",
+      "community": "You're on the page for communities and utilities. I can help with energy diagnostics, procurement support, grant readiness and how the Center runs a project turnkey.",
+      "business": "You're on the business page. I can explain how to cut electricity costs, whether storage makes sense for your operating mode and where to start a calculation.",
+      "osbb": "You're on the HOA page with verified financing programmes. I can suggest which one fits your building and what's needed to apply.",
+      "developers": "You're on the page for RES and BESS developers. I can explain what we take on at the connection, technical conditions and financial model stage.",
+      "donors": "You're on the page for donors and investors. I can tell you how we prepare an evidence-based project package and keep technical support on the ground.",
+      "citizens": "You're on the page for private owners. I can explain how we size solar and storage for your home and what the path to a working system looks like.",
+      "services": "You're looking at services. I can explain any of the eight blocks, the ways of working, or the digital circuit — metering, monitoring, energy management.",
+      "contacts": "You're on the contacts page. If it's easier, leave a contact right here in the chat — I'll pass it to a specialist together with our conversation.",
+      "about": "You're reading about the Center. I can briefly explain how we differ from a single contractor or consultant."
+    },
+    "inputPlaceholder": "Type a question…",
+    "send": "Send",
+    "thinking": "Typing a reply…",
+    "quickRepliesLabel": "Quick questions",
+    "quickReplies": [
+      "Where do I start?",
+      "How much does it cost?",
+      "What is the single window?",
+      "What documents are needed?"
+    ],
+    "pageQuickReplies": {
+      "home": [
+        "Where do I start?",
+        "What is the single window?",
+        "How much does it cost?",
+        "Who are you?"
+      ],
+      "community": [
+        "What is procurement support?",
+        "How to prepare for a grant?",
+        "Where does diagnostics start?"
+      ],
+      "business": [
+        "Does storage make sense?",
+        "How to cut electricity costs?",
+        "How long does implementation take?"
+      ],
+      "osbb": [
+        "Which programme fits us?",
+        "What documents are needed?",
+        "Where do I start?"
+      ],
+      "developers": [
+        "Grid connection risks",
+        "What's in the financial model?",
+        "How do you control the contractor?"
+      ],
+      "donors": [
+        "What is an evidence-based package?",
+        "How do you control contractors?",
+        "Which facilities are ready?"
+      ],
+      "citizens": [
+        "How much is solar for a home?",
+        "What does storage do?",
+        "I already have an offer — check it"
+      ],
+      "services": [
+        "Explain the work blocks",
+        "Ways of working",
+        "What is the digital circuit?"
+      ],
+      "contacts": [
+        "How fast do you reply?",
+        "What should I write?"
+      ],
+      "about": [
+        "How are you different?",
+        "Do you install yourselves?"
+      ]
+    },
+    "contextHint": "Page: {page}",
+    "fallback": "Couldn't get a reply. Try again — or leave a contact and a specialist will answer personally.",
+    "disclaimer": "Replies are based on the site's materials. The assistant doesn't invent numbers that aren't on the site.",
+    "leadButton": "Leave a contact",
+    "leadIntro": "Sure — I'll pass your situation to a specialist together with our conversation. How should we address you and where should we reply?",
+    "leadName": "Name",
+    "leadContact": "Phone or email",
+    "leadConsent": "By sending, you consent to data processing for a reply.",
+    "leadSubmit": "Send",
+    "leadSending": "Sending…",
+    "leadDone": "Thank you, {name}. Contact passed on — a Center specialist will get back to you within one business day. Feel free to keep asking.",
+    "leadError": "Couldn't send. Try again or use the form on the Contacts page.",
+    "leadMessagePrefix": "Contact left via the assistant chat (page: {page}).",
+    "nudges": {
+      "default": "If anything is unclear — I'm here. I can suggest where to start.",
+      "home": "Want a hint on where to start? It takes a minute.",
+      "community": "Questions about grants, procurement or diagnostics for a community? Ask away.",
+      "business": "Want to check whether storage makes sense for your operating mode?",
+      "osbb": "Want a hint on which financing programme fits your building?",
+      "developers": "Questions about connection, technical conditions or the financial model? I'll answer to the point.",
+      "donors": "Curious which facilities in the community are project-ready? I'll tell you.",
+      "citizens": "Already have a contractor's offer? I can tell you what to look out for.",
+      "services": "Not sure which block you need? Describe the task — I'll suggest.",
+      "contacts": "Don't feel like filling in the form? Leave a contact right in the chat."
+    },
+    "nudgeAction": "Ask",
+    "nudgeDismiss": "Dismiss hint",
+    "leadSubmitLabel": "Send contact"
+  },
+  "Admin": {
+    "title": "CEE Admin Panel",
+    "nav": {
+      "dashboard": "Dashboard",
+      "services": "Services",
+      "surveys": "Surveys",
+      "billing": "Billing",
+      "aiModels": "AI Models",
+      "leads": "Leads",
+      "blog": "Blog",
+      "account": "Account",
+      "documents": "Documents",
+      "digests": "Digests",
+      "users": "Users"
+    },
+    "backToSite": "← Back to site",
+    "dashboard": {
+      "title": "Dashboard & monitoring",
+      "subtitle": "Live metrics: leads and the AI assistant",
+      "visitorsOnline": "Visitors online",
+      "visitorsToday": "Visitors today",
+      "aiChats": "AI conversations",
+      "aiSuccessRate": "Answered by the AI model (rest — knowledge base)",
+      "conversion": "Conversion to leads",
+      "systemStatus": "System status",
+      "systemOk": "All systems operating normally",
+      "errorLog": "Error log",
+      "noErrors": "No errors recorded in the last 24 hours",
+      "apiResponseTime": "API response time",
+      "newLeads": "New leads",
+      "leadsTotal": "Leads total",
+      "channelsTitle": "Client communication channels",
+      "channelsHint": "Enabled via variables in .env.local — see .env.example. Without email and Telegram, leads simply land in the Leads section.",
+      "channelEmail": "Email (SMTP)",
+      "channelTelegram": "Telegram",
+      "channelAi": "AI model (key)",
+      "on": "Enabled",
+      "off": "Not configured",
+      "testChannels": "Test channels",
+      "testing": "Testing…",
+      "previewClient": "Preview client email",
+      "previewCenter": "Preview Center email"
+    },
+    "services": {
+      "title": "Service management",
+      "subtitle": "Create, edit and manage the status of paid services",
+      "addNew": "+ Add service",
+      "name": "Name",
+      "description": "Description",
+      "price": "Price",
+      "currency": "Currency",
+      "status": "Status",
+      "page": "Site page",
+      "active": "Active",
+      "hidden": "Hidden",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "surveys": {
+      "title": "Survey builder",
+      "subtitle": "Create surveys and view results",
+      "addNew": "+ New survey",
+      "questionTypes": {
+        "text": "Text field",
+        "single": "Single choice",
+        "multi": "Multiple choice",
+        "nps": "Scale (NPS)"
+      },
+      "trigger": "Display trigger",
+      "results": "Results",
+      "export": "Export CSV"
+    },
+    "billing": {
+      "title": "Billing & company details",
+      "subtitle": "Legal information, invoices and payment gateways",
+      "companyName": "Company name",
+      "edrpou": "Registration number",
+      "address": "Legal address",
+      "iban": "IBAN",
+      "vat": "VAT rate",
+      "invoices": "Invoices",
+      "invoiceStatus": {
+        "pending": "Pending",
+        "paid": "Paid",
+        "cancelled": "Cancelled",
+        "draft": "Draft",
+        "sent": "Sent",
+        "overdue": "Overdue"
+      },
+      "paymentGateways": "Payment gateways",
+      "apiKey": "API key",
+      "save": "Save",
+      "bankName": "Bank name",
+      "email": "Email",
+      "phone": "Phone",
+      "vatPayer": "VAT payer",
+      "addInvoice": "+ New invoice",
+      "clientName": "Client",
+      "amount": "Amount",
+      "serviceDescription": "Service description",
+      "downloadPdf": "PDF",
+      "markPaid": "Mark as paid",
+      "connected": "Connected",
+      "disconnected": "Not connected",
+      "connect": "Connect",
+      "disconnect": "Disconnect"
+    },
+    "logout": "Log out",
+    "login": {
+      "title": "Admin sign in",
+      "subtitle": "Access is limited to authorized CEE staff",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "error": "Invalid email or password"
+    },
+    "aiModels": {
+      "title": "AI Models",
+      "subtitle": "Manage the assistant's models, fallback order, and token costs",
+      "addNew": "+ Add model",
+      "name": "Name",
+      "provider": "Provider",
+      "model": "Model (ID)",
+      "apiKeyEnvVar": "API key env variable",
+      "priority": "Priority",
+      "priorityHint": "Lower number = higher priority (used first)",
+      "active": "Active",
+      "inactive": "Disabled",
+      "default": "Default",
+      "setDefault": "Set as default",
+      "inputCost": "Input cost / 1K tokens ($)",
+      "outputCost": "Output cost / 1K tokens ($)",
+      "testConnection": "Test connection",
+      "testing": "Testing…",
+      "testOk": "Working",
+      "testFail": "Connection failed",
+      "noKey": "No key set in .env.local",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "cancel": "Cancel",
+      "usageTitle": "Usage (recent entries)",
+      "usageEmpty": "No usage recorded yet",
+      "fallbackNote": "If the default model is disabled or fails, the system silently switches to the next active model by priority.",
+      "status": "Status",
+      "responseTime": "Response time",
+      "cost": "Cost",
+      "tokens": "Tokens"
+    },
+    "leads": {
+      "title": "Leads",
+      "subtitle": "Requests from the Contacts form and contacts collected by the AI assistant in chat",
+      "all": "All",
+      "status": {
+        "new": "New",
+        "in_progress": "In progress",
+        "done": "Done",
+        "spam": "Spam"
+      },
+      "source": {
+        "form": "Form",
+        "chat": "Chat"
+      },
+      "empty": "No leads yet. As soon as someone writes via the form or leaves a contact in chat, it will appear here.",
+      "loading": "Loading…",
+      "contact": "Contact",
+      "message": "Message",
+      "transcript": "Conversation with the assistant",
+      "note": "Note",
+      "notePlaceholder": "What was agreed, when to call back…",
+      "saveNote": "Save note",
+      "saved": "Saved",
+      "delete": "Delete",
+      "confirmDelete": "Delete permanently?",
+      "clearSpam": "Clear spam",
+      "page": "Page",
+      "segment": "Who",
+      "copy": "Copy",
+      "copied": "Copied",
+      "you": "Client",
+      "assistant": "Assistant",
+      "segments": {
+        "osbb": "HOA",
+        "business": "Business",
+        "community": "Community / utility / NGO",
+        "developer": "Developer",
+        "donor": "Donor / investor",
+        "citizen": "Private owner",
+        "other": "Other",
+        "subscription": "Knowledge base subscription"
+      }
+    },
+    "blog": {
+      "title": "Blog",
+      "subtitle": "Articles for the Blog section. Markdown body, two languages; English may be empty — then Ukrainian is shown.",
+      "addNew": "New article",
+      "published": "Published",
+      "draft": "Draft",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "cancel": "Cancel",
+      "publish": "Publish",
+      "unpublish": "Unpublish",
+      "confirmDelete": "Delete the article permanently?",
+      "slug": "Address (slug)",
+      "slugHint": "Latin letters, digits and hyphens only. Filled automatically from the title.",
+      "titleUk": "Title (uk)",
+      "titleEn": "Title (en)",
+      "excerptUk": "Excerpt (uk)",
+      "excerptEn": "Excerpt (en)",
+      "bodyUk": "Body (uk, Markdown)",
+      "bodyEn": "Body (en, Markdown)",
+      "tag": "Topic",
+      "tagHint": "Short marker: HOA, BESS, Process…",
+      "markdownHint": "Markdown: ## Heading, **bold**, - list, > quote. HTML is not rendered.",
+      "empty": "No articles yet.",
+      "loading": "Loading…",
+      "open": "Open on site",
+      "saved": "Saved",
+      "error": "Could not save"
+    },
+    "account": {
+      "title": "Account",
+      "subtitle": "Signed in as {email}. You can change the administrator password here.",
+      "current": "Current password",
+      "next": "New password",
+      "confirm": "Repeat new password",
+      "hint": "At least 10 characters. A phrase of several words is better.",
+      "save": "Change password",
+      "saved": "Password changed. Use the new one next time.",
+      "mismatch": "Passwords do not match.",
+      "wrongCurrent": "Current password is wrong.",
+      "weak": "Password too short.",
+      "error": "Could not change the password."
+    },
+    "documents": {
+      "title": "Title",
+      "subtitle": "Document cards for the public knowledge base and the consultant",
+      "addNew": "Add document",
+      "published": "Published",
+      "draft": "Draft",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "cancel": "Cancel",
+      "publish": "Publish",
+      "unpublish": "Unpublish",
+      "confirmDelete": "Delete the document together with its change log?",
+      "slug": "Address (slug)",
+      "slugHint": "Latin letters, digits, hyphen. Filled from the title automatically.",
+      "kind": "Type",
+      "number": "Number",
+      "issuer": "Issuer",
+      "adoptedAt": "Adoption date",
+      "status": "Status",
+      "summary": "Summary (Markdown)",
+      "summaryHint": "In your own words: what the document is about, whom it concerns, what matters. The consultant answers from this text.",
+      "keyPoints": "Key points",
+      "keyPointsHint": "One per line.",
+      "tags": "Tags",
+      "tagsHint": "Comma-separated: HOA, storage, tariff…",
+      "sourceUrl": "Link to the official text",
+      "checked": "Checked today",
+      "checkedHint": "updates the “checked” date on the card",
+      "empty": "No documents yet.",
+      "loading": "Loading…",
+      "open": "Open on the site",
+      "saved": "Saved",
+      "error": "Error",
+      "filter": "Filter by number, title, tag",
+      "updates": "Change log",
+      "addUpdate": "Add",
+      "updateDate": "Date",
+      "updateNote": "What changed",
+      "updateSource": "Link to the source of the change",
+      "noUpdates": "No entries yet.",
+      "checkedAt": "checked",
+      "never": "not yet",
+      "pageTitle": "Regulatory and technical documentation"
+    },
+    "digests": {
+      "title": "Title",
+      "subtitle": "Sources → news feed → draft → editing → publication",
+      "tabSources": "Sources",
+      "tabNews": "News feed",
+      "tabDigests": "Digests",
+      "addSource": "Add",
+      "name": "Name",
+      "url": "RSS address",
+      "category": "Category",
+      "enabled": "Enabled",
+      "check": "Check",
+      "fetch": "Fetch news",
+      "fetchAll": "Refresh all enabled",
+      "lastStatus": "Status",
+      "items": "items",
+      "never": "never refreshed",
+      "sourcesHint": "Starter sources are disabled: press “Check” — if the feed returns items, enable it. Government RSS addresses change, so checking is mandatory. For automatic refresh set CRON_SECRET and call /api/cron/fetch-news on a schedule.",
+      "newsHint": "News for the period from enabled sources. “Generate draft” collects them into a digest: with an AI model — grouped and commented, without a key — a categorised list. Only you publish.",
+      "from": "From",
+      "to": "To",
+      "unassignedOnly": "only items not yet in a digest",
+      "showNews": "Show news",
+      "generateDraft": "Generate draft",
+      "draftMode.ai": "The draft was produced by an AI model from the period's news. Check facts and links before publishing.",
+      "draftMode.template": "No AI model available (no key) — a categorised list of news was assembled. Edit before publishing.",
+      "draftMode.empty": "No news for this period. Fetch news from sources first.",
+      "addNew": "New digest",
+      "published": "Published",
+      "draft": "Draft",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "cancel": "Cancel",
+      "publish": "Publish",
+      "unpublish": "Unpublish",
+      "confirmDelete": "Delete the digest? Its news items return to the feed.",
+      "slug": "Address (slug)",
+      "intro": "Intro (1–2 sentences)",
+      "body": "Body (Markdown)",
+      "markdownHint": "Headings — ##, items — “- ”, links — [title](url).",
+      "empty": "No digests yet.",
+      "loading": "Loading…",
+      "open": "Open on the site",
+      "saved": "Saved",
+      "error": "Error",
+      "inDigest": "in digest",
+      "noNews": "No news for the period. Fetch news from sources on the “Sources” tab.",
+      "categories": {
+        "regulator": "Regulator",
+        "government": "Government and legislation",
+        "operator": "System operator",
+        "market": "Market",
+        "media": "Industry media"
+      },
+      "pageTitle": "Digests and news sources"
+    },
+    "users": {
+      "title": "Knowledge base users",
+      "subtitle": "Registered users, their plans and activity",
+      "hint": "No payment gateway is connected yet, so plans are assigned manually: choose a plan and an end date, then save. After the end date the user automatically returns to “Basic”.",
+      "empty": "No registered users yet.",
+      "loading": "Loading…",
+      "plan": "Plan",
+      "planUntil": "Valid until",
+      "save": "Save",
+      "saved": "saved",
+      "delete": "Delete",
+      "confirmDelete": "Delete user",
+      "registered": "Registered",
+      "lastLogin": "Last sign-in",
+      "asks30d": "queries in 30 days",
+      "asksTotal": "total",
+      "never": "not yet",
+      "filter": "Search by email, name, organisation"
+    }
+  },
+  "DevelopersPage": {
+    "metaTitle": "For RES / BESS developers",
+    "metaDescription": "Technical, documentary and technological support for RES and BESS projects: grid connection, technical conditions, financial model, quality control — a bridge between the investor and the site.",
+    "heroLabel": "For RES / BESS developers",
+    "heroTitle": "A bridge between the investment and the site",
+    "heroText": "The developer brings capital, intent and deadlines. On the ground there is a grid operator, contractors, a community and real constraints. The Center stands between them: technical, documentary and technological support from technical conditions to a working system, with a guarantee that what's on paper matches what's on site.",
+    "ctaPrimary": "Discuss a project",
+    "ctaSecondary": "Work blocks",
+    "bridgeLabel": "How it works",
+    "bridgeTitle": "What passes through the Center",
+    "bridgeText": "A RES or BESS project rarely fails on equipment. It fails on grid connection, technical conditions, an unrealistic financial model and a contractor nobody controlled. That is exactly what we carry across the bridge.",
+    "bridge": {
+      "from": {
+        "label": "Developer / investor",
+        "items": [
+          "Capital and intent to invest",
+          "A site or a portfolio of sites",
+          "Deadlines, return requirements, risk appetite"
+        ]
+      },
+      "center": {
+        "label": "The Center",
+        "items": [
+          "Technical conditions and connection risk analysis",
+          "DSO interaction package",
+          "Technical specification and solution architecture",
+          "Financial model, scenarios, BESS operating modes",
+          "Quality control and sign-off"
+        ]
+      },
+      "to": {
+        "label": "The site",
+        "items": [
+          "Distribution system operator and connection point",
+          "Contractors",
+          "Community and local authorities",
+          "Metering data after commissioning"
+        ]
+      }
+    },
+    "bridgeBack": "Data, reporting, result verification",
+    "bridgeFooter": "This diagram is illustrative. The scope for a specific project is set after site and technical conditions analysis.",
+    "guaranteesLabel": "What we answer for",
+    "guaranteesTitle": "Three guarantees",
+    "guaranteesText": "We don't sell \"support\". We answer for three things an investor cannot verify from another city.",
+    "guarantees": [
+      {
+        "title": "Quality",
+        "text": "The Center sets the technical requirements and signs off the work. One criterion: as in the specification, not \"as it turned out\". The contractor knows they will be checked."
+      },
+      {
+        "title": "Adaptability",
+        "text": "The solution is fitted to real constraints: connection capacity, grid regime, site condition, budget. A copy of the neighbour's configuration doesn't work here — and we don't offer it."
+      },
+      {
+        "title": "Realism",
+        "text": "We take on what can actually be connected, built and maintained. If a project won't fly, we say so at the analysis stage — not after design money has been spent."
+      }
+    ],
+    "blocksLabel": "Work blocks for this segment",
+    "blocksTitle": "Where developers usually start",
+    "blocksText": "These are the stages from our line most often needed at the entry to a RES or BESS project. The full list and ways of working are on the services page.",
+    "blocks": [
+      {
+        "name": "DSO Connection Ready",
+        "text": "Reduce connection risk: technical conditions analysis, DSO interaction package, connection risks, action plan."
+      },
+      {
+        "name": "BESS Ready",
+        "text": "Test whether storage makes economic sense: feasibility, operating modes, payback scenarios, next-stage specification."
+      },
+      {
+        "name": "Feasibility Study Ready",
+        "text": "A document for the investor's decision: feasibility study with financial model, risks and scenarios."
+      },
+      {
+        "name": "Turnkey project",
+        "text": "From site analysis to a working system — with partner contractors, while the Center holds the technical role."
+      }
+    ],
+    "blocksLink": "All services and formats →",
+    "ctaTitle": "Have a site or a portfolio?",
+    "ctaText": "Describe the location, approximate capacity and current project stage — we'll tell you which risks we see first and where to start."
+  },
+  "DonorsPage": {
+    "metaTitle": "For donors, NGOs and investors",
+    "metaDescription": "Evidence-based projects, a structured project package and a portfolio of opportunities. The Center is a bridge between funding and the community on the ground: technical support, quality control, realism.",
+    "heroLabel": "For donors, NGOs and investors",
+    "heroTitle": "A bridge between funding and the community on the ground",
+    "heroText": "A donor, NGO or investor needs an evidence-based project, a structured package and confidence that money turns into a result, not a report. The Center stands between funding and the place: prepares the project package, holds the technical and documentary expertise, controls contractors and returns verified data about the result.",
+    "ctaPrimary": "Discuss cooperation",
+    "ctaSecondary": "Work blocks",
+    "bridgeLabel": "How it works",
+    "bridgeTitle": "What passes through the Center",
+    "bridgeText": "The most common problem of a donor project is the gap between what's written in the application and what exists on site. We know the place, so the package we prepare matches the community's reality.",
+    "bridge": {
+      "from": {
+        "label": "Donor / NGO / investor",
+        "items": [
+          "Funding and programme priorities",
+          "Reporting and transparency requirements",
+          "Expected impact and timeline"
+        ]
+      },
+      "center": {
+        "label": "The Center",
+        "items": [
+          "Project concept, budget, impact logic",
+          "Structured submission-ready package",
+          "Portfolio of opportunities in the community",
+          "Technical and documentary implementation support",
+          "Contractor control and sign-off"
+        ]
+      },
+      "to": {
+        "label": "Community on the ground",
+        "items": [
+          "Real facilities and their condition",
+          "Local contractors",
+          "Capacity to sustain the result",
+          "Metering data after commissioning"
+        ]
+      }
+    },
+    "bridgeBack": "Reporting, monitoring, impact verification",
+    "bridgeFooter": "This diagram is illustrative. The package composition depends on the requirements of a specific programme or investor.",
+    "guaranteesLabel": "What we answer for",
+    "guaranteesTitle": "Three guarantees",
+    "guaranteesText": "For a donor, the most expensive thing is a project that looked good in the application and doesn't work on site. We answer for that not happening.",
+    "guarantees": [
+      {
+        "title": "Quality",
+        "text": "The Center sets the technical requirements for equipment and works, and signs them off. The contractor knows the result will be checked against metering data, not a certificate."
+      },
+      {
+        "title": "Adaptability",
+        "text": "The package is fitted to a specific programme's format and to the community's actual capacity. The same facility is packaged differently for different donors — that's normal."
+      },
+      {
+        "title": "Realism",
+        "text": "The portfolio contains what the community can actually implement and sustain after funding ends. If a facility isn't ready, we say so before submission, not in the report."
+      }
+    ],
+    "blocksLabel": "Work blocks for this segment",
+    "blocksTitle": "Where donors usually start",
+    "blocksText": "These are the stages from our line most often needed when preparing and supporting a donor or investment project.",
+    "blocks": [
+      {
+        "name": "Grant Ready / Donor Ready",
+        "text": "Turn an idea into a submission-ready package: project concept, budget, impact logic, full material set."
+      },
+      {
+        "name": "Feasibility Study Ready",
+        "text": "A document for the decision: feasibility study with financial model, risks and scenarios."
+      },
+      {
+        "name": "Energy Manager Outsource",
+        "text": "Systematic management of the result after implementation: monthly control, reporting, portfolio of next measures."
+      },
+      {
+        "name": "HIOS Monitor",
+        "text": "Continuous monitoring of grants, tenders and regulation: digests, trackers, analytics."
+      }
+    ],
+    "blocksLink": "All services and formats →",
+    "ctaTitle": "Looking for projects in the community?",
+    "ctaText": "Describe the programme priorities and funding format — we'll show which facilities in the community are ready and which need preparation."
+  },
+  "PrivacyPage": {
+    "label": "Legal",
+    "title": "Privacy Policy",
+    "updated": "Version of 15 September 2026",
+    "intro": "This policy explains what personal data the website of the Center for Energy Efficiency (Ladyzhyn) collects, why, for how long, and what rights you have. We collect only what is needed to reply to your request.",
+    "sections": [
+      {
+        "title": "Who processes the data",
+        "paragraphs": [
+          "The controller of personal data is the Center for Energy Efficiency, Ladyzhyn, Vinnytsia region (the Center). Contact details are on the Contacts page."
+        ]
+      },
+      {
+        "title": "What data we collect",
+        "paragraphs": [
+          "We process only the data you provide yourself via the request form or the assistant chat on the site:"
+        ],
+        "items": [
+          "your name or how to address you;",
+          "phone and/or email;",
+          "the type of your organisation or site (e.g. HOA, business, community);",
+          "the text of your request and, for chat requests, the conversation with the assistant;",
+          "the page the request was sent from and the interface language."
+        ]
+      },
+      {
+        "title": "Why we process it",
+        "paragraphs": [
+          "The only purpose is to handle your request: contact you, clarify the situation and suggest where to start. The legal basis is your consent, given by ticking the box in the form or sending a contact in the chat.",
+          "We do not use your data for mailings without separate consent and do not pass it to third parties for advertising."
+        ]
+      },
+      {
+        "title": "The assistant on the site",
+        "paragraphs": [
+          "The assistant replies based on the site's materials. If the Center has an external language model connected, the text of your message may be sent to that model's provider to generate a reply. Do not enter passport data, card numbers or other sensitive information in the chat — it is not needed to answer your question."
+        ]
+      },
+      {
+        "title": "Cookies and local storage",
+        "paragraphs": [
+          "The site uses no advertising or tracking cookies. Only technical preferences are stored in your browser: the chosen theme, language and the current assistant conversation within a session, so it does not disappear between pages. This data does not leave your device."
+        ]
+      },
+      {
+        "title": "How long we keep it",
+        "paragraphs": [
+          "Requests are kept as long as needed to handle them and communicate about your project, but no longer than three years from the last contact unless the law requires otherwise. Spam and erroneous requests are deleted."
+        ]
+      },
+      {
+        "title": "Who has access",
+        "paragraphs": [
+          "Only authorised Center staff have access to requests. Technical services (hosting, database, mail server) may be used to store data and send emails; they process data on behalf of the Center and may not use it for their own purposes."
+        ]
+      },
+      {
+        "title": "Your rights",
+        "paragraphs": [
+          "Under the Law of Ukraine \"On Personal Data Protection\" you have the right to:"
+        ],
+        "items": [
+          "know what data of yours we process and receive a copy;",
+          "request correction of inaccurate data;",
+          "withdraw consent and request deletion;",
+          "object to processing.",
+          "To exercise any of these rights, write to us via the Contacts page form or the email listed there. We reply within 30 days."
+        ]
+      },
+      {
+        "title": "Changes to this policy",
+        "paragraphs": [
+          "We may update this policy. The current version is always published on this page with the update date."
+        ]
+      }
+    ],
+    "contact": "Questions about personal data — via the Contacts page form, marked \"personal data\"."
+  },
+  "TermsPage": {
+    "label": "Legal",
+    "title": "Terms of Use",
+    "updated": "Version of 15 September 2026",
+    "intro": "By using the website of the Center for Energy Efficiency you agree to these terms. They are simple: the information on the site is for reference, decisions about your site are made after a survey, and the assistant on the site is not a substitute for a specialist.",
+    "sections": [
+      {
+        "title": "What this site is",
+        "paragraphs": [
+          "The site describes the Center's areas of work, the process and ways of working, and lets you leave a request. The site is not a public offer: the terms of specific cooperation are set by a separate agreement after discussing your task."
+        ]
+      },
+      {
+        "title": "Informational nature",
+        "paragraphs": [
+          "All descriptions of services, stages and financing programmes are for reference. We verify programme data and indicate the verification date, but programme conditions change — check them directly with the programme administrator or bank before making financial decisions.",
+          "We do not publish figures we cannot back with a source, and we do not publish case studies without the client's written consent."
+        ]
+      },
+      {
+        "title": "The assistant on the site",
+        "paragraphs": [
+          "The assistant replies based on the site's materials and does not invent figures, prices or timelines. Its replies are not a technical opinion, a commercial offer or legal advice. Decisions about your site are made after a survey and a conversation with a Center specialist."
+        ]
+      },
+      {
+        "title": "Requests",
+        "paragraphs": [
+          "By sending a request you confirm that the contact details belong to you and agree that the Center will contact you to handle the request. Personal data processing is described in the Privacy Policy."
+        ]
+      },
+      {
+        "title": "Intellectual property",
+        "paragraphs": [
+          "The texts, diagrams and design of the site belong to the Center. You may quote the site's materials with a reference to the source. Commercial use without the Center's consent is not permitted."
+        ]
+      },
+      {
+        "title": "Liability",
+        "paragraphs": [
+          "The Center makes every effort to keep the information accurate and current, but does not guarantee uninterrupted operation of the site and is not liable for decisions made solely on the basis of information from the site without consulting a specialist."
+        ]
+      },
+      {
+        "title": "Changes",
+        "paragraphs": [
+          "We may update these terms. The current version is always published on this page with the update date."
+        ]
+      }
+    ],
+    "contact": "Questions about the terms — via the Contacts page form."
+  },
+  "ProjectsPage": {
+    "metaTitle": "Projects and results",
+    "metaDescription": "What the client receives at each stage of working with the Center and how the result is confirmed — by metering data, not a report.",
+    "heroLabel": "Projects",
+    "heroTitle": "A result you can verify",
+    "heroText": "We don't publish case studies without the client's written consent or figures without a source. Instead we show exactly what you receive at each stage — and how we make sure the working system delivers the effect that was in the calculation.",
+    "artifactsLabel": "In hand",
+    "artifactsTitle": "What the client receives at each stage",
+    "artifactsText": "Not an abstract consultation but a concrete product you can present to management, a donor, an investor or a procurement team.",
+    "artifacts": [
+      {
+        "title": "Short energy profile",
+        "text": "Where the losses are, what consumes most, what the load pattern is. The starting point for any decision.",
+        "stage": "Diagnostics"
+      },
+      {
+        "title": "Expert opinion",
+        "text": "An answer to a specific question: does it make sense, what are the risks, what next. Brief and to the point.",
+        "stage": "Diagnostics"
+      },
+      {
+        "title": "Technical specification",
+        "text": "Solution architecture, equipment composition, requirements for works. A document you can take to a contractor.",
+        "stage": "Design"
+      },
+      {
+        "title": "Feasibility study",
+        "text": "A feasibility study with a financial model, scenarios and risks — for a management or investor decision.",
+        "stage": "Design"
+      },
+      {
+        "title": "Grant application",
+        "text": "Project concept, budget, impact logic, a full material set in the format of a specific programme.",
+        "stage": "Financing"
+      },
+      {
+        "title": "Procurement package",
+        "text": "Procurement plan, specification, market analysis, documents, deadline control — without errors or delays.",
+        "stage": "Procurement"
+      },
+      {
+        "title": "DSO interaction package",
+        "text": "Technical conditions analysis, connection risks, action plan, documents for the grid operator.",
+        "stage": "Connection"
+      },
+      {
+        "title": "Financial model",
+        "text": "Operating modes, payback scenarios, tariff sensitivity — on the actual profile, not averages.",
+        "stage": "Design"
+      },
+      {
+        "title": "Analytics dashboard",
+        "text": "Consumption, generation, battery state, deviations — online, for a director, a board or a donor.",
+        "stage": "Digital circuit"
+      },
+      {
+        "title": "A working system confirmed by metering data",
+        "text": "The project closes not with a folder handed over, but with equipment that works and meter readings that match the calculation.",
+        "stage": "Result"
+      }
+    ],
+    "proofLabel": "Verifiability",
+    "proofTitle": "How we confirm the result",
+    "proofText": "The effect must be visible on the meter, not in a presentation. So measurement is both at the start and at the end.",
+    "proof": [
+      {
+        "title": "We measure \"before\"",
+        "text": "Consumption profile, metering status, connection capacity — before any works. Without this baseline, \"savings\" remain a guess."
+      },
+      {
+        "title": "We sign off against the specification",
+        "text": "One acceptance criterion: as in the specification, not \"as it turned out\". The contractor knows the result will be checked."
+      },
+      {
+        "title": "We compare \"after\"",
+        "text": "Metering data after commissioning against the calculation. If they diverge, we find out why and fix it — instead of writing a report."
+      }
+    ],
+    "casesNote": "Real case studies with figures will appear on this page once the data is confirmed by metering and clients give written consent to publication. This is our rule, not a placeholder.",
+    "ctaTitle": "Want this kind of result for your site?",
+    "ctaText": "Describe the situation — we'll tell you which stage to start from and what you'll receive first.",
+    "ctaPrimary": "Get a consultation"
+  },
+  "BlogPage": {
+    "label": "Blog",
+    "title": "Articles",
+    "intro": "We explain how energy solutions, financing programmes and the process work — in plain language, without figures we cannot back up.",
+    "empty": "Articles are being prepared. Check back soon.",
+    "read": "Read",
+    "backToList": "All articles",
+    "ctaTitle": "Have a question about your site?",
+    "ctaText": "Describe the situation — we'll tell you where to start.",
+    "ctaButton": "Get a consultation"
+  },
+  "Account": {
+    "label": "Account",
+    "title": "My account",
+    "loginTitle": "Sign in",
+    "loginIntro": "Sign in for a daily consultation allowance, your query history and subscription access.",
+    "registerTitle": "Create an account",
+    "registerIntro": "Without an account you get {guest} consultant queries per day. After registering — {free} per day, query history and the option to subscribe.",
+    "email": "Email",
+    "password": "Password",
+    "passwordHint": "At least 8 characters",
+    "name": "Name",
+    "organization": "Organisation (optional)",
+    "consent": "I agree to the terms of use and the privacy policy",
+    "privacyLink": "Privacy policy",
+    "loginSubmit": "Sign in",
+    "registerSubmit": "Create account",
+    "loginError": "Wrong email or password.",
+    "registerError": "Could not create the account. Check the fields and try again.",
+    "existsError": "An account with this email already exists — sign in.",
+    "tooManyError": "Too many attempts. Try again in an hour.",
+    "noAccount": "No account yet?",
+    "registerLink": "Register",
+    "haveAccount": "Already have an account?",
+    "loginLink": "Sign in",
+    "planLabel": "Your plan",
+    "dailyLimit": "{n} consultant queries per day",
+    "unlimited": "No daily limit (fair use — up to {fair} per day)",
+    "until": "Valid until {date}",
+    "upgrade": "Subscribe",
+    "todayLabel": "Used today",
+    "todayText": "The allowance resets at midnight (UTC).",
+    "goAsk": "Go to the consultant",
+    "historyTitle": "Recent queries",
+    "signOut": "Sign out"
+  },
+  "Pricing": {
+    "metaTitle": "Knowledge base plans — CEE",
+    "metaDescription": "Free access to documents and digests, legislation consultant with a daily allowance, and a subscription with analytics for teams.",
+    "label": "Plans",
+    "title": "Access to the knowledge base",
+    "intro": "Documents and digests are open to everyone. The legislation consultant has a daily allowance, which registration and a subscription extend. Prices for paid plans are being finalised: leave a request and we will send the terms.",
+    "recommended": "For practitioners",
+    "free": "Free",
+    "priceTbd": "On request",
+    "priceNote": "we will send the price in reply to your request",
+    "perMonth": "per month",
+    "askDaily": "{n} consultant queries per day",
+    "askUnlimited": "No daily limit, fair use up to {fair} per day",
+    "ctaRegister": "Register",
+    "ctaGoAsk": "Go to the consultant",
+    "ctaRequest": "Request terms",
+    "guestNote": "Without an account — {n} queries per day, no history.",
+    "plans": {
+      "guest": {
+        "name": "Guest",
+        "for": "No account"
+      },
+      "free": {
+        "name": "Basic",
+        "for": "For occasional checks of a rule"
+      },
+      "premium": {
+        "name": "Premium",
+        "for": "For energy managers, HOA chairs and project teams"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "for": "For organisations, developers and donor programmes"
+      }
+    },
+    "features": {
+      "documents": "Catalogue of regulatory and technical documents",
+      "documentSearch": "Search with change log",
+      "digests": "Energy news digests",
+      "ask": "Legislation consultant",
+      "askHistory": "Query history in your account",
+      "analytics": "Analytics and briefs for your site",
+      "api": "API access and integrations"
+    },
+    "faqTitle": "Questions about access",
+    "faq": [
+      {
+        "q": "Why are there no prices?",
+        "a": "Paid plans launch in stages. For now we agree terms individually — leave a request and we will send the price and what is included."
+      },
+      {
+        "q": "What does “fair use” mean?",
+        "a": "On plans without a daily limit we do not count every query, but we protect the service from automated scripts: beyond the agreed daily volume, queries may be temporarily throttled."
+      },
+      {
+        "q": "Is a consultation a legal opinion?",
+        "a": "No. It is an information brief based on the CEE base with links to primary sources. For decisions about a specific site, talk to a specialist."
+      },
+      {
+        "q": "How do I pay?",
+        "a": "After your request we will send an invoice. Online card payment will appear once a payment gateway is connected in the admin panel."
+      }
+    ]
+  },
+  "Knowledge": {
+    "nav": {
+      "aria": "Knowledge base sections",
+      "hub": "Knowledge base",
+      "documents": "Documents",
+      "digests": "Digests",
+      "ask": "Consultant",
+      "pricing": "Plans"
+    },
+    "kinds": {
+      "law": "Law",
+      "resolution": "CMU resolution",
+      "regulator": "NEURC resolution",
+      "dbn": "DBN",
+      "dstu": "DSTU",
+      "iso": "ISO",
+      "eu": "EU act",
+      "other": "Other"
+    },
+    "status": {
+      "active": "In force",
+      "amended": "Amended",
+      "repealed": "Repealed",
+      "draft": "Draft"
+    },
+    "hub": {
+      "metaTitle": "Energy knowledge base — CEE",
+      "metaDescription": "Regulatory and technical documentation, Ukrainian energy news digests and a legislation consultant from the Energy Efficiency Centre.",
+      "label": "Knowledge base",
+      "title": "Legislation, standards and energy news — in one place",
+      "text": "We work with regulations every day for communities, HOAs, businesses and developers. This is the part we can share: verified document cards, digests of changes and a consultant that answers with a link to the source.",
+      "cards": {
+        "documents": {
+          "title": "Regulatory and technical documentation",
+          "text": "Laws, NEURC and CMU resolutions, DBN, DSTU, ISO, EU acts. Summary, key points, change log and a link to the primary source.",
+          "meta": "{n, plural, one {# document} other {# documents}} in the base"
+        },
+        "digests": {
+          "title": "News digests",
+          "text": "A concise review of energy-sector changes for a period: what was adopted, what opened, what to account for in a project. Selected and commented by a CEE specialist.",
+          "meta": "{n, plural, one {# issue} other {# issues}}"
+        },
+        "ask": {
+          "title": "Legislation consultant",
+          "text": "Ask a question and get an answer based on the CEE document base with links to the cards. A few queries a day without an account.",
+          "meta": "{guest} queries without an account · {free} after registering"
+        }
+      },
+      "open": "Open",
+      "principlesLabel": "How we handle information",
+      "principlesTitle": "Three rules of the knowledge base",
+      "principles": [
+        {
+          "title": "Verified by a person",
+          "text": "Every document card and every digest passes through a Centre specialist. The date of the last check is on the card."
+        },
+        {
+          "title": "Continuously updated",
+          "text": "News is collected automatically from official sources; document changes are logged — you can see what changed and when."
+        },
+        {
+          "title": "Always with a source",
+          "text": "The consultant answers only from documents in the base and shows which ones it relies on. No link — no answer."
+        }
+      ],
+      "recentDocs": "Recently checked documents",
+      "recentDigests": "Latest digests",
+      "all": "All",
+      "checked": "checked",
+      "emptyDocs": "No documents published yet.",
+      "emptyDigests": "No digests published yet."
+    },
+    "documents": {
+      "metaTitle": "Regulatory and technical documentation — CEE",
+      "metaDescription": "A base of laws, resolutions, DBN, DSTU, ISO and EU acts on energy and energy efficiency with summaries, key points and a change log.",
+      "label": "Documents",
+      "title": "Regulatory and technical documentation",
+      "intro": "The documents we work with in projects: laws and resolutions, building codes and standards, EU acts. Each card has a summary, key points, a link to the official text and a change log.",
+      "searchLabel": "Search documents",
+      "searchPlaceholder": "Number, title or topic: 2019-VIII, HOA, storage…",
+      "kindLabel": "Document type",
+      "allKinds": "All types",
+      "searchButton": "Search",
+      "found": "Found: {n}",
+      "none": "Nothing found",
+      "reset": "reset",
+      "emptyHint": "Try a shorter wording or another document type. If the document you need is not in the base — write to us and we will add it.",
+      "askInstead": "Ask the consultant",
+      "checked": "checked",
+      "source": "Source",
+      "disclaimer": "The base is not an official publication and does not replace the primary source. Before applying a rule, check the current wording via the link on the card — that is why we show the date of the last check."
+    },
+    "document": {
+      "back": "Back to the catalogue",
+      "keyPoints": "Key points",
+      "summary": "Summary",
+      "updates": "Change log",
+      "noUpdates": "No changes recorded since the document was added.",
+      "sourceLink": "source of the change",
+      "issuer": "Issuer",
+      "adopted": "Adopted",
+      "checkedAt": "Checked",
+      "statusLabel": "Status",
+      "openSource": "Official text",
+      "askAbout": "Ask about this document",
+      "ctaTitle": "Need to apply it to your site?",
+      "ctaText": "A CEE specialist will work out how the rule applies in your case and take it through to the result.",
+      "ctaButton": "Leave a request",
+      "disclaimer": "The summary was prepared by a CEE specialist. It is neither the official text nor a legal opinion; check the current wording via the official source link."
+    },
+    "digests": {
+      "metaTitle": "Ukrainian energy news digests — CEE",
+      "metaDescription": "Periodic reviews of changes in Ukraine's energy sector: regulation, legislation, support programmes, market and renewables. Editorial by the Energy Efficiency Centre.",
+      "label": "Digests",
+      "title": "Energy news — short and sourced",
+      "intro": "Each issue is a selection of changes for a period with a link to the primary source and a short note on what it means for communities, HOAs, businesses and developers. Collected automatically, selected by hand.",
+      "empty": "The first issue is in preparation.",
+      "read": "Read",
+      "back": "All digests",
+      "period": "Period",
+      "subscribeTitle": "Get digests by email",
+      "subscribeText": "Register — and new issues will arrive in your inbox once the mailing is switched on.",
+      "subscribeButton": "Register",
+      "disclaimer": "A digest is a CEE editorial review based on open sources. We paraphrase rather than quote; for the exact wording follow the link to the primary source.",
+      "ctaTitle": "Not sure how a change affects your site?",
+      "ctaText": "Ask the consultant — it will find the document in the base and explain with links.",
+      "ctaButton": "Go to the consultant"
+    },
+    "ask": {
+      "metaTitle": "Energy legislation consultant — CEE",
+      "metaDescription": "Ask about laws, NEURC resolutions, DBN and standards in energy — get an answer with links to documents in the CEE base.",
+      "label": "Consultant",
+      "title": "A question on legislation — an answer with sources",
+      "intro": "The consultant looks for the answer only in the CEE document base and shows which cards it relies on. It is a brief, not a legal opinion; for your site, talk to a specialist.",
+      "examplesLabel": "Try, for example:",
+      "examples": [
+        "What is an active consumer and how can an HOA sell surplus electricity?",
+        "What are the requirements for building energy certification?",
+        "Is a licence needed for an energy storage installation?",
+        "What must an energy audit contain by law?"
+      ],
+      "inputLabel": "Your question",
+      "placeholder": "Write a question about a rule, a document or a situation…",
+      "placeholderExhausted": "Daily allowance used up",
+      "send": "Ask",
+      "hint": "Enter — send, Shift+Enter — new line. Queries are counted per day.",
+      "thinking": "Searching the document base…",
+      "sources": "Sources",
+      "modeAi": "The answer was drafted from documents in the CEE base. Verify via the links.",
+      "modeRetrieval": "Showing documents from the CEE base related to the question.",
+      "quotaTitle": "Today's allowance is used up",
+      "quotaGuest": "Register to get more queries per day and a history in your account.",
+      "quotaUser": "A subscription removes the daily limit and adds analytics for your site.",
+      "burst": "Too many queries in a row. Wait a minute.",
+      "error": "Could not get an answer. Try again.",
+      "register": "Register",
+      "login": "Sign in",
+      "plans": "Plans",
+      "quotaLabel": "Queries today",
+      "quotaLeft": "left for today",
+      "quotaUnlimited": "no daily limit",
+      "planLabel": "Plan",
+      "planNames": {
+        "guest": "Guest",
+        "free": "Basic",
+        "premium": "Premium",
+        "enterprise": "Enterprise"
+      },
+      "upsellGuestTitle": "More queries after registering",
+      "upsellGuestText": "Free. A higher daily allowance and query history in your account.",
+      "upsellFreeTitle": "No limit and with analytics",
+      "upsellFreeText": "A subscription removes the daily limit and adds briefs for your site.",
+      "accountTitle": "Your account",
+      "accountLink": "History and plan",
+      "disclaimer": "Answers are generated from the CEE base and are not a legal opinion. Check the primary source before deciding."
+    }
+  }
+}

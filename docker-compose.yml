@@ -1,0 +1,66 @@
+# Повний стек для VPS: сайт + PostgreSQL + Caddy (HTTPS автоматично).
+# Запуск: cp deploy/env.production.example .env.production && відредагувати → docker compose up -d --build
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: cee_site
+      POSTGRES_USER: cee
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env.production}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cee -d cee_site"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-https://cee.energy}
+    restart: unless-stopped
+    env_file: .env.production
+    environment:
+      DATABASE_URL: postgresql://cee:${POSTGRES_PASSWORD}@db:5432/cee_site
+    depends_on:
+      db:
+        condition: service_healthy
+    expose:
+      - "3000"
+
+  # Одноразово: схема БД + початкові дані. Запуск: docker compose --profile tools run --rm migrate
+  migrate:
+    build:
+      context: .
+      target: build
+    profiles: ["tools"]
+    env_file: .env.production
+    environment:
+      DATABASE_URL: postgresql://cee:${POSTGRES_PASSWORD}@db:5432/cee_site
+    depends_on:
+      db:
+        condition: service_healthy
+    command: sh -c "npx drizzle-kit push && npx tsx lib/db/seed.ts"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      SITE_DOMAIN: ${SITE_DOMAIN:?set SITE_DOMAIN in .env.production}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+
+volumes:
+  pgdata:
+  caddy_data:
+  caddy_config:

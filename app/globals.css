@@ -1,0 +1,304 @@
+@import "tailwindcss";
+
+/* Клас-керована темна тема (next-themes додає/знімає .dark на <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* ФОНИ кнопок і плашок — тільки з білим текстом поверх */
+  --color-brand: #10b981;
+  --color-brand-hover: #059669;
+  --color-brand-dark: #047857;
+
+  /* ТЕКСТ на світлому фоні. Контраст 5.1:1 — проходить WCAG AA */
+  --color-brand-text: #047857;
+
+  /* Акцент. Для тексту тільки темний варіант, 4.6:1 */
+  --color-accent: #f59e0b;
+  --color-accent-text: #b45309;
+
+  /* Другий акцент з ТЗ — електрик-синій (#6aa8ff), для сяйва і підсвічень */
+  --color-electric: #6aa8ff;
+  --color-electric-text: #1d4ed8;
+
+  /* Нейтральні (light за замовчуванням) */
+  --color-fg: #111827;
+  --color-fg-muted: #4b5563;
+  --color-fg-placeholder: #6b7280;
+  --color-line: #e5e7eb;
+  --color-surface: #f9fafb;
+  --color-bg: #ffffff;
+  --color-bg-elevated: #ffffff;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Темна тема: перевизначення нейтральних і фонових змінних */
+.dark {
+  /* Палітра ТЗ: фон #070b12, акценти #34e5a1 / #6aa8ff */
+  --color-brand-text: #34e5a1;
+  --color-accent-text: #fbbf24;
+  --color-electric-text: #8dbcff;
+
+  --color-fg: #eef2f7;
+  --color-fg-muted: #9aa5b8;
+  --color-fg-placeholder: #6b7689;
+  --color-line: #1c2434;
+  --color-surface: #0c111c;
+  --color-bg: #070b12;
+  --color-bg-elevated: #10182a;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    color: var(--color-fg);
+    background: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.25; font-weight: 700; letter-spacing: -0.01em; }
+  h3 { font-size: clamp(1.125rem, 2vw, 1.375rem); line-height: 1.35; font-weight: 600; }
+  p  { line-height: 1.65; }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-dark);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Ефекти ---------- */
+
+/* Сітка у фоні героя */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(16, 185, 129, 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.09) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+/* Поява при прокручуванні */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal[data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Підкреслення, що виїжджає при наведенні */
+.underline-grow {
+  background-image: linear-gradient(var(--color-brand-text), var(--color-brand-text));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  transition: background-size 0.35s ease;
+}
+.underline-grow:hover,
+.underline-grow:focus-visible {
+  background-size: 100% 2px;
+}
+
+/* Картка з рухомим бордюром при наведенні */
+.lift {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
+}
+.lift:hover {
+  transform: translateY(-5px);
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 14px 34px -12px rgba(4, 120, 87, 0.28);
+}
+
+/* Пульсуюча крапка статусу */
+.pulse-dot {
+  position: relative;
+}
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: inherit;
+  animation: pulse 2.4s ease-out infinite;
+}
+@keyframes pulse {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  70%  { transform: scale(2.6); opacity: 0; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* Стрічка слів */
+.ticker-item {
+  animation: tickerFade 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes tickerFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Легке підняття тексту героя після завантаження */
+.rise {
+  animation: rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------- Кінематографічний герой (референс: tesla.com/megapack, sparkgrid.ai) ---------- */
+
+/* Великий заголовок героя: щільніше, крупніше за базовий h1 */
+.hero-title {
+  font-size: clamp(2rem, 5.8vw, 4.5rem);
+  overflow-wrap: anywhere;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+/* Підсвічений фрагмент заголовка: градієнт смарагд → електрик-синій */
+.hero-highlight {
+  background: linear-gradient(92deg, var(--color-brand-text) 0%, var(--color-electric-text) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Легке віньєтування, щоб текст читався поверх сяйва */
+.hero-vignette {
+  background:
+    linear-gradient(to right, var(--color-bg) 0%, color-mix(in srgb, var(--color-bg) 70%, transparent) 45%, transparent 75%),
+    linear-gradient(to top, var(--color-bg) 0%, transparent 35%);
+}
+
+/* Рядок показників у стилі «технічної специфікації» */
+.stat-num {
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Індикатор прокрутки */
+.scroll-hint {
+  animation: scrollHint 2.2s ease-in-out infinite;
+}
+@keyframes scrollHint {
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50%      { transform: translateY(6px); opacity: 1; }
+}
+
+/* ---------- Інженерний регістр ---------- */
+
+/* Технічна сітка: тонка, монохромна, без згасання по краях */
+.grid-tech {
+  background-image:
+    linear-gradient(to right, rgba(17, 24, 39, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 24, 39, 0.055) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Крос-маркери на перетинах — як на кресленні */
+.grid-marks {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(17, 24, 39, 0.16) 1px,
+    transparent 0
+  );
+  background-size: 128px 128px;
+}
+
+/* Робоча лінія: тонкий рух зліва направо, як індикація потоку */
+.flow-line {
+  stroke-dasharray: 6 8;
+  animation: flow 2.4s linear infinite;
+}
+@keyframes flow {
+  to { stroke-dashoffset: -28; }
+}
+
+/* ---------- Місток: Центр між капіталом і майданчиком ---------- */
+
+/* З'єднувач між опорами. До lg — вертикальний пунктир, від lg — горизонтальний.
+   Рух пунктиру показує напрям: ресурс і рішення йдуть через Центр на місце. */
+.bridge-link {
+  align-self: center;
+  justify-self: center;
+  width: 2px;
+  height: 28px;
+  background-image: linear-gradient(
+    180deg,
+    var(--color-brand) 0 6px,
+    transparent 6px 14px
+  );
+  background-size: 2px 14px;
+  background-repeat: repeat-y;
+  animation: bridgeFlowV 1.8s linear infinite;
+}
+@keyframes bridgeFlowV {
+  to { background-position: 0 14px; }
+}
+
+@media (min-width: 1024px) {
+  .bridge-link {
+    width: 100%;
+    min-width: 28px;
+    height: 2px;
+    background-image: linear-gradient(
+      90deg,
+      var(--color-brand) 0 6px,
+      transparent 6px 14px
+    );
+    background-size: 14px 2px;
+    background-repeat: repeat-x;
+    animation-name: bridgeFlowH;
+  }
+}
+@keyframes bridgeFlowH {
+  to { background-position: 14px 0; }
+}
+
+/* Зворотний потік: дані й підтвердження результату йдуть назад до опори */
+.bridge-link-back {
+  animation-direction: reverse;
+  background-image: linear-gradient(
+    180deg,
+    var(--color-fg-placeholder) 0 4px,
+    transparent 4px 14px
+  );
+}
+@media (min-width: 1024px) {
+  .bridge-link-back {
+    background-image: linear-gradient(
+      90deg,
+      var(--color-fg-placeholder) 0 4px,
+      transparent 4px 14px
+    );
+  }
+}
+
+/* Моноширинна технічна мітка */
+.mono-label {
+  font-family: ui-monospace, "JetBrains Mono", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
