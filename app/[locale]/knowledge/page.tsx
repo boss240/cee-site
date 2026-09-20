@@ -10,6 +10,7 @@ import { db, schema } from "@/lib/db";
 import { searchDocuments } from "@/lib/knowledge/documents";
 import { listPublishedDigests } from "@/lib/knowledge/digests";
 import { PLANS } from "@/lib/knowledge/plans";
+import { AccountBenefits } from "@/components/account/AccountBenefits";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Knowledge.hub");
@@ -99,6 +100,13 @@ export default async function KnowledgeHub() {
               );
             })}
           </ul>
+        </div>
+      </section>
+
+      {/* Навіщо реєструватися — видно кожному, хто заходить у базу знань */}
+      <section className="border-b border-[var(--color-line)]">
+        <div className="mx-auto max-w-6xl px-4 py-16">
+          <AccountBenefits />
         </div>
       </section>
 

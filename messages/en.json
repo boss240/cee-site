@@ -1957,7 +1957,7 @@
         "enterprise": "Enterprise"
       },
       "upsellGuestTitle": "More queries after registering",
-      "upsellGuestText": "Free. A higher daily allowance and query history in your account.",
+      "upsellGuestText": "Free, no card: {free} queries per day instead of {guest}, history of queries and sources in your account, unlimited subscription on request.",
       "upsellFreeTitle": "No limit and with analytics",
       "upsellFreeText": "A subscription removes the daily limit and adds briefs for your site.",
       "accountTitle": "Your account",
@@ -1971,5 +1971,43 @@
     "link": "Privacy Policy",
     "accept": "Got it",
     "close": "Close"
+  },
+  "AccountBenefits": {
+    "label": "Account benefits",
+    "title": "Why register",
+    "intro": "Registration is free and is only needed for the legislation consultant. Here is what you get:",
+    "items": [
+      {
+        "title": "{free} consultant queries per day instead of {guest}",
+        "text": "Guests get {guest} queries; with an account — {free}. The allowance resets daily at midnight."
+      },
+      {
+        "title": "History of queries and sources",
+        "text": "All your questions, answers and the document cards they rely on are kept in your account — no need to ask twice."
+      },
+      {
+        "title": "Your allowance and plan at a glance",
+        "text": "Your account shows how many queries remain today and which plan is active."
+      },
+      {
+        "title": "Subscription without a daily limit",
+        "text": "Premium and Enterprise are activated from your account on request: no limit, analytics for your site, API access for organisations."
+      },
+      {
+        "title": "No card, no extra data",
+        "text": "Only e-mail, password and name. No ads or trackers; data is processed under the Privacy Policy."
+      }
+    ],
+    "noAccountTitle": "Available without an account",
+    "noAccountText": "All knowledge-base documents, news digests, the request form and the on-site assistant. An account is needed only for the legislation consultant.",
+    "cta": "Create an account",
+    "ctaSecondary": "Already have one — sign in",
+    "compactTitle": "What an account gives you",
+    "compactItems": [
+      "{free} consultant queries per day instead of {guest}",
+      "History of queries and sources in your account",
+      "Subscription without a daily limit",
+      "Free, no card required"
+    ]
   }
 }

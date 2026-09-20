@@ -4,6 +4,7 @@ import { alternatesFor } from "@/lib/seo";
 import { redirect } from "next/navigation";
 import { getUserSession } from "@/lib/auth/requireAdmin";
 import { LoginForm } from "../AuthForms";
+import { AccountBenefits } from "@/components/account/AccountBenefits";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Account");
@@ -21,6 +22,7 @@ export default async function LoginPage({ params }: { params: Promise<{ locale: 
       <h1 className="mt-2">{t("loginTitle")}</h1>
       <p className="mt-3 text-[var(--color-fg-muted)]">{t("loginIntro")}</p>
       <div className="mt-8"><LoginForm /></div>
+      <div className="mt-10"><AccountBenefits variant="compact" /></div>
     </div>
   );
 }

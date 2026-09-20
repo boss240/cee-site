@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { PLANS } from "@/lib/knowledge/plans";
 import { useLocale, useTranslations } from "next-intl";
 import { Loader2, SendHorizontal, Sparkles, FileText, LockKeyhole } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -190,7 +191,7 @@ export function AskClient({ initialQuestion = "" }: { initialQuestion?: string }
         {!signedIn ? (
           <div className="rounded-xl border border-[var(--color-brand)] p-5">
             <p className="font-semibold">{t("upsellGuestTitle")}</p>
-            <p className="mt-1 text-sm text-[var(--color-fg-muted)]">{t("upsellGuestText")}</p>
+            <p className="mt-1 text-sm text-[var(--color-fg-muted)]">{t("upsellGuestText", { guest: PLANS.guest.dailyAsk ?? 0, free: PLANS.free.dailyAsk ?? 0 })}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               <Link href="/account/register" className="rounded-lg bg-[var(--color-brand)] px-4 py-2 text-sm font-semibold text-white">{t("register")}</Link>
               <Link href="/account/login" className="rounded-lg border border-[var(--color-line)] px-4 py-2 text-sm font-semibold">{t("login")}</Link>
