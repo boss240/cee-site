@@ -1,20 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { desc } from "drizzle-orm";
-import { z } from "zod";
 import { db, schema } from "@/lib/db";
 import { requireAdminSession } from "@/lib/auth/requireAdmin";
-
-export const PostSchema = z.object({
-  slug: z.string().trim().min(2).max(160).regex(/^[a-z0-9-]+$/, "slug: лише a-z, 0-9 і дефіс"),
-  titleUk: z.string().trim().min(2).max(255),
-  titleEn: z.string().trim().max(255).default(""),
-  excerptUk: z.string().trim().max(2000).default(""),
-  excerptEn: z.string().trim().max(2000).default(""),
-  bodyUk: z.string().max(100_000).default(""),
-  bodyEn: z.string().max(100_000).default(""),
-  tag: z.string().trim().max(64).optional().nullable(),
-  published: z.boolean().default(false),
-});
+import { PostSchema } from "@/lib/blog/postSchema";
 
 export async function GET() {
   const guard = await requireAdminSession();
