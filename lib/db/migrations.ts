@@ -280,6 +280,31 @@ INSERT INTO "sources" ("name", "url", "kind", "category", "enabled") VALUES
 ('Open Budget — бюджет громади', 'https://openbudget.gov.ua/local-budget/0255600000/info/profile', 'rss', 'local', false)
 ON CONFLICT ("url") DO NOTHING;`,
   },
+  {
+    // "0001_digest_kind_local_sources" уже застосована на проді (id зафіксований у
+    // __cee_migrations) з часу, коли в її SQL було лише 4 джерела — тому редагування
+    // INSERT у тому блоці пізніше (додавання ще 10 джерел з дослідження) саме по собі
+    // на прод не подіяло: runMigrations() пропускає застосовані id, SQL не перевиконується.
+    // Той самий INSERT ... ON CONFLICT DO NOTHING тут, під новим id, щоб реально
+    // додати рядки, яких ще нема в БД.
+    id: "0002_more_local_sources",
+    sql: String.raw`INSERT INTO "sources" ("name", "url", "kind", "category", "enabled") VALUES
+('Ладижинська міська рада — новини', 'https://ladrada.gov.ua/index.php?option=com_content&view=category&layout=blog&id=55&format=feed&type=rss', 'rss', 'local', false),
+('Вінницька обласна військова адміністрація', 'https://www.vin.gov.ua/rss', 'rss', 'local', false),
+('Вінницька обласна рада', 'https://vinrada.gov.ua/rss', 'rss', 'local', false),
+('Гайсинська РДА — новини', 'https://haysynrayrada.gov.ua/rss', 'rss', 'local', false),
+('КП «Ладижинський ККП» (благоустрій)', 'https://ladrada.gov.ua/komunalni-pidpryiemstva/kp-ladyzhynskyi-kkp.html', 'rss', 'local', false),
+('КП «Ладводоканал»', 'https://ladrada.gov.ua/komunalni-pidpryiemstva/kp-ladvodokanal.html', 'rss', 'local', false),
+('DTEK Ладижинська ТЕС — прес-центр', 'https://energo.dtek.com/media-center/press/', 'rss', 'local', false),
+('Вінницяобленерго — графіки відключень', 'https://voe.com.ua/disconnection', 'rss', 'local', false),
+('ladyzhyn.today — місцеві новини', 'https://ladyzhyn.today/local-news/', 'rss', 'local', false),
+('ladyzhyn.news', 'https://ladyzhyn.news/', 'rss', 'local', false),
+('ВітаТВ — Ладижин', 'https://vitatv.com.ua/m-ladyzhyn', 'rss', 'local', false),
+('i-vin.info', 'https://i-vin.info/', 'rss', 'local', false),
+('Podilske.com / PodilskeRadio', 'https://www.podilske.com/', 'rss', 'local', false),
+('Open Budget — бюджет громади', 'https://openbudget.gov.ua/local-budget/0255600000/info/profile', 'rss', 'local', false)
+ON CONFLICT ("url") DO NOTHING;`,
+  },
 ];
 
 /** Застосовує ще не застосовані міграції. Повертає список застосованих id. */
