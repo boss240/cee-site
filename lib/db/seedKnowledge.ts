@@ -13,10 +13,23 @@ export const SEED_SOURCES = [
   { name: "Фонд енергоефективності", url: "https://eefund.org.ua/feed", category: "government", enabled: false },
   { name: "Оператор ринку (ОРЕЕ)", url: "https://www.oree.com.ua/index.php/rss", category: "market", enabled: false },
   // Місцеві джерела для дайджесту «Місцеві новини» (kind = local). Адреси RSS перевірити в адмінці.
-  { name: "Ладижинська міська рада — новини", url: "https://ladyzhyn-rada.gov.ua/rss", category: "local", enabled: false },
+  // Telegram-канали (t.me/ladyzhyn_info, t.me/ladizhinvkursi) і Facebook-сторінки сюди свідомо не додані:
+  // rss-parser не вміє їх читати (Facebook Graph API взагалі вимагає App Review від Meta) — це окрема
+  // задача на ручну або спеціалізовану інтеграцію, не RSS-джерело. Список — у проєктному документі.
+  { name: "Ладижинська міська рада — новини", url: "https://ladrada.gov.ua/index.php?option=com_content&view=category&layout=blog&id=55&format=feed&type=rss", category: "local", enabled: false },
   { name: "Вінницька обласна військова адміністрація", url: "https://www.vin.gov.ua/rss", category: "local", enabled: false },
   { name: "Вінницька обласна рада", url: "https://vinrada.gov.ua/rss", category: "local", enabled: false },
-  { name: "Гайсинська РДА — новини", url: "https://gaisin-rda.gov.ua/rss", category: "local", enabled: false },
+  { name: "Гайсинська РДА — новини", url: "https://haysynrayrada.gov.ua/rss", category: "local", enabled: false },
+  { name: "КП «Ладижинський ККП» (благоустрій)", url: "https://ladrada.gov.ua/komunalni-pidpryiemstva/kp-ladyzhynskyi-kkp.html", category: "local", enabled: false },
+  { name: "КП «Ладводоканал»", url: "https://ladrada.gov.ua/komunalni-pidpryiemstva/kp-ladvodokanal.html", category: "local", enabled: false },
+  { name: "DTEK Ладижинська ТЕС — прес-центр", url: "https://energo.dtek.com/media-center/press/", category: "local", enabled: false },
+  { name: "Вінницяобленерго — графіки відключень", url: "https://voe.com.ua/disconnection", category: "local", enabled: false },
+  { name: "ladyzhyn.today — місцеві новини", url: "https://ladyzhyn.today/local-news/", category: "local", enabled: false },
+  { name: "ladyzhyn.news", url: "https://ladyzhyn.news/", category: "local", enabled: false },
+  { name: "ВітаТВ — Ладижин", url: "https://vitatv.com.ua/m-ladyzhyn", category: "local", enabled: false },
+  { name: "i-vin.info", url: "https://i-vin.info/", category: "local", enabled: false },
+  { name: "Podilske.com / PodilskeRadio", url: "https://www.podilske.com/", category: "local", enabled: false },
+  { name: "Open Budget — бюджет громади", url: "https://openbudget.gov.ua/local-budget/0255600000/info/profile", category: "local", enabled: false },
 ];
 
 /** Вступний дайджест — пояснює, як влаштовані дайджести ЦЕЕ. Далі дайджести створюються з реальних новин. */

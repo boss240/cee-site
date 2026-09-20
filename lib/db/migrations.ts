@@ -264,10 +264,20 @@ ALTER TABLE "usage_events" ADD CONSTRAINT "usage_events_user_id_users_id_fk" FOR
     sql: String.raw`ALTER TABLE "digests" ADD COLUMN IF NOT EXISTS "kind" varchar(16) DEFAULT 'energy' NOT NULL;
 --> statement-breakpoint
 INSERT INTO "sources" ("name", "url", "kind", "category", "enabled") VALUES
-('Ладижинська міська рада — новини', 'https://ladyzhyn-rada.gov.ua/rss', 'rss', 'local', false),
+('Ладижинська міська рада — новини', 'https://ladrada.gov.ua/index.php?option=com_content&view=category&layout=blog&id=55&format=feed&type=rss', 'rss', 'local', false),
 ('Вінницька обласна військова адміністрація', 'https://www.vin.gov.ua/rss', 'rss', 'local', false),
 ('Вінницька обласна рада', 'https://vinrada.gov.ua/rss', 'rss', 'local', false),
-('Гайсинська РДА — новини', 'https://gaisin-rda.gov.ua/rss', 'rss', 'local', false)
+('Гайсинська РДА — новини', 'https://haysynrayrada.gov.ua/rss', 'rss', 'local', false),
+('КП «Ладижинський ККП» (благоустрій)', 'https://ladrada.gov.ua/komunalni-pidpryiemstva/kp-ladyzhynskyi-kkp.html', 'rss', 'local', false),
+('КП «Ладводоканал»', 'https://ladrada.gov.ua/komunalni-pidpryiemstva/kp-ladvodokanal.html', 'rss', 'local', false),
+('DTEK Ладижинська ТЕС — прес-центр', 'https://energo.dtek.com/media-center/press/', 'rss', 'local', false),
+('Вінницяобленерго — графіки відключень', 'https://voe.com.ua/disconnection', 'rss', 'local', false),
+('ladyzhyn.today — місцеві новини', 'https://ladyzhyn.today/local-news/', 'rss', 'local', false),
+('ladyzhyn.news', 'https://ladyzhyn.news/', 'rss', 'local', false),
+('ВітаТВ — Ладижин', 'https://vitatv.com.ua/m-ladyzhyn', 'rss', 'local', false),
+('i-vin.info', 'https://i-vin.info/', 'rss', 'local', false),
+('Podilske.com / PodilskeRadio', 'https://www.podilske.com/', 'rss', 'local', false),
+('Open Budget — бюджет громади', 'https://openbudget.gov.ua/local-budget/0255600000/info/profile', 'rss', 'local', false)
 ON CONFLICT ("url") DO NOTHING;`,
   },
 ];
