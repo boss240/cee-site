@@ -50,6 +50,9 @@
 
 @layer base {
   html { scroll-behavior: smooth; }
+  /* Без горизонтального прокручування на мобільних: пульсація кнопки AI-помічника (animate-ping)
+     виходить за правий край екрана і без clip розтягувала сторінку до 421px на 390px-екрані. */
+  html, body { overflow-x: clip; }
   body {
     color: var(--color-fg);
     background: var(--color-bg);

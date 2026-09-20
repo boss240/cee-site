@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
+import { revalidateTag } from "next/cache";
 import { requireAdminSession } from "@/lib/auth/requireAdmin";
+import { PUBLIC_CONTACTS_TAG } from "@/lib/publicProfile";
 
 export async function GET() {
   const guard = await requireAdminSession();
@@ -35,6 +37,9 @@ export async function PATCH(req: NextRequest) {
     .set(updatable)
     .where(eq(schema.companyProfile.id, profile.id))
     .returning();
+
+  // Контакти у футері кешуються — скидаємо кеш, щоб зміни з'явилися одразу.
+  revalidateTag(PUBLIC_CONTACTS_TAG, "max");
 
   return NextResponse.json({ profile: updated });
 }

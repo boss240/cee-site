@@ -1229,9 +1229,6 @@
       "unassignedOnly": "only items not yet in a digest",
       "showNews": "Show news",
       "generateDraft": "Generate draft",
-      "draftMode.ai": "The draft was produced by an AI model from the period's news. Check facts and links before publishing.",
-      "draftMode.template": "No AI model available (no key) — a categorised list of news was assembled. Edit before publishing.",
-      "draftMode.empty": "No news for this period. Fetch news from sources first.",
       "addNew": "New digest",
       "published": "Published",
       "draft": "Draft",
@@ -1260,7 +1257,12 @@
         "market": "Market",
         "media": "Industry media"
       },
-      "pageTitle": "Digests and news sources"
+      "pageTitle": "Digests and news sources",
+      "draftMode": {
+        "ai": "The draft was produced by an AI model from the period's news. Check facts and links before publishing.",
+        "template": "No AI model available (no key) — a categorised list of news was assembled. Edit before publishing.",
+        "empty": "No news for this period. Fetch news from sources first."
+      }
     },
     "users": {
       "title": "Knowledge base users",
@@ -1453,7 +1455,7 @@
   "PrivacyPage": {
     "label": "Legal",
     "title": "Privacy Policy",
-    "updated": "Version of 15 September 2026",
+    "updated": "Version of 17 September 2026",
     "intro": "This policy explains what personal data the website of the Center for Energy Efficiency (Ladyzhyn) collects, why, for how long, and what rights you have. We collect only what is needed to reply to your request.",
     "sections": [
       {
@@ -1465,7 +1467,7 @@
       {
         "title": "What data we collect",
         "paragraphs": [
-          "We process only the data you provide yourself via the request form or the assistant chat on the site:"
+          "We process only the data you provide yourself on the site — via the request form, the assistant chat, or when registering a knowledge-base account:"
         ],
         "items": [
           "your name or how to address you;",
@@ -1486,6 +1488,19 @@
         "title": "The assistant on the site",
         "paragraphs": [
           "The assistant replies based on the site's materials. If the Center has an external language model connected, the text of your message may be sent to that model's provider to generate a reply. Do not enter passport data, card numbers or other sensitive information in the chat — it is not needed to answer your question."
+        ]
+      },
+      {
+        "title": "Knowledge-base account",
+        "paragraphs": [
+          "If you register, we store your email, name and organisation (optional), your password as an irreversible hash (bcrypt), your plan and the date of your last sign-in. To enforce plan limits we keep a count of consultant requests (date and request type) without storing the questions themselves beyond your session.",
+          "Sign-in uses a technical session cookie valid for up to 30 days or until you sign out. The account can be deleted on request together with all related data."
+        ]
+      },
+      {
+        "title": "Paid services and invoices",
+        "paragraphs": [
+          "If you order a paid service or plan, we process the payer's name and details, the amount and the issue and payment dates in order to issue an invoice. This data is kept for as long as accounting law requires (at least three years after the reporting period). The site does not collect or store bank card details."
         ]
       },
       {
@@ -1949,5 +1964,12 @@
       "accountLink": "History and plan",
       "disclaimer": "Answers are generated from the CEE base and are not a legal opinion. Check the primary source before deciding."
     }
+  },
+  "PrivacyNotice": {
+    "ariaLabel": "Privacy notice",
+    "text": "This site uses no advertising or tracking cookies. Your browser keeps only technical settings (theme, language, session) and the assistant chat for the duration of your visit. We process your data only when you send us a request, and only with your consent. Details —",
+    "link": "Privacy Policy",
+    "accept": "Got it",
+    "close": "Close"
   }
 }

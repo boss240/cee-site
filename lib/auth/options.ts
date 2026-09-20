@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
+import { tooManyRequests } from "@/lib/rateLimit";
 
 /**
  * NextAuth (credentials) для двох типів облікових записів:
@@ -21,11 +22,22 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
         scope: { label: "Scope", type: "text" }, // "admin" | "user" — з якої форми входять
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         const email = credentials?.email?.toLowerCase().trim();
         const password = credentials?.password;
         const scope = credentials?.scope === "admin" ? "admin" : "user";
         if (!email || !password) return null;
+
+        // Захист від перебору паролів: не більше 10 спроб на e-mail і 30 з однієї IP-адреси за 15 хвилин.
+        // Лічильник у пам'яті процесу (як і решта лімітів) — при перевищенні вхід просто не вдається.
+        const headers = (req?.headers ?? {}) as Record<string, string | string[] | undefined>;
+        const fwd = headers["x-forwarded-for"];
+        const ip = (Array.isArray(fwd) ? fwd[0] : fwd)?.split(",")[0]?.trim() || (headers["x-real-ip"] as string | undefined) || "local";
+        const windowMs = 15 * 60 * 1000;
+        if (tooManyRequests(`login:email:${scope}:${email}`, 10, windowMs) || tooManyRequests(`login:ip:${ip}`, 30, windowMs)) {
+          console.warn(`[auth] too many login attempts scope=${scope} email=${email} ip=${ip}`);
+          return null;
+        }
 
         if (scope === "admin") {
           const [admin] = await db.select().from(schema.adminUsers).where(eq(schema.adminUsers.email, email));

@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+import nodemailer, { type Transporter } from "nodemailer";
 
 /**
  * Email через SMTP (nodemailer). Працює з будь-яким провайдером —
@@ -20,7 +20,7 @@ export function notifyRecipients(): string[] {
     .filter(Boolean);
 }
 
-let cached: nodemailer.Transporter | null = null;
+let cached: Transporter | null = null;
 
 function transporter() {
   if (cached) return cached;

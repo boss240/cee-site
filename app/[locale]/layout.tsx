@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AIAssistantWidget } from "@/components/ui/AIAssistantWidget";
+import { PrivacyNotice } from "@/components/ui/PrivacyNotice";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
@@ -81,6 +82,7 @@ export default async function RootLayout({
             </main>
             <Footer />
             <AIAssistantWidget />
+            <PrivacyNotice />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

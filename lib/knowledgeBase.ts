@@ -102,6 +102,12 @@ const ENTRIES: Record<Locale, KBEntry[]> = {
       answer:
         "Центр енергоефективності в Ладижині — технічний експертний центр, що обстежує, рахує, проєктує і доводить енергетичні рішення до працюючої системи для громад, бізнесу, ОСББ, девелоперів, донорів і приватних власників. Одне вікно замість п'яти виконавців: ви отримуєте результат, а не папку документів.",
     },
+    {
+      id: "energy-audit",
+      keywords: ["енергоаудит", "енергетичний аудит", "аудит", "обстеження", "вимірювання", "енергоефективність", "що таке енерго", "енергосертифікат", "сертифікат енергоефективності", "теплові втрати", "тепловізор"],
+      answer:
+        "Енергоаудит (обстеження) — це перший крок будь-якого проєкту: ми знімаємо профіль споживання за даними обліку, перевіряємо стан обліку і потужність приєднання, оглядаємо будівлю й обладнання і визначаємо, де саме втрачається енергія та гроші. Результат — не папка, а перелік заходів із розрахованим ефектом і черговістю: з чого почати, що дасть найбільше, що можна відкласти. Далі за бажанням — розрахунок, проєкт і впровадження під ключ. Щоб оцінити обсяг для вашого об'єкта, залиште контакт тут у чаті.",
+    },
   ],
   en: [
     {
@@ -187,6 +193,12 @@ const ENTRIES: Record<Locale, KBEntry[]> = {
       keywords: ["who are you", "what is cee", "the center", "ladyzhyn", "about you", "what do you do"],
       answer:
         "The Center for Energy Efficiency in Ladyzhyn is a technical expert center that surveys, calculates, designs and carries energy solutions through to a working system for communities, businesses, HOAs, developers, donors and private owners. A single window instead of five contractors: you get a result, not a folder of documents.",
+    },
+    {
+      id: "energy-audit",
+      keywords: ["energy audit", "audit", "survey", "assessment", "measurement", "energy efficiency", "what is energy", "energy certificate", "heat loss", "thermal imaging"],
+      answer:
+        "An energy audit (survey) is the first step of any project: we take the consumption profile from metering data, check the metering and the grid connection capacity, inspect the building and equipment, and pinpoint where energy and money are being lost. The result is not a folder but a list of measures with calculated effect and priority: what to start with, what gives the most, what can wait. From there, optionally: calculation, design and turnkey implementation. To scope it for your site, leave your contact here in the chat.",
     },
   ],
 };
