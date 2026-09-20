@@ -152,6 +152,15 @@ export function Header() {
               {t("cta")}
             </Link>
 
+            {/* Акаунт, мова, тема — одразу під головною дією, а не в кінці довгого
+                списку розділів: інакше на телефоні їх треба довго прокручувати,
+                і користувач не розуміє, що перемикач мови/теми взагалі є. */}
+            <div className="mt-3 flex items-center gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] px-2 py-2">
+              <AccountLink className="mr-auto" onClick={() => setOpen(false)} />
+              <LanguageSwitcher />
+              <ThemeToggle />
+            </div>
+
             <p className="mono-label px-2 pb-1 pt-3 text-[var(--color-fg-placeholder)]">
               {tNav("audiences")}
             </p>
@@ -182,12 +191,6 @@ export function Header() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div className="mx-auto flex max-w-6xl items-center gap-2 border-t border-[var(--color-line)] px-4 py-3">
-            <AccountLink className="mr-auto" onClick={() => setOpen(false)} />
-            <LanguageSwitcher />
-            <ThemeToggle />
           </div>
         </nav>
       )}
