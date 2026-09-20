@@ -1,18 +1,28 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/Reveal";
 import { EnergyField } from "@/components/ui/EnergyField";
 import { TrendingUp, Zap, AlertTriangle, CheckCircle2, ChevronRight } from "lucide-react";
 
-export async function generateMetadata(): Promise<Metadata> {
+type Props = { params: Promise<{ locale: string }> };
+
+/** Статична сторінка, ISR: оновлення раз на 10 хв */
+export const revalidate = 600;
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("Placeholder.business");
-  return { title: t("title"), description: t("hint") };
+  return { title: t("title"), description: t("hint"), alternates: await alternatesFor("/business") };
 }
 
 type Item = { title: string; text: string };
 
-export default async function BusinessPage() {
+export default async function BusinessPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("BusinessPage");
   const tCommon = await getTranslations("Common");
 

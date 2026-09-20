@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
 import { Reveal } from "@/components/ui/Reveal";
 import { AskClient } from "./AskClient";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Knowledge.ask");
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return { title: t("metaTitle"), description: t("metaDescription"), alternates: await alternatesFor("/knowledge/ask") };
 }
 
 export default async function AskPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {

@@ -41,7 +41,7 @@ export function PrivacyNotice() {
     <div
       role="region"
       aria-label={t("ariaLabel")}
-      className="fixed inset-x-0 bottom-0 z-[55] px-3 pb-3 sm:px-6 sm:pb-6 print:hidden"
+      className="fixed inset-x-0 bottom-0 z-[55] px-3 pb-20 sm:px-6 sm:pb-6 sm:pr-24 print:hidden"
     >
       <div className="mx-auto flex max-w-3xl flex-col gap-3 rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg-elevated)] p-4 shadow-xl sm:flex-row sm:items-center sm:gap-4 sm:p-5">
         <ShieldCheck size={22} aria-hidden className="hidden shrink-0 text-[var(--color-brand)] sm:block" />

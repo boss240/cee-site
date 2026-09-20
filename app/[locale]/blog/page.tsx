@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/Reveal";
@@ -7,7 +8,7 @@ import { listPublishedPosts } from "@/lib/blog/queries";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("BlogPage");
-  return { title: t("title"), description: t("intro") };
+  return { title: t("title"), description: t("intro"), alternates: await alternatesFor("/blog") };
 }
 
 function fmt(d: Date | null, locale: string) {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Markdown } from "@/components/ui/Markdown";
@@ -12,7 +13,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const d = await getDigest(slug);
   if (!d) return {};
-  return { title: d.title, description: d.intro };
+  return { title: d.title, description: d.intro, alternates: await alternatesFor(`/knowledge/digests/${slug}`) };
 }
 
 export default async function DigestPage({ params }: Params) {

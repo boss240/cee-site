@@ -96,10 +96,29 @@
   transform: translateY(18px);
   transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Страховка: якщо JS ще не завантажився (повільна мережа) або вимкнений —
+     вміст усе одно з'явиться через 1.8 с, не чекаючи гідратації. */
+  animation: reveal-timeout 0.5s cubic-bezier(0.22, 1, 0.36, 1) 1.8s forwards;
 }
 .reveal[data-shown="true"] {
   opacity: 1;
   transform: none;
+  animation: none;
+}
+@keyframes reveal-timeout {
+  to { opacity: 1; transform: none; }
+}
+
+/* Перший екран (hero): без залежності від JS — CSS-анімація одразу при відмальовуванні */
+.hero-in {
+  animation: hero-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .hero-in { animation: none; opacity: 1; transform: none; transition: none; }
 }
 
 /* Підкреслення, що виїжджає при наведенні */

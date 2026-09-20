@@ -17,7 +17,7 @@ export function ContactForm({ initialMessage = "", initialSegment }: { initialMe
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [segment, setSegment] = useState(initialSegment && segments.some((s) => s.value === initialSegment) ? initialSegment : (segments[0]?.value ?? "other"));
+  const [segment, setSegment] = useState(initialSegment && segments.some((s) => s.value === initialSegment) ? initialSegment : "other" /* без вибору — «Інше», а не перший пункт списку */);
   const [message, setMessage] = useState(initialMessage);
   const [consent, setConsent] = useState(false);
   const [website, setWebsite] = useState(""); // honeypot — люди не бачать

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
 import { redirect } from "next/navigation";
 import { getUserSession } from "@/lib/auth/requireAdmin";
 import { RegisterForm } from "../AuthForms";
@@ -7,7 +8,7 @@ import { PLANS } from "@/lib/knowledge/plans";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Account");
-  return { title: t("registerTitle") };
+  return { title: t("registerTitle"), alternates: await alternatesFor("/account/register") };
 }
 
 export default async function RegisterPage({ params }: { params: Promise<{ locale: string }> }) {

@@ -43,6 +43,12 @@ const nextConfig: NextConfig = {
   // Для Docker: мінімальний самодостатній білд у .next/standalone
   output: isVercel ? undefined : "standalone",
   poweredByHeader: false,
+  // Шрифти для og-картинки та PDF-рахунків читаються з диска під час виконання —
+  // гарантуємо, що вони потраплять у бандл serverless-функцій на Vercel.
+  outputFileTracingIncludes: {
+    "/[locale]/opengraph-image": ["./assets/fonts/**"],
+    "/api/admin/invoices/[id]/pdf": ["./assets/fonts/**"],
+  },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },

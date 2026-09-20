@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
 import { ArrowLeft, ExternalLink, CheckCircle2, History, MessageSquareText } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Markdown } from "@/components/ui/Markdown";
@@ -12,7 +13,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const res = await getDocument(slug);
   if (!res) return {};
-  return { title: `${res.doc.number ? `${res.doc.number} — ` : ""}${res.doc.title}`, description: res.doc.summary.replace(/[#*_>`]/g, "").slice(0, 160) };
+  return { title: `${res.doc.number ? `${res.doc.number} — ` : ""}${res.doc.title}`, description: res.doc.summary.replace(/[#*_>`]/g, "").slice(0, 160), alternates: await alternatesFor(`/knowledge/documents/${slug}`) };
 }
 
 export default async function DocumentPage({ params }: Params) {

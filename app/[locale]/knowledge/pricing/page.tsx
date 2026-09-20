@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
 import { Check, Minus } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/Reveal";
@@ -8,7 +9,7 @@ import { getUserSession } from "@/lib/auth/requireAdmin";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Pricing");
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return { title: t("metaTitle"), description: t("metaDescription"), alternates: await alternatesFor("/knowledge/pricing") };
 }
 
 const ORDER: PlanId[] = ["free", "premium", "enterprise"];

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
 import { Search, ExternalLink } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/Reveal";
@@ -7,7 +8,7 @@ import { DOC_KINDS, searchDocuments } from "@/lib/knowledge/documents";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Knowledge.documents");
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return { title: t("metaTitle"), description: t("metaDescription"), alternates: await alternatesFor("/knowledge/documents") };
 }
 
 type Props = { searchParams: Promise<{ q?: string; kind?: string }> };

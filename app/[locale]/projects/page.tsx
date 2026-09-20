@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
 import { FileSearch, FileCheck2, FileCode2, Landmark, FileSignature, ShoppingCart, PlugZap, LineChart, LayoutDashboard, Zap, ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/Reveal";
@@ -10,12 +11,21 @@ type Proof = { title: string; text: string };
 
 const ARTIFACT_ICONS = [FileSearch, FileCheck2, FileCode2, Landmark, FileSignature, ShoppingCart, PlugZap, LineChart, LayoutDashboard, Zap];
 
-export async function generateMetadata(): Promise<Metadata> {
+type Props = { params: Promise<{ locale: string }> };
+
+/** Статична сторінка, ISR: оновлення раз на 10 хв */
+export const revalidate = 600;
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("ProjectsPage");
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return { title: t("metaTitle"), description: t("metaDescription"), alternates: await alternatesFor("/projects") };
 }
 
-export default async function ProjectsPage() {
+export default async function ProjectsPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("ProjectsPage");
   const artifacts = t.raw("artifacts") as Artifact[];
   const proof = t.raw("proof") as Proof[];

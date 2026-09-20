@@ -15,7 +15,9 @@ import {
   BatteryCharging,
   HandCoins,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/Reveal";
 import { Ticker } from "@/components/ui/Ticker";
@@ -27,9 +29,22 @@ const WHY_ICONS = [Gauge, Timer, Receipt, ShieldCheck];
 const SEGMENT_ICONS = [Users, Factory, Building2, BatteryCharging, HandCoins, HomeIcon];
 const COMPETENCY_ICONS = [Ruler, Calculator, FileCode2, Wrench];
 
-export default function HomePage() {
-  const t = useTranslations("HomePage");
-  const tCommon = useTranslations("Common");
+type Props = { params: Promise<{ locale: string }> };
+
+/** Головна — статична, оновлюється раз на 10 хв (ISR) */
+export const revalidate = 600;
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  return { alternates: await alternatesFor("/") };
+}
+
+export default async function HomePage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("HomePage");
+  const tCommon = await getTranslations("Common");
 
   const whyItems = t.raw("whyItems") as { title: string; text: string }[];
   const segments = t.raw("segments") as { href: string; title: string; text: string }[];
@@ -46,26 +61,26 @@ export default function HomePage() {
         <div aria-hidden="true" className="hero-vignette absolute inset-0" />
 
         <div className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pb-8 pt-14 sm:pt-16">
-          <Reveal>
+          <div className="hero-in">
             <p className="mb-6 inline-flex items-center gap-2 self-start rounded-full border border-[var(--color-line)] bg-[var(--color-bg)]/70 px-4 py-1.5 text-sm backdrop-blur">
               <Ticker words={ticker} />
             </p>
-          </Reveal>
+          </div>
 
-          <Reveal delay={80}>
+          <div className="hero-in" style={{ animationDelay: "80ms" }}>
             <h1 className="hero-title max-w-5xl">
               {t("heroTitlePrefix")}{" "}
               <span className="hero-highlight">{t("heroTitleHighlight")}</span>
             </h1>
-          </Reveal>
+          </div>
 
-          <Reveal delay={160}>
+          <div className="hero-in" style={{ animationDelay: "160ms" }}>
             <p className="mt-6 max-w-2xl text-lg text-[var(--color-fg-muted)] sm:text-xl">
               {t("heroText")}
             </p>
-          </Reveal>
+          </div>
 
-          <Reveal delay={240}>
+          <div className="hero-in" style={{ animationDelay: "240ms" }}>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/contacts"
@@ -80,11 +95,11 @@ export default function HomePage() {
                 {t("ctaSecondary")}
               </Link>
             </div>
-          </Reveal>
+          </div>
         </div>
 
         {/* Рядок показників — як технічна специфікація Megapack */}
-        <Reveal delay={320}>
+        <div className="hero-in" style={{ animationDelay: "320ms" }}>
           <div className="relative mx-auto w-full max-w-6xl px-4 pb-7">
             <dl className="grid gap-5 border-t border-[var(--color-line)] pt-5 sm:grid-cols-3 sm:gap-8">
               {heroStats.map(({ value, label }) => (
@@ -96,7 +111,7 @@ export default function HomePage() {
             </dl>
             <p className="mono-label mt-3 text-[var(--color-fg-placeholder)]">{t("heroStatsSource")}</p>
           </div>
-        </Reveal>
+        </div>
 
         <div
           aria-hidden="true"

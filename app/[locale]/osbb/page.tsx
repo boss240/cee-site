@@ -1,18 +1,27 @@
 import type { Metadata } from "next";
-import { getTranslations, getLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 import { getPrograms } from "@/lib/programs";
 import { ProgramCard } from "@/components/ui/ProgramCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { EnergyField } from "@/components/ui/EnergyField";
 
-export async function generateMetadata(): Promise<Metadata> {
+type Props = { params: Promise<{ locale: string }> };
+
+/** Статична сторінка, ISR: оновлення раз на 10 хв */
+export const revalidate = 600;
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("OsbbPage");
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return { title: t("metaTitle"), description: t("metaDescription"), alternates: await alternatesFor("/osbb") };
 }
 
-export default async function OsbbPage() {
-  const locale = await getLocale();
+export default async function OsbbPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "OsbbPage" });
   const whyItems = t.raw("whyItems") as { title: string; text: string }[];
   const steps = t.raw("steps") as { title: string; text: string }[];

@@ -18,7 +18,9 @@ export function KnowledgeNav() {
   const pathname = usePathname();
   return (
     <nav aria-label={t("aria")} className="sticky top-[3.85rem] z-30 border-b border-[var(--color-line)] bg-[var(--color-bg)]/90 backdrop-blur">
-      <ul className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 py-2 [scrollbar-width:none]">
+      {/* На телефоні список ширший за екран — градієнт праворуч підказує, що можна гортати */}
+      <div className="relative after:pointer-events-none after:absolute after:inset-y-0 after:right-0 after:w-12 after:bg-gradient-to-l after:from-[var(--color-bg)] after:to-transparent md:after:hidden">
+      <ul className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 py-2 pr-12 [scrollbar-width:none] md:pr-4">
         {ITEMS.map(({ href, key, Icon, exact }) => {
           const active = exact ? pathname === href : pathname.startsWith(href);
           return (
@@ -35,6 +37,7 @@ export function KnowledgeNav() {
           );
         })}
       </ul>
+      </div>
     </nav>
   );
 }

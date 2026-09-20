@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
 import { redirect } from "next/navigation";
 import { desc, eq } from "drizzle-orm";
 import { Link } from "@/i18n/navigation";
@@ -11,7 +12,7 @@ import { SignOutButton } from "./AuthForms";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Account");
-  return { title: t("title") };
+  return { title: t("title"), alternates: await alternatesFor("/account") };
 }
 
 export default async function AccountPage({ params }: { params: Promise<{ locale: string }> }) {

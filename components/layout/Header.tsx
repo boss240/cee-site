@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { AUDIENCES, HEADER_NAV } from "@/lib/nav";
+import { AUDIENCES, HEADER_NAV, SECTIONS } from "@/lib/nav";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { AccountLink } from "@/components/layout/AccountLink";
@@ -143,6 +143,15 @@ export function Header() {
           className="border-t border-[var(--color-line)] bg-[var(--color-surface)] lg:hidden"
         >
           <div className="mx-auto max-w-6xl px-4 py-2">
+            {/* Головна дія — на телефоні кнопки в шапці немає, тому вона перша в меню */}
+            <Link
+              href="/contacts"
+              onClick={() => setOpen(false)}
+              className="mt-2 flex h-12 items-center justify-center rounded-lg bg-[var(--color-brand)] px-4 text-base font-semibold text-white transition hover:bg-[var(--color-brand-hover)]"
+            >
+              {t("cta")}
+            </Link>
+
             <p className="mono-label px-2 pb-1 pt-3 text-[var(--color-fg-placeholder)]">
               {tNav("audiences")}
             </p>
@@ -161,7 +170,7 @@ export function Header() {
             </ul>
 
             <ul className="mt-2 border-t border-[var(--color-line)] pt-2">
-              {HEADER_NAV.map((item) => (
+              {SECTIONS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
 import { Mail, MapPin, Phone, MessageCircle } from "lucide-react";
 import { ContactForm } from "./ContactForm";
 import { getPublicContacts } from "@/lib/publicProfile";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("ContactsPage");
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return { title: t("metaTitle"), description: t("metaDescription"), alternates: await alternatesFor("/contacts") };
 }
 
 export default async function ContactsPage({ searchParams }: { searchParams: Promise<{ topic?: string }> }) {

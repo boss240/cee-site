@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Markdown } from "@/components/ui/Markdown";
@@ -12,7 +13,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug, locale } = await params;
   const post = await getPublishedPost(slug, locale === "en" ? "en" : "uk");
   if (!post) return {};
-  return { title: post.title, description: post.excerpt };
+  return { title: post.title, description: post.excerpt, alternates: await alternatesFor(`/blog/${slug}`) };
 }
 
 export default async function PostPage({ params }: Params) {

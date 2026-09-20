@@ -9,7 +9,8 @@ export async function Footer() {
   const tNav = await getTranslations("Nav");
   const c = await getPublicContacts();
 
-  const linkCls = "text-sm text-[var(--color-fg-muted)] transition hover:text-[var(--color-brand-text)]";
+  // inline-block + py-2: зона дотику ≥ 36px на телефоні (посилання самі по собі 19px)
+  const linkCls = "inline-block py-2 text-sm text-[var(--color-fg-muted)] transition hover:text-[var(--color-brand-text)]";
 
   return (
     <footer className="mt-20 border-t border-[var(--color-line)] bg-[var(--color-surface)]">
@@ -17,7 +18,7 @@ export async function Footer() {
         <div className="sm:col-span-2 lg:col-span-1">
           <p className="font-bold">{t("title")}</p>
           <p className="mt-2 text-sm text-[var(--color-fg-muted)]">{c.address || t("address")}</p>
-          <ul className="mt-4 space-y-1.5">
+          <ul className="mt-3 space-y-0.5">
             {c.phone && (
               <li>
                 <a href={`tel:${c.phone.replace(/[^\d+]/g, "")}`} className={linkCls}>
@@ -42,7 +43,7 @@ export async function Footer() {
 
         <nav aria-label={t("audiencesNav")}>
           <p className="font-semibold">{t("audiencesTitle")}</p>
-          <ul className="mt-3 space-y-2">
+          <ul className="mt-2 space-y-0.5">
             {AUDIENCES.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className={linkCls}>
@@ -55,7 +56,7 @@ export async function Footer() {
 
         <nav aria-label={t("sectionsNav")}>
           <p className="font-semibold">{t("sectionsTitle")}</p>
-          <ul className="mt-3 space-y-2">
+          <ul className="mt-2 space-y-0.5">
             {SECTIONS.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className={linkCls}>
@@ -68,7 +69,7 @@ export async function Footer() {
 
         <nav aria-label={t("documentsNav")}>
           <p className="font-semibold">{t("documentsTitle")}</p>
-          <ul className="mt-3 space-y-2">
+          <ul className="mt-2 space-y-0.5">
             <li>
               <Link href="/privacy" className={linkCls}>
                 {t("privacy")}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
 import { FileText, Newspaper, MessageSquareText, ArrowRight, ShieldCheck, RefreshCw, Link2 } from "lucide-react";
 import { sql } from "drizzle-orm";
 import { Link } from "@/i18n/navigation";
@@ -12,7 +13,7 @@ import { PLANS } from "@/lib/knowledge/plans";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Knowledge.hub");
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return { title: t("metaTitle"), description: t("metaDescription"), alternates: await alternatesFor("/knowledge") };
 }
 
 type Principle = { title: string; text: string };
