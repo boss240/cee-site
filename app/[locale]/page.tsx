@@ -23,6 +23,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Ticker } from "@/components/ui/Ticker";
 import { SystemDiagram } from "@/components/ui/SystemDiagram";
 import { EnergyField } from "@/components/ui/EnergyField";
+import { HomeFresh } from "@/components/home/HomeFresh";
 
 const WHY_ICONS = [Gauge, Timer, Receipt, ShieldCheck];
 /* Порядок збігається з HomePage.segments: громади, бізнес, ОСББ, девелопери, донори, власники */
@@ -259,6 +260,33 @@ export default async function HomePage({ params }: Props) {
           </div>
         </Reveal>
       </section>
+
+      {/* Інструменти і підписки */}
+      <section className="border-y border-[var(--color-line)] bg-[var(--color-surface)]">
+        <div className="mx-auto max-w-6xl px-4 py-20">
+          <Reveal>
+            <p className="mono-label text-[var(--color-brand-text)]">{t("toolsLabel")}</p>
+            <h2 className="mt-2">{t("toolsTitle")}</h2>
+            <p className="mt-4 max-w-2xl text-[var(--color-fg-muted)]">{t("toolsText")}</p>
+          </Reveal>
+          <ul className="mt-10 grid gap-5 md:grid-cols-3">
+            {(t.raw("tools") as { href: string; title: string; text: string; cta: string }[]).map((item, i) => (
+              <Reveal as="li" key={item.href} delay={i * 90}>
+                <Link href={item.href} className="lift group flex h-full flex-col rounded-xl border border-[var(--color-line)] bg-[var(--color-bg)] p-6">
+                  <h3 className="text-xl">{item.title}</h3>
+                  <p className="mt-2 flex-1 text-sm text-[var(--color-fg-muted)]">{item.text}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[var(--color-brand-text)]">
+                    {item.cta} <ChevronDown size={14} aria-hidden className="-rotate-90 transition group-hover:translate-x-0.5" />
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Свіжі новини й статті — з БД, за 10 хв кешу ISR */}
+      <HomeFresh locale={locale} />
 
       {/* CTA */}
       <section className="mx-auto max-w-6xl px-4 py-20">

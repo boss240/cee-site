@@ -3,7 +3,7 @@ import { z } from "zod";
 import { requireAdminSession } from "@/lib/auth/requireAdmin";
 import { buildDigestDraft } from "@/lib/knowledge/digests";
 
-const Body = z.object({ from: z.string(), to: z.string(), unassignedOnly: z.boolean().default(true) });
+const Body = z.object({ from: z.string(), to: z.string(), unassignedOnly: z.boolean().default(true), kind: z.enum(["energy", "local"]).default("energy") });
 
 /** POST — згенерувати чернетку дайджесту за період (AI, або шаблон без ключа) */
 export async function POST(req: NextRequest) {
@@ -14,6 +14,6 @@ export async function POST(req: NextRequest) {
   const from = new Date(`${parsed.data.from}T00:00:00`);
   const to = new Date(`${parsed.data.to}T23:59:59`);
   if (Number.isNaN(from.getTime()) || Number.isNaN(to.getTime())) return NextResponse.json({ error: "Bad dates" }, { status: 400 });
-  const draft = await buildDigestDraft({ from, to, unassignedOnly: parsed.data.unassignedOnly });
+  const draft = await buildDigestDraft({ from, to, unassignedOnly: parsed.data.unassignedOnly, kind: parsed.data.kind });
   return NextResponse.json({ draft });
 }

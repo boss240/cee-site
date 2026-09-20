@@ -244,7 +244,7 @@ export const sources = pgTable("sources", {
   name: varchar("name", { length: 160 }).notNull(),
   url: varchar("url", { length: 500 }).notNull().unique(),
   kind: varchar("kind", { length: 24 }).notNull().default("rss"), // rss
-  category: varchar("category", { length: 32 }), // regulator | government | operator | market | media
+  category: varchar("category", { length: 32 }), // regulator | government | operator | market | media | local
   enabled: boolean("enabled").notNull().default(false),
   lastFetchedAt: timestamp("last_fetched_at"),
   lastStatus: varchar("last_status", { length: 255 }), // «OK, 24 items» або текст помилки
@@ -269,6 +269,7 @@ export const digests = pgTable("digests", {
   title: varchar("title", { length: 255 }).notNull(),
   periodFrom: timestamp("period_from"),
   periodTo: timestamp("period_to"),
+  kind: varchar("kind", { length: 16 }).notNull().default("energy"), // energy | local (місцеві новини)
   intro: text("intro").notNull().default(""),
   body: text("body").notNull().default(""), // Markdown
   published: boolean("published").notNull().default(false),

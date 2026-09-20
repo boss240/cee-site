@@ -259,6 +259,17 @@ ALTER TABLE "survey_questions" ADD CONSTRAINT "survey_questions_survey_id_survey
 ALTER TABLE "survey_responses" ADD CONSTRAINT "survey_responses_question_id_survey_questions_id_fk" FOREIGN KEY ("question_id") REFERENCES "public"."survey_questions"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "usage_events" ADD CONSTRAINT "usage_events_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;`,
   },
+  {
+    id: "0001_digest_kind_local_sources",
+    sql: String.raw`ALTER TABLE "digests" ADD COLUMN IF NOT EXISTS "kind" varchar(16) DEFAULT 'energy' NOT NULL;
+--> statement-breakpoint
+INSERT INTO "sources" ("name", "url", "kind", "category", "enabled") VALUES
+('Ладижинська міська рада — новини', 'https://ladyzhyn-rada.gov.ua/rss', 'rss', 'local', false),
+('Вінницька обласна військова адміністрація', 'https://www.vin.gov.ua/rss', 'rss', 'local', false),
+('Вінницька обласна рада', 'https://vinrada.gov.ua/rss', 'rss', 'local', false),
+('Гайсинська РДА — новини', 'https://gaisin-rda.gov.ua/rss', 'rss', 'local', false)
+ON CONFLICT ("url") DO NOTHING;`,
+  },
 ];
 
 /** Застосовує ще не застосовані міграції. Повертає список застосованих id. */

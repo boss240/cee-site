@@ -26,13 +26,14 @@ export const DocumentUpdateSchema = z.object({
 export const SourceSchema = z.object({
   name: z.string().trim().min(2).max(160),
   url: z.string().trim().url().max(500),
-  category: z.enum(["regulator", "government", "operator", "market", "media"]).default("media"),
+  category: z.enum(["regulator", "government", "operator", "market", "media", "local"]).default("media"),
   enabled: z.boolean().default(false),
 });
 
 export const DigestSchema = z.object({
   slug: z.string().trim().min(2).max(160).regex(/^[a-z0-9-]+$/, "slug: лише a-z, 0-9 і дефіс"),
   title: z.string().trim().min(2).max(255),
+  kind: z.enum(["energy", "local"]).default("energy"),
   periodFrom: z.string().trim().optional().nullable(),
   periodTo: z.string().trim().optional().nullable(),
   intro: z.string().max(5000).default(""),

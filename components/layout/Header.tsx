@@ -57,7 +57,7 @@ export function Header() {
         </Link>
 
         <nav aria-label={t("mainNav")} className="hidden lg:block">
-          <ul className="flex items-center gap-6">
+          <ul className="flex items-center gap-5">
             <li>
               <div ref={audiencesRef} className="relative">
                 <button

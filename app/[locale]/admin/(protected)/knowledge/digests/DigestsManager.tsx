@@ -5,18 +5,19 @@ import { Plus, Pencil, Trash2, Loader2, ExternalLink, Eye, EyeOff, RefreshCw, Ra
 
 type Source = { id: number; name: string; url: string; category: string | null; enabled: boolean; lastFetchedAt: string | null; lastStatus: string | null; itemsCount: number };
 type News = { id: number; title: string; url: string; publishedAt: string | null; fetchedAt: string; summary: string | null; digestId: number | null; sourceName: string };
-type Digest = { id: number; slug: string; title: string; periodFrom: string | null; periodTo: string | null; intro: string; body: string; published: boolean; publishedAt: string | null; updatedAt: string };
+type Digest = { id: number; slug: string; title: string; kind?: string; periodFrom: string | null; periodTo: string | null; intro: string; body: string; published: boolean; publishedAt: string | null; updatedAt: string };
 
 export type DigestLabels = Record<
   | "tabSources" | "tabNews" | "tabDigests" | "addSource" | "name" | "url" | "category" | "enabled" | "check" | "fetch" | "fetchAll" | "lastStatus" | "items" | "never"
   | "sourcesHint" | "newsHint" | "from" | "to" | "unassignedOnly" | "showNews" | "generateDraft" | "draftMode.ai" | "draftMode.template" | "draftMode.empty"
   | "addNew" | "published" | "draft" | "edit" | "delete" | "save" | "cancel" | "publish" | "unpublish" | "confirmDelete" | "slug" | "title" | "intro" | "body" | "markdownHint"
-  | "empty" | "loading" | "open" | "saved" | "error" | "inDigest" | "noNews",
+  | "empty" | "loading" | "open" | "saved" | "error" | "inDigest" | "noNews" | "kindLabel" | "kinds.energy" | "kinds.local",
   string
 >;
 
-const CATS = ["regulator", "government", "operator", "market", "media"] as const;
-const emptyDigest = () => ({ slug: "", title: "", periodFrom: "", periodTo: "", intro: "", body: "", published: false, newsIds: [] as number[] });
+const CATS = ["regulator", "government", "operator", "market", "media", "local"] as const;
+const KINDS = ["energy", "local"] as const;
+const emptyDigest = () => ({ slug: "", title: "", kind: "energy", periodFrom: "", periodTo: "", intro: "", body: "", published: false, newsIds: [] as number[] });
 type DForm = ReturnType<typeof emptyDigest>;
 const iso = (d: Date) => d.toISOString().slice(0, 10);
 
@@ -30,7 +31,7 @@ export function DigestsManager({ labels: l, categoryNames }: { labels: DigestLab
   const [msg, setMsg] = useState<string | null>(null);
   const [newSrc, setNewSrc] = useState({ name: "", url: "", category: "media" });
   const weekAgo = new Date(Date.now() - 7 * 864e5);
-  const [range, setRange] = useState({ from: iso(weekAgo), to: iso(new Date()), unassignedOnly: true });
+  const [range, setRange] = useState({ from: iso(weekAgo), to: iso(new Date()), unassignedOnly: true, kind: "energy" as "energy" | "local" });
   const [editing, setEditing] = useState<number | "new" | null>(null);
   const [form, setForm] = useState<DForm>(emptyDigest());
   const [draftMode, setDraftMode] = useState<string | null>(null);
@@ -90,7 +91,7 @@ export function DigestsManager({ labels: l, categoryNames }: { labels: DigestLab
     setBusy("draft"); setMsg(null); setDraftMode(null);
     const d = await fetch("/api/admin/knowledge/digests/draft", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(range) }).then((r) => r.json());
     if (d.draft) {
-      setForm({ slug: d.draft.slug, title: d.draft.title, periodFrom: range.from, periodTo: range.to, intro: d.draft.intro, body: d.draft.body, published: false, newsIds: d.draft.newsIds });
+      setForm({ slug: d.draft.slug, title: d.draft.title, kind: d.draft.kind ?? range.kind, periodFrom: range.from, periodTo: range.to, intro: d.draft.intro, body: d.draft.body, published: false, newsIds: d.draft.newsIds });
       setDraftMode(d.draft.mode);
       setEditing("new"); setTab("digests");
     } else setMsg(d.error ?? l.error);
@@ -98,7 +99,7 @@ export function DigestsManager({ labels: l, categoryNames }: { labels: DigestLab
   }
   function startNew() { setForm(emptyDigest()); setDraftMode(null); setEditing("new"); setMsg(null); }
   function startEdit(d: Digest) {
-    setForm({ slug: d.slug, title: d.title, periodFrom: d.periodFrom?.slice(0, 10) ?? "", periodTo: d.periodTo?.slice(0, 10) ?? "", intro: d.intro, body: d.body, published: d.published, newsIds: [] });
+    setForm({ slug: d.slug, title: d.title, kind: d.kind ?? "energy", periodFrom: d.periodFrom?.slice(0, 10) ?? "", periodTo: d.periodTo?.slice(0, 10) ?? "", intro: d.intro, body: d.body, published: d.published, newsIds: [] });
     setDraftMode(null); setEditing(d.id); setMsg(null);
   }
   async function saveDigest() {
@@ -186,6 +187,9 @@ export function DigestsManager({ labels: l, categoryNames }: { labels: DigestLab
             <div><label className={label} htmlFor="n-to">{l.to}</label><input id="n-to" type="date" className={field} value={range.to} onChange={(e) => setRange((r) => ({ ...r, to: e.target.value }))} /></div>
             <label className="flex items-center gap-2 pb-2 text-sm"><input type="checkbox" checked={range.unassignedOnly} onChange={(e) => setRange((r) => ({ ...r, unassignedOnly: e.target.checked }))} /> {l.unassignedOnly}</label>
             <button type="button" onClick={loadNews} disabled={busy === "news"} className="rounded-lg border border-[var(--color-line)] px-4 py-2 text-sm font-semibold disabled:opacity-60">{l.showNews}</button>
+            <select aria-label={l.kindLabel} className={field + " w-auto"} value={range.kind} onChange={(e) => setRange((r) => ({ ...r, kind: e.target.value as "energy" | "local" }))}>
+              {KINDS.map((k) => <option key={k} value={k}>{l[`kinds.${k}` as keyof DigestLabels]}</option>)}
+            </select>
             <button type="button" onClick={generateDraft} disabled={busy === "draft"} className="inline-flex items-center gap-2 rounded-lg bg-[var(--color-brand)] px-4 py-2 text-sm font-semibold text-white disabled:opacity-60">
               {busy === "draft" ? <Loader2 size={14} className="animate-spin" aria-hidden /> : <Wand2 size={14} aria-hidden />} {l.generateDraft}
             </button>
@@ -218,7 +222,7 @@ export function DigestsManager({ labels: l, categoryNames }: { labels: DigestLab
                   <span className={`mono-label shrink-0 rounded-full px-2.5 py-1 ${d.published ? "bg-[var(--color-brand)] text-white" : "border border-[var(--color-line)] text-[var(--color-fg-muted)]"}`}>{d.published ? l.published : l.draft}</span>
                   <span className="min-w-0 flex-1">
                     <span className="block font-semibold">{d.title}</span>
-                    <span className="block truncate text-xs text-[var(--color-fg-placeholder)]">/{d.slug}{d.periodFrom && d.periodTo ? ` · ${d.periodFrom.slice(0, 10)} — ${d.periodTo.slice(0, 10)}` : ""}</span>
+                    <span className="block truncate text-xs text-[var(--color-fg-placeholder)]">{d.kind === "local" ? `${l["kinds.local"]} · ` : ""}/{d.slug}{d.periodFrom && d.periodTo ? ` · ${d.periodFrom.slice(0, 10)} — ${d.periodTo.slice(0, 10)}` : ""}</span>
                   </span>
                   <span className="flex shrink-0 items-center gap-1">
                     {d.published && <a href={`/uk/knowledge/digests/${d.slug}`} target="_blank" rel="noreferrer" aria-label={l.open} className={iconBtn}><ExternalLink size={16} aria-hidden /></a>}
@@ -242,6 +246,7 @@ export function DigestsManager({ labels: l, categoryNames }: { labels: DigestLab
             <div className="grid grid-cols-2 gap-3">
               <div><label className={label} htmlFor="g-from">{l.from}</label><input id="g-from" type="date" className={field} value={form.periodFrom} onChange={(e) => setForm((f) => ({ ...f, periodFrom: e.target.value }))} /></div>
               <div><label className={label} htmlFor="g-to">{l.to}</label><input id="g-to" type="date" className={field} value={form.periodTo} onChange={(e) => setForm((f) => ({ ...f, periodTo: e.target.value }))} /></div>
+              <div><label className={label} htmlFor="g-kind">{l.kindLabel}</label><select id="g-kind" className={field} value={form.kind} onChange={(e) => setForm((f) => ({ ...f, kind: e.target.value }))}>{KINDS.map((k) => <option key={k} value={k}>{l[`kinds.${k}` as keyof DigestLabels]}</option>)}</select></div>
             </div>
             <div className="sm:col-span-2"><label className={label} htmlFor="g-intro">{l.intro}</label><textarea id="g-intro" className={`${field} min-h-[70px]`} value={form.intro} onChange={(e) => setForm((f) => ({ ...f, intro: e.target.value }))} /></div>
             <div className="sm:col-span-2"><label className={label} htmlFor="g-body">{l.body}</label><textarea id="g-body" className={`${field} min-h-[360px] font-mono text-xs`} value={form.body} onChange={(e) => setForm((f) => ({ ...f, body: e.target.value }))} /><p className="mt-1 text-xs text-[var(--color-fg-placeholder)]">{l.markdownHint}</p></div>

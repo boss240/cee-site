@@ -69,9 +69,11 @@ export async function fetchAllEnabled(): Promise<{ source: string; result: Fetch
 }
 
 /** Новини за період (для чернетки дайджесту та адмінки) */
-export async function listNews(opts: { from?: Date; to?: Date; limit?: number; unassignedOnly?: boolean }) {
-  const { from, to, limit = 200, unassignedOnly = false } = opts;
+export async function listNews(opts: { from?: Date; to?: Date; limit?: number; unassignedOnly?: boolean; /** "local" — лише місцеві джерела; "energy" — усі, крім місцевих */ kind?: "energy" | "local" }) {
+  const { from, to, limit = 200, unassignedOnly = false, kind } = opts;
   const conds = [sql`1=1`];
+  if (kind === "local") conds.push(sql`${schema.sources.category} = 'local'`);
+  if (kind === "energy") conds.push(sql`coalesce(${schema.sources.category}, 'media') <> 'local'`);
   if (from) conds.push(sql`coalesce(${schema.newsItems.publishedAt}, ${schema.newsItems.fetchedAt}) >= ${from}`);
   if (to) conds.push(sql`coalesce(${schema.newsItems.publishedAt}, ${schema.newsItems.fetchedAt}) <= ${to}`);
   if (unassignedOnly) conds.push(sql`${schema.newsItems.digestId} is null`);

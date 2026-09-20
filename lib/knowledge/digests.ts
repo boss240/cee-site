@@ -5,9 +5,13 @@ import { listNews } from "./rss";
 
 export type DigestRow = typeof schema.digests.$inferSelect;
 
-export async function listPublishedDigests(limit = 50): Promise<DigestRow[]> {
+export type DigestKind = "energy" | "local";
+
+export async function listPublishedDigests(limit = 50, kind?: DigestKind): Promise<DigestRow[]> {
   try {
-    return await db.select().from(schema.digests).where(eq(schema.digests.published, true)).orderBy(desc(schema.digests.publishedAt), desc(schema.digests.createdAt)).limit(limit);
+    const conds = [eq(schema.digests.published, true)];
+    if (kind) conds.push(eq(schema.digests.kind, kind));
+    return await db.select().from(schema.digests).where(and(...conds)).orderBy(desc(schema.digests.publishedAt), desc(schema.digests.createdAt)).limit(limit);
   } catch {
     return [];
   }
@@ -34,6 +38,7 @@ const CATEGORY_TITLES: Record<string, string> = {
   operator: "Оператор системи",
   market: "Ринок",
   media: "Галузеві медіа",
+  local: "Місцеві новини",
 };
 
 /**
@@ -42,13 +47,16 @@ const CATEGORY_TITLES: Record<string, string> = {
  * список за категоріями джерел. У будь-якому разі кожен пункт має посилання
  * на першоджерело, а публікує чернетку лише адміністратор.
  */
-export async function buildDigestDraft(opts: { from: Date; to: Date; unassignedOnly?: boolean }) {
-  const news = await listNews({ from: opts.from, to: opts.to, limit: 120, unassignedOnly: opts.unassignedOnly ?? true });
-  const title = `Дайджест енергетики: ${fmtDate(opts.from)} — ${fmtDate(opts.to)}`;
-  const slug = `daidzhest-${opts.from.toISOString().slice(0, 10)}-${opts.to.toISOString().slice(0, 10)}`;
+export async function buildDigestDraft(opts: { from: Date; to: Date; unassignedOnly?: boolean; kind?: DigestKind }) {
+  const kind: DigestKind = opts.kind ?? "energy";
+  const news = await listNews({ from: opts.from, to: opts.to, limit: 120, unassignedOnly: opts.unassignedOnly ?? true, kind });
+  const title = kind === "local"
+    ? `Місцеві новини Ладижина і громади: ${fmtDate(opts.from)} — ${fmtDate(opts.to)}`
+    : `Дайджест енергетики: ${fmtDate(opts.from)} — ${fmtDate(opts.to)}`;
+  const slug = `${kind === "local" ? "mistsevi-novyny" : "daidzhest"}-${opts.from.toISOString().slice(0, 10)}-${opts.to.toISOString().slice(0, 10)}`;
 
   if (news.length === 0) {
-    return { title, slug, intro: "", body: "", newsIds: [] as number[], mode: "empty" as const };
+    return { title, slug, kind, intro: "", body: "", newsIds: [] as number[], mode: "empty" as const };
   }
 
   // Табличний (шаблонний) варіант — завжди готовий
@@ -72,7 +80,14 @@ export async function buildDigestDraft(opts: { from: Date; to: Date; unassignedO
     locale: "uk",
     page: "admin/digests",
     maxTokens: 2500,
-    system: `Ти редактор дайджесту Центру енергоефективності (ЦЕЕ, Ладижин). Аудиторія: громади, ОСББ, бізнес, девелопери ВДЕ/BESS, донори.
+    system: kind === "local"
+      ? `Ти редактор місцевого дайджесту Центру енергоефективності (ЦЕЕ, Ладижин). Аудиторія: мешканці Ладижина і громади, ОСББ, місцевий бізнес, комунальні підприємства.
+Напиши дайджест українською у Markdown за наданими новинами. Правила:
+- Групуй за темами (енергетика й комунальні послуги, рішення міської ради, програми підтримки, інфраструктура, інше). Пропускай порожні теми.
+- Кожен пункт: коротка суть (1–2 речення) + посилання на першоджерело у форматі [назва](url). Не вигадуй фактів і цифр, яких нема в новині.
+- Після кожної теми додай 1 речення «Що це означає для мешканців» — практичний висновок, обережно, без гарантій.
+- Не додавай заголовок першого рівня і не пиши вступ — тільки розділи ## і пункти.`
+      : `Ти редактор дайджесту Центру енергоефективності (ЦЕЕ, Ладижин). Аудиторія: громади, ОСББ, бізнес, девелопери ВДЕ/BESS, донори.
 Напиши дайджест українською у Markdown за наданими новинами. Правила:
 - Групуй за темами (регулювання й тарифи, законодавство, програми підтримки, мережі та ринок, ВДЕ/накопичувачі, інше). Пропускай порожні теми.
 - Кожен пункт: коротка суть (1–2 речення) + посилання на першоджерело у форматі [назва](url). Не вигадуй фактів і цифр, яких нема в новині.
@@ -83,11 +98,12 @@ export async function buildDigestDraft(opts: { from: Date; to: Date; unassignedO
       .join("\n"),
   });
 
-  const intro = `Огляд змін в енергетиці України за період ${fmtDate(opts.from)} — ${fmtDate(opts.to)}: ${news.length} ${news.length === 1 ? "публікація" : news.length < 5 ? "публікації" : "публікацій"} з ${byCat.size} ${byCat.size === 1 ? "категорії" : "категорій"} джерел. Відібрано та перевірено фахівцем ЦЕЕ.`;
+  const intro = `${kind === "local" ? "Огляд місцевих новин Ладижина і громади" : "Огляд змін в енергетиці України"} за період ${fmtDate(opts.from)} — ${fmtDate(opts.to)}: ${news.length} ${news.length === 1 ? "публікація" : news.length < 5 ? "публікації" : "публікацій"} з ${byCat.size} ${byCat.size === 1 ? "категорії" : "категорій"} джерел. Відібрано та перевірено фахівцем ЦЕЕ.`;
 
   return {
     title,
     slug,
+    kind,
     intro,
     body: ai?.text?.trim() ? ai.text.trim() : templateBody,
     newsIds: news.map((n) => n.id),

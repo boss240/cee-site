@@ -9,6 +9,9 @@ export type NavKey =
   | "projects"
   | "blog"
   | "knowledge"
+  | "calculators"
+  | "news"
+  | "subscriptions"
   | "about"
   | "contacts";
 
@@ -36,9 +39,12 @@ export const AUDIENCES: NavItem[] = [
 /** Решта розділів */
 export const SECTIONS: NavItem[] = [
   { href: "/services", key: "services", ready: true },
-  { href: "/projects", key: "projects", ready: false },
-  { href: "/blog", key: "blog", ready: false },
+  { href: "/subscriptions", key: "subscriptions", ready: true },
+  { href: "/calculators", key: "calculators", ready: true },
+  { href: "/projects", key: "projects", ready: true },
   { href: "/knowledge", key: "knowledge", ready: true },
+  { href: "/knowledge/digests", key: "news", ready: true },
+  { href: "/blog", key: "blog", ready: true },
   { href: "/about", key: "about", ready: true },
   { href: "/contacts", key: "contacts", ready: true },
 ];
@@ -48,5 +54,5 @@ export const NAV: NavItem[] = [...AUDIENCES, ...SECTIONS];
 
 /** Пункти верхнього рівня в шапці (напрями йдуть окремим списком) */
 export const HEADER_NAV: NavItem[] = SECTIONS.filter((i) =>
-  ["/services", "/knowledge", "/about", "/contacts"].includes(i.href)
+  ["/services", "/subscriptions", "/calculators", "/knowledge", "/knowledge/digests", "/blog", "/contacts"].includes(i.href)
 );

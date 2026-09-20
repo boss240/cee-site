@@ -12,6 +12,11 @@ export const SEED_SOURCES = [
   { name: "Держенергоефективності", url: "https://saee.gov.ua/uk/rss", category: "government", enabled: false },
   { name: "Фонд енергоефективності", url: "https://eefund.org.ua/feed", category: "government", enabled: false },
   { name: "Оператор ринку (ОРЕЕ)", url: "https://www.oree.com.ua/index.php/rss", category: "market", enabled: false },
+  // Місцеві джерела для дайджесту «Місцеві новини» (kind = local). Адреси RSS перевірити в адмінці.
+  { name: "Ладижинська міська рада — новини", url: "https://ladyzhyn-rada.gov.ua/rss", category: "local", enabled: false },
+  { name: "Вінницька обласна військова адміністрація", url: "https://www.vin.gov.ua/rss", category: "local", enabled: false },
+  { name: "Вінницька обласна рада", url: "https://vinrada.gov.ua/rss", category: "local", enabled: false },
+  { name: "Гайсинська РДА — новини", url: "https://gaisin-rda.gov.ua/rss", category: "local", enabled: false },
 ];
 
 /** Вступний дайджест — пояснює, як влаштовані дайджести ЦЕЕ. Далі дайджести створюються з реальних новин. */

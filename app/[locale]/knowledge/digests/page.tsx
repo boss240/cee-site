@@ -4,17 +4,19 @@ import { alternatesFor } from "@/lib/seo";
 import { ArrowRight, Rss } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/Reveal";
-import { listPublishedDigests } from "@/lib/knowledge/digests";
+import { listPublishedDigests, type DigestKind } from "@/lib/knowledge/digests";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Knowledge.digests");
   return { title: t("metaTitle"), description: t("metaDescription"), alternates: await alternatesFor("/knowledge/digests") };
 }
 
-export default async function DigestsPage() {
+export default async function DigestsPage({ searchParams }: { searchParams: Promise<{ kind?: string }> }) {
+  const { kind: kindParam } = await searchParams;
+  const kind: DigestKind = kindParam === "local" ? "local" : "energy";
   const t = await getTranslations("Knowledge.digests");
   const locale = (await getLocale()) as "uk" | "en";
-  const digests = await listPublishedDigests(60);
+  const digests = await listPublishedDigests(60, kind);
   const fmt = (d: Date | null) => (d ? new Date(d).toLocaleDateString(locale === "en" ? "en-GB" : "uk-UA", { day: "numeric", month: "long", year: "numeric" }) : "");
   const period = (from: Date | null, to: Date | null) => (from && to ? `${fmt(from)} — ${fmt(to)}` : "");
 
@@ -26,8 +28,18 @@ export default async function DigestsPage() {
         <p className="mt-4 max-w-2xl text-[var(--color-fg-muted)]">{t("intro")}</p>
       </Reveal>
 
+      {/* Два потоки: енергетика України і місцеві новини Ладижина та громади */}
+      <div role="tablist" aria-label={t("kindsAria")} className="mt-8 flex gap-2">
+        {(["energy", "local"] as const).map((k) => (
+          <Link key={k} role="tab" aria-selected={kind === k} href={k === "energy" ? "/knowledge/digests" : "/knowledge/digests?kind=local"} className={`rounded-lg border px-4 py-2 text-sm font-semibold transition ${kind === k ? "border-[var(--color-brand)] bg-[var(--color-brand)] text-white" : "border-[var(--color-line)] text-[var(--color-fg-muted)] hover:bg-[var(--color-surface)]"}`}>
+            {t(`kinds.${k}`)}
+          </Link>
+        ))}
+      </div>
+      <p className="mt-3 text-sm text-[var(--color-fg-muted)]">{t(`kindsText.${kind}`)}</p>
+
       {digests.length === 0 ? (
-        <p className="mt-10 rounded-xl border border-dashed border-[var(--color-line)] p-8 text-[var(--color-fg-muted)]">{t("empty")}</p>
+        <p className="mt-10 rounded-xl border border-dashed border-[var(--color-line)] p-8 text-[var(--color-fg-muted)]">{kind === "local" ? t("emptyLocal") : t("empty")}</p>
       ) : (
         <ol className="mt-10 space-y-4">
           {digests.map((g, i) => (

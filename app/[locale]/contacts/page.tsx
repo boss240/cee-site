@@ -16,7 +16,17 @@ export default async function ContactsPage({ searchParams }: { searchParams: Pro
   const tf = await getTranslations("ContactForm");
   // /contacts?topic=subscription-premium — заявка на підписку з тарифів
   const planMatch = /^subscription-(premium|enterprise)$/.exec(topic);
-  const initialMessage = planMatch ? tf("subscriptionMessage", { plan: tf(`planNames.${planMatch[1]}`) }) : "";
+  // /contacts?topic=calc-bess|arb|finance|express — заявка з калькулятора
+  const calcMatch = /^calc-(bess|arb|finance|express)$/.exec(topic);
+  // /contacts?topic=service-<slug> — заявка на послугу/абонемент зі сторінки підписок
+  const serviceMatch = /^service-([a-z0-9-]{2,60})$/.exec(topic);
+  const initialMessage = planMatch
+    ? tf("subscriptionMessage", { plan: tf(`planNames.${planMatch[1]}`) })
+    : calcMatch
+      ? tf(`calcMessage.${calcMatch[1]}`)
+      : serviceMatch
+        ? tf("serviceMessage", { service: serviceMatch[1].replace(/-/g, " ") })
+        : "";
   const c = await getPublicContacts();
   const address = c.address || t("address");
 

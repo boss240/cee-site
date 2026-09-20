@@ -12,7 +12,10 @@
     "audiences": "Who we serve",
     "developers": "RES / BESS developers",
     "donors": "Donors & investors",
-    "knowledge": "Knowledge base"
+    "knowledge": "Knowledge base",
+    "calculators": "Calculators",
+    "news": "News",
+    "subscriptions": "Subscriptions"
   },
   "Header": {
     "cta": "Get a consultation",
@@ -169,7 +172,40 @@
     "diagramTitle": "Elements of the site's energy system",
     "diagramText": "Click a node to see its role. Order matters: without measuring the consumption profile and checking connection capacity, every other decision is a guess.",
     "ctaTitle": "Have a question about your site?",
-    "ctaText": "Describe the situation — we'll tell you where to start."
+    "ctaText": "Describe the situation — we'll tell you where to start.",
+    "toolsLabel": "Tools and subscriptions",
+    "toolsTitle": "Calculate yourself, order or subscribe",
+    "toolsText": "Free calculators give a preliminary estimate in a minute. Then — a one-off service or a retainer, depending on the task.",
+    "tools": [
+      {
+        "href": "/calculators",
+        "title": "Effect calculators",
+        "text": "BESS optimiser, day-ahead arbitrage, financing, express estimates for solar and demand management.",
+        "cta": "Calculate"
+      },
+      {
+        "href": "/services",
+        "title": "Services",
+        "text": "16 expert products: from energy diagnostics and feasibility studies to certification, tariffs, ESCO and turnkey integration.",
+        "cta": "Browse the catalogue"
+      },
+      {
+        "href": "/subscriptions",
+        "title": "Subscriptions",
+        "text": "Outsourced energy manager, monitoring and dashboards, regulatory support, knowledge base with the consultant.",
+        "cta": "What is included"
+      }
+    ],
+    "freshLabel": "Fresh",
+    "freshTitle": "News and articles",
+    "freshNews": "News digests",
+    "freshBlog": "Articles",
+    "freshAll": "All",
+    "freshRead": "Read",
+    "freshNoNews": "The first issue is in preparation.",
+    "freshNoPosts": "Articles are in preparation.",
+    "freshLocalTag": "Local news",
+    "freshEnergyTag": "Energy"
   },
   "SystemDiagram": {
     "ariaLabel": "Diagram of the site's energy system elements",
@@ -440,7 +476,14 @@
     "planNames": {
       "premium": "Premium",
       "enterprise": "Enterprise"
-    }
+    },
+    "calcMessage": {
+      "bess": "Please prepare a battery storage (BESS) feasibility study for my site. I ran the site calculator; site parameters: ",
+      "arb": "I am interested in a day-ahead arbitrage study with battery storage. Allowed power and load profile: ",
+      "finance": "Please advise on financing an energy-efficiency measure (loan/lease/programme). Amount, term, expected savings: ",
+      "express": "Please survey the site and prepare a full feasibility study following the express estimate on the website. Site and its consumption: "
+    },
+    "serviceMessage": "I am interested in the '{service}' service/subscription. Please send the terms, price and how to start. Site: "
   },
   "CitizensPage": {
     "heroLabel": "For Residents",
@@ -671,7 +714,7 @@
     ],
     "productsLabel": "What the work consists of",
     "productsTitle": "Eight blocks",
-    "productsText": "These are stages inside a turnkey project. Each can be taken separately if you have the rest covered — but by default we don't stop at any of them.",
+    "productsText": "These are stages inside a turnkey project and stand-alone expert products. Each can be taken separately if the rest is covered — but by default we do not stop at any of them.",
     "resultLabel": "What this stage produces",
     "priceNote": "Cost and timelines are set by scope after an initial conversation. There is no standard price list: scope depends on the state of the site, the data available and how deep we go.",
     "products": [
@@ -755,6 +798,89 @@
           "Trackers",
           "Analytics",
           "Fast access to information"
+        ]
+      },
+      {
+        "name": "ESCO contract and energy management",
+        "task": "Pay for modernisation from savings, not from the budget",
+        "results": [
+          "3-year consumption baseline",
+          "80/20 contract terms and three scenarios",
+          "Energy management system under ISO 50001",
+          "Savings verification under IPMVP",
+          "Prozorro tender package"
+        ]
+      },
+      {
+        "name": "Building energy certification",
+        "task": "Obtain the certificate and a thermal-modernisation plan required by law",
+        "results": [
+          "Energy performance calculation (class A+–F)",
+          "Building energy certificate",
+          "Thermal-modernisation recommendations",
+          "Compliance with Law 2118-VIII, DBN V.2.6-31, DSTU 9190"
+        ]
+      },
+      {
+        "name": "Regulatory monitoring and compliance",
+        "task": "Never miss a rule change that affects your site or project",
+        "results": [
+          "Monitoring of NEURC, Parliament, Cabinet, ENTSO-E",
+          "Project compliance check against the codes",
+          "Monthly review with a 'what it means for you' conclusion",
+          "Position for appeals to the DSO and the regulator"
+        ]
+      },
+      {
+        "name": "Water supply and sewerage audit",
+        "task": "Understand the real cost and losses of a water utility before decisions",
+        "results": [
+          "Express audit (30 days) or full (2–3 months)",
+          "Cost model based on the GIZ methodology with author's coefficients",
+          "Terms of reference and commercial proposal",
+          "Express report with priorities"
+        ]
+      },
+      {
+        "name": "Tariffs: calculation, revision, justification",
+        "task": "Submit a justified tariff for heat, hot water, water or sewerage",
+        "results": [
+          "Tariff structure and cost check",
+          "Calculation and revision scenarios",
+          "Compensation of tariff difference",
+          "Package for NEURC or the local council",
+          "Term: about 20 working days"
+        ]
+      },
+      {
+        "name": "Turnkey storage and solar integration",
+        "task": "Go from survey to commissioning of storage or PV without gaps between stages",
+        "results": [
+          "Survey and effect model",
+          "Design ToR under DBN A.2.2-3",
+          "Procurement and contractor organisation",
+          "Technical supervision and acceptance",
+          "Commissioning"
+        ]
+      },
+      {
+        "name": "Dashboards and data automation",
+        "task": "See consumption and the effect of measures in real time, not once a year",
+        "results": [
+          "Data collection from AMR, meters, SCADA, APIs",
+          "KPI/EnPI indicators under ISO 50006",
+          "Interactive panels for the manager and energy manager",
+          "Hosted on site or on the client's website"
+        ]
+      },
+      {
+        "name": "Training and documentation",
+        "task": "Hand knowledge to the team and give management clear reports",
+        "results": [
+          "Technical reports and analytical notes",
+          "Presentations for HOA boards, community councils, investors",
+          "Training of energy managers and responsible staff",
+          "Templates and instructions for daily work"
         ]
       }
     ],
@@ -1255,13 +1381,19 @@
         "government": "Government and legislation",
         "operator": "System operator",
         "market": "Market",
-        "media": "Industry media"
+        "media": "Industry media",
+        "local": "Local sources (Ladyzhyn, region)"
       },
       "pageTitle": "Digests and news sources",
       "draftMode": {
         "ai": "The draft was produced by an AI model from the period's news. Check facts and links before publishing.",
         "template": "No AI model available (no key) — a categorised list of news was assembled. Edit before publishing.",
         "empty": "No news for this period. Fetch news from sources first."
+      },
+      "kindLabel": "Digest type",
+      "kinds": {
+        "energy": "Ukrainian energy",
+        "local": "Local news"
       }
     },
     "users": {
@@ -1914,7 +2046,17 @@
       "disclaimer": "A digest is a CEE editorial review based on open sources. We paraphrase rather than quote; for the exact wording follow the link to the primary source.",
       "ctaTitle": "Not sure how a change affects your site?",
       "ctaText": "Ask the consultant — it will find the document in the base and explain with links.",
-      "ctaButton": "Go to the consultant"
+      "ctaButton": "Go to the consultant",
+      "kindsAria": "Digest type",
+      "kinds": {
+        "energy": "Ukrainian energy",
+        "local": "Local news"
+      },
+      "kindsText": {
+        "energy": "Regulation, legislation, support programmes, market and RES — with links to primary sources.",
+        "local": "Ladyzhyn and the community: city council decisions, utilities, energy and infrastructure, support programmes for residents and HOAs."
+      },
+      "emptyLocal": "The first local news issue is in preparation. Sources: city council, regional administration, regional council."
     },
     "ask": {
       "metaTitle": "Energy legislation consultant — CEE",
@@ -2008,6 +2150,316 @@
       "History of queries and sources in your account",
       "Subscription without a daily limit",
       "Free, no card required"
+    ]
+  },
+  "Calculators": {
+    "metaTitle": "Calculators: BESS, day-ahead arbitrage, financing, express estimates",
+    "metaDescription": "Free engineering calculators from the Centre: battery storage optimiser, day-ahead market arbitrage, financing of efficiency measures, express estimates for storage, solar and demand management.",
+    "label": "Tools",
+    "title": "Effect calculators",
+    "intro": "A preliminary techno-economic estimate in a minute: enter your site parameters and see the effect, payback, NPV and IRR. This is a guide for the 'is it worth going further' decision; the Centre prepares an exact feasibility study after a site survey.",
+    "disclaimer": "Estimates only: a typical daily day-ahead price and load profile, no taxes, reserves or grid-connection specifics. Order a feasibility study for decisions about a specific site.",
+    "tabs": {
+      "bess": "Storage / BESS",
+      "arb": "Day-ahead arbitrage",
+      "finance": "Financing",
+      "express": "Express estimate"
+    },
+    "cta": {
+      "bess": "Order a site feasibility study",
+      "arb": "Order an arbitrage study",
+      "finance": "Get financing advice",
+      "express": "Order a site survey"
+    },
+    "verdict": {
+      "loss": "Not profitable with these parameters",
+      "high": "High return ({pay} yrs)",
+      "ok": "Acceptable payback ({pay} yrs)",
+      "long": "Long payback ({pay} yrs)"
+    },
+    "units": {
+      "kwh": "kWh",
+      "kw": "kW",
+      "h": "h",
+      "uahKwh": "UAH/kWh",
+      "uahMwh": "UAH/MWh",
+      "pct": "%",
+      "uah": "UAH",
+      "years": "years",
+      "kUah": "kUAH",
+      "kUahYear": "kUAH/year",
+      "usdKwh": "$/kWh",
+      "mwhMonth": "MWh/month",
+      "m2": "m²"
+    },
+    "bess": {
+      "title": "Battery storage optimiser (BESS)",
+      "text": "Daily dispatch model: charge in the cheapest hours, discharge in the most expensive — first against own load, surplus to the grid. 15-year economics with degradation, OPEX and discounting.",
+      "groups": {
+        "params": "System parameters",
+        "rdn": "Day-ahead prices by segment",
+        "load": "Site load"
+      },
+      "fields": {
+        "cap": "Capacity",
+        "inv": "Inverter power",
+        "gridLim": "Connection limit",
+        "rdnLim": "Export limit",
+        "nCharge": "Charge hours (cheapest)",
+        "nDischarge": "Discharge hours (most expensive)",
+        "gridFee": "Electricity cost incl. distribution",
+        "capexPer": "CAPEX per kWh",
+        "eff": "Round-trip efficiency",
+        "night": "Night (1–7, 24)",
+        "half": "Shoulder (8–17)",
+        "peak": "Peak (18–23)",
+        "loadD": "Day (8–17)",
+        "loadE": "Evening (18–22)",
+        "loadN": "Night (23–7)"
+      },
+      "rdnHint": "Current day-ahead prices: oree.com.ua.",
+      "loadHint": "Average load per segment of the day. An energy audit gives the exact profile.",
+      "results": {
+        "daily": "Daily effect",
+        "yearly": "Annual effect",
+        "capex": "CAPEX",
+        "pay": "Payback",
+        "npv": "NPV (15 yrs)",
+        "irr": "IRR",
+        "cycEff": "Cycle efficiency",
+        "yld": "Revenue per kWh charged"
+      },
+      "dispatch": "Charge: {c} h · Discharge: {d} h",
+      "chartTitle": "Daily chart: charge / discharge and state of charge",
+      "legend": {
+        "charge": "Charge, kW",
+        "discharge": "Discharge, kW",
+        "soc": "State of charge, %"
+      }
+    },
+    "arb": {
+      "title": "Day-ahead market arbitrage",
+      "text": "Picks a standard inverter for the allowed power (4-hour capacity), buys in cheap hours, sells or offsets consumption in expensive ones. Prices — a typical day-ahead profile.",
+      "fields": {
+        "gridLimit": "Allowed power",
+        "baseLoad": "Average load",
+        "profile": "Load profile",
+        "gridFee": "Electricity cost incl. distribution",
+        "capexUsd": "System CAPEX"
+      },
+      "profiles": {
+        "office": "Office (08–18)",
+        "shift": "Single-shift plant (07–16)",
+        "flat": "Continuous 24/7"
+      },
+      "results": {
+        "inv": "Inverter",
+        "cap": "Capacity (×4)",
+        "intRev": "Own-consumption revenue / day",
+        "extRev": "Export revenue / day",
+        "chargeCost": "Charging cost / day",
+        "yearly": "Annual profit",
+        "capex": "CAPEX",
+        "payback": "Payback"
+      },
+      "details": "{cycles} cycles/day · own consumption {pct}%",
+      "chartTitle": "Hourly: day-ahead price, charge and discharge"
+    },
+    "finance": {
+      "title": "Financing an energy-efficiency measure",
+      "text": "Annuity loan or lease: monthly payment, total interest and whether the savings repay the financing within the term. Fits 'Energodim', bank loans for HOAs and business, ESCO.",
+      "fields": {
+        "amount": "Financing amount",
+        "rate": "Annual rate",
+        "years": "Term",
+        "savings": "Expected savings"
+      },
+      "results": {
+        "monthly": "Monthly payment",
+        "total": "Total payments",
+        "overpay": "Interest cost",
+        "savings": "Annual savings",
+        "payback": "Financing payback"
+      },
+      "ok": "Worthwhile — repaid within the term",
+      "warn": "Increase savings or term — not repaid by the end of the contract"
+    },
+    "express": {
+      "title": "60-second express estimate",
+      "text": "Three short forms — a preliminary integration effect on typical coefficients. Full feasibility study after a consultation.",
+      "bess": {
+        "title": "Storage integration",
+        "cons": "Consumption",
+        "peak": "Peak load",
+        "tariff": "Average tariff",
+        "run": "Calculate",
+        "out": {
+          "size": "Recommended storage",
+          "peak": "Peak shaving",
+          "arb": "Day/night arbitrage",
+          "total": "Total",
+          "payback": "Payback"
+        }
+      },
+      "solar": {
+        "title": "Solar integration",
+        "area": "Available roof area",
+        "day": "Daytime consumption share",
+        "tariff": "Tariff",
+        "run": "Calculate",
+        "out": {
+          "kwp": "PV capacity",
+          "gen": "Generation",
+          "self": "Self-consumption",
+          "save": "Savings",
+          "capex": "Indicative CAPEX",
+          "payback": "Payback"
+        }
+      },
+      "dsm": {
+        "title": "Demand management",
+        "cons": "Consumption",
+        "shift": "Shiftable load",
+        "diff": "Day/night tariff difference",
+        "run": "Calculate",
+        "out": {
+          "shifted": "Shifted",
+          "month": "Monthly savings",
+          "year": "Annual savings",
+          "capex": "Minimal CAPEX — automation and dispatch"
+        }
+      },
+      "note": "Preliminary estimate. Exact figures after a site survey."
+    },
+    "perMonth": "/month",
+    "perYear": "/year"
+  },
+  "Subscriptions": {
+    "metaTitle": "Subscriptions and retainer services",
+    "metaDescription": "Subscriptions offered by the Centre for Energy Efficiency: retainer services (energy manager, monitoring, regulatory and procurement support) and knowledge-base access with the legislation consultant. What is included, how it is paid, how to start.",
+    "label": "Subscriptions",
+    "title": "Subscriptions: what exists and what is included",
+    "intro": "The Centre offers two kinds of subscriptions. Retainer services are regular work of our specialists with your site for a fixed monthly fee. The knowledge base is access to documents, digests and the legislation consultant on the website. Below is what each includes.",
+    "servicesLabel": "Retainer services",
+    "servicesTitle": "Regular work with your site",
+    "servicesText": "Instead of one-off requests, a Centre specialist keeps your site in view continuously. The price depends on the number of sites and depth — we quote it in reply to a request after a short call.",
+    "plans": [
+      {
+        "slug": "energy-manager",
+        "name": "Outsourced energy manager",
+        "for": "HOAs, municipal utilities, public institutions, SMEs",
+        "period": "monthly",
+        "includes": [
+          "Consumption control from meters and bills, comparison with the baseline",
+          "Monthly report: where costs grow and why",
+          "Prioritised savings plan with indicative effect",
+          "Answers for the board, manager and accountant",
+          "Support in dealings with the supplier and the DSO"
+        ],
+        "price": "on request"
+      },
+      {
+        "slug": "monitoring",
+        "name": "Monitoring and dashboards",
+        "for": "Sites with meters, AMR or own generation",
+        "period": "monthly",
+        "includes": [
+          "Automatic data collection (meters, AMR, SCADA, APIs)",
+          "Dashboards for the manager and energy manager (KPI/EnPI under ISO 50006)",
+          "Alerts on deviations and anomalies",
+          "Tiers: 1 site updated every 15 min · up to 3 sites every 5 min · unlimited, real time",
+          "Hosted on site or on your website"
+        ],
+        "price": "on request"
+      },
+      {
+        "slug": "regulatory",
+        "name": "Regulatory and procurement support",
+        "for": "Communities, utilities, RES/BESS developers, industry",
+        "period": "monthly",
+        "includes": [
+          "Monthly review of NEURC, Parliament, Cabinet and ENTSO-E changes with a 'what it means for you' conclusion",
+          "Monitoring of support programmes, grants and tenders for your profile",
+          "Document templates and deadline trackers",
+          "Project compliance checks against the codes",
+          "Consultations on questions that arose during the month"
+        ],
+        "price": "on request"
+      },
+      {
+        "slug": "full",
+        "name": "Full retainer",
+        "for": "Organisations with several sites or own generation",
+        "period": "monthly",
+        "includes": [
+          "Everything from the three plans above",
+          "Dedicated specialist and quarterly meeting with management",
+          "Priority for one-off work (feasibility studies, tenders, surveys)",
+          "Annual energy-efficiency strategy with updates"
+        ],
+        "price": "on request"
+      }
+    ],
+    "order": "Send a request",
+    "kbLabel": "Knowledge base",
+    "kbTitle": "Access to documents, digests and the consultant",
+    "kbText": "This is a website subscription, not specialists' work. Documents and digests are open to everyone; the legislation consultant has a daily limit, which free registration raises and paid plans remove.",
+    "kbPlans": [
+      {
+        "name": "Basic",
+        "price": "free",
+        "text": "Document catalogue, digests, search, consultant — {free} queries per day after registration ({guest} without it)."
+      },
+      {
+        "name": "Premium",
+        "price": "price to be confirmed",
+        "text": "No daily limit (up to 200 queries per day), query history, analytics and reviews for your site."
+      },
+      {
+        "name": "Enterprise",
+        "price": "price to be confirmed",
+        "text": "For organisations: no limit (up to 1000 per day), API access, several users."
+      }
+    ],
+    "kbLink": "Knowledge-base plans in detail",
+    "howLabel": "How it works",
+    "howTitle": "From request to first report",
+    "steps": [
+      {
+        "title": "Request and call",
+        "text": "You describe the site and the task; we clarify the scope in 15–30 minutes."
+      },
+      {
+        "title": "Proposal",
+        "text": "You receive a written proposal: what is included, monthly price, first step."
+      },
+      {
+        "title": "Contract and invoice",
+        "text": "Contract, invoice, monthly act — everything for the accounting of an HOA, utility or company."
+      },
+      {
+        "title": "Work and report",
+        "text": "First report within the first month. You can stop from the next month with prior notice."
+      }
+    ],
+    "faqTitle": "Questions about subscriptions",
+    "faq": [
+      {
+        "q": "How does a subscription differ from a one-off service?",
+        "a": "A one-off service is a result with a clear boundary: a feasibility study, a certificate, a document package. A subscription is continuous attention to the site: control, reports, response to changes. Many start with a one-off survey and then move to a retainer."
+      },
+      {
+        "q": "Can I combine a retainer with a knowledge-base subscription?",
+        "a": "Yes. Retainer services include Premium knowledge-base access for the client's responsible staff."
+      },
+      {
+        "q": "What about my site's data?",
+        "a": "Meter data and documents are used only for work under the contract, kept on secured servers and not shared with third parties. Details in the Privacy Policy."
+      },
+      {
+        "q": "Is there online payment?",
+        "a": "Currently payment is by invoice to a bank account. Card payment online will appear once a payment gateway is connected."
+      }
     ]
   }
 }
