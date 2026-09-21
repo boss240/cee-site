@@ -33,39 +33,92 @@ export async function seedDatabase(): Promise<string[]> {
     log.push(`• Адмін ${adminEmail} вже існує, пропускаю`);
   }
 
+  // Ідемпотентно: раніше тут була перевірка `if (existingModels.length === 0)`,
+  // через яку на проді (де вже було 2 моделі) нові рівні ніколи не додавались,
+  // навіть якщо список нижче поповнювався. Тепер звіряємо по кожній моделі
+  // окремо (provider+model), тож повторний виклик просто добавляє відсутнє.
   const existingModels = await db.select().from(schema.aiModels);
-  if (existingModels.length === 0) {
-    await db.insert(schema.aiModels).values([
-      {
-        name: "OpenAI GPT-4o mini (основна)",
-        provider: "openai",
-        model: "gpt-4o-mini",
-        apiKeyEnvVar: "OPENAI_API_KEY",
-        priority: 0,
-        isActive: true,
-        isDefault: true,
-        inputCostPer1kTokens: 0.00015,
-        outputCostPer1kTokens: 0.0006,
-        systemPrompt:
-          "Ти — AI-помічник сайту Центру енергоефективності (ЦЕЕ) у Ладижині. Відповідай коротко, по суті, українською або англійською залежно від мови користувача.",
-      },
-      {
-        name: "Anthropic Claude Haiku (резервна)",
-        provider: "anthropic",
-        model: "claude-3-5-haiku-20241022",
-        apiKeyEnvVar: "ANTHROPIC_API_KEY",
-        priority: 1,
-        isActive: true,
-        isDefault: false,
-        inputCostPer1kTokens: 0.0008,
-        outputCostPer1kTokens: 0.004,
-        systemPrompt:
-          "Ти — AI-помічник сайту Центру енергоефективності (ЦЕЕ) у Ладижині. Відповідай коротко, по суті, українською або англійською залежно від мови користувача.",
-      },
-    ]);
-    log.push("✓ Додано 2 дефолтні AI-моделі (основна + резервна)");
+  const haveModel = new Set(existingModels.map((m) => `${m.provider}:${m.model}`));
+
+  const assistantSystemPrompt =
+    "Ти — AI-помічник сайту Центру енергоефективності (ЦЕЕ) у Ладижині. Відповідай коротко, по суті, українською або англійською залежно від мови користувача.";
+
+  // Ланцюг фолбеку (менше priority = вищий пріоритет): дешеві OpenRouter-моделі
+  // йдуть перед прямими OpenAI/Anthropic, щоб основне навантаження лягало на
+  // найдешевший рівень, а дорожчі провайдери лишались резервом.
+  const wantedModels = [
+    {
+      name: "OpenAI GPT-4o mini (основна)",
+      provider: "openai",
+      model: "gpt-4o-mini",
+      apiKeyEnvVar: "OPENAI_API_KEY",
+      priority: 0,
+      isActive: true,
+      isDefault: true,
+      inputCostPer1kTokens: 0.00015,
+      outputCostPer1kTokens: 0.0006,
+      systemPrompt: assistantSystemPrompt,
+    },
+    {
+      name: "Qwen 3.7 Flash (OpenRouter)",
+      provider: "openrouter",
+      model: "qwen/qwen3.7-flash",
+      apiKeyEnvVar: "OPENROUTER_API_KEY_CEE",
+      priority: 1,
+      isActive: true,
+      isDefault: false,
+      inputCostPer1kTokens: 0.00003,
+      outputCostPer1kTokens: 0.00012,
+      systemPrompt: assistantSystemPrompt,
+    },
+    {
+      name: "Gemini 2.5 Flash (OpenRouter)",
+      provider: "openrouter",
+      model: "google/gemini-2.5-flash",
+      apiKeyEnvVar: "OPENROUTER_API_KEY_CEE",
+      priority: 2,
+      isActive: true,
+      isDefault: false,
+      inputCostPer1kTokens: 0.0003,
+      outputCostPer1kTokens: 0.0025,
+      systemPrompt: assistantSystemPrompt,
+    },
+    {
+      name: "Anthropic Claude Haiku (резервна)",
+      provider: "anthropic",
+      model: "claude-3-5-haiku-20241022",
+      apiKeyEnvVar: "ANTHROPIC_API_KEY",
+      priority: 3,
+      isActive: true,
+      isDefault: false,
+      inputCostPer1kTokens: 0.0008,
+      outputCostPer1kTokens: 0.004,
+      systemPrompt: assistantSystemPrompt,
+    },
+  ];
+
+  const missingModels = wantedModels.filter((m) => !haveModel.has(`${m.provider}:${m.model}`));
+  if (missingModels.length > 0) {
+    await db.insert(schema.aiModels).values(missingModels);
+    log.push(`✓ Додано ${missingModels.length} AI-модел(ей): ${missingModels.map((m) => m.model).join(", ")}`);
   } else {
-    log.push("• AI-моделі вже існують, пропускаю");
+    log.push(`• AI-моделі вже повні (${existingModels.length})`);
+  }
+
+  // Claude Haiku раніше мала priority=1 (коли була єдиною резервною моделлю);
+  // тепер має йти після двох дешевших OpenRouter-рівнів. Вирівнюємо priority
+  // для вже існуючих моделей зі списку, якщо вона розійшлась з бажаною.
+  for (const wanted of wantedModels) {
+    const existing = existingModels.find(
+      (m) => m.provider === wanted.provider && m.model === wanted.model
+    );
+    if (existing && existing.priority !== wanted.priority) {
+      await db
+        .update(schema.aiModels)
+        .set({ priority: wanted.priority })
+        .where(eq(schema.aiModels.id, existing.id));
+      log.push(`✓ Оновлено пріоритет ${wanted.model}: ${existing.priority} → ${wanted.priority}`);
+    }
   }
 
   const existingCompany = await db.select().from(schema.companyProfile);

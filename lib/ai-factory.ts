@@ -25,6 +25,20 @@ function buildProviderModel(provider: string, modelId: string, apiKey: string) {
     const client = createAnthropic({ apiKey });
     return client(modelId);
   }
+  if (provider === "openrouter") {
+    // OpenRouter реалізує OpenAI-сумісний протокол — той самий клієнт @ai-sdk/openai,
+    // лише з іншим baseURL і атрибуційними заголовками (потрібні OpenRouter для
+    // показу трафіку сайту в його власному дашборді витрат).
+    const client = createOpenAI({
+      apiKey,
+      baseURL: "https://openrouter.ai/api/v1",
+      headers: {
+        "HTTP-Referer": "https://cee.energy",
+        "X-Title": "CEE Energy — AI Assistant",
+      },
+    });
+    return client(modelId);
+  }
   throw new Error(`Невідомий провайдер AI: ${provider}`);
 }
 
