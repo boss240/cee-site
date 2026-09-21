@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Inbox, MessageSquare, Activity, Clock, Mail, Send, Bot, ExternalLink, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Inbox, MessageSquare, Activity, Clock, Mail, Send, Bot, ExternalLink, Loader2, Sparkles } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
 type Labels = {
@@ -38,6 +39,7 @@ type Stats = {
   avgResponseMs: number;
   totalCostUsd: number;
   errorsLast24h: number;
+  pendingKnowledgeDrafts: number;
 };
 
 function StatCard({
@@ -77,6 +79,7 @@ function StatCard({
  * (Plausible / GA) — вигаданих цифр на дашборді немає.
  */
 export function DashboardStats({ labels }: { labels: Labels }) {
+  const tDash = useTranslations("Admin.dashboard");
   const [stats, setStats] = useState<Stats | null>(null);
   const [testing, setTesting] = useState(false);
   const [testResult, setTestResult] = useState<{ email: { ok: boolean; message: string }; telegram: { ok: boolean; message: string } } | null>(null);
@@ -176,6 +179,21 @@ export function DashboardStats({ labels }: { labels: Labels }) {
           </a>
         </div>
       </div>
+
+      {(stats?.pendingKnowledgeDrafts ?? 0) > 0 && (
+        <Link
+          href="/admin/knowledge/documents"
+          className="flex items-center justify-between gap-3 rounded-xl border border-dashed border-[var(--color-brand)] bg-[var(--color-surface)] p-4 text-sm transition hover:-translate-y-0.5"
+        >
+          <span className="inline-flex items-center gap-2 font-medium">
+            <Sparkles size={16} className="text-[var(--color-brand-text)]" aria-hidden />
+            {tDash("knowledgeDrafts", { count: stats!.pendingKnowledgeDrafts })}
+          </span>
+          <span className="inline-flex shrink-0 items-center gap-1 text-[var(--color-brand-text)]">
+            {tDash("knowledgeDraftsCta")} <ExternalLink size={12} aria-hidden />
+          </span>
+        </Link>
+      )}
 
       <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-bg)] p-5">
         <div className="flex items-center justify-between">

@@ -225,6 +225,13 @@ export const documents = pgTable("documents", {
   sourceUrl: varchar("source_url", { length: 500 }), // першоджерело (zakon.rada.gov.ua тощо)
   checkedAt: timestamp("checked_at"), // коли фахівець Центру звіряв
   published: boolean("published").notNull().default(false),
+  // Самонавчання бази знань: коли AI-консультант (lib/knowledge/ask.ts) не
+  // знаходить жодного документа за питанням відвідувача, це прогалина.
+  // lib/knowledge/autoDraft.ts створює чернетку (aiDraft=true, published=false,
+  // status="draft") з питанням, що її спричинило — щоб адмін відразу бачив
+  // чергу тем на дослідження, а не втрачав сигнал.
+  aiDraft: boolean("ai_draft").notNull().default(false),
+  draftQuestion: text("draft_question"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });

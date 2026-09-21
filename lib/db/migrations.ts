@@ -305,6 +305,16 @@ ON CONFLICT ("url") DO NOTHING;`,
 ('Open Budget — бюджет громади', 'https://openbudget.gov.ua/local-budget/0255600000/info/profile', 'rss', 'local', false)
 ON CONFLICT ("url") DO NOTHING;`,
   },
+  {
+    // Поля для самонавчання бази знань документів: коли AI-консультант
+    // (lib/knowledge/ask.ts) не знаходить у "documents" нічого за питанням
+    // відвідувача, lib/knowledge/autoDraft.ts вставляє неопубліковану
+    // чернетку з цим питанням — щоб адмін бачив чергу прогалин.
+    id: "0003_documents_ai_draft",
+    sql: String.raw`ALTER TABLE "documents" ADD COLUMN IF NOT EXISTS "ai_draft" boolean DEFAULT false NOT NULL;
+--> statement-breakpoint
+ALTER TABLE "documents" ADD COLUMN IF NOT EXISTS "draft_question" text;`,
+  },
 ];
 
 /** Застосовує ще не застосовані міграції. Повертає список застосованих id. */

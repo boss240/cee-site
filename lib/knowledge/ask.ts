@@ -1,5 +1,6 @@
 import { generateWithModels } from "@/lib/ai-factory";
 import { retrieveForAsk, type DocRow } from "./documents";
+import { draftKnowledgeCandidate } from "./autoDraft";
 
 export type AskCitation = { slug: string; title: string; number: string | null; kind: string };
 export type AskAnswer = {
@@ -27,6 +28,12 @@ export async function answerQuestion(question: string, locale: "uk" | "en"): Pro
   const citations: AskCitation[] = docs.map((d) => ({ slug: d.slug, title: d.title, number: d.number, kind: d.kind }));
 
   if (docs.length === 0) {
+    // Прогалина в базі: жодного документа ЦЕЕ за цим питанням. Не чекаємо
+    // на відповідь (не блокуємо й не сповільнюємо користувача) — паралельно
+    // просимо AI підготувати чернетку майбутньої статті на перевірку
+    // фахівцю. Так база документів поповнюється сама з реальних питань
+    // відвідувачів, а не тільки вручну.
+    void draftKnowledgeCandidate(question, locale).catch(() => {});
     return {
       mode: "retrieval",
       citations: [],

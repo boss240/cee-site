@@ -1089,7 +1089,9 @@
       "testChannels": "Test channels",
       "testing": "Testing…",
       "previewClient": "Preview client email",
-      "previewCenter": "Preview Center email"
+      "previewCenter": "Preview Center email",
+      "knowledgeDrafts": "AI drafted {count, plural, one {# knowledge base entry} other {# knowledge base entries}} from visitor questions — awaiting review",
+      "knowledgeDraftsCta": "View in Documents"
     },
     "services": {
       "title": "Service management",
@@ -1329,7 +1331,9 @@
       "noUpdates": "No entries yet.",
       "checkedAt": "checked",
       "never": "not yet",
-      "pageTitle": "Regulatory and technical documentation"
+      "pageTitle": "Regulatory and technical documentation",
+      "aiDraftBadge": "AI draft",
+      "aiDraftQuestion": "Visitor question"
     },
     "digests": {
       "title": "Title",

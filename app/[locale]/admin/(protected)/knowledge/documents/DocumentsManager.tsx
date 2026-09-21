@@ -1,12 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Plus, Pencil, Trash2, Loader2, ExternalLink, Eye, EyeOff, History, ShieldCheck } from "lucide-react";
+import { Plus, Pencil, Trash2, Loader2, ExternalLink, Eye, EyeOff, History, ShieldCheck, Bot } from "lucide-react";
 
 type Doc = {
   id: number; slug: string; kind: string; number: string | null; title: string; issuer: string | null;
   adoptedAt: string | null; status: string; summary: string; keyPoints: string[] | null; tags: string[] | null;
   sourceUrl: string | null; checkedAt: string | null; published: boolean; updatedAt: string;
+  aiDraft: boolean; draftQuestion: string | null;
 };
 type Upd = { id: number; date: string; note: string; sourceUrl: string | null };
 
@@ -14,7 +15,7 @@ export type DocLabels = Record<
   | "addNew" | "published" | "draft" | "edit" | "delete" | "save" | "cancel" | "publish" | "unpublish" | "confirmDelete" | "slug" | "slugHint"
   | "kind" | "number" | "title" | "issuer" | "adoptedAt" | "status" | "summary" | "summaryHint" | "keyPoints" | "keyPointsHint" | "tags" | "tagsHint"
   | "sourceUrl" | "checked" | "checkedHint" | "empty" | "loading" | "open" | "saved" | "error" | "filter" | "updates" | "addUpdate" | "updateDate"
-  | "updateNote" | "updateSource" | "noUpdates" | "checkedAt" | "never",
+  | "updateNote" | "updateSource" | "noUpdates" | "checkedAt" | "never" | "aiDraftBadge" | "aiDraftQuestion",
   string
 >;
 
@@ -107,7 +108,7 @@ export function DocumentsManager({ labels: l, kindNames, statusNames }: { labels
 
   const field = "w-full rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2 text-sm";
   const label = "mb-1 block text-xs font-semibold uppercase tracking-wide text-[var(--color-fg-placeholder)]";
-  const shown = docs.filter((d) => !filter || `${d.number ?? ""} ${d.title} ${d.slug} ${(d.tags ?? []).join(" ")}`.toLowerCase().includes(filter.toLowerCase()));
+  const shown = docs.filter((d) => !filter || `${d.number ?? ""} ${d.title} ${d.slug} ${(d.tags ?? []).join(" ")} ${d.draftQuestion ?? ""}`.toLowerCase().includes(filter.toLowerCase()));
 
   return (
     <div className="mt-8">
@@ -129,9 +130,20 @@ export function DocumentsManager({ labels: l, kindNames, statusNames }: { labels
               {shown.map((d) => (
                 <li key={d.id} className="flex flex-col gap-3 rounded-xl border border-[var(--color-line)] bg-[var(--color-bg)] p-4 sm:flex-row sm:items-center sm:gap-4">
                   <span className={`mono-label shrink-0 rounded-full px-2.5 py-1 ${d.published ? "bg-[var(--color-brand)] text-white" : "border border-[var(--color-line)] text-[var(--color-fg-muted)]"}`}>{d.published ? l.published : l.draft}</span>
+                  {d.aiDraft && (
+                    <span
+                      title={d.draftQuestion ? `${l.aiDraftQuestion}: «${d.draftQuestion}»` : l.aiDraftBadge}
+                      className="mono-label inline-flex shrink-0 items-center gap-1 rounded-full border border-dashed border-[var(--color-brand)] px-2.5 py-1 text-[var(--color-brand-text)]"
+                    >
+                      <Bot size={12} aria-hidden /> {l.aiDraftBadge}
+                    </span>
+                  )}
                   <span className="min-w-0 flex-1">
                     <span className="block font-semibold">{d.number ? `${d.number} — ` : ""}{d.title}</span>
                     <span className="block truncate text-xs text-[var(--color-fg-placeholder)]">{kindNames[d.kind] ?? d.kind} · {statusNames[d.status] ?? d.status} · {l.checkedAt}: {d.checkedAt ? d.checkedAt.slice(0, 10) : l.never}</span>
+                    {d.aiDraft && d.draftQuestion && (
+                      <span className="block truncate text-xs italic text-[var(--color-fg-placeholder)]">{l.aiDraftQuestion}: «{d.draftQuestion}»</span>
+                    )}
                   </span>
                   <span className="flex shrink-0 items-center gap-1">
                     {d.published && <a href={`/uk/knowledge/documents/${d.slug}`} target="_blank" rel="noreferrer" aria-label={l.open} className="flex h-9 w-9 items-center justify-center rounded-lg text-[var(--color-fg-placeholder)] hover:bg-[var(--color-surface)] hover:text-[var(--color-brand-text)]"><ExternalLink size={16} aria-hidden /></a>}
