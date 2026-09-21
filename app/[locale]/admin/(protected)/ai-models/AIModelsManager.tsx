@@ -77,7 +77,9 @@ export function AIModelsManager({ labels: l }: { labels: Labels }) {
   const [editingId, setEditingId] = useState<number | null>(null);
   const [adding, setAdding] = useState(false);
   const [form, setForm] = useState(emptyForm());
-  const [testState, setTestState] = useState<Record<number, "testing" | "ok" | "fail" | undefined>>({});
+  const [testState, setTestState] = useState<
+    Record<number, { status: "testing" | "ok" | "fail"; message?: string } | undefined>
+  >({});
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -163,10 +165,17 @@ export function AIModelsManager({ labels: l }: { labels: Labels }) {
   }
 
   async function testConnection(id: number) {
-    setTestState((s) => ({ ...s, [id]: "testing" }));
-    const res = await fetch(`/api/admin/ai-models/${id}/test-connection`, { method: "POST" });
-    const data = await res.json();
-    setTestState((s) => ({ ...s, [id]: data.ok ? "ok" : "fail" }));
+    setTestState((s) => ({ ...s, [id]: { status: "testing" } }));
+    try {
+      const res = await fetch(`/api/admin/ai-models/${id}/test-connection`, { method: "POST" });
+      const data = await res.json();
+      setTestState((s) => ({ ...s, [id]: { status: data.ok ? "ok" : "fail", message: data.message } }));
+    } catch (err) {
+      setTestState((s) => ({
+        ...s,
+        [id]: { status: "fail", message: err instanceof Error ? err.message : String(err) },
+      }));
+    }
   }
 
   const field =
@@ -327,14 +336,14 @@ export function AIModelsManager({ labels: l }: { labels: Labels }) {
                           onClick={() => testConnection(m.id)}
                           className="flex items-center gap-1 rounded-lg border border-[var(--color-line)] px-2.5 py-1.5 text-xs font-medium text-[var(--color-fg-muted)] hover:bg-[var(--color-surface)]"
                         >
-                          {state === "testing" && <Loader2 size={13} className="animate-spin" aria-hidden />}
-                          {state === "ok" && <CheckCircle2 size={13} className="text-green-500" aria-hidden />}
-                          {state === "fail" && <XCircle size={13} className="text-red-500" aria-hidden />}
-                          {state === "testing"
+                          {state?.status === "testing" && <Loader2 size={13} className="animate-spin" aria-hidden />}
+                          {state?.status === "ok" && <CheckCircle2 size={13} className="text-green-500" aria-hidden />}
+                          {state?.status === "fail" && <XCircle size={13} className="text-red-500" aria-hidden />}
+                          {state?.status === "testing"
                             ? l.testing
-                            : state === "ok"
+                            : state?.status === "ok"
                               ? l.testOk
-                              : state === "fail"
+                              : state?.status === "fail"
                                 ? l.testFail
                                 : l.testConnection}
                         </button>
@@ -345,6 +354,11 @@ export function AIModelsManager({ labels: l }: { labels: Labels }) {
                           <Trash2 size={15} aria-hidden />
                         </button>
                       </div>
+                      {state?.status === "fail" && state.message && (
+                        <p className="mt-1 max-w-[260px] whitespace-normal break-words text-right text-xs text-[#b91c1c] dark:text-[#f87171]">
+                          {state.message}
+                        </p>
+                      )}
                     </td>
                   </tr>
                 );
