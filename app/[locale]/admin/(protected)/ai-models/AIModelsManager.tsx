@@ -206,6 +206,7 @@ export function AIModelsManager({ labels: l }: { labels: Labels }) {
               <select className={`mt-1 ${field}`} value={form.provider} onChange={(e) => setForm((f) => ({ ...f, provider: e.target.value }))}>
                 <option value="openai">OpenAI</option>
                 <option value="anthropic">Anthropic</option>
+                <option value="openrouter">OpenRouter (Qwen, Gemini, DeepSeek, …)</option>
               </select>
             </label>
             <label className="text-sm">
