@@ -388,6 +388,11 @@ export function AIModelsManager({ labels: l }: { labels: Labels }) {
                   >
                     {log.status}
                   </span>
+                  {log.errorMessage && (
+                    <p className="mt-1 max-w-xs whitespace-normal break-words text-xs text-[#b91c1c] dark:text-[#f87171]">
+                      {log.errorMessage}
+                    </p>
+                  )}
                 </td>
                 <td className="px-4 py-3 tabular-nums text-[var(--color-fg-muted)]">
                   {log.inputTokens + log.outputTokens}
