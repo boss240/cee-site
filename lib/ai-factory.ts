@@ -34,7 +34,7 @@ function buildProviderModel(provider: string, modelId: string, apiKey: string) {
       baseURL: "https://openrouter.ai/api/v1",
       headers: {
         "HTTP-Referer": "https://cee.energy",
-        "X-Title": "CEE Energy — AI Assistant",
+        "X-Title": "CEE Energy - AI Assistant",
       },
     });
     return client(modelId);
