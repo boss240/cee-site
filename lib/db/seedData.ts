@@ -188,10 +188,17 @@ export async function seedDatabase(): Promise<string[]> {
     log.push("• Документи бази знань уже є, пропускаю");
   }
 
-  const existingSources = await db.select({ id: schema.sources.id }).from(schema.sources).limit(1);
-  if (existingSources.length === 0) {
-    await db.insert(schema.sources).values(SEED_SOURCES);
-    log.push(`✓ Додано ${SEED_SOURCES.length} джерел новин (вимкнені до перевірки)`);
+  // Ідемпотентно per-джерело (той самий фікс, що і для AI-моделей вище): раніше тут
+  // була перевірка `if (existingSources.length === 0)`, через яку на проді (де вже було
+  // 4 джерела з першого запуску сіда) розширений список SEED_SOURCES (13 місцевих
+  // кандидатів) ніколи б не долетів до БД — весь блок просто пропускався. Звіряємо
+  // по url (unique-поле), тож повторний виклик додає лише відсутнє.
+  const existingSources = await db.select({ url: schema.sources.url }).from(schema.sources);
+  const haveSourceUrl = new Set(existingSources.map((s) => s.url));
+  const missingSources = SEED_SOURCES.filter((s) => !haveSourceUrl.has(s.url));
+  if (missingSources.length > 0) {
+    await db.insert(schema.sources).values(missingSources);
+    log.push(`✓ Додано ${missingSources.length} джерел новин (вимкнені до перевірки)`);
   } else {
     log.push("• Джерела новин уже є, пропускаю");
   }
