@@ -8,32 +8,26 @@ export type PublicContacts = {
   email: string;
 };
 
-const EMPTY: PublicContacts = { legalName: "", address: "", phone: "", email: "" };
-
 /** Тег кешу; адмінка скидає його після збереження реквізитів (revalidateTag). */
 export const PUBLIC_CONTACTS_TAG = "public-contacts";
 
 async function readPublicContacts(): Promise<PublicContacts> {
-  try {
-    const [p] = await db.select().from(schema.companyProfile).limit(1);
-    return {
-      legalName: p?.legalName ?? "",
-      address: p?.address ?? "",
-      phone: p?.phone ?? "",
-      email: p?.email ?? "",
-    };
-  } catch {
-    return EMPTY;
-  }
+  // Помилку БД не перетворюємо на успішний порожній результат:
+  // під час revalidation Next.js зберігає останні коректні контакти й повторює спробу.
+  // На холодному кеші помилка має поширитись, щоб не закешувати порожню сторінку.
+  const [p] = await db.select().from(schema.companyProfile).limit(1);
+  return {
+    legalName: p?.legalName ?? "",
+    address: p?.address ?? "",
+    phone: p?.phone ?? "",
+    email: p?.email ?? "",
+  };
 }
 
 /**
- * Публічні контакти Центру — з профілю компанії, який адміністратор редагує
- * в адмінці (Білінг → реквізити). Якщо БД недоступна — порожні значення,
- * сторінки не падають.
- *
- * Футер є на кожній сторінці, тому результат кешується на 10 хвилин (і скидається
- * одразу після редагування в адмінці) — інакше кожен перегляд сторінки робив запит до БД.
+ * Публічні контакти Центру — з профілю компанії в адмінці (Білінг → реквізити).
+ * Десятихвилинний TTL — резерв; після зміни публічних полів тег запускає SWR
+ * на наступному запиті. Помилки читання не замінюють останній коректний кеш.
  */
 export const getPublicContacts = unstable_cache(readPublicContacts, ["public-contacts"], {
   revalidate: 600,

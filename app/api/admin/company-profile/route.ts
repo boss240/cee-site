@@ -38,8 +38,12 @@ export async function PATCH(req: NextRequest) {
     .where(eq(schema.companyProfile.id, profile.id))
     .returning();
 
-  // Контакти у футері кешуються — скидаємо кеш, щоб зміни з'явилися одразу.
-  revalidateTag(PUBLIC_CONTACTS_TAG, "max");
+  // Банківські реквізити й повторне збереження не змінюють публічні сторінки.
+  // Після зміни контактів наступний запит запускає фонове оновлення (SWR).
+  const publicFields = ["legalName", "address", "phone", "email"] as const;
+  if (publicFields.some((key) => (profile[key] ?? "") !== (updated[key] ?? ""))) {
+    revalidateTag(PUBLIC_CONTACTS_TAG, "max");
+  }
 
   return NextResponse.json({ profile: updated });
 }
