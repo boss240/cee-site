@@ -2475,6 +2475,15 @@
   },
   "Animation": {
     "play": "Play animation",
-    "pause": "Pause animation"
+    "pause": "Pause animation",
+    "illustration": "Energy solution illustration",
+    "scenes": {
+      "business": "Industrial site with illustrated energy flows",
+      "community": "City and municipal energy infrastructure",
+      "osbb": "Apartment building with rooftop solar panels",
+      "developers": "Solar panel installation at a construction site",
+      "donors": "Solar panels and battery storage near a city",
+      "citizens": "Private home and energy equipment"
+    }
   }
 }

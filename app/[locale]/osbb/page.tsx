@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { getPrograms } from "@/lib/programs";
 import { ProgramCard } from "@/components/ui/ProgramCard";
 import { Reveal } from "@/components/ui/Reveal";
-import { EnergyField } from "@/components/ui/EnergyField";
+import { AudienceScene } from "@/components/ui/AudienceScene";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -30,11 +30,9 @@ export default async function OsbbPage({ params }: Props) {
 
   return (
     <>
-      <section className="relative isolate overflow-hidden border-b border-[var(--color-line)] bg-[var(--color-bg)]">
-        <div aria-hidden="true" className="grid-tech absolute inset-0 opacity-60" />
-        <EnergyField variant="band" />
-        <div aria-hidden="true" className="hero-vignette absolute inset-0" />
-        <div className="relative mx-auto max-w-5xl px-4 py-16 sm:py-24">
+      <section className="audience-hero relative isolate overflow-hidden border-b border-[var(--color-line)] bg-[var(--color-bg)]">
+        <AudienceScene audience="osbb" />
+        <div className="audience-copy relative mx-auto max-w-5xl px-4 py-16 sm:py-24">
           <h1>{t("title")}</h1>
           <p className="mt-5 max-w-2xl text-lg text-[var(--color-fg-muted)]">
             {t("intro")}

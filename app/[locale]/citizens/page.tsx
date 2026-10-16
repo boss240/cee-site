@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { alternatesFor } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/Reveal";
-import { EnergyField } from "@/components/ui/EnergyField";
+import { AudienceScene } from "@/components/ui/AudienceScene";
 import { DollarSign, Sun, Battery, CheckCircle2, ChevronRight } from "lucide-react";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -33,12 +33,10 @@ export default async function CitizensPage({ params }: Props) {
   return (
     <>
       {/* Герой */}
-      <section className="relative isolate border-b border-[var(--color-line)] bg-[var(--color-bg)]">
-        <div aria-hidden="true" className="grid-tech absolute inset-0 opacity-60" />
-        <EnergyField variant="hero" />
-        <div aria-hidden="true" className="hero-vignette absolute inset-0" />
+      <section className="audience-hero relative isolate border-b border-[var(--color-line)] bg-[var(--color-bg)]">
+        <AudienceScene audience="citizens" />
 
-        <div className="relative mx-auto max-w-6xl px-4 py-20 sm:py-28">
+        <div className="audience-copy relative mx-auto max-w-6xl px-4 py-20 sm:py-28">
           <Reveal>
             <p className="mono-label mb-4 text-[var(--color-brand-text)]">{t("heroLabel")}</p>
             <h1 className="hero-title max-w-4xl">{t("heroTitle")}</h1>
@@ -166,7 +164,6 @@ export default async function CitizensPage({ params }: Props) {
       <section className="mx-auto max-w-6xl px-4 py-20">
         <Reveal>
           <div className="relative isolate overflow-hidden rounded-2xl bg-[#070b12] px-6 py-16 text-center text-white sm:px-12 sm:py-20">
-            <EnergyField variant="band" forceDark />
             <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#070b12_95%)]" />
             <div className="relative">
               <h2 className="text-white">{t("ctaTitle")}</h2>
