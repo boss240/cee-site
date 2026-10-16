@@ -16,7 +16,10 @@ On narrow screens the full 16:9 illustration is above the copy. Desktop uses a
 background gradient to preserve text contrast. A visible caption identifies
 these as illustrations, not evidence of completed projects.
 
-The image stays still. SVG paths aligned to each source composition show visible
+The artwork and its registered SVG overlay move together on a 6-second
+alternating camera pan/zoom (scale 1.08–1.20, horizontal shift ±2%). Overscan
+prevents empty edges; equipment proportions and text/controls remain unchanged.
+This is animation of a still image, not footage of the site. SVG paths show visible
 energy pulses on a 3.6-second cycle. These are illustrative connections, not
 measured electrical topology or real site data. Mobile/desktop SVGs share the
 image coordinate system and crop. Play/Pause is always available; reduced-motion

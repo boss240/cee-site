@@ -22,6 +22,7 @@ import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/Reveal";
 import { Ticker } from "@/components/ui/Ticker";
 import { SystemDiagram } from "@/components/ui/SystemDiagram";
+import { GeneralHeroVideo } from "@/components/ui/GeneralHeroVideo";
 import { EnergyField } from "@/components/ui/EnergyField";
 import { HomeFresh } from "@/components/home/HomeFresh";
 
@@ -58,7 +59,7 @@ export default async function HomePage({ params }: Props) {
       {/* Hero — кінематографічний, повноекранний (референс: Tesla Megapack / SparkGrid) */}
       <section className="relative isolate flex flex-col overflow-hidden lg:min-h-[calc(100svh-4rem)] border-b border-[var(--color-line)] bg-[var(--color-bg)]">
         <div aria-hidden="true" className="grid-tech absolute inset-0 opacity-60" />
-        <EnergyField variant="hero" />
+        <GeneralHeroVideo />
         <div aria-hidden="true" className="hero-vignette absolute inset-0" />
 
         <div className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pb-8 pt-14 sm:pt-16">

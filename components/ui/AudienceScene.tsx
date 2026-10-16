@@ -43,12 +43,14 @@ export function AudienceScene({ audience }: { audience: Audience }) {
   return (
     <div ref={ref} className="audience-scene" data-audience-scene={audience} data-playing={enabled && active}>
       <div className="audience-scene-window" id={id}>
-        <picture>
-          <source media="(max-width: 767px)" srcSet={`${base}/mobile.webp`} />
-          <Image src={`${base}/${desktop}.webp`} alt={t(`scenes.${audience}`)} width={1280} height={720}
-            unoptimized loading="eager" fetchPriority="high" className="audience-scene-image" />
-        </picture>
-        <AudienceFlows audience={audience} />
+        <div className="audience-scene-plane">
+          <picture>
+            <source media="(max-width: 767px)" srcSet={`${base}/mobile.webp`} />
+            <Image src={`${base}/${desktop}.webp`} alt={t(`scenes.${audience}`)} width={1280} height={720}
+              unoptimized loading="eager" fetchPriority="high" className="audience-scene-image" />
+          </picture>
+          <AudienceFlows audience={audience} />
+        </div>
       </div>
       <div className="audience-scene-shade" aria-hidden="true" />
       <p className="audience-scene-caption">{t("flowsIllustration")}</p>

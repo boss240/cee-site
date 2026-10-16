@@ -2485,6 +2485,9 @@
       "donors": "Solar panels and battery storage near a city",
       "citizens": "Private home and energy equipment"
     },
-    "flowsIllustration": "Illustrative flows · not site data"
+    "flowsIllustration": "Illustrative flows · not site data",
+    "videoPlay": "Play video",
+    "videoPause": "Pause video",
+    "videoUnavailable": "Video did not start. Try the Play video button."
   }
 }
