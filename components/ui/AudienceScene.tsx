@@ -1,13 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import { AudienceFlows } from "./AudienceFlows";
 import { useEffect, useId, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useReducedMotion } from "@/lib/hooks/browser";
 
 export type Audience = "business" | "community" | "osbb" | "developers" | "donors" | "citizens";
 
-/** Original static artwork with gentle camera movement, not footage of a real project. */
+/** Original static artwork with illustrative animated energy pulses, not footage of a real project. */
 export function AudienceScene({ audience }: { audience: Audience }) {
   const t = useTranslations("Animation");
   const reduced = useReducedMotion();
@@ -47,9 +48,10 @@ export function AudienceScene({ audience }: { audience: Audience }) {
           <Image src={`${base}/${desktop}.webp`} alt={t(`scenes.${audience}`)} width={1280} height={720}
             unoptimized loading="eager" fetchPriority="high" className="audience-scene-image" />
         </picture>
+        <AudienceFlows audience={audience} />
       </div>
       <div className="audience-scene-shade" aria-hidden="true" />
-      <p className="audience-scene-caption">{t("illustration")}</p>
+      <p className="audience-scene-caption">{t("flowsIllustration")}</p>
       <button type="button" className="audience-scene-control" aria-controls={id} aria-pressed={enabled}
         onClick={() => setChoice({ enabled: !enabled, reduced })}>
         {t(enabled ? "pause" : "play")}

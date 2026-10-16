@@ -16,8 +16,10 @@ On narrow screens the full 16:9 illustration is above the copy. Desktop uses a
 background gradient to preserve text contrast. A visible caption identifies
 these as illustrations, not evidence of completed projects.
 
-The animation is a gentle CSS camera pan/zoom, not filmed machinery or newly
-simulated electricity flows. Play/Pause is always available; reduced-motion
+The image stays still. SVG paths aligned to each source composition show visible
+energy pulses on a 3.6-second cycle. These are illustrative connections, not
+measured electrical topology or real site data. Mobile/desktop SVGs share the
+image coordinate system and crop. Play/Pause is always available; reduced-motion
 starts paused, with explicit opt-in. A scoped CSS duration override allows
 that opt-in without the global 0.01ms reduced-motion rule creating a fast loop.
 Offscreen/hidden scenes pause. Without JavaScript the poster stays visible and

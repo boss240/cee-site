@@ -329,10 +329,8 @@
 .audience-hero { overflow: hidden; }
 .audience-scene { position: absolute; inset: 0; overflow: hidden; }
 .audience-scene-window { position: absolute; inset: 0 0 0 30%; overflow: hidden; }
-.audience-scene-image { width: 100%; height: 100%; object-fit: cover; object-position: center; animation: audience-pan 20s ease-in-out infinite alternate; animation-play-state: paused; }
+.audience-scene-image { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .audience-scene picture { display: block; width: 100%; height: 100%; }
-.audience-scene[data-playing="true"] .audience-scene-image { animation-play-state: running; }
-@keyframes audience-pan { from { transform: scale(1); } to { transform: scale(1.045) translateX(-0.6%); } }
 .audience-scene-shade { position: absolute; inset: 0; background: linear-gradient(90deg, var(--color-bg) 15%, var(--color-bg) 35%, color-mix(in srgb, var(--color-bg) 92%, transparent) 62%, transparent 88%); }
 .audience-copy { pointer-events: none; }
 .audience-copy a, .audience-copy button { pointer-events: auto; }
@@ -349,7 +347,18 @@
   .audience-hero > .audience-copy { padding-top: calc(56.25vw + 2rem); padding-bottom: 3rem; }
   .audience-scene-caption { bottom: 8px; font-size: 11px; }
 }
-/* This controlled illustration stays paused for reduced-motion until explicit Play.
-   Keep its duration intact so the site's global reduced-motion rule cannot turn
-   that deliberate opt-in into a 0.01ms flashing loop. */
-.audience-scene-image { animation-duration: 20s !important; }
+/* Only these explicit Play-controlled pulses override the global reduced-motion
+   duration. The initial reduced-motion state remains paused, without flashes. */
+.audience-flows { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; }
+.audience-flows-mobile { display: none; }
+.audience-flow-cool { color: #a7fff1; }
+.audience-flow-warm { color: #ffe4a0; }
+.audience-flow-track { fill: none; stroke: #103f43; stroke-width: 5px; stroke-opacity: 0.4; stroke-linejoin: round; }
+.audience-flow-pulse { fill: none; stroke: currentColor; stroke-width: 3.5px; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 8 42; filter: drop-shadow(0 0 3px currentColor); animation: audience-flow-travel 3.6s linear infinite; animation-duration: 3.6s !important; animation-play-state: paused; }
+.audience-flow-warm .audience-flow-pulse { animation-direction: reverse; }
+.audience-scene[data-playing="true"] .audience-flow-pulse { animation-play-state: running; }
+@keyframes audience-flow-travel { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -100; } }
+@media (max-width: 767px) {
+  .audience-flows-mobile { display: block; }
+  .audience-flows-desktop { display: none; }
+}
