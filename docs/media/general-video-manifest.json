@@ -1,0 +1,129 @@
+{
+  "source_archive": {
+    "filename": "CEE-website-upgrade-20261011.zip",
+    "sha256": "4fac2872f60ceca705592dbe60f9ce453d25028fd8b83ba7655f66f596cba348",
+    "size_bytes": 4765928
+  },
+  "prepared_date": "2026-10-16",
+  "scope": "Two converted general hero videos and their two original WebP posters. General scene is an abstract energy-network animation. No audience videos, WebMs, or application source included.",
+  "encoding": {
+    "encoder": "FFmpeg 7.1.5 with libx264",
+    "settings": [
+      "-map 0:v:0",
+      "-map_metadata -1",
+      "-c:v libx264",
+      "-preset slow",
+      "-crf 20",
+      "-pix_fmt yuv420p",
+      "-profile:v baseline",
+      "-level:v 3.1",
+      "-maxrate 4M",
+      "-bufsize 8M",
+      "-g 48",
+      "-keyint_min 48",
+      "-sc_threshold 0",
+      "-tag:v avc1",
+      "-movflags +faststart",
+      "-an -sn -dn"
+    ],
+    "note": "Resolution, frame count, frame rate, duration and 16:9 aspect preserved from original respective desktop/mobile MP4. Original High 4:4:4 Predictive/yuv444p replaced with Constrained Baseline/yuv420p."
+  },
+  "validation": {
+    "ffprobe_passed": true,
+    "full_ffmpeg_decode_without_errors": true,
+    "moov_precedes_mdat_verified": true,
+    "codec_string_read_from_avcC": "avc1.42C01F",
+    "visual_frames_inspected": {
+      "desktop_seconds": [
+        0,
+        4,
+        9
+      ],
+      "mobile_seconds": [
+        0,
+        2,
+        5
+      ]
+    },
+    "device_testing": "No physical Safari/iPhone playback claimed by this asset-preparation step; integration still requires browser verification."
+  },
+  "integration_notes": [
+    "Select mobile.mp4 for narrower viewports and desktop.mp4 for wider viewports; both are landscape 16:9.",
+    "Use actual codec declaration video/mp4; codecs=\"avc1.42C01F\" or generic video/mp4, not the old High-profile codec string.",
+    "Retain responsive original poster fallback for reduced motion, autoplay rejection and media errors.",
+    "For inline muted autoplay set muted, playsInline and loop, and handle play() rejection.",
+    "Pause offscreen and hidden-tab video; respect reduced-motion settings.",
+    "Do not reuse the abstract general video as a substitute for audience-specific imagery."
+  ],
+  "reference": "https://developer.apple.com/documentation/webkit/delivering-video-content-for-safari",
+  "assets": [
+    {
+      "path": "public/assets/hero-video/general/desktop.mp4",
+      "type": "video",
+      "source_archive_path": "preview/assets/hero-video/general/desktop.mp4",
+      "source_sha256": "108400d88252cdc5c48842cf12aacc80b30058d7a793d2bc9cfecde73f4b1320",
+      "sha256": "1e0561f0f135b5f65a925dabe730b4ae0c1c6bbc14291ad73848abb8d8f21fb2",
+      "bytes": 2471569,
+      "width": 1280,
+      "height": 720,
+      "aspect_ratio": "16:9",
+      "frame_rate": "24/1",
+      "frame_count": 231,
+      "duration_seconds": 9.625,
+      "codec": "H.264 Constrained Baseline",
+      "profile": "Constrained Baseline",
+      "level": "3.1",
+      "pixel_format": "yuv420p",
+      "codec_string": "avc1.42C01F",
+      "mime_type": "video/mp4; codecs=\"avc1.42C01F\"",
+      "audio_tracks": 0,
+      "faststart": true,
+      "moov_offset": 32,
+      "mdat_offset": 1800
+    },
+    {
+      "path": "public/assets/hero-video/general/mobile.mp4",
+      "type": "video",
+      "source_archive_path": "preview/assets/hero-video/general/mobile.mp4",
+      "source_sha256": "a6ff767fe529d9af10f85ced4ffdf2d43c38ecc06a1cd92160cb8a314b4d7cfc",
+      "sha256": "36a9df81f7ddc1f02e240748a5a6adfdb5aecbbaa31f64019f8069a6d0f33259",
+      "bytes": 969095,
+      "width": 960,
+      "height": 540,
+      "aspect_ratio": "16:9",
+      "frame_rate": "24/1",
+      "frame_count": 134,
+      "duration_seconds": 5.583333,
+      "codec": "H.264 Constrained Baseline",
+      "profile": "Constrained Baseline",
+      "level": "3.1",
+      "pixel_format": "yuv420p",
+      "codec_string": "avc1.42C01F",
+      "mime_type": "video/mp4; codecs=\"avc1.42C01F\"",
+      "audio_tracks": 0,
+      "faststart": true,
+      "moov_offset": 32,
+      "mdat_offset": 1372
+    },
+    {
+      "path": "public/assets/hero-video/general/desktop.webp",
+      "type": "poster",
+      "source_archive_path": "preview/assets/hero-video/general/desktop.webp",
+      "sha256": "1bacad1e1ae20ff5bc70bda14b772fbde06c77ad743c16339ab200a097b8bca7",
+      "bytes": 25316,
+      "width": 1280,
+      "height": 720,
+      "original_bytes_preserved": true
+    },
+    {
+      "path": "public/assets/hero-video/general/mobile.webp",
+      "type": "poster",
+      "source_archive_path": "preview/assets/hero-video/general/mobile.webp",
+      "sha256": "64efa05c060fec0811d05c66da592565859967420c3c2dff44fa46abf08f108b",
+      "bytes": 19626,
+      "width": 960,
+      "height": 540,
+      "original_bytes_preserved": true
+    }
+  ]
+}
