@@ -1,0 +1,355 @@
+{
+  "version": 1,
+  "prepared_date": "2026-10-16",
+  "page_to_scene": {
+    "community": "community",
+    "business": "business",
+    "developers": "developers",
+    "donors": "donors",
+    "citizens": "home-osbb",
+    "osbb": "home-osbb"
+  },
+  "source_type": "Five original user-supplied MP4 scene videos. Original files preserved byte-for-byte outside the public directory.",
+  "derivative_encoding": {
+    "desktop": "1280x720 H264 Constrained Baseline level 3.1/yuv420p, avc1.42C01F",
+    "mobile": "768x432 H264 Constrained Baseline level 3.0/yuv420p, avc1.42C01E",
+    "both": "24fps, silent, faststart, full original video duration/frame count/aspect preserved; first-frame WebP poster"
+  },
+  "qa": [
+    "All source and derivative SHA256 hashes verified before upload.",
+    "All ten optimized videos decoded fully without error; frame counts and durations match originals.",
+    "MP4 moov atom precedes mdat and codec declaration checked from avcC.",
+    "Original eight-frame sequences and desktop/mobile poster/midpoint frames visually inspected.",
+    "No physical iPhone/Safari playback result is claimed by this asset-preparation step."
+  ],
+  "content_notes": [
+    "These are moving scene videos with rendered energy flows and perspective changes. Do not substitute pan/zoom on a still image.",
+    "Business uses the supplied BESS-labelled industrial/city scene.",
+    "Citizens and OSBB share the supplied private-house scene; it does not show an apartment building.",
+    "The donor video contains baked-in illustrative financial/ESG charts and numbers; these are not verified project results or financial projections.",
+    "The source clips do not have matching start/end views. Loop restarts are not seamless; no artificial reversal/crossfade was added.",
+    "Audio is preserved in original archives, omitted from optimized background videos."
+  ],
+  "scenes": [
+    {
+      "scene": "community",
+      "original": {
+        "path": "assets/source-videos/2026-10-16/community.mp4",
+        "size": 4441226,
+        "sha256": "644a7b23ac9a9e46f5c1c4f27bf6e5e0612863c3d74db74fed0edfa2c17a9369",
+        "git_blob_sha": "535c1b62c267ac5f2cecdf1e9b7b5b9b62ae6137",
+        "source_filename": "Муніципальна енергетика та Когенерація (Community).mp4"
+      },
+      "profiles": {
+        "desktop": {
+          "video": {
+            "path": "public/assets/thematic-video/community/desktop.mp4",
+            "size": 2536501,
+            "sha256": "8ffff724f76998e2d9dd8a1ea8b1f803787bb53bd40e837b1602316312d493a1",
+            "git_blob_sha": "72ce86bbc8dc5d5c27ca0be6110a7f451b13446c"
+          },
+          "poster": {
+            "path": "public/assets/thematic-video/community/desktop.webp",
+            "size": 98978,
+            "sha256": "192ea23c72442a6425836c1dc98d823c67eb46c05495bee69cadc1812bc2c188",
+            "git_blob_sha": "80ce606d29a98c774e51e5607c7d7a45c6e2551e"
+          },
+          "width": 1280,
+          "height": 720,
+          "frames": 144,
+          "duration_seconds": 6.0,
+          "fps": "24/1",
+          "profile_name": "Constrained Baseline",
+          "level": 3.1,
+          "pixel_format": "yuv420p",
+          "codec_string": "avc1.42C01F",
+          "audio_tracks": 0,
+          "faststart": true,
+          "decode_passed": true
+        },
+        "mobile": {
+          "video": {
+            "path": "public/assets/thematic-video/community/mobile.mp4",
+            "size": 1181914,
+            "sha256": "1ec5dd2fe0588b31725a737df0df8ac76f9e9974690771e876651a6e68156778",
+            "git_blob_sha": "673ce9e4185c982ec36e2f67464148074bb3069f"
+          },
+          "poster": {
+            "path": "public/assets/thematic-video/community/mobile.webp",
+            "size": 51176,
+            "sha256": "ecd30a43e76ad0271cf40e17852ab8d5713b78ec6f0d6355f09ea53d1cfe0db5",
+            "git_blob_sha": "d3a85dba5c026a043da91be5afc50878bf17dc0f"
+          },
+          "width": 768,
+          "height": 432,
+          "frames": 144,
+          "duration_seconds": 6.0,
+          "fps": "24/1",
+          "profile_name": "Constrained Baseline",
+          "level": 3.0,
+          "pixel_format": "yuv420p",
+          "codec_string": "avc1.42C01E",
+          "audio_tracks": 0,
+          "faststart": true,
+          "decode_passed": true
+        }
+      }
+    },
+    {
+      "scene": "business",
+      "original": {
+        "path": "assets/source-videos/2026-10-16/business.mp4",
+        "size": 5927780,
+        "sha256": "c04bcbbc40bebdc7f20aaf1029a517d54dd8ed2de6ea44ba69b727d986c8206e",
+        "git_blob_sha": "6360f92b3bc0af5e9d91f8ca4e0cf8d4aec8893c",
+        "source_filename": "Системи накопичення енергії (BESS).mp4"
+      },
+      "profiles": {
+        "desktop": {
+          "video": {
+            "path": "public/assets/thematic-video/business/desktop.mp4",
+            "size": 2541947,
+            "sha256": "26da60d1ba346eb125146d4f1140f99e7466eaf777e89767662577a811bbf5ca",
+            "git_blob_sha": "1b7e85c8b3210e0b30ae3d330cc7b014d1bca1fc"
+          },
+          "poster": {
+            "path": "public/assets/thematic-video/business/desktop.webp",
+            "size": 66106,
+            "sha256": "63db4851f66a6666be5ff1e5757f474237075bca3dc2f4155468429fed5610a1",
+            "git_blob_sha": "7c82a847a2fa3c6f954b4e85d31e16d459a0510f"
+          },
+          "width": 1280,
+          "height": 720,
+          "frames": 144,
+          "duration_seconds": 6.0,
+          "fps": "24/1",
+          "profile_name": "Constrained Baseline",
+          "level": 3.1,
+          "pixel_format": "yuv420p",
+          "codec_string": "avc1.42C01F",
+          "audio_tracks": 0,
+          "faststart": true,
+          "decode_passed": true
+        },
+        "mobile": {
+          "video": {
+            "path": "public/assets/thematic-video/business/mobile.mp4",
+            "size": 1185694,
+            "sha256": "c80dddd020ce56d09be9b3de6af75a7f6d5b1ac994bb0992e83bd904d62be440",
+            "git_blob_sha": "779c83f1ee3c9e8a46a1304c79d6c8c96c559d9c"
+          },
+          "poster": {
+            "path": "public/assets/thematic-video/business/mobile.webp",
+            "size": 34812,
+            "sha256": "c2ca9cf671f2cd92f4840dad588dd68f7c0b439d093f5b89c98ebbd135e8cf09",
+            "git_blob_sha": "42d191c962ecbde0daa662e11c2979f16bd283ac"
+          },
+          "width": 768,
+          "height": 432,
+          "frames": 144,
+          "duration_seconds": 6.0,
+          "fps": "24/1",
+          "profile_name": "Constrained Baseline",
+          "level": 3.0,
+          "pixel_format": "yuv420p",
+          "codec_string": "avc1.42C01E",
+          "audio_tracks": 0,
+          "faststart": true,
+          "decode_passed": true
+        }
+      }
+    },
+    {
+      "scene": "developers",
+      "original": {
+        "path": "assets/source-videos/2026-10-16/developers.mp4",
+        "size": 4985617,
+        "sha256": "4d26138f757dbb1f0affe41a7bfda2a0433a7ef0afd69f47fdb0f245a9b0dc91",
+        "git_blob_sha": "1375592d6914431983dadfb97344a5bce26f2137",
+        "source_filename": "Сторінка «Девелоперам.mp4"
+      },
+      "profiles": {
+        "desktop": {
+          "video": {
+            "path": "public/assets/thematic-video/developers/desktop.mp4",
+            "size": 3303697,
+            "sha256": "27c9616abc2998b9b54aed6a3e10028936382189f1d9aea4efc8a58d059b991b",
+            "git_blob_sha": "2f0186046887aa16cce4039bdf5442ae074a6db9"
+          },
+          "poster": {
+            "path": "public/assets/thematic-video/developers/desktop.webp",
+            "size": 41352,
+            "sha256": "9473db3ec9c99773b0e8281a445571270635b585d097f068f3085eae2c11de23",
+            "git_blob_sha": "cbfa40296a0f0709be046991f997690996d460ff"
+          },
+          "width": 1280,
+          "height": 720,
+          "frames": 240,
+          "duration_seconds": 10.0,
+          "fps": "24/1",
+          "profile_name": "Constrained Baseline",
+          "level": 3.1,
+          "pixel_format": "yuv420p",
+          "codec_string": "avc1.42C01F",
+          "audio_tracks": 0,
+          "faststart": true,
+          "decode_passed": true
+        },
+        "mobile": {
+          "video": {
+            "path": "public/assets/thematic-video/developers/mobile.mp4",
+            "size": 1318494,
+            "sha256": "de4d9c439497adae216469fd3cf4d19cc3d55df95a0485ee3c1db9a7839f6b35",
+            "git_blob_sha": "454f0e8bca2167088534f45945fadaa2bfa5b9c5"
+          },
+          "poster": {
+            "path": "public/assets/thematic-video/developers/mobile.webp",
+            "size": 19858,
+            "sha256": "d76dc2df47fd971b7fcb08eebdded8a98432656a736b02b3f9e29b33c832e6aa",
+            "git_blob_sha": "dc78b65ba94922cf0d9aaf6c3caf373a09d99b42"
+          },
+          "width": 768,
+          "height": 432,
+          "frames": 240,
+          "duration_seconds": 10.0,
+          "fps": "24/1",
+          "profile_name": "Constrained Baseline",
+          "level": 3.0,
+          "pixel_format": "yuv420p",
+          "codec_string": "avc1.42C01E",
+          "audio_tracks": 0,
+          "faststart": true,
+          "decode_passed": true
+        }
+      }
+    },
+    {
+      "scene": "donors",
+      "original": {
+        "path": "assets/source-videos/2026-10-16/donors.mp4",
+        "size": 5445149,
+        "sha256": "72a3856428f04119619d51be99fe3c791c8953fd8badafea8e36345c81cbb747",
+        "git_blob_sha": "83916197a44d5f948cc98763fa573d9a6a5807b5",
+        "source_filename": "Сторінка «Донорам та Інвесторам».mp4"
+      },
+      "profiles": {
+        "desktop": {
+          "video": {
+            "path": "public/assets/thematic-video/donors/desktop.mp4",
+            "size": 3759248,
+            "sha256": "0e5faec3ad79297eb2daa9967412414cc44c3348f255ac562c656c261e8387c1",
+            "git_blob_sha": "50fb8f4b44a5ff42399dfbc9ed63b7f576b9fa37"
+          },
+          "poster": {
+            "path": "public/assets/thematic-video/donors/desktop.webp",
+            "size": 39894,
+            "sha256": "8c07b3f32d3ef138e58a31414398468695158c9a24a24bb30e6540a62d56efb3",
+            "git_blob_sha": "b3c781ee067ac6c05d159045a49c28bb0610ec4a"
+          },
+          "width": 1280,
+          "height": 720,
+          "frames": 240,
+          "duration_seconds": 10.0,
+          "fps": "24/1",
+          "profile_name": "Constrained Baseline",
+          "level": 3.1,
+          "pixel_format": "yuv420p",
+          "codec_string": "avc1.42C01F",
+          "audio_tracks": 0,
+          "faststart": true,
+          "decode_passed": true
+        },
+        "mobile": {
+          "video": {
+            "path": "public/assets/thematic-video/donors/mobile.mp4",
+            "size": 1640392,
+            "sha256": "3d1aaa3bc51982bd07bafcea4a39ff261c108c882a5a17696953e6a4ef6772d9",
+            "git_blob_sha": "8dc3a10109da36e687c7c8f849621832aaa43ad4"
+          },
+          "poster": {
+            "path": "public/assets/thematic-video/donors/mobile.webp",
+            "size": 19310,
+            "sha256": "a841ca32f4bdd842e4dfc53f907d8e114d2dba0b28c21fcce072596e10296be0",
+            "git_blob_sha": "48c3cb30845545b8ce7b12d9282de7c8796a3bd1"
+          },
+          "width": 768,
+          "height": 432,
+          "frames": 240,
+          "duration_seconds": 10.0,
+          "fps": "24/1",
+          "profile_name": "Constrained Baseline",
+          "level": 3.0,
+          "pixel_format": "yuv420p",
+          "codec_string": "avc1.42C01E",
+          "audio_tracks": 0,
+          "faststart": true,
+          "decode_passed": true
+        }
+      }
+    },
+    {
+      "scene": "home-osbb",
+      "original": {
+        "path": "assets/source-videos/2026-10-16/home-osbb.mp4",
+        "size": 4522099,
+        "sha256": "eeee8000b9acf81139b73810b789516db84cd69f99b5855ae5932fcd517edcb8",
+        "git_blob_sha": "e850c6a92adcab2b7ba6cdadc9ba19a3da0ce467",
+        "source_filename": "Сторінка «Приватним Власникам та ОСББ».mp4"
+      },
+      "profiles": {
+        "desktop": {
+          "video": {
+            "path": "public/assets/thematic-video/home-osbb/desktop.mp4",
+            "size": 2927836,
+            "sha256": "1fd20d6d18db5fa6b66bca3e59f7d520af6d2511721d7aebb47fe803ba0643a0",
+            "git_blob_sha": "0c9dc50c52ee6aed79db06a29c70cf8720473841"
+          },
+          "poster": {
+            "path": "public/assets/thematic-video/home-osbb/desktop.webp",
+            "size": 50746,
+            "sha256": "c16a871858a2f50ed5aa199a626372b413c06f41f82346884285dd21b22bdd52",
+            "git_blob_sha": "6efd863e6d9f04d61f8b74c45dd1d89c3b55fdda"
+          },
+          "width": 1280,
+          "height": 720,
+          "frames": 240,
+          "duration_seconds": 10.0,
+          "fps": "24/1",
+          "profile_name": "Constrained Baseline",
+          "level": 3.1,
+          "pixel_format": "yuv420p",
+          "codec_string": "avc1.42C01F",
+          "audio_tracks": 0,
+          "faststart": true,
+          "decode_passed": true
+        },
+        "mobile": {
+          "video": {
+            "path": "public/assets/thematic-video/home-osbb/mobile.mp4",
+            "size": 1234774,
+            "sha256": "40f78ff07dceb6919a4bf3afc3637853530bf5a6fd91cbea9bddaf03b3d8c554",
+            "git_blob_sha": "8433cba3ad62ff0f1f5953c5694a28350b08319f"
+          },
+          "poster": {
+            "path": "public/assets/thematic-video/home-osbb/mobile.webp",
+            "size": 26014,
+            "sha256": "bbf05b794b8d2b102817641421fa8f7ddf47ca78484c630a5264f1a289270ba8",
+            "git_blob_sha": "37e10156d8fdea3e0192bbb9b8f53f60b5eddd22"
+          },
+          "width": 768,
+          "height": 432,
+          "frames": 240,
+          "duration_seconds": 10.0,
+          "fps": "24/1",
+          "profile_name": "Constrained Baseline",
+          "level": 3.0,
+          "pixel_format": "yuv420p",
+          "codec_string": "avc1.42C01E",
+          "audio_tracks": 0,
+          "faststart": true,
+          "decode_passed": true
+        }
+      }
+    }
+  ]
+}
