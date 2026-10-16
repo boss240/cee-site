@@ -347,34 +347,13 @@
   .audience-hero > .audience-copy { padding-top: calc(56.25vw + 2rem); padding-bottom: 3rem; }
   .audience-scene-caption { bottom: 8px; font-size: 11px; }
 }
-/* Only these explicit Play-controlled pulses override the global reduced-motion
-   duration. The initial reduced-motion state remains paused, without flashes. */
-.audience-flows { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; }
-.audience-flows-mobile { display: none; }
-.audience-flow-cool { color: #a7fff1; }
-.audience-flow-warm { color: #ffe4a0; }
-.audience-flow-track { fill: none; stroke: #103f43; stroke-width: 5px; stroke-opacity: 0.4; stroke-linejoin: round; }
-.audience-flow-pulse { fill: none; stroke: currentColor; stroke-width: 3.5px; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 8 42; filter: drop-shadow(0 0 3px currentColor); animation: audience-flow-travel 3.6s linear infinite; animation-duration: 3.6s !important; animation-play-state: paused; }
-.audience-flow-warm .audience-flow-pulse { animation-direction: reverse; }
-.audience-scene[data-playing="true"] .audience-flow-pulse { animation-play-state: running; }
-@keyframes audience-flow-travel { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -100; } }
+/* Real MP4 playback: no synthetic camera motion or overlaid energy paths. */
+.audience-video-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0; }
+.audience-video-media[data-ready="true"] { opacity: 1; }
+.audience-scene-window:has(.audience-video-media[data-ready="true"]) .audience-scene-image { opacity: 0; }
+.audience-scene-shade { pointer-events: none; }
 @media (max-width: 767px) {
-  .audience-flows-mobile { display: block; }
-  .audience-flows-desktop { display: none; }
-}
-
-/* Move artwork and its registered SVG overlay together; copy/controls stay still.
-   Overscan exceeds translation at both endpoints, so no empty edge is exposed. */
-.audience-scene-plane {
-  position: absolute; inset: 0; transform-origin: center;
-  animation: audience-camera 6s ease-in-out infinite alternate;
-  animation-duration: 6s !important;
-  animation-play-state: paused;
-}
-.audience-scene[data-playing="true"] .audience-scene-plane { animation-play-state: running; }
-@keyframes audience-camera {
-  from { transform: scale(1.08) translate(-2%, 1%); }
-  to { transform: scale(1.20) translate(2%, -1%); }
+  .audience-video-media { object-fit: contain; }
 }
 
 .general-video { position: absolute; inset: 0; pointer-events: none; }
@@ -391,4 +370,8 @@
   .general-video ~ .hero-vignette {
     background: linear-gradient(to right, color-mix(in srgb, var(--color-bg) 94%, transparent), color-mix(in srgb, var(--color-bg) 84%, transparent));
   }
+}
+@media (min-width: 768px) {
+  /* Keep the disclosure clear of the fixed chat launcher. */
+  .audience-scene-caption { right: 96px; }
 }

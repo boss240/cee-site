@@ -2488,6 +2488,9 @@
     "flowsIllustration": "Illustrative flows · not site data",
     "videoPlay": "Play video",
     "videoPause": "Pause video",
-    "videoUnavailable": "Video did not start. Try the Play video button."
+    "videoUnavailable": "Video did not start. Try the Play video button.",
+    "videoIllustration": "Illustrative video",
+    "videoFiguresIllustrative": "Illustrative video · figures are not a forecast",
+    "privateHouseVideo": "Private-house illustration"
   }
 }

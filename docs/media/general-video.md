@@ -1,6 +1,6 @@
 # General homepage hero video
 
-Only the first hero on `/uk` and `/en` uses the abstract energy animation. Audience pages keep their six original still illustrations with synchronized camera movement and illustrative SVG flows. No footage or object telemetry is implied.
+Only the first hero on `/uk` and `/en` uses the abstract energy animation. Audience pages use their separately approved thematic MP4 videos and static poster fallbacks. No footage or object telemetry is implied.
 
 `GeneralHeroVideo` selects mobile below 768 CSS pixels once after hydration. It assigns only that MP4 source, including after orientation changes. The responsive WebP poster renders on the server and remains available with JavaScript disabled, a rejected autoplay promise, or a media error. Files and checksums are recorded in `general-video-manifest.json`.
 

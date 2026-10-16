@@ -1,34 +1,22 @@
-# Audience background illustrations
+# Audience video backgrounds
 
-`AudienceScene` renders the original single-frame WebP assets from
-`CEE-website-upgrade-20261011.zip`; SHA256 provenance is in
-`audience-assets-manifest.json`. The repository includes the actual assets in
-`public/assets/hero-video`, not only an installer manifest. The historical
-`hero-video` directory name does not mean these files are video.
+The six audience routes use user-supplied MP4 videos and matching static WebP posters. They do not use CSS pan/zoom or synthetic SVG energy flows. The general homepage video remains separate and unchanged.
 
-All six audience routes use their corresponding artwork. Business, community
-and citizens use desktop/mobile sources. OSBB, developers and donors use the
-correctly themed mobile source on both sizes, avoiding the near-duplicate
-solar-farm desktop scenes. These 960×540 originals may appear softer on large
-screens; they have not been falsely upscaled or presented as distinct videos.
+Approved mapping:
 
-On narrow screens the full 16:9 illustration is above the copy. Desktop uses a
-background gradient to preserve text contrast. A visible caption identifies
-these as illustrations, not evidence of completed projects.
+| Route | Video |
+| --- | --- |
+| community | Community |
+| business | BESS / industrial city |
+| developers | Solar station and storage |
+| donors | Investors |
+| citizens | Private house |
+| osbb | Same private-house video as citizens, explicitly approved |
 
-The artwork and its registered SVG overlay move together on a 6-second
-alternating camera pan/zoom (scale 1.08–1.20, horizontal shift ±2%). Overscan
-prevents empty edges; equipment proportions and text/controls remain unchanged.
-This is animation of a still image, not footage of the site. SVG paths show visible
-energy pulses on a 3.6-second cycle. These are illustrative connections, not
-measured electrical topology or real site data. Mobile/desktop SVGs share the
-image coordinate system and crop. Play/Pause is always available; reduced-motion
-starts paused, with explicit opt-in. A scoped CSS duration override allows
-that opt-in without the global 0.01ms reduced-motion rule creating a fast loop.
-Offscreen/hidden scenes pause. Without JavaScript the poster stays visible and
-static. General Canvas stars were removed from these six pages, including CTA
-bands; other pages retain their existing background.
+Investor-video figures are illustrative, not forecasts or amendments to the financial model. The visible caption says so in both locales. Citizens/OSBB identify the private-house illustration. Videos are illustrations, not asserted evidence of completed projects.
 
-No archived installer, general abstract video, broken HeroVideo import or
-H.264 4:4:4 file is deployed. Future actual video needs its own compatible
-encodes and Safari device validation; no physical iPhone validation is claimed.
+`AudienceScene` provides the responsive server-rendered poster. `AudienceVideoPlayer` chooses one desktop/mobile MP4 on hydration and keeps that choice during the visit, including rotation. Source assignment is deferred until playback is requested. Reduced-motion therefore makes no MP4 request before explicit Play. Playback is muted, inline and looping, with localized Play/Pause controls. A rejected autoplay promise or failed media request leaves the poster visible and offers manual retry. Hidden/offscreen playback pauses; a manual pause survives return.
+
+Mobile keeps the complete landscape video above the copy. Desktop preserves the existing background crop and text-protection gradient. There is no transform animation on the picture, video or container. Actual playback validation must measure advancing currentTime and decoded frames, not CSS movement or screenshot differences alone.
+
+Assets are under `public/assets/thematic-video/{community,business,developers,donors,home-osbb}`; provenance and checksums are in `thematic-video-manifest.json`. Original source files remain outside public. These videos repeat with a visible restart; they are not seamless loops. Physical Safari remains unverified until tested on an actual device.

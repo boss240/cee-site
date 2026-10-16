@@ -1,63 +1,37 @@
 "use client";
 
 import Image from "next/image";
-import { AudienceFlows } from "./AudienceFlows";
-import { useEffect, useId, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useReducedMotion } from "@/lib/hooks/browser";
+import { useHydrated } from "@/lib/hooks/browser";
+import { AudienceVideoPlayer } from "./AudienceVideoPlayer";
 
 export type Audience = "business" | "community" | "osbb" | "developers" | "donors" | "citizens";
 
-/** Original static artwork with illustrative animated energy pulses, not footage of a real project. */
+// Citizens and OSBB intentionally share the user-approved private-house video.
+const media: Record<Audience, string> = {
+  business: "business", community: "community", developers: "developers",
+  donors: "donors", citizens: "home-osbb", osbb: "home-osbb",
+};
+
+/** Actual user-supplied illustrative video; never CSS motion presented as footage. */
 export function AudienceScene({ audience }: { audience: Audience }) {
   const t = useTranslations("Animation");
-  const reduced = useReducedMotion();
-  const [choice, setChoice] = useState<{ enabled: boolean; reduced: boolean } | null>(null);
-  const [active, setActive] = useState(true);
-  const ref = useRef<HTMLDivElement>(null);
-  const id = useId();
-  const enabled = choice?.reduced === reduced ? choice.enabled : !reduced;
-  const desktop = ["osbb", "developers", "donors"].includes(audience) ? "mobile" : "desktop";
-  const base = `/assets/hero-video/${audience}`;
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    const update = () => {
-      const box = node.getBoundingClientRect();
-      setActive(!document.hidden && box.bottom > 0 && box.top < window.innerHeight);
-    };
-    const observer = typeof IntersectionObserver === "undefined" ? null : new IntersectionObserver(update);
-    observer?.observe(node);
-    document.addEventListener("visibilitychange", update);
-    window.addEventListener("pageshow", update);
-    window.addEventListener("scroll", update, { passive: true });
-    return () => {
-      observer?.disconnect();
-      document.removeEventListener("visibilitychange", update);
-      window.removeEventListener("pageshow", update);
-      window.removeEventListener("scroll", update);
-    };
-  }, []);
-
+  const hydrated = useHydrated();
+  const base = `/assets/thematic-video/${media[audience]}`;
+  const caption = audience === "donors" ? "videoFiguresIllustrative"
+    : audience === "osbb" || audience === "citizens" ? "privateHouseVideo" : "videoIllustration";
   return (
-    <div ref={ref} className="audience-scene" data-audience-scene={audience} data-playing={enabled && active}>
-      <div className="audience-scene-window" id={id}>
-        <div className="audience-scene-plane">
-          <picture>
-            <source media="(max-width: 767px)" srcSet={`${base}/mobile.webp`} />
-            <Image src={`${base}/${desktop}.webp`} alt={t(`scenes.${audience}`)} width={1280} height={720}
-              unoptimized loading="eager" fetchPriority="high" className="audience-scene-image" />
-          </picture>
-          <AudienceFlows audience={audience} />
-        </div>
+    <div className="audience-scene" data-audience-scene={audience} data-video-scene={media[audience]}>
+      <div className="audience-scene-window">
+        <picture>
+          <source media="(max-width: 767px)" srcSet={`${base}/mobile.webp`} />
+          <Image src={`${base}/desktop.webp`} alt="" width={1280} height={720}
+            unoptimized loading="eager" fetchPriority="high" className="audience-scene-image" />
+        </picture>
+        {hydrated && <AudienceVideoPlayer key={base} base={base} />}
       </div>
       <div className="audience-scene-shade" aria-hidden="true" />
-      <p className="audience-scene-caption">{t("flowsIllustration")}</p>
-      <button type="button" className="audience-scene-control" aria-controls={id} aria-pressed={enabled}
-        onClick={() => setChoice({ enabled: !enabled, reduced })}>
-        {t(enabled ? "pause" : "play")}
-      </button>
+      <p className="audience-scene-caption">{t(caption)}</p>
     </div>
   );
 }
