@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 
 import { useTranslations } from "next-intl";
 
@@ -41,15 +41,23 @@ const motionQuery = "(prefers-reduced-motion: reduce)";
 function motionSnapshot() { return window.matchMedia(motionQuery).matches; }
 function subscribeMotion(onChange: () => void) {
   const media = window.matchMedia(motionQuery);
-  media.addEventListener("change", onChange);
-  return () => media.removeEventListener("change", onChange);
+  if (media.addEventListener) {
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }
+  // Older Safari exposes only the legacy MediaQueryList subscription.
+  media.addListener(onChange);
+  return () => media.removeListener(onChange);
 }
 
 export function EnergyField({ variant = "hero", forceDark = false, className = "" }: Props) {
   const ref = useRef<HTMLCanvasElement>(null);
+  const canvasId = useId();
   const tMotion = useTranslations("Animation");
   const reducedMotion = useSyncExternalStore(subscribeMotion, motionSnapshot, () => true);
-  const [manualMotion, setManualMotion] = useState(false);
+  const [choice, setChoice] = useState<{ enabled: boolean; reduced: boolean } | null>(null);
+  // A changed OS preference takes precedence over an earlier manual choice.
+  const animate = choice?.reduced === reducedMotion ? choice.enabled : !reducedMotion;
 
   useEffect(() => {
     const canvas = ref.current;
@@ -57,12 +65,12 @@ export function EnergyField({ variant = "hero", forceDark = false, className = "
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const reduceMotion = reducedMotion && !manualMotion;
+    const reduceMotion = !animate;
 
     let w = 0;
     let h = 0;
     let raf = 0;
-    let running = true; // видимість вкладки + присутність на екрані
+    let contextLost = false;
     let t = 0;
     let last = performance.now();
     let nodes: Node[] = [];
@@ -108,11 +116,12 @@ export function EnergyField({ variant = "hero", forceDark = false, className = "
         r: Math.random() * 1.4 + 0.8,
       }));
       sparks = [];
-      // Resizing the bitmap clears it, including the reduced-motion static frame.
-      if (reduceMotion) drawStatic();
+      // Always paint immediately: RAF may be suspended while offscreen/backgrounded.
+      drawStatic();
     }
 
     function drawStatic() {
+      if (contextLost || w <= 0 || h <= 0) return;
       ctx!.clearRect(0, 0, w, h);
       const dark = isDark();
       drawAurora(dark);
@@ -210,8 +219,8 @@ export function EnergyField({ variant = "hero", forceDark = false, className = "
       const R = w < 640 ? 110 : 150;
 
       for (const n of nodes) {
-        n.x += n.vx;
-        n.y += n.vy;
+        n.x += n.vx * dt / 16.67;
+        n.y += n.vy * dt / 16.67;
         if (n.x < 0 || n.x > w) n.vx *= -1;
         if (n.y < 0 || n.y > h) n.vy *= -1;
       }
@@ -285,12 +294,10 @@ export function EnergyField({ variant = "hero", forceDark = false, className = "
     }
 
     function frame(now: number) {
-      const dt = Math.min(48, now - last);
+      raf = 0;
+      if (reduceMotion || contextLost || !inView || document.hidden) return;
+      const dt = Math.min(48, Math.max(0, now - last));
       last = now;
-      if (!running) {
-        raf = requestAnimationFrame(frame);
-        return;
-      }
       t += dt;
       // Курсор наздоганяє ціль (плавний паралакс)
       mouse.x += (mouse.tx - mouse.x) * 0.04;
@@ -314,62 +321,104 @@ export function EnergyField({ variant = "hero", forceDark = false, className = "
       mouse.ty = 0.5;
     }
     let inView = true;
-    let tabVisible = true;
-    const sync = () => {
-      running = inView && tabVisible;
-    };
-    const onVis = () => {
-      tabVisible = document.visibilityState === "visible";
+    function measureVisibility() {
+      const box = canvas!.getBoundingClientRect();
+      inView = box.width > 0 && box.height > 0 && box.bottom > 0 && box.right > 0
+        && box.top < window.innerHeight && box.left < window.innerWidth;
+    }
+    function stop() {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    }
+    function sync() {
+      if (reduceMotion || contextLost || !inView || document.hidden) {
+        stop();
+      } else if (!raf) {
+        last = performance.now();
+        raf = requestAnimationFrame(frame);
+      }
+    }
+    // pageshow covers Safari's back/forward cache. Restart rather than trusting
+    // a RAF handle or IntersectionObserver result retained before suspension.
+    function resume() {
+      stop();
+      measureVisibility();
+      resize();
       sync();
-    };
-    const io = new IntersectionObserver(
-      (entries) => {
-        inView = entries[0]?.isIntersecting ?? true;
-        sync();
-      },
-      { threshold: 0.01 }
+    }
+    function onVis() {
+      if (document.hidden) stop();
+      else resume();
+    }
+    function onResize() {
+      measureVisibility();
+      resize();
+      sync();
+    }
+    function onScroll() {
+      measureVisibility();
+      sync();
+    }
+    function onContextLost(event: Event) {
+      event.preventDefault();
+      contextLost = true;
+      stop();
+    }
+    function onContextRestored() {
+      contextLost = false;
+      resume();
+    }
+    const io = typeof IntersectionObserver === "undefined" ? null : new IntersectionObserver(
+      () => { measureVisibility(); sync(); },
+      { threshold: 0 }
     );
-
-    resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(canvas.parentElement!);
-    io.observe(canvas);
+    const ro = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(onResize);
+    ro?.observe(canvas.parentElement!);
+    io?.observe(canvas);
+    window.addEventListener("resize", onResize, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("pageshow", resume);
+    window.addEventListener("pagehide", stop);
     window.addEventListener("pointermove", onMove, { passive: true });
     window.addEventListener("pointerleave", onLeave);
     document.addEventListener("visibilitychange", onVis);
+    canvas.addEventListener("contextlost", onContextLost);
+    canvas.addEventListener("contextrestored", onContextRestored);
 
-    const themeObserver = new MutationObserver(() => { if (reduceMotion) drawStatic(); });
+    const themeObserver = new MutationObserver(drawStatic);
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
-    if (reduceMotion) {
-      drawStatic();
-    } else {
-      raf = requestAnimationFrame(frame);
-    }
+    resume();
 
     return () => {
-      cancelAnimationFrame(raf);
-      ro.disconnect();
+      stop();
+      ro?.disconnect();
       themeObserver.disconnect();
-      io.disconnect();
+      io?.disconnect();
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("pageshow", resume);
+      window.removeEventListener("pagehide", stop);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerleave", onLeave);
       document.removeEventListener("visibilitychange", onVis);
+      canvas.removeEventListener("contextlost", onContextLost);
+      canvas.removeEventListener("contextrestored", onContextRestored);
     };
-  }, [variant, forceDark, reducedMotion, manualMotion]);
+  }, [variant, forceDark, animate]);
 
   return (
     <>
     <canvas
       ref={ref}
+      id={canvasId}
       aria-hidden="true"
       className={`pointer-events-none absolute inset-0 h-full w-full ${className}`}
     />
-    {reducedMotion && (
-      <button type="button" aria-pressed={manualMotion} onClick={() => setManualMotion((value) => !value)}
-        className="absolute bottom-3 right-3 z-10 rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] px-3 py-2 text-xs text-[var(--color-fg)]">
-        {tMotion(manualMotion ? "pause" : "play")}
-      </button>
-    )}
+    <button type="button" aria-controls={canvasId} aria-pressed={animate}
+      onClick={() => setChoice({ enabled: !animate, reduced: reducedMotion })}
+      className="absolute top-3 right-3 z-20 min-h-11 min-w-11 touch-manipulation rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] px-3 py-2 text-sm text-[var(--color-fg)] shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-text)]">
+      {tMotion(animate ? "pause" : "play")}
+    </button>
     </>
   );
 }
