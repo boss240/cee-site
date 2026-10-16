@@ -1,0 +1,170 @@
+{
+  "source_archive": {
+    "filename": "CEE-website-upgrade-20261011.zip",
+    "sha256": "4fac2872f60ceca705592dbe60f9ce453d25028fd8b83ba7655f66f596cba348",
+    "size_bytes": 4765928
+  },
+  "inspected_date": "2026-10-16",
+  "scope": "Original six-audience static WebP assets only. No re-encoding, generated imagery, video, 3D model, page source, or installer included.",
+  "notes": [
+    "All images are single-frame, 16:9 landscape: desktop 1280x720, mobile 960x540.",
+    "The desktop OSBB, developers and donors files are distinct bytes but visually near-duplicate solar-farm/crane scenes.",
+    "Mobile OSBB, developers and donors are distinct, correctly themed images. Use OSBB mobile and donors mobile as desktop alternatives where thematic accuracy matters.",
+    "The source archive has no six-audience videos. Its only video is an abstract general energy-network animation and is deliberately not included here.",
+    "These images depict illustrative solutions, not verified completed projects or equipment testimonials."
+  ],
+  "recommended_fallback_profile": {
+    "business": "desktop",
+    "community": "desktop",
+    "osbb": "mobile",
+    "developers": "desktop",
+    "donors": "mobile",
+    "citizens": "desktop"
+  },
+  "assets": [
+    {
+      "archive_path": "preview/assets/hero-video/business/desktop.webp",
+      "bytes": 51622,
+      "sha256": "7bee05a2eeb59751f0942b1468e6da6be703cc03856fee2b8f76b6fa7f8cee60",
+      "width": 1280,
+      "height": 720,
+      "frames": 1,
+      "target_path": "public/assets/hero-video/business/desktop.webp",
+      "scene": "business",
+      "profile": "desktop",
+      "description": "Factory campus with energy flows"
+    },
+    {
+      "archive_path": "preview/assets/hero-video/business/mobile.webp",
+      "bytes": 37070,
+      "sha256": "37f80d9c080588fba62ba18c780b63147fe29c06ab7cffd8e366db6bca17344d",
+      "width": 960,
+      "height": 540,
+      "frames": 1,
+      "target_path": "public/assets/hero-video/business/mobile.webp",
+      "scene": "business",
+      "profile": "mobile",
+      "description": "Factory campus with energy flows"
+    },
+    {
+      "archive_path": "preview/assets/hero-video/citizens/desktop.webp",
+      "bytes": 64460,
+      "sha256": "c4f03da908f57efc52bac69ee9aea7bbd6066725433aed16bd84a489206352fe",
+      "width": 1280,
+      "height": 720,
+      "frames": 1,
+      "target_path": "public/assets/hero-video/citizens/desktop.webp",
+      "scene": "citizens",
+      "profile": "desktop",
+      "description": "Home at dusk, front view"
+    },
+    {
+      "archive_path": "preview/assets/hero-video/citizens/mobile.webp",
+      "bytes": 27018,
+      "sha256": "9fb52a1c84a7946601ae3af7c7d53b530cb79fca8e21ee8a2ac8cfe7c32ce0b9",
+      "width": 960,
+      "height": 540,
+      "frames": 1,
+      "target_path": "public/assets/hero-video/citizens/mobile.webp",
+      "scene": "citizens",
+      "profile": "mobile",
+      "description": "Home at dusk, corner view with outdoor equipment and energy flow"
+    },
+    {
+      "archive_path": "preview/assets/hero-video/community/desktop.webp",
+      "bytes": 81186,
+      "sha256": "d2a03e1213dea868bf1f33fb47e257d23251560a34ff1f9aa82f4fc395cdfd07",
+      "width": 1280,
+      "height": 720,
+      "frames": 1,
+      "target_path": "public/assets/hero-video/community/desktop.webp",
+      "scene": "community",
+      "profile": "desktop",
+      "description": "City and utility plant"
+    },
+    {
+      "archive_path": "preview/assets/hero-video/community/mobile.webp",
+      "bytes": 58450,
+      "sha256": "04c66d08b062b9075dfdbb7ce624d47a0fca549a530e70c909328c5e5600edbb",
+      "width": 960,
+      "height": 540,
+      "frames": 1,
+      "target_path": "public/assets/hero-video/community/mobile.webp",
+      "scene": "community",
+      "profile": "mobile",
+      "description": "City and utility plant"
+    },
+    {
+      "archive_path": "preview/assets/hero-video/developers/desktop.webp",
+      "bytes": 65910,
+      "sha256": "485af39e6a36815bba4aae42c0a1358e10e2a71b788f9bc978bcc96d25b6167a",
+      "width": 1280,
+      "height": 720,
+      "frames": 1,
+      "target_path": "public/assets/hero-video/developers/desktop.webp",
+      "scene": "developers",
+      "profile": "desktop",
+      "description": "Solar farm and construction crane"
+    },
+    {
+      "archive_path": "preview/assets/hero-video/developers/mobile.webp",
+      "bytes": 37972,
+      "sha256": "e4ad873877f89eb63eb500f460cc0306c43e9e1afe112d0fe13d4912c8eea111",
+      "width": 960,
+      "height": 540,
+      "frames": 1,
+      "target_path": "public/assets/hero-video/developers/mobile.webp",
+      "scene": "developers",
+      "profile": "mobile",
+      "description": "Workers installing solar panels and energy flows"
+    },
+    {
+      "archive_path": "preview/assets/hero-video/donors/desktop.webp",
+      "bytes": 65964,
+      "sha256": "f8ec51a253c61fb1f75c6ef97c9a3df7d9dcc17f41991e1158ae0781fdd1a745",
+      "width": 1280,
+      "height": 720,
+      "frames": 1,
+      "target_path": "public/assets/hero-video/donors/desktop.webp",
+      "scene": "donors",
+      "profile": "desktop",
+      "description": "Solar farm and crane, nearly duplicated in osbb and developers desktop"
+    },
+    {
+      "archive_path": "preview/assets/hero-video/donors/mobile.webp",
+      "bytes": 43408,
+      "sha256": "9b8c3f0c0fe2a94b541391e1580bf0bfe56abc7b96795fc094fa4fdbe39d3268",
+      "width": 960,
+      "height": 540,
+      "frames": 1,
+      "target_path": "public/assets/hero-video/donors/mobile.webp",
+      "scene": "donors",
+      "profile": "mobile",
+      "description": "Solar and battery-storage site with city skyline and foreground people"
+    },
+    {
+      "archive_path": "preview/assets/hero-video/osbb/desktop.webp",
+      "bytes": 65598,
+      "sha256": "2f2efd236f1e089595e0faee8ae7c1915e9d740563df3a76472c43064f675d13",
+      "width": 1280,
+      "height": 720,
+      "frames": 1,
+      "target_path": "public/assets/hero-video/osbb/desktop.webp",
+      "scene": "osbb",
+      "profile": "desktop",
+      "description": "Solar farm and crane, nearly duplicated in developers and donors desktop; not an apartment scene"
+    },
+    {
+      "archive_path": "preview/assets/hero-video/osbb/mobile.webp",
+      "bytes": 30008,
+      "sha256": "6ab330cd41d862ac09b2fde6fc812cb615b0265d58e4a1aa4245a52f51a01ea5",
+      "width": 960,
+      "height": 540,
+      "frames": 1,
+      "target_path": "public/assets/hero-video/osbb/mobile.webp",
+      "scene": "osbb",
+      "profile": "mobile",
+      "description": "Apartment rooftop solar and battery; correct OSBB thematic alternative"
+    }
+  ]
+}
