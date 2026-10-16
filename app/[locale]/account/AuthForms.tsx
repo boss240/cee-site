@@ -22,11 +22,13 @@ export function LoginForm({ next = "/knowledge/ask" }: { next?: string }) {
     e.preventDefault();
     setBusy(true);
     setError(false);
-    const res = await signIn("credentials", { email, password, scope: "user", redirect: false });
-    setBusy(false);
-    if (res?.error) return setError(true);
-    router.push(next);
-    router.refresh();
+    try {
+      const res = await signIn("credentials", { email, password, scope: "user", redirect: false });
+      if (!res?.ok || res.error) { setError(true); return; }
+      router.push(next);
+      router.refresh();
+    } catch { setError(true); }
+    finally { setBusy(false); }
   }
 
   return (
@@ -68,21 +70,22 @@ export function RegisterForm() {
     e.preventDefault();
     setBusy(true);
     setError(null);
-    const res = await fetch("/api/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, organization, email, password, locale, website }),
-    });
-    if (!res.ok) {
-      const d = await res.json().catch(() => ({}));
-      setBusy(false);
-      return setError(d.error === "exists" ? t("existsError") : d.error === "too-many" ? t("tooManyError") : t("registerError"));
-    }
-    const login = await signIn("credentials", { email, password, scope: "user", redirect: false });
-    setBusy(false);
-    if (login?.error) return setError(t("registerError"));
-    router.push("/knowledge/ask");
-    router.refresh();
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, organization, email, password, locale, website }),
+      });
+      if (!res.ok) {
+        const d = await res.json().catch(() => ({}));
+        setError(d.error === "exists" ? t("existsError") : d.error === "too-many" ? t("tooManyError") : t("registerError"));
+        return;
+      }
+      const login = await signIn("credentials", { email, password, scope: "user", redirect: false });
+      if (!login?.ok || login.error) { setError(t("registeredLoginFailed")); return; }
+      router.push("/knowledge/ask");
+      router.refresh();
+    } catch { setError(t("registerError")); }
+    finally { setBusy(false); }
   }
 
   return (

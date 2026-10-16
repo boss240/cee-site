@@ -1023,15 +1023,15 @@
     },
     "contextHint": "Page: {page}",
     "fallback": "Couldn't get a reply. Try again — or leave a contact and a specialist will answer personally.",
-    "disclaimer": "Replies are based on the site's materials. The assistant doesn't invent numbers that aren't on the site.",
+    "disclaimer": "Information support, not an engineering design or legal opinion. Verify important details with a specialist.",
     "leadButton": "Leave a contact",
-    "leadIntro": "Sure — I'll pass your situation to a specialist together with our conversation. How should we address you and where should we reply?",
+    "leadIntro": "This form submits a request with your contact and the latest conversation turns. How should we address you and where can we reply?",
     "leadName": "Name",
     "leadContact": "Phone or email",
     "leadConsent": "By sending, you consent to data processing for a reply.",
     "leadSubmit": "Send",
     "leadSending": "Sending…",
-    "leadDone": "Thank you, {name}. Contact passed on — a Center specialist will get back to you within one business day. Feel free to keep asking.",
+    "leadDone": "Thank you, {name}. Your request has been saved for a Center specialist to review. This confirms submission, not a scheduled call or consultation.",
     "leadError": "Couldn't send. Try again or use the form on the Contacts page.",
     "leadMessagePrefix": "Contact left via the assistant chat (page: {page}).",
     "nudges": {
@@ -1048,7 +1048,11 @@
     },
     "nudgeAction": "Ask",
     "nudgeDismiss": "Dismiss hint",
-    "leadSubmitLabel": "Send contact"
+    "leadSubmitLabel": "Send contact",
+    "referenceMode": "Reference mode · no AI generation",
+    "requestFailed": "Could not obtain a reply. Please retry or use the Leave a contact form. A chat message is not an application.",
+    "rateLimited": "Too many requests in a short period. Please try later or use the contact form.",
+    "documentsConsultant": "Consult documents and sources"
   },
   "Admin": {
     "title": "CEE Admin Panel",
@@ -1114,7 +1118,7 @@
     },
     "surveys": {
       "title": "Survey builder",
-      "subtitle": "Create surveys and view results",
+      "subtitle": "Demo editor. Metrics and responses below are examples; question edits are not saved to the server.",
       "addNew": "+ New survey",
       "questionTypes": {
         "text": "Text field",
@@ -1157,9 +1161,10 @@
       "downloadPdf": "PDF",
       "markPaid": "Mark as paid",
       "connected": "Connected",
-      "disconnected": "Not connected",
+      "disconnected": "Online payment is not implemented",
       "connect": "Connect",
-      "disconnect": "Disconnect"
+      "disconnect": "Disconnect",
+      "requestFailed": "The operation failed. Check the data and retry; the change has not been confirmed."
     },
     "logout": "Log out",
     "login": {
@@ -1859,8 +1864,9 @@
     "todayLabel": "Used today",
     "todayText": "The allowance resets at midnight (UTC).",
     "goAsk": "Go to the consultant",
-    "historyTitle": "Recent queries",
-    "signOut": "Sign out"
+    "historyTitle": "Last 10 questions (answers and sources are not stored)",
+    "signOut": "Sign out",
+    "registeredLoginFailed": "Your account was created, but automatic sign-in failed. Please use the sign-in page."
   },
   "Pricing": {
     "metaTitle": "Knowledge base plans — CEE",
@@ -1926,7 +1932,8 @@
       }
     ],
     "included": "Included",
-    "excluded": "Not included"
+    "excluded": "Not included",
+    "notImplemented": "Not implemented in the account; scope requires separate agreement."
   },
   "Knowledge": {
     "nav": {

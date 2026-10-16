@@ -83,12 +83,12 @@ export default async function AdminLayout({
       </aside>
 
       {/* Мобільна навігація адмінки */}
-      <nav className="fixed inset-x-0 bottom-0 z-40 flex justify-around border-t border-[var(--color-line)] bg-[var(--color-bg-elevated)] py-2 lg:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-40 flex justify-start overflow-x-auto border-t border-[var(--color-line)] bg-[var(--color-bg-elevated)] py-2 lg:hidden">
         {NAV.map(({ href, key, Icon }) => (
           <Link
             key={href}
             href={href}
-            className="flex flex-col items-center gap-0.5 px-2 py-1 text-[10px] text-[var(--color-fg-muted)]"
+            className="flex min-w-16 shrink-0 flex-col items-center gap-0.5 px-2 py-1 text-[10px] text-[var(--color-fg-muted)]"
           >
             <Icon size={18} aria-hidden />
             {t(`nav.${key}`)}

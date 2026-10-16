@@ -4,12 +4,13 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useHydrated } from "@/lib/hooks/browser";
 import { useLocale, useTranslations } from "next-intl";
 import { MessageCircle, X, Send, Sparkles, UserRound, Check } from "lucide-react";
-import { usePathname } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 
 type ChatMessage = {
   id: string;
   role: "assistant" | "user";
   text: string;
+  source?: "ai" | "knowledge-base";
   /** системна картка всередині стрічки: форма контакту або підтвердження */
   kind?: "lead-form" | "lead-done";
 };
@@ -175,9 +176,9 @@ function AssistantClient() {
 
   async function send(text: string) {
     const trimmed = text.trim();
-    if (!trimmed || thinking) return;
+    if (!trimmed || trimmed.length > 2000 || thinking) return;
 
-    const history = messages.filter((m) => !m.kind).map((m) => ({ role: m.role, text: m.text }));
+    const history = messages.filter((m) => !m.kind).slice(-10).map((m) => ({ role: m.role, text: m.text.slice(0, 1500) }));
 
     setMessages((m) => [...m, { id: uid(), role: "user", text: trimmed }]);
     setInput("");
@@ -192,12 +193,13 @@ function AssistantClient() {
         body: JSON.stringify({ message: trimmed, locale, page: pathname, history }),
       });
       const data = await res.json();
-      const reply: string = data.reply ?? t("fallback");
-      // Невелика штучна затримка — відчувається як «думає», а не миттєвий echo.
-      await new Promise((r) => setTimeout(r, 350 + Math.random() * 350));
-      setMessages((m) => [...m, { id: uid(), role: "assistant", text: reply }]);
+      if (!res.ok || typeof data.reply !== "string" || !data.reply.trim()) {
+        setMessages((m) => [...m, { id: uid(), role: "assistant", text: t(res.status === 429 ? "rateLimited" : "requestFailed") }]);
+      } else {
+        setMessages((m) => [...m, { id: uid(), role: "assistant", text: data.reply, source: data.source }]);
+      }
     } catch {
-      setMessages((m) => [...m, { id: uid(), role: "assistant", text: t("fallback") }]);
+      setMessages((m) => [...m, { id: uid(), role: "assistant", text: t("requestFailed") }]);
     } finally {
       setThinking(false);
       if (wantsContact) openLeadForm();
@@ -205,7 +207,7 @@ function AssistantClient() {
   }
 
   async function submitLead(lead: { name: string; contact: string }) {
-    const transcript = messages.filter((m) => !m.kind).map((m) => ({ role: m.role, text: m.text.slice(0, 4000) }));
+    const transcript = messages.filter((m) => !m.kind).slice(-60).map((m) => ({ role: m.role, text: m.text.slice(0, 4000) }));
     const isEmail = lead.contact.includes("@");
     const res = await fetch("/api/leads", {
       method: "POST",
@@ -282,6 +284,7 @@ function AssistantClient() {
                     {m.kind === "lead-done" && (
                       <Check size={14} aria-hidden className="mr-1 inline text-[var(--color-brand-text)]" />
                     )}
+                    {m.source === "knowledge-base" && <span className="mb-1 block text-xs font-semibold text-[var(--color-fg-muted)]">{t("referenceMode")}</span>}
                     {m.text}
                   </p>
                 </div>
@@ -313,7 +316,7 @@ function AssistantClient() {
                   {t("leadButton")}
                 </button>
               )}
-              {quickReplies.map((q) => (
+              {messages.length <= 1 && quickReplies.map((q) => (
                 <button
                   key={q}
                   type="button"
@@ -337,6 +340,7 @@ function AssistantClient() {
           >
             <input
               ref={inputRef}
+              maxLength={2000}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={t("inputPlaceholder")}
@@ -354,6 +358,7 @@ function AssistantClient() {
           </form>
           <p className="bg-[var(--color-bg-elevated)] px-4 pb-2 text-center text-[10px] text-[var(--color-fg-placeholder)]">
             {t("disclaimer")}
+            <Link href="/knowledge/ask" className="mt-1 block text-xs text-[var(--color-brand-text)] underline underline-offset-2">{t("documentsConsultant")}</Link>
           </p>
         </div>
       )}

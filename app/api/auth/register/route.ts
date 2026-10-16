@@ -31,8 +31,8 @@ export async function POST(req: NextRequest) {
       .returning({ id: schema.users.id });
     return NextResponse.json({ ok: true, id: created.id }, { status: 201 });
   } catch (e) {
-    const msg = e instanceof Error ? e.message : String(e);
-    if (msg.includes("unique")) return NextResponse.json({ error: "exists" }, { status: 409 });
+    const cause = e as { code?: string; cause?: { code?: string } };
+    if (cause.code === "23505" || cause.cause?.code === "23505") return NextResponse.json({ error: "exists" }, { status: 409 });
     return NextResponse.json({ error: "failed" }, { status: 500 });
   }
 }
