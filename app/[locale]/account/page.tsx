@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { alternatesFor } from "@/lib/seo";
 import { redirect } from "next/navigation";
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq, gte, sql } from "drizzle-orm";
 import { Link } from "@/i18n/navigation";
 import { db, schema } from "@/lib/db";
 import { getUserSession } from "@/lib/auth/requireAdmin";
@@ -29,7 +29,10 @@ export default async function AccountPage({ params }: { params: Promise<{ locale
 
   const since = new Date(); since.setUTCHours(0, 0, 0, 0);
   const recent = await db.select().from(schema.usageEvents).where(eq(schema.usageEvents.userId, userId)).orderBy(desc(schema.usageEvents.createdAt)).limit(10);
-  const usedToday = recent.filter((r) => r.createdAt >= since).length;
+  const [usage] = await db.select({ count: sql<number>`count(*)::int` }).from(schema.usageEvents).where(
+    and(eq(schema.usageEvents.userId, userId), eq(schema.usageEvents.kind, "ask"), gte(schema.usageEvents.createdAt, since))
+  );
+  const usedToday = usage?.count ?? 0;
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16">

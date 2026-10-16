@@ -6,11 +6,12 @@
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",
     "db:seed": "tsx lib/db/seed.ts",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "test": "node --test tests/*.test.cjs"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.53",
@@ -42,6 +43,8 @@
     "@types/react-dom": "^19.0.0",
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.8",
     "tailwindcss": "4.3.3",
     "tsx": "^4.23.13",
     "typescript": "^5.9.0"

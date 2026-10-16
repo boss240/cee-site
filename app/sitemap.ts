@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPaths = ["/", ...NAV.map((n) => n.href), "/knowledge/documents", "/knowledge/digests", "/knowledge/ask", "/knowledge/pricing", "/privacy", "/terms"];
   const entries: MetadataRoute.Sitemap = [];
 
-  for (const path of staticPaths) {
+  for (const path of new Set(staticPaths)) {
     for (const locale of locales) {
       entries.push({
         url: `${base}/${locale}${path === "/" ? "" : path}`,

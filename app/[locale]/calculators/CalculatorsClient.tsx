@@ -19,13 +19,13 @@ const TABS: { id: Tab; Icon: typeof Battery }[] = [
 
 const field = "w-full rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2 text-[var(--color-fg)] transition focus:border-[var(--color-brand-dark)] focus:bg-[var(--color-bg)]";
 const card = "rounded-xl border border-[var(--color-line)] bg-[var(--color-bg)] p-5";
-const verdictCls: Record<string, string> = { loss: "text-red-500", high: "text-[var(--color-brand-text)]", ok: "text-amber-500", long: "text-red-500" };
+const verdictCls: Record<string, string> = { loss: "text-red-700 dark:text-red-400", high: "text-[var(--color-brand-text)]", ok: "text-[var(--color-accent-text)]", long: "text-red-700 dark:text-red-400" };
 
-function Num({ id, label, unit, value, onChange, step = 1, min = 0 }: { id: string; label: string; unit?: string; value: number; onChange: (v: number) => void; step?: number; min?: number }) {
+function Num({ id, label, unit, value, onChange, step = 1, min = 0, max = 1e9 }: { id: string; label: string; unit?: string; value: number; onChange: (v: number) => void; step?: number; min?: number; max?: number }) {
   return (
     <label htmlFor={id} className="block">
       <span className="mb-1 block text-xs font-semibold text-[var(--color-fg-muted)]">{label}{unit ? <span className="ml-1 font-normal text-[var(--color-fg-placeholder)]">({unit})</span> : null}</span>
-      <input id={id} type="number" inputMode="decimal" className={field} value={Number.isFinite(value) ? value : ""} step={step} min={min} onChange={(e) => onChange(parseFloat(e.target.value) || 0)} />
+      <input id={id} type="number" inputMode="decimal" className={field} value={Number.isFinite(value) ? value : ""} step={step} min={min} max={max} onChange={(e) => { const n = Number(e.target.value); onChange(Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : min); }} />
     </label>
   );
 }
@@ -125,15 +125,15 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
             <div className={card}>
               <p className="mono-label mb-3 text-[var(--color-brand-text)]">{t("bess.groups.params")}</p>
               <div className="grid grid-cols-2 gap-3">
-                <Num id="b-cap" label={t("bess.fields.cap")} unit={u("kwh")} value={b.cap} onChange={bindB("cap")} step={10} />
+                <Num id="b-cap" label={t("bess.fields.cap")} unit={u("kwh")} value={b.cap} onChange={bindB("cap")} min={1} step={10} />
                 <Num id="b-inv" label={t("bess.fields.inv")} unit={u("kw")} value={b.inv} onChange={bindB("inv")} step={5} />
                 <Num id="b-grid" label={t("bess.fields.gridLim")} unit={u("kw")} value={b.gridLim} onChange={bindB("gridLim")} step={5} />
                 <Num id="b-rdn" label={t("bess.fields.rdnLim")} unit={u("kw")} value={b.rdnLim} onChange={bindB("rdnLim")} step={5} />
-                <Num id="b-nc" label={t("bess.fields.nCharge")} unit={u("h")} value={b.nCharge} onChange={bindB("nCharge")} />
-                <Num id="b-nd" label={t("bess.fields.nDischarge")} unit={u("h")} value={b.nDischarge} onChange={bindB("nDischarge")} />
+                <Num id="b-nc" label={t("bess.fields.nCharge")} unit={u("h")} value={b.nCharge} onChange={(v) => bindB("nCharge")(Math.floor(v))} max={24} />
+                <Num id="b-nd" label={t("bess.fields.nDischarge")} unit={u("h")} value={b.nDischarge} onChange={(v) => bindB("nDischarge")(Math.floor(v))} max={24} />
                 <Num id="b-gf" label={t("bess.fields.gridFee")} unit={u("uahKwh")} value={b.gridFee} onChange={bindB("gridFee")} step={0.1} />
                 <Num id="b-cx" label={t("bess.fields.capexPer")} unit={u("uah")} value={b.capexPer} onChange={bindB("capexPer")} step={100} />
-                <Num id="b-eff" label={t("bess.fields.eff")} unit={u("pct")} value={b.eff} onChange={bindB("eff")} step={0.1} />
+                <Num id="b-eff" label={t("bess.fields.eff")} unit={u("pct")} value={b.eff} onChange={bindB("eff")} min={0.1} max={100} step={0.1} />
               </div>
             </div>
             <div className={card}>
@@ -158,6 +158,7 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
           <div className={`${card} lg:sticky lg:top-24 lg:self-start`}>
             <p className={`text-lg font-bold ${verdictCls[bv]}`}>{t(`verdict.${bv}`, { pay: bess.eco.pay.toFixed(1) })}</p>
             <p className="mt-1 text-xs text-[var(--color-fg-muted)]">{t("bess.dispatch", { c: bess.eco.chargeHours, d: bess.eco.dischargeHours })}</p>
+            {bess.eco.npv < 0 && <p role="status" className="mt-3 text-sm text-[var(--color-accent-text)]">{t("bess.negativeNpv")}</p>}
             <dl className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
               <Stat label={t("bess.results.daily")} value={uah(bess.eco.daily)} accent />
               <Stat label={t("bess.results.yearly")} value={uah(bess.eco.yearly)} accent />
@@ -198,7 +199,7 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
             <dl className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
               <Stat label={t("arb.results.inv")} value={`${arb.invKw} ${u("kw")}`} />
               <Stat label={t("arb.results.cap")} value={`${arb.capKwh} ${u("kwh")}`} />
-              <Stat label={t("arb.results.yearly")} value={uah(Math.max(0, arb.yearlyP))} accent />
+              <Stat label={t("arb.results.yearly")} value={uah(arb.yearlyP)} accent />
               <Stat label={t("arb.results.intRev")} value={uah(arb.intRev)} />
               <Stat label={t("arb.results.extRev")} value={uah(arb.extRev)} />
               <Stat label={t("arb.results.chargeCost")} value={uah(arb.chargeCost)} />
@@ -218,13 +219,13 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
             <div><h2 className="text-xl">{t("finance.title")}</h2><p className="mt-2 text-sm text-[var(--color-fg-muted)]">{t("finance.text")}</p></div>
             <div className={`${card} grid grid-cols-2 gap-3`}>
               <Num id="f-amt" label={t("finance.fields.amount")} unit={u("kUah")} value={f.amount} onChange={(v) => setF((s) => ({ ...s, amount: v }))} step={10} />
-              <Num id="f-rate" label={t("finance.fields.rate")} unit={u("pct")} value={f.rate} onChange={(v) => setF((s) => ({ ...s, rate: v }))} step={0.5} />
-              <Num id="f-years" label={t("finance.fields.years")} unit={u("years")} value={f.years} onChange={(v) => setF((s) => ({ ...s, years: v }))} min={1} />
+              <Num id="f-rate" label={t("finance.fields.rate")} unit={u("pct")} value={f.rate} onChange={(v) => setF((s) => ({ ...s, rate: v }))} max={100} step={0.5} />
+              <Num id="f-years" label={t("finance.fields.years")} unit={u("years")} value={f.years} onChange={(v) => setF((s) => ({ ...s, years: v }))} min={1} max={100} />
               <Num id="f-sav" label={t("finance.fields.savings")} unit={u("kUahYear")} value={f.savings} onChange={(v) => setF((s) => ({ ...s, savings: v }))} step={10} />
             </div>
           </div>
           <div className={card}>
-            <p className={`text-lg font-bold ${fin.withinTerm ? "text-[var(--color-brand-text)]" : "text-amber-500"}`}>{fin.withinTerm ? t("finance.ok") : t("finance.warn")}</p>
+            <p className={`text-lg font-bold ${fin.withinTerm ? "text-[var(--color-brand-text)]" : "text-[var(--color-accent-text)]"}`}>{fin.withinTerm ? t("finance.ok") : t("finance.warn")}</p>
             <dl className="mt-4 grid grid-cols-2 gap-3">
               <Stat label={t("finance.results.monthly")} value={uah(fin.monthly)} accent />
               <Stat label={t("finance.results.total")} value={uah(fin.total)} />
@@ -264,7 +265,7 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
               <h3>{t("express.solar.title")}</h3>
               <div className="mt-3 space-y-3">
                 <Num id="x2-a" label={t("express.solar.area")} unit={u("m2")} value={e2.area} onChange={(v) => setE2((s) => ({ ...s, area: v }))} step={10} />
-                <Num id="x2-d" label={t("express.solar.day")} unit={u("pct")} value={e2.day} onChange={(v) => setE2((s) => ({ ...s, day: v }))} />
+                <Num id="x2-d" label={t("express.solar.day")} unit={u("pct")} value={e2.day} onChange={(v) => setE2((s) => ({ ...s, day: v }))} max={100} />
                 <Num id="x2-t" label={t("express.solar.tariff")} unit={u("uahKwh")} value={e2.tariff} onChange={(v) => setE2((s) => ({ ...s, tariff: v }))} step={0.1} />
               </div>
               <button type="button" onClick={() => setE2((s) => ({ ...s, done: true }))} className="mt-4 w-full rounded-lg bg-[var(--color-brand)] px-4 py-2.5 text-sm font-semibold text-white">{t("express.solar.run")}</button>
@@ -283,7 +284,7 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
               <h3>{t("express.dsm.title")}</h3>
               <div className="mt-3 space-y-3">
                 <Num id="x3-c" label={t("express.dsm.cons")} unit={u("mwhMonth")} value={e3.cons} onChange={(v) => setE3((s) => ({ ...s, cons: v }))} />
-                <Num id="x3-s" label={t("express.dsm.shift")} unit={u("pct")} value={e3.shift} onChange={(v) => setE3((s) => ({ ...s, shift: v }))} />
+                <Num id="x3-s" label={t("express.dsm.shift")} unit={u("pct")} value={e3.shift} onChange={(v) => setE3((s) => ({ ...s, shift: v }))} max={100} />
                 <Num id="x3-d" label={t("express.dsm.diff")} unit={u("uahKwh")} value={e3.diff} onChange={(v) => setE3((s) => ({ ...s, diff: v }))} step={0.1} />
               </div>
               <button type="button" onClick={() => setE3((s) => ({ ...s, done: true }))} className="mt-4 w-full rounded-lg bg-[var(--color-brand)] px-4 py-2.5 text-sm font-semibold text-white">{t("express.dsm.run")}</button>

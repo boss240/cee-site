@@ -5,8 +5,8 @@
 
 @theme {
   /* ФОНИ кнопок і плашок — тільки з білим текстом поверх */
-  --color-brand: #10b981;
-  --color-brand-hover: #059669;
+  --color-brand: #047857;
+  --color-brand-hover: #065f46;
   --color-brand-dark: #047857;
 
   /* ТЕКСТ на світлому фоні. Контраст 5.1:1 — проходить WCAG AA */

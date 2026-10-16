@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+
+import { useTranslations } from "next-intl";
 
 type Props = {
   /**
@@ -35,8 +37,19 @@ type Glow = { hue: [number, number, number]; ax: number; ay: number; fx: number;
  * Кольори читаються з класу .dark на <html> на кожному кадрі — перемикання
  * теми не перезапускає анімацію.
  */
+const motionQuery = "(prefers-reduced-motion: reduce)";
+function motionSnapshot() { return window.matchMedia(motionQuery).matches; }
+function subscribeMotion(onChange: () => void) {
+  const media = window.matchMedia(motionQuery);
+  media.addEventListener("change", onChange);
+  return () => media.removeEventListener("change", onChange);
+}
+
 export function EnergyField({ variant = "hero", forceDark = false, className = "" }: Props) {
   const ref = useRef<HTMLCanvasElement>(null);
+  const tMotion = useTranslations("Animation");
+  const reducedMotion = useSyncExternalStore(subscribeMotion, motionSnapshot, () => true);
+  const [manualMotion, setManualMotion] = useState(false);
 
   useEffect(() => {
     const canvas = ref.current;
@@ -44,7 +57,7 @@ export function EnergyField({ variant = "hero", forceDark = false, className = "
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = reducedMotion && !manualMotion;
 
     let w = 0;
     let h = 0;
@@ -95,6 +108,16 @@ export function EnergyField({ variant = "hero", forceDark = false, className = "
         r: Math.random() * 1.4 + 0.8,
       }));
       sparks = [];
+      // Resizing the bitmap clears it, including the reduced-motion static frame.
+      if (reduceMotion) drawStatic();
+    }
+
+    function drawStatic() {
+      ctx!.clearRect(0, 0, w, h);
+      const dark = isDark();
+      drawAurora(dark);
+      if (variant === "hero") drawGrid(dark, 0);
+      drawNetwork(dark, 0);
     }
 
     function drawAurora(dark: boolean) {
@@ -315,12 +338,10 @@ export function EnergyField({ variant = "hero", forceDark = false, className = "
     window.addEventListener("pointerleave", onLeave);
     document.addEventListener("visibilitychange", onVis);
 
+    const themeObserver = new MutationObserver(() => { if (reduceMotion) drawStatic(); });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     if (reduceMotion) {
-      // Один статичний кадр — без анімації
-      const dark = isDark();
-      drawAurora(dark);
-      if (variant === "hero") drawGrid(dark, 0);
-      drawNetwork(dark, 0);
+      drawStatic();
     } else {
       raf = requestAnimationFrame(frame);
     }
@@ -328,18 +349,27 @@ export function EnergyField({ variant = "hero", forceDark = false, className = "
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
+      themeObserver.disconnect();
       io.disconnect();
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerleave", onLeave);
       document.removeEventListener("visibilitychange", onVis);
     };
-  }, [variant, forceDark]);
+  }, [variant, forceDark, reducedMotion, manualMotion]);
 
   return (
+    <>
     <canvas
       ref={ref}
       aria-hidden="true"
       className={`pointer-events-none absolute inset-0 h-full w-full ${className}`}
     />
+    {reducedMotion && (
+      <button type="button" aria-pressed={manualMotion} onClick={() => setManualMotion((value) => !value)}
+        className="absolute bottom-3 right-3 z-10 rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] px-3 py-2 text-xs text-[var(--color-fg)]">
+        {tMotion(manualMotion ? "pause" : "play")}
+      </button>
+    )}
+    </>
   );
 }

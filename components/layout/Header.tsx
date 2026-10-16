@@ -140,7 +140,7 @@ export function Header() {
         <nav
           id="mobile-nav"
           aria-label={t("mobileNav")}
-          className="border-t border-[var(--color-line)] bg-[var(--color-surface)] lg:hidden"
+          className="max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain border-t border-[var(--color-line)] bg-[var(--color-surface)] lg:hidden"
         >
           <div className="mx-auto max-w-6xl px-4 py-2">
             {/* Головна дія — на телефоні кнопки в шапці немає, тому вона перша в меню */}

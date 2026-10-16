@@ -13,7 +13,7 @@ export type BessParams = {
   nDischarge: number; // годин розряду
   gridFee: number; // вартість електроенергії (тариф + розподіл), грн/кВт·год
   capexPer: number; // грн за кВт·год ємності
-  eff: number; // ККД циклу, частка (0.927)
+  eff: number; // ККД кожного етапу заряду/розряду, частка (0.927)
   socMin?: number;
   socMax?: number;
   socInit?: number;
@@ -79,7 +79,7 @@ export function loadProfile(day: number, evening: number, night: number): number
 }
 
 export function bessVerdict(eco: BessEco): "loss" | "high" | "ok" | "long" {
-  if (eco.daily <= 0) return "loss";
+  if (eco.daily <= 0 || eco.net <= 0) return "loss";
   if (eco.pay <= 4) return "high";
   if (eco.pay <= 7) return "ok";
   return "long";

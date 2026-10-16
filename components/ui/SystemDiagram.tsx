@@ -48,7 +48,7 @@ export function SystemDiagram() {
       <div className="overflow-x-auto rounded-xl border border-[var(--color-line)] bg-[var(--color-bg)]">
         <svg
           viewBox="0 0 760 300"
-          role="img"
+          role="group"
           aria-label={t("ariaLabel")}
           className="grid-tech h-auto w-full min-w-[640px]"
         >

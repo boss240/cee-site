@@ -29,29 +29,21 @@ export async function searchDocuments(opts: { q?: string; kind?: string; limit?:
            or ${schema.documents.title} ilike ${like} or ${schema.documents.number} ilike ${like} or ${schema.documents.tags}::text ilike ${like} or ${schema.documents.summary} ilike ${like})`
     );
   }
-  try {
-    return await db
-      .select()
-      .from(schema.documents)
-      .where(conds.length ? and(...conds) : undefined)
-      .orderBy(desc(schema.documents.checkedAt), desc(schema.documents.updatedAt))
-      .limit(limit);
-  } catch {
-    return [];
-  }
+  return await db
+    .select()
+    .from(schema.documents)
+    .where(conds.length ? and(...conds) : undefined)
+    .orderBy(desc(schema.documents.checkedAt), desc(schema.documents.updatedAt))
+    .limit(limit);
 }
 
 export async function getDocument(slug: string, publishedOnly = true): Promise<{ doc: DocRow; updates: (typeof schema.documentUpdates.$inferSelect)[] } | null> {
-  try {
-    const conds = [eq(schema.documents.slug, slug)];
-    if (publishedOnly) conds.push(eq(schema.documents.published, true));
-    const [doc] = await db.select().from(schema.documents).where(and(...conds)).limit(1);
-    if (!doc) return null;
-    const updates = await db.select().from(schema.documentUpdates).where(eq(schema.documentUpdates.documentId, doc.id)).orderBy(desc(schema.documentUpdates.date));
-    return { doc, updates };
-  } catch {
-    return null;
-  }
+  const conds = [eq(schema.documents.slug, slug)];
+  if (publishedOnly) conds.push(eq(schema.documents.published, true));
+  const [doc] = await db.select().from(schema.documents).where(and(...conds)).limit(1);
+  if (!doc) return null;
+  const updates = await db.select().from(schema.documentUpdates).where(eq(schema.documentUpdates.documentId, doc.id)).orderBy(desc(schema.documentUpdates.date));
+  return { doc, updates };
 }
 
 const STOP = new Set(["який", "яка", "яке", "які", "яких", "якщо", "щоб", "або", "також", "того", "цього", "може", "можна", "можуть", "потрібно", "потрібна", "потрібен", "треба", "буде", "було", "бути", "після", "перед", "через", "коли", "куди", "тому", "чому", "дуже", "лише", "тільки", "what", "which", "does", "need", "have", "with", "that", "this", "from", "about", "there"]);

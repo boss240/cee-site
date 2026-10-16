@@ -713,7 +713,7 @@
       }
     ],
     "productsLabel": "What the work consists of",
-    "productsTitle": "Eight blocks",
+    "productsTitle": "Sixteen blocks",
     "productsText": "These are stages inside a turnkey project and stand-alone expert products. Each can be taken separately if the rest is covered — but by default we do not stop at any of them.",
     "resultLabel": "What this stage produces",
     "priceNote": "Cost and timelines are set by scope after an initial conversation. There is no standard price list: scope depends on the state of the site, the data available and how deep we go.",
@@ -2213,7 +2213,7 @@
         "nDischarge": "Discharge hours (most expensive)",
         "gridFee": "Electricity cost incl. distribution",
         "capexPer": "CAPEX per kWh",
-        "eff": "Round-trip efficiency",
+        "eff": "Efficiency per charge/discharge stage",
         "night": "Night (1–7, 24)",
         "half": "Shoulder (8–17)",
         "peak": "Peak (18–23)",
@@ -2239,7 +2239,8 @@
         "charge": "Charge, kW",
         "discharge": "Discharge, kW",
         "soc": "State of charge, %"
-      }
+      },
+      "negativeNpv": "NPV is negative at an 18% discount rate: simple payback does not imply investment attractiveness."
     },
     "arb": {
       "title": "Day-ahead market arbitrage",
@@ -2465,5 +2466,9 @@
         "a": "Currently payment is by invoice to a bank account. Card payment online will appear once a payment gateway is connected."
       }
     ]
+  },
+  "Animation": {
+    "play": "Play animation",
+    "pause": "Pause animation"
   }
 }

@@ -15,7 +15,7 @@ import { clientIp, tooManyRequests } from "@/lib/rateLimit";
 const LeadSchema = z.object({
   name: z.string().trim().min(2).max(255),
   email: z.string().trim().email().max(255).optional().or(z.literal("")),
-  phone: z.string().trim().max(64).optional().or(z.literal("")),
+  phone: z.string().trim().max(64).refine((v) => !v || (/^[+\d\s().-]+$/.test(v) && v.replace(/\D/g, "").length >= 7), "Invalid phone").optional().or(z.literal("")),
   segment: z.string().trim().max(32).optional(),
   message: z.string().trim().max(5000).default(""),
   source: z.enum(["form", "chat"]).default("form"),
@@ -26,6 +26,10 @@ const LeadSchema = z.object({
     .max(60)
     .optional(),
   website: z.string().optional(), // honeypot
+}).superRefine((data, ctx) => {
+  if (data.source === "form" && data.message.length < 10 && !data.website) {
+    ctx.addIssue({ code: "custom", path: ["message"], message: "Message must contain at least 10 characters" });
+  }
 });
 
 export async function POST(req: NextRequest) {

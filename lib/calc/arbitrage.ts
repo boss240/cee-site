@@ -14,7 +14,7 @@ const STD_INV = [10, 15, 20, 30, 50, 100, 150, 250, 500, 1000, 2000];
 export function arbitrage(inp: ArbInput): ArbResult {
   const { gridLimit, baseLoad, profile, gridFee, capexUsdPerKwh } = inp;
   const usdRate = inp.usdRate ?? 41.5;
-  let invKw = STD_INV[0];
+  let invKw = 0;
   for (let i = STD_INV.length - 1; i >= 0; i--) if (STD_INV[i] <= gridLimit) { invKw = STD_INV[i]; break; }
   const capKwh = invKw * 4;
   const hours = Array.from({ length: 24 }, (_, i) => i);
@@ -51,7 +51,7 @@ export function arbitrage(inp: ArbInput): ArbResult {
   const totalDis = intDis.reduce((a, b) => a + b, 0) + extDis.reduce((a, b) => a + b, 0);
   return {
     invKw, capKwh, intRev, extRev, chargeCost, dailyP, yearlyP, capexUsd, capexUah, payback,
-    cycles: totalDis / usableCap, intPct: Math.round((intRev / (intRev + extRev || 1)) * 100),
+    cycles: usableCap > 0 ? totalDis / usableCap : 0, intPct: Math.round((intRev / (intRev + extRev || 1)) * 100),
     hours: hours.map((h) => ({ h, price: damP[h], load: loadArr[h], charge: chargeSch[h], disInt: intDis[h], disExt: extDis[h] })),
   };
 }

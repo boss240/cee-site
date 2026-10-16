@@ -22,30 +22,22 @@ function pick(row: typeof schema.posts.$inferSelect, locale: Locale) {
 }
 
 export async function listPublishedPosts(locale: Locale): Promise<PostCard[]> {
-  try {
-    const rows = await db
-      .select()
-      .from(schema.posts)
-      .where(eq(schema.posts.published, true))
-      .orderBy(desc(schema.posts.publishedAt), desc(schema.posts.id));
-    return rows.map((r) => {
-      const p = pick(r, locale);
-      return { slug: p.slug, title: p.title, excerpt: p.excerpt, tag: p.tag, publishedAt: p.publishedAt };
-    });
-  } catch {
-    return [];
-  }
+  const rows = await db
+    .select()
+    .from(schema.posts)
+    .where(eq(schema.posts.published, true))
+    .orderBy(desc(schema.posts.publishedAt), desc(schema.posts.id));
+  return rows.map((r) => {
+    const p = pick(r, locale);
+    return { slug: p.slug, title: p.title, excerpt: p.excerpt, tag: p.tag, publishedAt: p.publishedAt };
+  });
 }
 
 export async function getPublishedPost(slug: string, locale: Locale): Promise<PostFull | null> {
-  try {
-    const [row] = await db
-      .select()
-      .from(schema.posts)
-      .where(and(eq(schema.posts.slug, slug), eq(schema.posts.published, true)))
-      .limit(1);
-    return row ? pick(row, locale) : null;
-  } catch {
-    return null;
-  }
+  const [row] = await db
+    .select()
+    .from(schema.posts)
+    .where(and(eq(schema.posts.slug, slug), eq(schema.posts.published, true)))
+    .limit(1);
+  return row ? pick(row, locale) : null;
 }

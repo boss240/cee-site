@@ -8,24 +8,16 @@ export type DigestRow = typeof schema.digests.$inferSelect;
 export type DigestKind = "energy" | "local";
 
 export async function listPublishedDigests(limit = 50, kind?: DigestKind): Promise<DigestRow[]> {
-  try {
-    const conds = [eq(schema.digests.published, true)];
-    if (kind) conds.push(eq(schema.digests.kind, kind));
-    return await db.select().from(schema.digests).where(and(...conds)).orderBy(desc(schema.digests.publishedAt), desc(schema.digests.createdAt)).limit(limit);
-  } catch {
-    return [];
-  }
+  const conds = [eq(schema.digests.published, true)];
+  if (kind) conds.push(eq(schema.digests.kind, kind));
+  return await db.select().from(schema.digests).where(and(...conds)).orderBy(desc(schema.digests.publishedAt), desc(schema.digests.createdAt)).limit(limit);
 }
 
 export async function getDigest(slug: string, publishedOnly = true): Promise<DigestRow | null> {
-  try {
-    const conds = [eq(schema.digests.slug, slug)];
-    if (publishedOnly) conds.push(eq(schema.digests.published, true));
-    const [d] = await db.select().from(schema.digests).where(and(...conds)).limit(1);
-    return d ?? null;
-  } catch {
-    return null;
-  }
+  const conds = [eq(schema.digests.slug, slug)];
+  if (publishedOnly) conds.push(eq(schema.digests.published, true));
+  const [d] = await db.select().from(schema.digests).where(and(...conds)).limit(1);
+  return d ?? null;
 }
 
 function fmtDate(d: Date) {

@@ -37,7 +37,7 @@ export function LanguageSwitcher() {
           type="button"
           onClick={() => switchTo(loc)}
           aria-pressed={locale === loc}
-          aria-label={t(loc)}
+          aria-label={`${loc.toUpperCase()} — ${t(loc)}`}
           className={`h-11 px-2.5 text-sm font-semibold uppercase transition ${
             locale === loc
               ? "bg-[var(--color-brand)] text-white"
