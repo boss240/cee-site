@@ -37,6 +37,7 @@ export default async function PostPage({ params }: Params) {
         {date && <span className="text-sm text-[var(--color-fg-placeholder)]">{date}</span>}
       </div>
       <h1 className="mt-3">{post.title}</h1>
+      {post.untranslated && <p className="mt-2 text-sm text-[var(--color-fg-muted)]">Some of this article is available in Ukrainian only.</p>}
       <p className="mt-5 text-lg text-[var(--color-fg-muted)]">{post.excerpt}</p>
       <div className="mt-8 border-t border-[var(--color-line)] pt-2">
         <Markdown source={post.body} />

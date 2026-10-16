@@ -57,7 +57,8 @@
     "backToHome": "Back to home",
     "contactUs": "Contact us",
     "apologize": "Sorry for the inconvenience, we're changing the world here!",
-    "inWorkDefault": "This section is still in progress. We're preparing it to be useful, not just present."
+    "inWorkDefault": "This section is still in progress. We're preparing it to be useful, not just present.",
+    "discussScenario": "Discuss this scenario"
   },
   "HomePage": {
     "ticker": [
@@ -483,7 +484,8 @@
       "finance": "Please advise on financing an energy-efficiency measure (loan/lease/programme). Amount, term, expected savings: ",
       "express": "Please survey the site and prepare a full feasibility study following the express estimate on the website. Site and its consumption: "
     },
-    "serviceMessage": "I am interested in the '{service}' service/subscription. Please send the terms, price and how to start. Site: "
+    "serviceMessage": "I am interested in the '{service}' service/subscription. Please send the terms, price and how to start. Site: ",
+    "scenarioMessage": "I would like to discuss: {topic}."
   },
   "CitizensPage": {
     "heroLabel": "For Residents",
@@ -1922,7 +1924,9 @@
         "q": "How do I pay?",
         "a": "After your request we will send an invoice. Online card payment will appear once a payment gateway is connected in the admin panel."
       }
-    ]
+    ],
+    "included": "Included",
+    "excluded": "Not included"
   },
   "Knowledge": {
     "nav": {
@@ -2240,7 +2244,8 @@
         "discharge": "Discharge, kW",
         "soc": "State of charge, %"
       },
-      "negativeNpv": "NPV is negative at an 18% discount rate: simple payback does not imply investment attractiveness."
+      "negativeNpv": "NPV is negative at an 18% discount rate: simple payback does not imply investment attractiveness.",
+      "irrUnavailable": "Not defined"
     },
     "arb": {
       "title": "Day-ahead market arbitrage",
@@ -2304,7 +2309,8 @@
           "arb": "Day/night arbitrage",
           "total": "Total",
           "payback": "Payback"
-        }
+        },
+        "noConsumption": "Nonzero consumption and peak power are required. No savings are projected for zero consumption."
       },
       "solar": {
         "title": "Solar integration",
@@ -2408,7 +2414,7 @@
     "order": "Send a request",
     "kbLabel": "Knowledge base",
     "kbTitle": "Access to documents, digests and the consultant",
-    "kbText": "This is a website subscription, not specialists' work. Documents and digests are open to everyone; the legislation consultant has a daily limit, which free registration raises and paid plans remove.",
+    "kbText": "This is a website subscription, not specialists’ work. Documents and digests are open to everyone. The consultant has a daily query allowance; registration raises it, and paid plans provide higher fair-use allowances.",
     "kbPlans": [
       {
         "name": "Basic",
@@ -2418,12 +2424,12 @@
       {
         "name": "Premium",
         "price": "price to be confirmed",
-        "text": "No daily limit (up to 200 queries per day), query history, analytics and reviews for your site."
+        "text": "Up to 200 queries per day (fair use), query history, analytics and reviews for your site."
       },
       {
         "name": "Enterprise",
         "price": "price to be confirmed",
-        "text": "For organisations: no limit (up to 1000 per day), API access, several users."
+        "text": "For organisations: up to 1000 queries per day (fair use), API access, several users."
       }
     ],
     "kbLink": "Knowledge-base plans in detail",

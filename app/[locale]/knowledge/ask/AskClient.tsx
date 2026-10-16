@@ -29,6 +29,7 @@ export function AskClient({ initialQuestion = "" }: { initialQuestion?: string }
   const [busy, setBusy] = useState(false);
   const [quota, setQuota] = useState<Quota | null>(null);
   const [signedIn, setSignedIn] = useState(false);
+  const nextTurnId = useRef(0);
   const bottomRef = useRef<HTMLDivElement>(null);
   const examples = t.raw("examples") as string[];
 
@@ -46,7 +47,7 @@ export function AskClient({ initialQuestion = "" }: { initialQuestion?: string }
   async function submit(q?: string) {
     const text = (q ?? question).trim();
     if (text.length < 5 || busy) return;
-    const id = Date.now();
+    const id = ++nextTurnId.current;
     setTurns((prev) => [...prev, { id, question: text }]);
     setQuestion("");
     setBusy(true);

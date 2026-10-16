@@ -15,11 +15,15 @@ export function UsersManager({ labels: l, planNames }: { labels: UserLabels; pla
   const [msg, setMsg] = useState<string | null>(null);
   const [filter, setFilter] = useState("");
 
-  const load = useCallback(async () => {
-    setLoading(true);
+  const load = useCallback(() => {
+    const request = async () => {
     const d = await fetch("/api/admin/users").then((r) => r.json());
+      return { d };
+    };
+    return request().then(({ d }) => {
     setUsers(d.users ?? []);
     setLoading(false);
+    });
   }, []);
   useEffect(() => { load(); }, [load]);
 

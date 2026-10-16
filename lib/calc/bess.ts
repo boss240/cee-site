@@ -51,7 +51,7 @@ export function bessDispatch(p: BessParams, rdnP: number[], loadArr: number[]): 
   return res;
 }
 
-export type BessEco = { daily: number; yearly: number; capex: number; opex: number; net: number; pay: number; cycEff: number; yld: number; npv: number; irr: number; chargeHours: number; dischargeHours: number };
+export type BessEco = { daily: number; yearly: number; capex: number; opex: number; net: number; pay: number; cycEff: number; yld: number; npv: number; irr: number | null; chargeHours: number; dischargeHours: number };
 
 export function bessEco(p: BessParams, disp: HourRow[]): BessEco {
   const opexR = p.opexR ?? 0.02, deg = p.deg ?? 0.015, disc = p.disc ?? 0.18;
@@ -63,9 +63,8 @@ export function bessEco(p: BessParams, disp: HourRow[]): BessEco {
   let npv = -capex, capT = p.cap;
   const cfs = [-capex];
   for (let y = 1; y <= 15; y++) { capT *= 1 - deg; const ey = (capT / p.cap) * yearly - opex; cfs.push(ey); npv += ey / Math.pow(1 + disc, y); }
-  let lo = -0.5, hi = 2;
-  for (let i = 0; i < 60; i++) { const mid = (lo + hi) / 2; const n = cfs.reduce((s, cf, t) => s + cf / Math.pow(1 + mid, t), 0); if (n > 0) lo = mid; else hi = mid; }
-  return { daily, yearly, capex, opex, net, pay, cycEff, yld: tC > 0 ? daily / tC : 0, npv, irr: (lo + hi) / 2, chargeHours: disp.filter((r) => r.cG > 0).length, dischargeHours: disp.filter((r) => r.dL + r.dR > 0).length };
+
+  return { daily, yearly, capex, opex, net, pay, cycEff, yld: tC > 0 ? daily / tC : 0, npv, irr: investmentIrr(cfs), chargeHours: disp.filter((r) => r.cG > 0).length, dischargeHours: disp.filter((r) => r.dL + r.dR > 0).length };
 }
 
 /** Профіль цін РДН за трьома сегментами (грн/МВт·год → грн/кВт·год) */
@@ -83,4 +82,20 @@ export function bessVerdict(eco: BessEco): "loss" | "high" | "ok" | "long" {
   if (eco.pay <= 4) return "high";
   if (eco.pay <= 7) return "ok";
   return "long";
+}
+
+/** Unique IRR for an initial investment followed by nonnegative cash flows.
+ * No fabricated endpoint when the return is undefined or roots may be ambiguous. */
+export function investmentIrr(cashFlows: number[]): number | null {
+  if (cashFlows.length < 2 || !cashFlows.every(Number.isFinite) || cashFlows[0] >= 0 ||
+      cashFlows.slice(1).some((v) => v < 0) || !cashFlows.slice(1).some((v) => v > 0)) return null;
+  const npvAt = (rate: number) => cashFlows.reduce((sum, cf, year) => sum + cf / Math.pow(1 + rate, year), 0);
+  let lo = -0.999999999, hi = 1;
+  while (npvAt(hi) > 0 && hi < 1e9) hi *= 2;
+  if (npvAt(lo) < 0 || npvAt(hi) > 0) return null;
+  for (let i = 0; i < 120; i++) {
+    const mid = (lo + hi) / 2;
+    if (npvAt(mid) > 0) lo = mid; else hi = mid;
+  }
+  return (lo + hi) / 2;
 }

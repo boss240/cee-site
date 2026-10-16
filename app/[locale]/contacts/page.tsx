@@ -20,7 +20,15 @@ export default async function ContactsPage({ searchParams }: { searchParams: Pro
   const calcMatch = /^calc-(bess|arb|finance|express)$/.exec(topic);
   // /contacts?topic=service-<slug> — заявка на послугу/абонемент зі сторінки підписок
   const serviceMatch = /^service-([a-z0-9-]{2,60})$/.exec(topic);
-  const initialMessage = planMatch
+  const scenarioMatch = /^(business|community|citizens)-(\d{1,2})$/.exec(topic);
+  const scenarioSources = { business: ["BusinessPage", "scenarios"], community: ["CommunityPage", "objects"], citizens: ["CitizensPage", "solutions"] } as const;
+  let scenarioTitle = "";
+  if (scenarioMatch) {
+    const [namespace, items] = scenarioSources[scenarioMatch[1] as keyof typeof scenarioSources];
+    const source = await getTranslations(namespace);
+    scenarioTitle = (source.raw(items) as { title: string }[])[Number(scenarioMatch[2]) - 1]?.title ?? "";
+  }
+  const initialMessage = scenarioTitle ? tf("scenarioMessage", { topic: scenarioTitle }) : planMatch
     ? tf("subscriptionMessage", { plan: tf(`planNames.${planMatch[1]}`) })
     : calcMatch
       ? tf(`calcMessage.${calcMatch[1]}`)

@@ -9,6 +9,7 @@ export type PostCard = {
   excerpt: string;
   tag: string | null;
   publishedAt: Date | null;
+  untranslated?: boolean;
 };
 
 export type PostFull = PostCard & { body: string };
@@ -18,7 +19,7 @@ function pick(row: typeof schema.posts.$inferSelect, locale: Locale) {
   const title = locale === "en" && row.titleEn ? row.titleEn : row.titleUk;
   const excerpt = locale === "en" && row.excerptEn ? row.excerptEn : row.excerptUk;
   const body = locale === "en" && row.bodyEn ? row.bodyEn : row.bodyUk;
-  return { slug: row.slug, title, excerpt, body, tag: row.tag, publishedAt: row.publishedAt };
+  return { slug: row.slug, title, excerpt, body, tag: row.tag, publishedAt: row.publishedAt, untranslated: locale === "en" && (!row.titleEn || !row.excerptEn || !row.bodyEn) };
 }
 
 export async function listPublishedPosts(locale: Locale): Promise<PostCard[]> {
@@ -29,7 +30,7 @@ export async function listPublishedPosts(locale: Locale): Promise<PostCard[]> {
     .orderBy(desc(schema.posts.publishedAt), desc(schema.posts.id));
   return rows.map((r) => {
     const p = pick(r, locale);
-    return { slug: p.slug, title: p.title, excerpt: p.excerpt, tag: p.tag, publishedAt: p.publishedAt };
+    return { slug: p.slug, title: p.title, excerpt: p.excerpt, tag: p.tag, publishedAt: p.publishedAt, untranslated: p.untranslated };
   });
 }
 

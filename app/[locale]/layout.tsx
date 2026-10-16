@@ -102,7 +102,6 @@ export default async function RootLayout({
       <body className="flex min-h-screen flex-col bg-[var(--color-bg)] font-sans">
         <script
           type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
         <NextIntlClientProvider>

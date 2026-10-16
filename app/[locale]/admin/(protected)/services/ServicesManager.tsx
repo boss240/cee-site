@@ -48,12 +48,16 @@ export function ServicesManager({ labels: l }: { labels: Labels }) {
   const [form, setForm] = useState(emptyForm());
   const [adding, setAdding] = useState(false);
 
-  const load = useCallback(async () => {
-    setLoading(true);
+  const load = useCallback(() => {
+    const request = async () => {
     const res = await fetch("/api/admin/services");
     const data = await res.json();
+      return { data };
+    };
+    return request().then(({ data }) => {
     setServices(data.services ?? []);
     setLoading(false);
+    });
   }, []);
 
   useEffect(() => {

@@ -35,7 +35,8 @@ export async function HomeFresh({ locale }: { locale: string }) {
               <li key={g.id}>
                 <Link href={`/knowledge/digests/${g.slug}`} className="flex flex-col gap-1 px-5 py-4 transition hover:bg-[var(--color-surface)]">
                   <span className="mono-label text-[var(--color-fg-placeholder)]">{g.kind === "local" ? t("freshLocalTag") : t("freshEnergyTag")} · {fmt(g.publishedAt)}</span>
-                  <span className="font-semibold">{g.title}</span>
+                  <span className="font-semibold" lang="uk">{g.title}</span>
+                  {locale === "en" && <span className="text-xs text-[var(--color-fg-muted)]">In Ukrainian</span>}
                 </Link>
               </li>
             ))}

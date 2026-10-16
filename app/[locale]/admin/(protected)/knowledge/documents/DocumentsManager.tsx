@@ -42,12 +42,16 @@ export function DocumentsManager({ labels: l, kindNames, statusNames }: { labels
   const [updates, setUpdates] = useState<Upd[]>([]);
   const [upd, setUpd] = useState({ date: "", note: "", sourceUrl: "" });
 
-  const load = useCallback(async () => {
-    setLoading(true);
+  const load = useCallback(() => {
+    const request = async () => {
     const r = await fetch("/api/admin/knowledge/documents");
     const d = await r.json();
+      return { d };
+    };
+    return request().then(({ d }) => {
     setDocs(d.documents ?? []);
     setLoading(false);
+    });
   }, []);
   useEffect(() => { load(); }, [load]);
 

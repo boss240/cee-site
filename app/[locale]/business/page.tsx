@@ -113,7 +113,7 @@ export default async function BusinessPage({ params }: Props) {
           {scenarios.map((scenario, i) => (
             <Reveal as="div" key={scenario.title} delay={i * 90}>
               <Link
-                href="/contacts"
+                href={`/contacts?topic=business-${i + 1}`}
                 className="lift group flex h-full flex-col gap-4 rounded-xl border border-[var(--color-line)] bg-[var(--color-bg)] p-6 transition"
               >
                 <div className="flex items-start justify-between gap-3">
@@ -124,7 +124,7 @@ export default async function BusinessPage({ params }: Props) {
                   <CheckCircle2 size={20} className="text-[var(--color-brand)] flex-shrink-0" />
                 </div>
                 <span className="text-sm font-semibold text-[var(--color-brand-text)]">
-                  {tCommon("detailsMore")} <ChevronRight className="inline" size={16} />
+                  {tCommon("discussScenario")} <ChevronRight className="inline" size={16} />
                 </span>
               </Link>
             </Reveal>

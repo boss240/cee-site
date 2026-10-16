@@ -113,7 +113,7 @@ export default async function CommunityPage({ params }: Props) {
           {objects.map((obj, i) => (
             <Reveal as="div" key={obj.title} delay={i * 90}>
               <Link
-                href="/contacts"
+                href={`/contacts?topic=community-${i + 1}`}
                 className="lift group flex h-full flex-col gap-4 rounded-xl border border-[var(--color-line)] bg-[var(--color-bg)] p-6 transition"
               >
                 <div className="flex items-start justify-between gap-3">
@@ -124,7 +124,7 @@ export default async function CommunityPage({ params }: Props) {
                   <CheckCircle2 size={20} className="text-[var(--color-brand)] flex-shrink-0" />
                 </div>
                 <span className="text-sm font-semibold text-[var(--color-brand-text)]">
-                  {tCommon("detailsMore")} <ChevronRight className="inline" size={16} />
+                  {tCommon("discussScenario")} <ChevronRight className="inline" size={16} />
                 </span>
               </Link>
             </Reveal>

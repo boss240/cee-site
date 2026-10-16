@@ -141,7 +141,7 @@ export default async function ServicesPage({ params }: Props) {
         </ol>
       </section>
 
-      {/* Вісім блоків усередині роботи */}
+      {/* Сервісні блоки */}
       <section className="border-y border-[var(--color-line)] bg-[var(--color-surface)]">
         <div className="mx-auto max-w-6xl px-4 py-20">
           <Reveal>

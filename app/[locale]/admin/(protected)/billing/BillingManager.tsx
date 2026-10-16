@@ -73,8 +73,8 @@ export function BillingManager({ labels: l }: { labels: Labels }) {
   const [addingInvoice, setAddingInvoice] = useState(false);
   const [invoiceForm, setInvoiceForm] = useState(emptyInvoiceForm());
 
-  const load = useCallback(async () => {
-    setLoading(true);
+  const load = useCallback(() => {
+    const request = async () => {
     const [companyRes, invoicesRes, gatewaysRes] = await Promise.all([
       fetch("/api/admin/company-profile"),
       fetch("/api/admin/invoices"),
@@ -83,10 +83,14 @@ export function BillingManager({ labels: l }: { labels: Labels }) {
     const companyData = await companyRes.json();
     const invoicesData = await invoicesRes.json();
     const gatewaysData = await gatewaysRes.json();
+      return { companyData, invoicesData, gatewaysData };
+    };
+    return request().then(({ companyData, invoicesData, gatewaysData }) => {
     setCompany(companyData.profile);
     setInvoices(invoicesData.invoices ?? []);
     setGateways(gatewaysData.gateways ?? []);
     setLoading(false);
+    });
   }, []);
 
   useEffect(() => {

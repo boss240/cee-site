@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useHydrated } from "@/lib/hooks/browser";
 import { useLocale, useTranslations } from "next-intl";
 import { MessageCircle, X, Send, Sparkles, UserRound, Check } from "lucide-react";
 import { usePathname } from "@/i18n/navigation";
@@ -54,6 +55,18 @@ const CONTACT_INTENT =
   /(менеджер|зв'яж|звяж|передзвон|зателефон|контакт|консультац|фахів|спеціаліст|поговорити|call me|contact|manager|specialist|talk to|phone)/i;
 
 export function AIAssistantWidget() {
+  return useHydrated() ? <AssistantClient /> : null;
+}
+
+function restoredMessages(): ChatMessage[] {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+    const stored = raw ? JSON.parse(raw) as StoredChat : null;
+    return Array.isArray(stored?.messages) ? stored.messages : [];
+  } catch { return []; }
+}
+
+function AssistantClient() {
   const t = useTranslations("AIAssistant");
   const tNav = useTranslations("Nav");
   const locale = useLocale() as "uk" | "en";
@@ -62,11 +75,10 @@ export function AIAssistantWidget() {
   const dk = dictKey(key);
 
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>(restoredMessages);
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
   const [nudge, setNudge] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -95,37 +107,19 @@ export function AIAssistantWidget() {
     : t.raw("quickReplies")) as string[];
   const nudgeText = t.has(`nudges.${dk}`) ? t(`nudges.${dk}`) : t("nudges.default");
 
-  // ---- Відновлення чату з sessionStorage (переходи між сторінками не стирають розмову)
   useEffect(() => {
-    try {
-      const raw = sessionStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const stored = JSON.parse(raw) as StoredChat;
-        if (Array.isArray(stored.messages) && stored.messages.length > 0) {
-          setMessages(stored.messages);
-        }
-      }
-    } catch {
-      /* приватний режим тощо — просто починаємо з чистого */
-    }
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated) return;
     try {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ path: pathname, messages } satisfies StoredChat));
     } catch {
       /* ігноруємо */
     }
-  }, [messages, pathname, hydrated]);
+  }, [messages, pathname]);
 
-  // ---- Перше вітання (контекстне) при відкритті порожнього чату
-  useEffect(() => {
-    if (open && hydrated && messages.length === 0) {
-      setMessages([{ id: uid(), role: "assistant", text: greeting }]);
-    }
-  }, [open, hydrated, messages.length, greeting]);
+  function openChat() {
+    setNudge(false);
+    setMessages((previous) => previous.length ? previous : [{ id: uid(), role: "assistant", text: greeting }]);
+    setOpen(true);
+  }
 
   // ---- Прокрутка донизу, фокус у поле, Escape закриває
   useEffect(() => {
@@ -151,7 +145,7 @@ export function AIAssistantWidget() {
 
   // ---- М'яка підказка: один раз за сесію, після паузи, лише якщо чат закритий і порожній
   useEffect(() => {
-    if (open || !hydrated) return;
+    if (open) return;
     let seen = false;
     try {
       seen = sessionStorage.getItem(NUDGE_KEY) === "1";
@@ -168,11 +162,8 @@ export function AIAssistantWidget() {
       }
     }, NUDGE_DELAY_MS);
     return () => window.clearTimeout(id);
-  }, [open, hydrated, messages.length]);
+  }, [open, messages.length]);
 
-  useEffect(() => {
-    if (open) setNudge(false);
-  }, [open]);
 
   // ---- Відкрити форму контакту всередині стрічки (не дублюючи)
   const openLeadForm = useCallback(() => {
@@ -376,7 +367,7 @@ export function AIAssistantWidget() {
           <p className="pr-6 leading-relaxed text-[var(--color-fg)]">{nudgeText}</p>
           <button
             type="button"
-            onClick={() => setOpen(true)}
+            onClick={openChat}
             className="mt-2 text-sm font-semibold text-[var(--color-brand-text)] underline-offset-2 hover:underline"
           >
             {t("nudgeAction")}
@@ -394,7 +385,7 @@ export function AIAssistantWidget() {
 
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => { if (open) setOpen(false); else openChat(); }}
         aria-expanded={open}
         aria-label={open ? t("closeLabel") : t("openLabel")}
         className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-brand)] text-white shadow-lg shadow-emerald-900/20 transition hover:scale-105 hover:bg-[var(--color-brand-hover)] active:scale-95"

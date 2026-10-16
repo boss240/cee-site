@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "@/lib/hooks/browser";
 
 /**
  * Показує вміст із плавною появою, коли він потрапляє у вікно перегляду.
@@ -19,13 +20,10 @@ export function Reveal({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      setShown(true);
-      return;
-    }
+    if (reduced) return;
 
     const node = ref.current;
     if (!node) return;
@@ -42,12 +40,12 @@ export function Reveal({
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [reduced]);
 
   return (
     <Tag
       ref={ref as never}
-      data-shown={shown}
+      data-shown={shown || reduced}
       style={{ transitionDelay: `${delay}ms` }}
       className={`reveal ${className}`}
     >

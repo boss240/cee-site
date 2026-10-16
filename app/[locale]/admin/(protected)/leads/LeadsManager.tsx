@@ -110,13 +110,17 @@ export function LeadsManager({ labels: l }: { labels: Labels }) {
     spam: l.statusSpam,
   };
 
-  const load = useCallback(async () => {
-    setLoading(true);
+  const load = useCallback(() => {
+    const request = async () => {
     const res = await fetch("/api/admin/leads");
     const data = await res.json();
+      return { data };
+    };
+    return request().then(({ data }) => {
     setLeads(data.leads ?? []);
     setByStatus(data.byStatus ?? {});
     setLoading(false);
+    });
   }, []);
 
   useEffect(() => {

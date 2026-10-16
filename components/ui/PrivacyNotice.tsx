@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useHydrated } from "@/lib/hooks/browser";
 import { ShieldCheck, X } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
@@ -14,17 +15,15 @@ import { Link } from "@/i18n/navigation";
 const KEY = "cee:privacy-notice:v1";
 
 export function PrivacyNotice() {
-  const t = useTranslations("PrivacyNotice");
-  const [visible, setVisible] = useState(false);
+  return useHydrated() ? <PrivacyNoticeClient /> : null;
+}
 
-  useEffect(() => {
-    try {
-      if (localStorage.getItem(KEY) !== "1") setVisible(true);
-    } catch {
-      // приватний режим / вимкнене сховище — показуємо лише в межах цієї сторінки
-      setVisible(true);
-    }
-  }, []);
+function PrivacyNoticeClient() {
+  const t = useTranslations("PrivacyNotice");
+  const [visible, setVisible] = useState(() => {
+    try { return localStorage.getItem(KEY) !== "1"; }
+    catch { return true; }
+  });
 
   function accept() {
     try {

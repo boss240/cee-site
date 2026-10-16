@@ -30,8 +30,7 @@ export function DigestsManager({ labels: l, categoryNames }: { labels: DigestLab
   const [busy, setBusy] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
   const [newSrc, setNewSrc] = useState({ name: "", url: "", category: "media" });
-  const weekAgo = new Date(Date.now() - 7 * 864e5);
-  const [range, setRange] = useState({ from: iso(weekAgo), to: iso(new Date()), unassignedOnly: true, kind: "energy" as "energy" | "local" });
+  const [range, setRange] = useState(() => ({ from: iso(new Date(Date.now() - 7 * 864e5)), to: iso(new Date()), unassignedOnly: true, kind: "energy" as "energy" | "local" }));
   const [editing, setEditing] = useState<number | "new" | null>(null);
   const [form, setForm] = useState<DForm>(emptyDigest());
   const [draftMode, setDraftMode] = useState<string | null>(null);
@@ -40,11 +39,15 @@ export function DigestsManager({ labels: l, categoryNames }: { labels: DigestLab
   const label = "mb-1 block text-xs font-semibold uppercase tracking-wide text-[var(--color-fg-placeholder)]";
   const iconBtn = "flex h-9 w-9 items-center justify-center rounded-lg text-[var(--color-fg-placeholder)] hover:bg-[var(--color-surface)] hover:text-[var(--color-brand-text)] disabled:opacity-50";
 
-  const loadAll = useCallback(async () => {
-    setLoading(true);
+  const loadAll = useCallback(() => {
+    const request = async () => {
     const [s, d] = await Promise.all([fetch("/api/admin/knowledge/sources").then((r) => r.json()), fetch("/api/admin/knowledge/digests").then((r) => r.json())]);
+      return { s, d };
+    };
+    return request().then(({ s, d }) => {
     setSources(s.sources ?? []); setDigests(d.digests ?? []);
     setLoading(false);
+    });
   }, []);
   useEffect(() => { loadAll(); }, [loadAll]);
 

@@ -39,12 +39,16 @@ export function BlogManager({ labels: l }: { labels: Labels }) {
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
 
-  const load = useCallback(async () => {
-    setLoading(true);
+  const load = useCallback(() => {
+    const request = async () => {
     const r = await fetch("/api/admin/posts");
     const d = await r.json();
+      return { d };
+    };
+    return request().then(({ d }) => {
     setPosts(d.posts ?? []);
     setLoading(false);
+    });
   }, []);
   useEffect(() => { load(); }, [load]);
 

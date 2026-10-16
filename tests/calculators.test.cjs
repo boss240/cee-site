@@ -31,3 +31,27 @@ test('BESS verdict includes OPEX and per-stage losses preserve energy balance', 
   assert.ok(Math.abs(e.cycEff-.927**2)<1e-9);
   assert.ok(d.every(h=>h.soc >= p.cap*.1-1e-8 && h.soc<=p.cap+1e-8));
 });
+
+test('IRR solves known returns beyond old bracket and rejects absent or ambiguous roots', () => {
+  const {investmentIrr} = load('bess');
+  assert.ok(Math.abs(investmentIrr([-100,110])-.1)<1e-10);
+  assert.ok(Math.abs(investmentIrr([-100,400])-3)<1e-10);
+  assert.ok(Math.abs(investmentIrr([-100,50])+.5)<1e-10);
+  assert.equal(investmentIrr([-100,-10]),null);
+  assert.equal(investmentIrr([-100,0]),null);
+  assert.equal(investmentIrr([-100,200,-110]),null);
+  assert.equal(investmentIrr([-100,230,-132]),null); // two valid roots: 10% and 20%
+  assert.equal(investmentIrr([0,100]),null);
+});
+test('express models reject invalid domains and cannot promise savings for zero consumption', () => {
+  const {expressBess,expressSolar,expressDsm}=load('express');
+  for (const [cons,peak] of [[0,200],[100,0]]) {
+    const result=expressBess(cons,peak,5.3);
+    assert.equal(result.yearly,0);assert.equal(result.feasible,false);
+  }
+  assert.throws(()=>expressBess(-1,10,5),/nonnegative/);
+  assert.throws(()=>expressSolar(100,101,5),/100/);
+  assert.throws(()=>expressDsm(10,Infinity,3),/finite/);
+  assert.equal(expressDsm(0,30,3).saveYear,0);
+  assert.equal(expressSolar(0,50,5).save,0);
+});

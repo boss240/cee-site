@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useReducedMotion } from "@/lib/hooks/browser";
 
 /** Рядок, у якому слова змінюють одне одного. */
 export function Ticker({
@@ -11,18 +12,15 @@ export function Ticker({
   interval?: number;
 }) {
   const [index, setIndex] = useState(0);
-  const [animate, setAnimate] = useState(true);
+  const animate = !useReducedMotion();
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setAnimate(false);
-      return;
-    }
+    if (!animate || !words.length) return;
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % words.length);
     }, interval);
     return () => clearInterval(id);
-  }, [words.length, interval]);
+  }, [words.length, interval, animate]);
 
   if (!animate) {
     return (

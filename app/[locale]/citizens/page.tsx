@@ -4,7 +4,7 @@ import { alternatesFor } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/Reveal";
 import { EnergyField } from "@/components/ui/EnergyField";
-import { Home, DollarSign, Sun, Battery, CheckCircle2, ChevronRight } from "lucide-react";
+import { DollarSign, Sun, Battery, CheckCircle2, ChevronRight } from "lucide-react";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -114,7 +114,7 @@ export default async function CitizensPage({ params }: Props) {
           {solutions.map((sol, i) => (
             <Reveal as="div" key={sol.title} delay={i * 90}>
               <Link
-                href="/contacts"
+                href={`/contacts?topic=citizens-${i + 1}`}
                 className="lift group flex h-full flex-col gap-4 rounded-xl border border-[var(--color-line)] bg-[var(--color-bg)] p-6 transition"
               >
                 <div className="flex items-start justify-between gap-3">
@@ -125,7 +125,7 @@ export default async function CitizensPage({ params }: Props) {
                   <CheckCircle2 size={20} className="text-[var(--color-brand)] flex-shrink-0" />
                 </div>
                 <span className="text-sm font-semibold text-[var(--color-brand-text)]">
-                  {tCommon("detailsMore")} <ChevronRight className="inline" size={16} />
+                  {tCommon("discussScenario")} <ChevronRight className="inline" size={16} />
                 </span>
               </Link>
             </Reveal>

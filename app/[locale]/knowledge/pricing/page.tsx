@@ -50,7 +50,7 @@ export default async function PricingPage() {
                   {FEATURE_KEYS.map((f) => (
                     <li key={f} className={`flex gap-2 ${p.features[f] ? "" : "text-[var(--color-fg-placeholder)]"}`}>
                       {p.features[f] ? <Check size={16} aria-hidden className="mt-0.5 shrink-0 text-[var(--color-brand)]" /> : <Minus size={16} aria-hidden className="mt-0.5 shrink-0" />}
-                      <span>{t(`features.${f}`)}</span>
+                      <span><span className="sr-only">{t(p.features[f] ? "included" : "excluded")}: </span>{t(`features.${f}`)}</span>
                     </li>
                   ))}
                 </ul>

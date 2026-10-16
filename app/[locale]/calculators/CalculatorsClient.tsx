@@ -165,7 +165,7 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
               <Stat label={t("bess.results.capex")} value={uah(bess.eco.capex)} />
               <Stat label={t("bess.results.pay")} value={bess.eco.pay > 0 ? `${bess.eco.pay.toFixed(1)} ${u("years")}` : "—"} />
               <Stat label={t("bess.results.npv")} value={`${bess.eco.npv >= 0 ? "+" : ""}${uah(bess.eco.npv)}`} />
-              <Stat label={t("bess.results.irr")} value={`${(bess.eco.irr * 100).toFixed(1)}%`} />
+              <Stat label={t("bess.results.irr")} value={bess.eco.irr === null ? t("bess.irrUnavailable") : `${(bess.eco.irr * 100).toFixed(1)}%`} />
               <Stat label={t("bess.results.cycEff")} value={`${(bess.eco.cycEff * 100).toFixed(1)}%`} />
               <Stat label={t("bess.results.yld")} value={`${bess.eco.yld.toFixed(2)} ${u("uahKwh")}`} />
             </dl>
@@ -251,7 +251,8 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
                 <Num id="x1-t" label={t("express.bess.tariff")} unit={u("uahKwh")} value={e1.tariff} onChange={(v) => setE1((s) => ({ ...s, tariff: v }))} step={0.1} />
               </div>
               <button type="button" onClick={() => setE1((s) => ({ ...s, done: true }))} className="mt-4 w-full rounded-lg bg-[var(--color-brand)] px-4 py-2.5 text-sm font-semibold text-white">{t("express.bess.run")}</button>
-              {e1.done && (
+              {e1.done && !x1.feasible && <p role="status" className="mt-4 text-sm">{t("express.bess.noConsumption")}</p>}
+              {e1.done && x1.feasible && (
                 <dl className="mt-4 space-y-1.5 text-sm">
                   <div className="flex justify-between gap-2"><dt className="text-[var(--color-fg-muted)]">{t("express.bess.out.size")}</dt><dd className="font-semibold">{fmt(x1.bessKwh)} {u("kwh")}</dd></div>
                   <div className="flex justify-between gap-2"><dt className="text-[var(--color-fg-muted)]">{t("express.bess.out.peak")}</dt><dd className="font-semibold">~{uah(x1.peakShaveMonth)}{t("perMonth")}</dd></div>
