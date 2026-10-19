@@ -38,20 +38,22 @@ function PrivacyNoticeClient() {
 
   return (
     <div
-      role="region"
-      aria-label={t("ariaLabel")}
-      className="fixed inset-x-0 bottom-0 z-[55] px-3 pb-20 sm:px-6 sm:pb-6 sm:pr-24 print:hidden"
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-[55] px-3 pb-20 sm:px-6 sm:pb-6 sm:pr-24 print:hidden"
     >
-      <div className="mx-auto flex max-w-3xl flex-col gap-3 rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg-elevated)] p-4 shadow-xl sm:flex-row sm:items-center sm:gap-4 sm:p-5">
+      <div
+        role="region"
+        aria-label={t("ariaLabel")}
+        tabIndex={0}
+        className="pointer-events-auto mx-auto flex max-h-[50dvh] max-w-3xl overflow-y-auto overscroll-contain focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand)] flex-col gap-3 rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg-elevated)] p-4 shadow-xl sm:flex-row sm:items-[safe_center] sm:gap-4 sm:p-5">
         <ShieldCheck size={22} aria-hidden className="hidden shrink-0 text-[var(--color-brand)] sm:block" />
-        <p className="flex-1 text-sm leading-relaxed text-[var(--color-fg-muted)]">
+        <p className="min-w-0 flex-1 break-words text-sm leading-relaxed text-[var(--color-fg-muted)]">
           {t("text")}{" "}
           <Link href="/privacy" className="font-medium text-[var(--color-fg)] underline underline-offset-2">
             {t("link")}
           </Link>
           .
         </p>
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex shrink-0 flex-wrap items-center gap-2">
           <button
             type="button"
             onClick={accept}
@@ -63,7 +65,7 @@ function PrivacyNoticeClient() {
             type="button"
             onClick={accept}
             aria-label={t("close")}
-            className="flex h-10 w-10 items-center justify-center rounded-lg text-[var(--color-fg-placeholder)] transition hover:bg-[var(--color-surface)] hover:text-[var(--color-fg)] sm:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-[var(--color-fg-placeholder)] transition hover:bg-[var(--color-surface)] hover:text-[var(--color-fg)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand)] sm:hidden"
           >
             <X size={18} aria-hidden />
           </button>

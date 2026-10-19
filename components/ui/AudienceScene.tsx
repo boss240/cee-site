@@ -23,6 +23,8 @@ export function AudienceScene({ audience }: { audience: Audience }) {
   return (
     <div className="audience-scene" data-audience-scene={audience} data-video-scene={media[audience]}>
       <div className="audience-scene-window">
+        <link rel="preload" as="image" href={`${base}/mobile.webp`} media="(max-width: 767px)" fetchPriority="high" />
+        <link rel="preload" as="image" href={`${base}/desktop.webp`} media="(min-width: 768px)" fetchPriority="high" />
         <picture>
           <source media="(max-width: 767px)" srcSet={`${base}/mobile.webp`} />
           <Image src={`${base}/desktop.webp`} alt="" width={1280} height={720}

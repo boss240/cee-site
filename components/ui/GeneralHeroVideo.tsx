@@ -8,11 +8,15 @@ import { useHydrated, useReducedMotion } from "@/lib/hooks/browser";
 const base = "/assets/hero-video/general";
 
 function Poster() {
-  return <picture>
-    <source media="(max-width: 767px)" srcSet={`${base}/mobile.webp`} />
-    <Image className="general-video-poster" src={`${base}/desktop.webp`} alt="" width={1280} height={720}
-      unoptimized loading="eager" fetchPriority="high" />
-  </picture>;
+  return <>
+    <link rel="preload" as="image" href={`${base}/mobile.webp`} media="(max-width: 767px)" fetchPriority="high" />
+    <link rel="preload" as="image" href={`${base}/desktop.webp`} media="(min-width: 768px)" fetchPriority="high" />
+    <picture>
+      <source media="(max-width: 767px)" srcSet={`${base}/mobile.webp`} />
+      <Image className="general-video-poster" src={`${base}/desktop.webp`} alt="" width={1280} height={720}
+        unoptimized loading="eager" fetchPriority="high" />
+    </picture>
+  </>;
 }
 
 function Player() {

@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/Reveal";
 import { EnergyField } from "@/components/ui/EnergyField";
+import { DeferredEnergyField } from "@/components/ui/DeferredEnergyField";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -81,7 +82,7 @@ export default async function AboutPage({ params }: Props) {
       <section className="mx-auto max-w-5xl px-4 pb-16">
         <Reveal>
           <div className="relative isolate overflow-hidden rounded-2xl bg-[#070b12] px-6 py-14 text-center text-white sm:px-12">
-            <EnergyField variant="band" forceDark />
+            <DeferredEnergyField variant="band" forceDark />
             <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#070b12_95%)]" />
             <div className="relative">
               <h2 className="text-white">{t("ctaTitle")}</h2>

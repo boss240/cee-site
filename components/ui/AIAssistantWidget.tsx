@@ -393,12 +393,12 @@ function AssistantClient() {
         onClick={() => { if (open) setOpen(false); else openChat(); }}
         aria-expanded={open}
         aria-label={open ? t("closeLabel") : t("openLabel")}
-        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-brand)] text-white shadow-lg shadow-emerald-900/20 transition hover:scale-105 hover:bg-[var(--color-brand-hover)] active:scale-95"
+        className="group relative flex h-[56px] w-[56px] items-center justify-center rounded-full bg-[var(--color-brand)] text-white shadow-lg shadow-emerald-900/20 transition hover:scale-105 hover:bg-[var(--color-brand-hover)] active:scale-95"
       >
         {!open && (
           <span
             aria-hidden="true"
-            className="absolute inset-0 animate-ping rounded-full bg-[var(--color-brand)] opacity-60 [animation-duration:2.5s] group-hover:opacity-0"
+            className="pointer-events-none absolute inset-0 animate-ping rounded-full bg-[var(--color-brand)] opacity-60 [animation-duration:2.5s] group-hover:opacity-0"
           />
         )}
         {open ? <X size={22} aria-hidden className="relative" /> : <MessageCircle size={22} aria-hidden className="relative" />}
