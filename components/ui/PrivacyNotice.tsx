@@ -38,7 +38,7 @@ function PrivacyNoticeClient() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-x-0 bottom-0 z-[55] px-3 pb-20 sm:px-6 sm:pb-6 sm:pr-24 print:hidden"
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-[70] px-3 pb-20 sm:px-6 sm:pb-6 sm:pr-24 print:hidden"
     >
       <div
         role="region"
