@@ -7,7 +7,7 @@ import { requireAdminSession } from "@/lib/auth/requireAdmin";
 
 const Schema = z.object({
   currentPassword: z.string().min(1),
-  newPassword: z.string().min(10).max(200),
+  newPassword: z.string().min(10).max(200).refine((value) => Buffer.byteLength(value, "utf8") <= 72, "Password must not exceed 72 UTF-8 bytes"),
 });
 
 /** POST /api/admin/account — зміна пароля поточного адміністратора */

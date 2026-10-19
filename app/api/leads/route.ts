@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
+import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import { db, schema } from "@/lib/db";
 import { notifyNewLead } from "@/lib/notify";
@@ -12,6 +13,8 @@ import { clientIp, tooManyRequests } from "@/lib/rateLimit";
  *  - honeypot-поле `website` — боти його заповнюють, люди не бачать;
  *  - м'який ліміт: не більше 5 заявок з однієї адреси за 10 хвилин (в пам'яті процесу).
  */
+export const maxDuration = 60;
+
 const LeadSchema = z.object({
   name: z.string().trim().min(2).max(255),
   email: z.string().trim().email().max(255).optional().or(z.literal("")),
@@ -76,16 +79,28 @@ export async function POST(req: NextRequest) {
       })
       .returning();
 
-    // Сповіщення — у фоні; клієнт не чекає на SMTP/Telegram.
-    void notifyNewLead({
-      ...created,
-      source: created.source as "form" | "chat",
-      transcript: (created.transcript as { role: "user" | "assistant"; text: string }[] | null) ?? null,
-    }).catch(() => {});
+    const attemptId = randomUUID();
+    try {
+      after(async () => {
+        try {
+          await notifyNewLead({
+            ...created,
+            source: created.source as "form" | "chat",
+            transcript: (created.transcript as { role: "user" | "assistant"; text: string }[] | null) ?? null,
+          }, attemptId);
+        } catch {
+          console.error(JSON.stringify({ event: "lead_notification_failed", leadId: created.id, attemptId }));
+        }
+      });
+      console.info(JSON.stringify({ event: "lead_notification_scheduled", leadId: created.id, attemptId }));
+    } catch {
+      // The lead is already stored: don't invite a duplicate retry with a false storage error.
+      console.error(JSON.stringify({ event: "lead_notification_schedule_failed", leadId: created.id, attemptId }));
+    }
 
     return NextResponse.json({ ok: true, id: created.id }, { status: 201 });
-  } catch (error) {
-    console.error("[leads] insert failed", error);
+  } catch {
+    console.error(JSON.stringify({ event: "lead_storage_failed" }));
     return NextResponse.json({ error: "Storage unavailable" }, { status: 503 });
   }
 }

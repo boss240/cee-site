@@ -16,13 +16,16 @@ export async function sendTelegram(html: string) {
 
   const results = await Promise.all(
     chats.map(async (chat_id) => {
+      try {
       const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chat_id, text: html, parse_mode: "HTML", disable_web_page_preview: true }),
         signal: AbortSignal.timeout(10_000),
       });
-      return res.ok;
+      const body = await res.json().catch(() => null);
+      return res.ok && body?.ok === true;
+      } catch { return false; }
     })
   );
   return { skipped: false as const, sent: results.filter(Boolean).length, total: results.length };

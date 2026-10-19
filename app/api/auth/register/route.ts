@@ -6,7 +6,7 @@ import { clientIp, tooManyRequests } from "@/lib/rateLimit";
 
 const Schema = z.object({
   email: z.string().trim().toLowerCase().email().max(255),
-  password: z.string().min(8).max(200),
+  password: z.string().min(8).max(200).refine((value) => Buffer.byteLength(value, "utf8") <= 72, "Password must not exceed 72 UTF-8 bytes"),
   name: z.string().trim().max(255).optional(),
   organization: z.string().trim().max(255).optional(),
   locale: z.enum(["uk", "en"]).optional(),

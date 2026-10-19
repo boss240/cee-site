@@ -1,69 +1,45 @@
+import { randomUUID } from "node:crypto";
 import { isEmailConfigured, notifyRecipients, sendEmail } from "./email";
 import { isTelegramConfigured, sendTelegram } from "./telegram";
 import { centerNotification, clientAutoReply, telegramText, type LeadForMail } from "./templates";
 
 export { isEmailConfigured, isTelegramConfigured };
 
-function siteUrl() {
-  return (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/$/, "");
-}
+type ChannelStatus = "accepted" | "partial" | "failed" | "skipped" | "no-address" | "no-recipients";
+export type NotifyReport = { clientEmail: ChannelStatus; centerEmail: ChannelStatus; telegram: ChannelStatus };
 
-export type NotifyReport = {
-  clientEmail: "sent" | "skipped" | "no-address" | "failed";
-  centerEmail: "sent" | "skipped" | "no-recipients" | "failed";
-  telegram: "sent" | "skipped" | "failed";
-};
-
-/**
- * Розсилка при новій заявці. Ніколи не кидає виключень — заявка вже в БД,
- * і збій каналу сповіщень не має ламати відповідь клієнту.
- * Викликається як fire-and-forget із /api/leads.
- */
-export async function notifyNewLead(lead: LeadForMail): Promise<NotifyReport> {
-  const url = siteUrl();
+/** No contact details, content, provider errors, tokens or message IDs in logs. */
+export async function notifyNewLead(lead: LeadForMail, attemptId = randomUUID()): Promise<NotifyReport> {
+  const started = Date.now();
+  const url = (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/$/, "");
   const report: NotifyReport = { clientEmail: "skipped", centerEmail: "skipped", telegram: "skipped" };
-
-  if (isEmailConfigured()) {
-    // 1) автовідповідь клієнту — лише якщо є пошта
-    if (lead.email) {
+  console.info(JSON.stringify({ event: "lead_notification_started", leadId: lead.id, attemptId }));
+  await Promise.all([
+    (async () => {
+      if (!isEmailConfigured()) return;
+      if (!lead.email) { report.clientEmail = "no-address"; return; }
       try {
-        const mail = clientAutoReply(lead, url);
-        await sendEmail({ to: lead.email, ...mail, replyTo: notifyRecipients()[0] });
-        report.clientEmail = "sent";
-      } catch (err) {
-        console.error("[notify] client email failed", err);
-        report.clientEmail = "failed";
-      }
-    } else {
-      report.clientEmail = "no-address";
-    }
-
-    // 2) сповіщення Центру
-    const to = notifyRecipients();
-    if (to.length) {
+        const r = await sendEmail({ to: lead.email, ...clientAutoReply(lead, url), replyTo: notifyRecipients()[0] });
+        report.clientEmail = r.skipped ? "skipped" : r.status;
+      } catch { report.clientEmail = "failed"; }
+    })(),
+    (async () => {
+      if (!isEmailConfigured()) return;
+      const to = notifyRecipients();
+      if (!to.length) { report.centerEmail = "no-recipients"; return; }
       try {
-        const mail = centerNotification(lead, url);
-        await sendEmail({ to, ...mail, replyTo: lead.email ?? undefined });
-        report.centerEmail = "sent";
-      } catch (err) {
-        console.error("[notify] center email failed", err);
-        report.centerEmail = "failed";
-      }
-    } else {
-      report.centerEmail = "no-recipients";
-    }
-  }
-
-  // 3) Telegram
-  if (isTelegramConfigured()) {
-    try {
-      await sendTelegram(telegramText(lead, url));
-      report.telegram = "sent";
-    } catch (err) {
-      console.error("[notify] telegram failed", err);
-      report.telegram = "failed";
-    }
-  }
-
+        const r = await sendEmail({ to, ...centerNotification(lead, url), replyTo: lead.email ?? undefined });
+        report.centerEmail = r.skipped ? "skipped" : r.status;
+      } catch { report.centerEmail = "failed"; }
+    })(),
+    (async () => {
+      if (!isTelegramConfigured()) return;
+      try {
+        const r = await sendTelegram(telegramText(lead, url));
+        report.telegram = r.skipped ? "skipped" : r.sent === 0 ? "failed" : r.sent === r.total ? "accepted" : "partial";
+      } catch { report.telegram = "failed"; }
+    })(),
+  ]);
+  console.info(JSON.stringify({ event: "lead_notification_completed", leadId: lead.id, attemptId, elapsedMs: Date.now() - started, ...report }));
   return report;
 }

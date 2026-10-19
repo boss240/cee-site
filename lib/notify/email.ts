@@ -53,7 +53,12 @@ export async function sendEmail(opts: {
     text: opts.text,
     replyTo: opts.replyTo,
   });
-  return { skipped: false as const, messageId: info.messageId };
+  const accepted = Array.isArray(info.accepted) ? info.accepted.length : 0;
+  const rejected = Array.isArray(info.rejected) ? info.rejected.length : 0;
+  const pending = Array.isArray(info.pending) ? info.pending.length : 0;
+  // SMTP acceptance is not confirmation of delivery to the inbox.
+  const status: "accepted" | "partial" | "failed" = accepted === 0 ? "failed" : rejected > 0 || pending > 0 ? "partial" : "accepted";
+  return { skipped: false as const, status, accepted, rejected, pending };
 }
 
 /** Для кнопки «Перевірити з'єднання» в адмінці */
@@ -62,7 +67,7 @@ export async function verifyEmail(): Promise<{ ok: boolean; message: string }> {
   try {
     await transporter().verify();
     return { ok: true, message: "OK" };
-  } catch (err) {
-    return { ok: false, message: err instanceof Error ? err.message : String(err) };
+  } catch {
+    return { ok: false, message: "SMTP verification failed" };
   }
 }

@@ -13,9 +13,9 @@ export async function POST() {
   if (isTelegramConfigured()) {
     try {
       const r = await sendTelegram("✅ Тестове повідомлення з сайту ЦЕЕ — сповіщення про заявки працюють.");
-      telegram = r.skipped ? telegram : { ok: r.sent > 0, message: r.sent > 0 ? "OK" : "Telegram відхилив повідомлення" };
-    } catch (err) {
-      telegram = { ok: false, message: err instanceof Error ? err.message : String(err) };
+      telegram = r.skipped ? telegram : { ok: r.total > 0 && r.sent === r.total, message: r.total > 0 && r.sent === r.total ? "OK" : "Telegram відхилив повідомлення" };
+    } catch {
+      telegram = { ok: false, message: "Telegram transport failed" };
     }
   }
   return NextResponse.json({ email, telegram });
