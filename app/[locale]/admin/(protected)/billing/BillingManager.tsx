@@ -1,9 +1,14 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Download, Loader2, Plus, CheckCircle2 } from "lucide-react";
 
 type Labels = {
+  invoiceLoadError: string;
+  invoiceValidationError: string;
+  invoiceSaveError: string;
+  invoiceSaveUnknown: string;
+  invoiceRefreshError: string;
   companyName: string;
   edrpou: string;
   address: string;
@@ -71,6 +76,9 @@ export function BillingManager({ labels: l }: { labels: Labels }) {
   const [loading, setLoading] = useState(true);
   const [savingCompany, setSavingCompany] = useState(false);
   const [addingInvoice, setAddingInvoice] = useState(false);
+  const [invoiceError, setInvoiceError] = useState("");
+  const [savingInvoice, setSavingInvoice] = useState(false);
+  const invoicePending = useRef(false);
   const [invoiceForm, setInvoiceForm] = useState(emptyInvoiceForm());
 
   const load = useCallback(() => {
@@ -80,6 +88,9 @@ export function BillingManager({ labels: l }: { labels: Labels }) {
       fetch("/api/admin/invoices"),
       fetch("/api/admin/payment-gateways"),
     ]);
+    if (![companyRes, invoicesRes, gatewaysRes].every(response => response.ok)) {
+      throw new Error("Billing data unavailable");
+    }
     const companyData = await companyRes.json();
     const invoicesData = await invoicesRes.json();
     const gatewaysData = await gatewaysRes.json();
@@ -94,8 +105,8 @@ export function BillingManager({ labels: l }: { labels: Labels }) {
   }, []);
 
   useEffect(() => {
-    load();
-  }, [load]);
+    load().catch(() => setInvoiceError(l.invoiceLoadError));
+  }, [load, l.invoiceLoadError]);
 
   async function saveCompany() {
     if (!company) return;
@@ -109,14 +120,33 @@ export function BillingManager({ labels: l }: { labels: Labels }) {
   }
 
   async function addInvoice() {
-    await fetch("/api/admin/invoices", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(invoiceForm),
-    });
-    setAddingInvoice(false);
-    setInvoiceForm(emptyInvoiceForm());
-    await load();
+    if (invoicePending.current) return;
+    invoicePending.current = true;
+    setSavingInvoice(true);
+    setInvoiceError("");
+    try {
+      let response: Response;
+      try {
+        response = await fetch("/api/admin/invoices", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(invoiceForm),
+        });
+      } catch {
+        setInvoiceError(l.invoiceSaveUnknown);
+        return;
+      }
+      if (!response.ok) {
+        setInvoiceError(response.status === 400 ? l.invoiceValidationError : l.invoiceSaveError);
+        return;
+      }
+      setAddingInvoice(false);
+      setInvoiceForm(emptyInvoiceForm());
+      try { await load(); } catch { setInvoiceError(l.invoiceRefreshError); }
+    } finally {
+      invoicePending.current = false;
+      setSavingInvoice(false);
+    }
   }
 
   async function markPaid(id: number) {
@@ -125,7 +155,7 @@ export function BillingManager({ labels: l }: { labels: Labels }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: "paid" }),
     });
-    await load();
+    await load().catch(() => setInvoiceError(l.invoiceLoadError));
   }
 
   async function toggleGateway(g: Gateway) {
@@ -134,7 +164,7 @@ export function BillingManager({ labels: l }: { labels: Labels }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ provider: g.provider, isConnected: !g.isConnected }),
     });
-    await load();
+    await load().catch(() => setInvoiceError(l.invoiceLoadError));
   }
 
   const statusStyle: Record<Invoice["status"], string> = {
@@ -151,6 +181,10 @@ export function BillingManager({ labels: l }: { labels: Labels }) {
   };
 
   const field = "mt-1 w-full rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2 text-sm text-[var(--color-fg)]";
+
+  if ((loading || !company) && invoiceError) {
+    return <p role="alert" className="mt-3 text-sm text-red-600">{invoiceError}</p>;
+  }
 
   if (loading || !company) {
     return (
@@ -216,6 +250,7 @@ export function BillingManager({ labels: l }: { labels: Labels }) {
           <h2 className="text-xl">{l.invoices}</h2>
           <button
             type="button"
+            disabled={savingInvoice}
             onClick={() => setAddingInvoice((v) => !v)}
             className="flex items-center gap-1.5 rounded-lg bg-[var(--color-brand)] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[var(--color-brand-hover)]"
           >
@@ -224,9 +259,10 @@ export function BillingManager({ labels: l }: { labels: Labels }) {
           </button>
         </div>
 
+        {invoiceError && <p role="alert" className="mt-3 text-sm text-red-600">{invoiceError}</p>}
         {addingInvoice && (
           <div className="mt-3 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4">
-            <div className="grid gap-3 sm:grid-cols-2">
+            <fieldset disabled={savingInvoice} className="grid gap-3 sm:grid-cols-2">
               <label className="text-sm">
                 {l.clientName}
                 <input className={field} value={invoiceForm.clientName} onChange={(e) => setInvoiceForm((f) => ({ ...f, clientName: e.target.value }))} />
@@ -239,8 +275,8 @@ export function BillingManager({ labels: l }: { labels: Labels }) {
                 {l.serviceDescription}
                 <input className={field} value={invoiceForm.serviceDescription} onChange={(e) => setInvoiceForm((f) => ({ ...f, serviceDescription: e.target.value }))} />
               </label>
-            </div>
-            <button onClick={addInvoice} type="button" className="mt-3 rounded-lg bg-[var(--color-brand)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--color-brand-hover)]">
+            </fieldset>
+            <button onClick={addInvoice} disabled={savingInvoice} aria-busy={savingInvoice} type="button" className="mt-3 rounded-lg bg-[var(--color-brand)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--color-brand-hover)]">
               {l.save}
             </button>
           </div>

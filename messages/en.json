@@ -1133,6 +1133,11 @@
     "billing": {
       "title": "Billing & company details",
       "subtitle": "Legal information, invoices and payment gateways",
+      "invoiceLoadError": "Could not load billing. Check your connection and sign-in, then reload the page.",
+      "invoiceValidationError": "Check the amount: it must be positive, and the currency must be a supported ISO code. Your entries are preserved.",
+      "invoiceSaveError": "Could not save the invoice. Your entries are preserved.",
+      "invoiceSaveUnknown": "Could not confirm whether the invoice was saved. Check the invoice list before retrying. Your entries are preserved.",
+      "invoiceRefreshError": "The invoice was saved, but the list could not refresh. Reload the page; do not create the invoice again.",
       "companyName": "Company name",
       "edrpou": "Registration number",
       "address": "Legal address",

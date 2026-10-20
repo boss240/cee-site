@@ -11,6 +11,11 @@ export default async function AdminBillingPage() {
 
       <BillingManager
         labels={{
+          invoiceLoadError: t("invoiceLoadError"),
+          invoiceValidationError: t("invoiceValidationError"),
+          invoiceSaveError: t("invoiceSaveError"),
+          invoiceSaveUnknown: t("invoiceSaveUnknown"),
+          invoiceRefreshError: t("invoiceRefreshError"),
           companyName: t("companyName"),
           edrpou: t("edrpou"),
           address: t("address"),
