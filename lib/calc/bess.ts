@@ -24,7 +24,19 @@ export type BessParams = {
 
 export type HourRow = { h: number; sig: "Z" | "D" | "P"; cG: number; dL: number; dR: number; eff_: number; soc: number; socP: number; price: number; load: number };
 
+function validateParams(p: BessParams) {
+  if (!Object.values(p).every(Number.isFinite) || p.cap <= 0 || p.eff <= 0 || p.eff > 1 ||
+      [p.inv, p.gridLim, p.rdnLim, p.gridFee, p.capexPer].some(v => v < 0) ||
+      [p.nCharge, p.nDischarge].some(v => !Number.isInteger(v) || v < 0 || v > 24) ||
+      (p.socMin ?? .1) < 0 || (p.socMax ?? 1) > 1 || (p.socMin ?? .1) > (p.socInit ?? .1) ||
+      (p.socInit ?? .1) > (p.socMax ?? 1) ||
+      [p.opexR ?? .02, p.deg ?? .015].some(v => v < 0 || v > 1) || (p.disc ?? .18) <= -1)
+    throw new RangeError("Invalid BESS inputs");
+}
+
 export function bessDispatch(p: BessParams, rdnP: number[], loadArr: number[]): HourRow[] {
+  validateParams(p);
+  if (rdnP.length !== 24 || loadArr.length !== 24 || !rdnP.every(Number.isFinite) || !loadArr.every(v => Number.isFinite(v) && v >= 0)) throw new RangeError("Expected 24 finite prices and nonnegative loads");
   const { cap, inv, gridLim, rdnLim, eff, nCharge, nDischarge, gridFee: gf } = p;
   const socMin = p.socMin ?? 0.1, socMax = p.socMax ?? 1.0, socInit = p.socInit ?? 0.1;
   const hours = Array.from({ length: 24 }, (_, i) => i);
@@ -42,29 +54,35 @@ export function bessDispatch(p: BessParams, rdnP: number[], loadArr: number[]): 
       cG = Math.max(0, Math.min(inv, gridLim - load, (socMax * cap - soc) / eff));
       soc += cG * eff; imp = load + cG; costW = imp * (price + gf);
     } else if (sig === "D") {
-      dL = Math.min(Math.min(inv, (soc - socMin * cap) * eff), load); soc -= dL / eff;
+      dL = Math.max(0, Math.min(inv, (soc - socMin * cap) * eff, load)); soc -= dL / eff;
       dR = Math.max(0, Math.min(rdnLim, inv - dL, (soc - socMin * cap) * eff)); soc -= dR / eff;
       imp = Math.max(0, load - dL); costW = imp * (price + gf); expR = dR * price;
     } else { imp = load; costW = costNo; }
+    if (![cG, dL, dR, costNo, costW, expR, soc].every(Number.isFinite)) throw new RangeError("Result exceeds numeric range");
     res.push({ h: h + 1, sig, cG, dL, dR, eff_: costNo - costW + expR, soc, socP: soc / cap, price, load });
   }
   return res;
 }
 
-export type BessEco = { daily: number; yearly: number; capex: number; opex: number; net: number; pay: number; cycEff: number; yld: number; npv: number; irr: number | null; chargeHours: number; dischargeHours: number };
+export type BessEco = { balanced: boolean; feasible: boolean; daily: number; yearly: number; capex: number; opex: number; net: number; pay: number; cycEff: number; yld: number; npv: number; irr: number | null; chargeHours: number; dischargeHours: number };
 
 export function bessEco(p: BessParams, disp: HourRow[]): BessEco {
+  validateParams(p);
+  if (disp.length !== 24 || !disp.every(r => Object.values(r).every(v => typeof v !== "number" || Number.isFinite(v)))) throw new RangeError("Invalid dispatch");
   const opexR = p.opexR ?? 0.02, deg = p.deg ?? 0.015, disc = p.disc ?? 0.18;
   const daily = disp.reduce((s, r) => s + r.eff_, 0);
   const tC = disp.reduce((s, r) => s + r.cG, 0);
   const tD = disp.reduce((s, r) => s + r.dL + r.dR, 0);
-  const yearly = daily * 365, capex = p.cap * p.capexPer, opex = capex * opexR;
+  const feasible = disp.every(r => r.load <= p.gridLim);
+  const balanced = Math.abs(disp[23].soc - (p.socInit ?? .1) * p.cap) <= Math.max(1, p.cap) * 1e-9;
+  const yearly = balanced && feasible ? daily * 365 : 0, capex = p.cap * p.capexPer, opex = capex * opexR;
   const net = yearly - opex, pay = net > 0 ? capex / net : 0, cycEff = tC > 0 ? tD / tC : 0;
   let npv = -capex, capT = p.cap;
   const cfs = [-capex];
-  for (let y = 1; y <= 15; y++) { capT *= 1 - deg; const ey = (capT / p.cap) * yearly - opex; cfs.push(ey); npv += ey / Math.pow(1 + disc, y); }
+  for (let y = 1; y <= 15; y++) { const ey = (capT / p.cap) * yearly - opex; cfs.push(ey); npv += ey / Math.pow(1 + disc, y); capT *= 1 - deg; }
 
-  return { daily, yearly, capex, opex, net, pay, cycEff, yld: tC > 0 ? daily / tC : 0, npv, irr: investmentIrr(cfs), chargeHours: disp.filter((r) => r.cG > 0).length, dischargeHours: disp.filter((r) => r.dL + r.dR > 0).length };
+  if (![daily, yearly, capex, opex, net, pay, cycEff, npv].every(Number.isFinite)) throw new RangeError("Result exceeds numeric range");
+  return { balanced, feasible, daily, yearly, capex, opex, net, pay, cycEff, yld: tC > 0 ? daily / tC : 0, npv, irr: investmentIrr(cfs), chargeHours: disp.filter((r) => r.cG > 0).length, dischargeHours: disp.filter((r) => r.dL + r.dR > 0).length };
 }
 
 /** Профіль цін РДН за трьома сегментами (грн/МВт·год → грн/кВт·год) */

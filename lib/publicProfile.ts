@@ -26,10 +26,10 @@ async function readPublicContacts(): Promise<PublicContacts> {
 
 /**
  * Публічні контакти Центру — з профілю компанії в адмінці (Білінг → реквізити).
- * Десятихвилинний TTL — резерв; після зміни публічних полів тег запускає SWR
+ * Годинний TTL — резерв; після зміни публічних полів тег запускає SWR
  * на наступному запиті. Помилки читання не замінюють останній коректний кеш.
  */
 export const getPublicContacts = unstable_cache(readPublicContacts, ["public-contacts"], {
-  revalidate: 600,
+  revalidate: 3600,
   tags: [PUBLIC_CONTACTS_TAG],
 });

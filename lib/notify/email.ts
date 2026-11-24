@@ -29,6 +29,8 @@ function transporter() {
     host: process.env.SMTP_HOST,
     port,
     secure: port === 465,
+    // Refuse plaintext fallback when the SMTP server does not advertise STARTTLS.
+    requireTLS: port !== 465,
     auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
     connectionTimeout: 10_000,
     greetingTimeout: 10_000,

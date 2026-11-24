@@ -1,6 +1,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import type { Program } from "@/lib/programs";
 import { STATUS_LABEL } from "@/lib/programs";
+import { safeExternalUrl } from "@/lib/safeExternalUrl";
 
 const STATUS_STYLE: Record<Program["status"], string> = {
   active: "bg-[#d1fae5] text-[#065f46] dark:bg-[#064e3b] dark:text-[#6ee7b7]",
@@ -22,6 +23,7 @@ export function ProgramCard({ program }: { program: Program }) {
   const locale = useLocale();
   const t = useTranslations("ProgramCard");
   const stale = isStale(program.checkedAt);
+  const sourceUrl = safeExternalUrl(program.source);
   const statusLabel = (STATUS_LABEL[locale as "uk" | "en"] ?? STATUS_LABEL.uk)[program.status];
 
   return (
@@ -102,18 +104,19 @@ export function ProgramCard({ program }: { program: Program }) {
       <div className="mt-6 border-t border-[var(--color-line)] pt-5">
         <h4 className="text-sm font-semibold">{t("contactsLabel")}</h4>
         <ul className="mt-2 grid gap-1.5 sm:grid-cols-2">
-          {program.contacts.map((c) => (
+          {program.contacts.map((c) => {
+            const contactUrl = safeExternalUrl(c.href);
+            return (
             <li key={c.label} className="text-sm text-[var(--color-fg-muted)]">
               <span className="font-medium text-[var(--color-fg)]">
                 {c.label}:
               </span>{" "}
-              {c.href ? (
+              {contactUrl ? (
                 <a
-                  href={c.href}
+                  href={contactUrl}
                   className="text-[var(--color-brand-text)] underline underline-offset-2"
-                  {...(c.href.startsWith("http")
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {c.value}
                 </a>
@@ -121,12 +124,16 @@ export function ProgramCard({ program }: { program: Program }) {
                 c.value
               )}
             </li>
-          ))}
+          );
+          })}
         </ul>
       </div>
 
+      <p className="mt-5 text-sm text-[var(--color-fg-muted)]">{t("ceeRole")}</p>
       <p className="mt-5 text-xs text-[var(--color-fg-placeholder)]">
-        {t("sourceLabel")}: {program.source}. {t("checkedLabel")} {formatDate(program.checkedAt, locale)}.
+        {t("sourceLabel")}: {sourceUrl ? (
+          <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="text-[var(--color-brand-text)] underline underline-offset-2">{t("sourceLink")}</a>
+        ) : program.source}. {t("checkedLabel")} {formatDate(program.checkedAt, locale)}.
         {stale && ` ${t("staleWarning")}`}
       </p>
     </article>

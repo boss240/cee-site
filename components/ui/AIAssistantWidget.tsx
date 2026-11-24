@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { answerFromKnowledgeBase } from "@/lib/knowledgeBase";
+import { leadAttempt, completeLeadAttempt, postLead } from "@/lib/leadAttempt";
 import { useHydrated } from "@/lib/hooks/browser";
 import { useLocale, useTranslations } from "next-intl";
 import { MessageCircle, X, Send, Sparkles, UserRound, Check } from "lucide-react";
@@ -79,6 +81,7 @@ function AssistantClient() {
   const [messages, setMessages] = useState<ChatMessage[]>(restoredMessages);
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
+  const [referenceOnly, setReferenceOnly] = useState(false);
   const [nudge, setNudge] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -186,49 +189,69 @@ function AssistantClient() {
 
     const wantsContact = CONTACT_INTENT.test(trimmed);
 
+    const applyReferenceAnswer = () => {
+      setReferenceOnly(true);
+      setMessages((m) => [...m, { id: uid(), role: "assistant",
+        text: answerFromKnowledgeBase(trimmed, locale).answer, source: "knowledge-base" }]);
+    };
     try {
+      if (referenceOnly) {
+        applyReferenceAnswer();
+        return;
+      }
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: trimmed, locale, page: pathname, history }),
+        // Abort only the browser wait; never assume this cancels or refunds remote work.
+        signal: AbortSignal.timeout(30000),
       });
       const data = await res.json();
       if (!res.ok || typeof data.reply !== "string" || !data.reply.trim()) {
-        setMessages((m) => [...m, { id: uid(), role: "assistant", text: t(res.status === 429 ? "rateLimited" : "requestFailed") }]);
+        applyReferenceAnswer();
       } else {
+        if (data.source === "knowledge-base") setReferenceOnly(true);
         setMessages((m) => [...m, { id: uid(), role: "assistant", text: data.reply, source: data.source }]);
       }
     } catch {
-      setMessages((m) => [...m, { id: uid(), role: "assistant", text: t("requestFailed") }]);
+      applyReferenceAnswer();
     } finally {
       setThinking(false);
       if (wantsContact) openLeadForm();
     }
   }
 
+  const leadSubmitting = useRef(false);
+
   async function submitLead(lead: { name: string; contact: string }) {
-    const transcript = messages.filter((m) => !m.kind).slice(-60).map((m) => ({ role: m.role, text: m.text.slice(0, 4000) }));
-    const isEmail = lead.contact.includes("@");
-    const res = await fetch("/api/leads", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: lead.name,
-        email: isEmail ? lead.contact : "",
-        phone: isEmail ? "" : lead.contact,
-        segment: segmentForPath(key),
-        message: t("leadMessagePrefix", { page: pageLabel || pathname }),
-        source: "chat",
-        page: pathname,
-        locale,
-        transcript,
-      }),
-    });
-    if (!res.ok) throw new Error("lead failed");
-    setMessages((m) => [
-      ...m.filter((x) => x.kind !== "lead-form"),
-      { id: uid(), role: "assistant", text: t("leadDone", { name: lead.name }), kind: "lead-done" },
-    ]);
+    if (leadSubmitting.current) throw new Error("lead pending");
+    leadSubmitting.current = true;
+    try {
+      const transcript = messages.filter((m) => !m.kind).slice(-60).map((m) => ({ role: m.role, text: m.text.slice(0, 4000) }));
+      const isEmail = lead.contact.includes("@");
+      const scope = `chat:${locale}:${pathname}`;
+      const body = JSON.stringify({
+          name: lead.name,
+          email: isEmail ? lead.contact : "",
+          phone: isEmail ? "" : lead.contact,
+          segment: segmentForPath(key),
+          message: t("leadMessagePrefix", { page: pageLabel || pathname }),
+          source: "chat",
+          page: pathname,
+          locale,
+          transcript,
+        });
+      const attemptKey = await leadAttempt(scope, body);
+      const res = await postLead(body, attemptKey);
+      if (!res.ok) throw new Error("lead failed");
+      completeLeadAttempt(scope, attemptKey);
+      setMessages((m) => [
+        ...m.filter((x) => x.kind !== "lead-form"),
+        { id: uid(), role: "assistant", text: t("leadDone", { name: lead.name }), kind: "lead-done" },
+      ]);
+    } finally {
+      leadSubmitting.current = false;
+    }
   }
 
   const leadFormShown = messages.some((m) => m.kind === "lead-form");
@@ -265,6 +288,9 @@ function AssistantClient() {
             </button>
           </div>
 
+          <p role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+            {thinking ? t("thinking") : messages.filter((message) => message.role === "assistant").at(-1)?.text}
+          </p>
           {/* Стрічка */}
           <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto bg-[var(--color-surface)] px-4 py-4">
             {messages.map((m) =>
@@ -302,6 +328,18 @@ function AssistantClient() {
             )}
           </div>
 
+          <div className="border-t border-[var(--color-line)] px-3 py-2 text-xs">
+            <label className="flex items-center gap-2">
+              <input type="checkbox" checked={referenceOnly} disabled={thinking}
+                onChange={(event) => setReferenceOnly(event.target.checked)} />
+              {t("localOnly")}
+            </label>
+            <p className="mt-1 text-[var(--color-fg-muted)]">{t("localOnlyHelp")}</p>
+            <div className="mt-1 flex gap-3">
+              <Link href="/contacts">{t("contactLink")}</Link>
+              <Link href="/calculators">{t("calculatorsLink")}</Link>
+            </div>
+          </div>
           {/* Швидкі питання + «Залишити контакт» */}
           <div className="border-t border-[var(--color-line)] bg-[var(--color-bg-elevated)] px-3 pt-3">
             <div className="flex flex-wrap gap-1.5 pb-1">
@@ -462,7 +500,7 @@ function LeadCard({
           autoComplete="tel"
           className="w-full rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2 text-sm outline-none focus:border-[var(--color-brand-dark)]"
         />
-        {error && <p className="text-xs text-[#b91c1c] dark:text-[#f87171]">{error}</p>}
+        {error && <p role="alert" className="text-xs text-[#b91c1c] dark:text-[#f87171]">{error}</p>}
         <div className="flex items-center justify-between gap-2">
           <p className="text-[11px] leading-tight text-[var(--color-fg-placeholder)]">{t("leadConsent")}</p>
           <button

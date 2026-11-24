@@ -1,3 +1,4 @@
+import { contactAddress } from "@/lib/contactAddress";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { alternatesFor } from "@/lib/seo";
@@ -36,7 +37,7 @@ export default async function ContactsPage({ searchParams }: { searchParams: Pro
         ? tf("serviceMessage", { service: serviceMatch[1].replace(/-/g, " ") })
         : "";
   const c = await getPublicContacts();
-  const address = c.address || t("address");
+  const address = contactAddress(c.address, t("address"));
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-16">

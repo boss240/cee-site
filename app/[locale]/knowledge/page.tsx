@@ -1,3 +1,6 @@
+// Preserve published-content freshness independently of the shared contacts cache.
+export const revalidate = 600;
+
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { alternatesFor } from "@/lib/seo";

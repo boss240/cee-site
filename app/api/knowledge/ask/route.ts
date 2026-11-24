@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { quotaFor, recordAsk, resolveActor } from "@/lib/knowledge/metering";
+import { quotaFor, reserveAsk, resolveActor } from "@/lib/knowledge/metering";
 import { answerQuestion } from "@/lib/knowledge/ask";
 import { clientIp, tooManyRequests } from "@/lib/rateLimit";
 
@@ -22,13 +22,13 @@ export async function POST(req: NextRequest) {
   if (!parsed.success) return NextResponse.json({ error: "validation" }, { status: 400 });
 
   const actor = await resolveActor(req);
-  const quota = await quotaFor(actor);
-  if (quota.remaining !== null && quota.remaining <= 0) {
+  const reserved = await reserveAsk(actor, parsed.data.question);
+  if (!reserved) {
+    const quota = await quotaFor(actor);
     return NextResponse.json({ error: "quota", quota, signedIn: actor.kind === "user" }, { status: 429 });
   }
 
   const result = await answerQuestion(parsed.data.question, parsed.data.locale);
-  await recordAsk(actor, parsed.data.question);
   const after = await quotaFor(actor);
   return NextResponse.json({ ...result, quota: after, signedIn: actor.kind === "user" });
 }

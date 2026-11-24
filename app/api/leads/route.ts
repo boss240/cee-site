@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse, after } from "next/server";
 import { randomUUID } from "node:crypto";
 import { z } from "zod";
-import { db, schema } from "@/lib/db";
+import { LeadSubmissionError, storeLeadOnce } from "@/lib/leadIdempotency";
 import { notifyNewLead } from "@/lib/notify";
 import { clientIp, tooManyRequests } from "@/lib/rateLimit";
 
@@ -59,26 +59,41 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Contact required" }, { status: 400 });
   }
 
-  if (tooManyRequests(`leads:${clientIp(req)}`, 5, 10 * 60 * 1000)) {
-    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  const key = req.headers.get("idempotency-key") ?? "";
+  if (!key) {
+    // Old bundles only inspect res.ok: never redirect or report success without a stored lead.
+    return NextResponse.json({
+      error: "client_upgrade_required",
+      recovery: "Keep the entered fields in this tab. Copy them to the updated contact form in a new tab before closing this one.",
+      recoveryPath: `/${data.locale === "en" ? "en" : "uk"}/contacts`,
+    }, { status: 400 });
+  }
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(key)) {
+    return NextResponse.json({ error: "Valid Idempotency-Key required" }, { status: 400 });
   }
 
   try {
-    const [created] = await db
-      .insert(schema.leads)
-      .values({
-        name: data.name,
-        email: data.email || null,
-        phone: data.phone || null,
-        segment: data.segment || null,
-        message: data.message,
-        source: data.source,
-        page: data.page || null,
-        locale: data.locale || null,
-        transcript: data.transcript ?? null,
-      })
-      .returning();
+    const result = await storeLeadOnce(key, {
+      name: data.name,
+      email: data.email || null,
+      phone: data.phone || null,
+      segment: data.segment || null,
+      message: data.message,
+      source: data.source,
+      page: data.page || null,
+      locale: data.locale || null,
+      transcript: data.transcript ?? null,
+    }, () => !tooManyRequests(`leads:${clientIp(req)}`, 5, 10 * 60 * 1000));
+    if (result.replayed || !result.created) {
+      // No notification is scheduled for a replay, including a receipt whose lead was deleted.
+      return NextResponse.json({ ok: true, id: result.id }, { status: 201 });
+    }
+    const created = result.created;
 
+    if (result.notificationsQueued) {
+      // Durable rows were committed with the lead. Never also invoke the legacy sender.
+      return NextResponse.json({ ok: true, id: created.id }, { status: 201 });
+    }
     const attemptId = randomUUID();
     try {
       after(async () => {
@@ -99,7 +114,11 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ ok: true, id: created.id }, { status: 201 });
-  } catch {
+  } catch (error) {
+    if (error instanceof LeadSubmissionError) {
+      return NextResponse.json({ error: error.code }, { status: error.code === "idempotency_conflict" ? 409 : 429 });
+    }
+    // Includes an unknown COMMIT outcome: do not retry storage or notifications in this request.
     console.error(JSON.stringify({ event: "lead_storage_failed" }));
     return NextResponse.json({ error: "Storage unavailable" }, { status: 503 });
   }

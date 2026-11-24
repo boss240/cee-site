@@ -1,3 +1,7 @@
+// Preserve published-content freshness independently of the shared contacts cache.
+export const revalidate = 600;
+
+import { SourceLink } from "@/components/ui/SourceLink";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -75,9 +79,9 @@ export default async function DocumentPage({ params }: Params) {
                     <p className="mono-label text-[var(--color-fg-placeholder)]">{fmt(u.date)}</p>
                     <p className="mt-1 text-sm">{u.note}</p>
                     {u.sourceUrl && (
-                      <a href={u.sourceUrl} target="_blank" rel="noreferrer" className="mt-1 inline-flex items-center gap-1 text-xs text-[var(--color-brand-text)] hover:underline">
+                      <SourceLink href={u.sourceUrl} locale={locale} className="mt-1 inline-flex items-center gap-1 text-xs text-[var(--color-brand-text)] hover:underline">
                         {t("sourceLink")} <ExternalLink size={11} aria-hidden />
-                      </a>
+                      </SourceLink>
                     )}
                   </li>
                 ))}
@@ -96,9 +100,9 @@ export default async function DocumentPage({ params }: Params) {
             <div className="flex justify-between gap-3 border-t border-[var(--color-line)] py-1.5"><dt className="text-[var(--color-fg-muted)]">{t("statusLabel")}</dt><dd className="text-right font-medium">{ts(doc.status)}</dd></div>
           </dl>
           {doc.sourceUrl && (
-            <a href={doc.sourceUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] px-4 py-3 text-sm font-semibold text-[var(--color-brand-text)] transition hover:bg-[var(--color-surface)]">
+            <SourceLink href={doc.sourceUrl} locale={locale} className="flex items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] px-4 py-3 text-sm font-semibold text-[var(--color-brand-text)] transition hover:bg-[var(--color-surface)]">
               {t("openSource")} <ExternalLink size={14} aria-hidden />
-            </a>
+            </SourceLink>
           )}
           <Link href={`/knowledge/ask?q=${encodeURIComponent(doc.number ? `${doc.number} ${doc.title}` : doc.title)}`} className="flex items-center justify-center gap-2 rounded-lg bg-[var(--color-brand)] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[var(--color-brand-hover)]">
             <MessageSquareText size={14} aria-hidden /> {t("askAbout")}

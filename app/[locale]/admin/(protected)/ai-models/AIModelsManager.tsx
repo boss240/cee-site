@@ -14,7 +14,10 @@ type Labels = {
   active: string;
   inactive: string;
   default: string;
-  setDefault: string;
+  configuredNotVerified: string;
+  providerNotApproved: string;
+  operationFailed: string;
+  refreshFailed: string;
   inputCost: string;
   outputCost: string;
   testConnection: string;
@@ -42,7 +45,8 @@ type AIModel = {
   apiKeyEnvVar: string;
   priority: number;
   isActive: boolean;
-  isDefault: boolean;
+  runtimePrimary: boolean;
+  routingStatus: "inactive" | "provider_not_approved" | "credential_missing" | "configured_not_verified";
   inputCostPer1kTokens: number;
   outputCostPer1kTokens: number;
   systemPrompt: string | null;
@@ -62,9 +66,9 @@ type UsageLog = {
 
 const emptyForm = () => ({
   name: "",
-  provider: "openai",
+  provider: "openrouter",
   model: "",
-  apiKeyEnvVar: "OPENAI_API_KEY",
+  apiKeyEnvVar: "OPENROUTER_API_KEY_CEE",
   priority: 0,
   inputCostPer1kTokens: 0,
   outputCostPer1kTokens: 0,
@@ -74,6 +78,7 @@ export function AIModelsManager({ labels: l }: { labels: Labels }) {
   const [models, setModels] = useState<AIModel[]>([]);
   const [logs, setLogs] = useState<UsageLog[]>([]);
   const [loading, setLoading] = useState(true);
+  const [operationError, setOperationError] = useState<"save" | "refresh" | null>(null);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [adding, setAdding] = useState(false);
   const [form, setForm] = useState(emptyForm());
@@ -83,15 +88,16 @@ export function AIModelsManager({ labels: l }: { labels: Labels }) {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const [modelsRes, logsRes] = await Promise.all([
-      fetch("/api/admin/ai-models"),
-      fetch("/api/admin/ai-usage"),
-    ]);
-    const modelsData = await modelsRes.json();
-    const logsData = await logsRes.json();
-    setModels(modelsData.models ?? []);
-    setLogs(logsData.logs ?? []);
-    setLoading(false);
+    try {
+      const [modelsRes, logsRes] = await Promise.all([
+        fetch("/api/admin/ai-models"), fetch("/api/admin/ai-usage"),
+      ]);
+      if (!modelsRes.ok || !logsRes.ok) throw new Error("refresh_failed");
+      const [modelsData, logsData] = await Promise.all([modelsRes.json(), logsRes.json()]);
+      setModels(modelsData.models ?? []);
+      setLogs(logsData.logs ?? []);
+    } catch { setOperationError("refresh"); }
+    finally { setLoading(false); }
   }, []);
 
   useEffect(() => {
@@ -124,21 +130,16 @@ export function AIModelsManager({ labels: l }: { labels: Labels }) {
   }
 
   async function save() {
-    if (editingId) {
-      await fetch(`/api/admin/ai-models/${editingId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+    setOperationError(null);
+    try {
+      const res=await fetch(editingId ? `/api/admin/ai-models/${editingId}` : "/api/admin/ai-models", {
+        method:editingId ? "PATCH" : "POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify(form),
       });
-    } else if (adding) {
-      await fetch("/api/admin/ai-models", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-    }
+      if (!res.ok) throw new Error("save_failed");
+    } catch { setOperationError("save"); return; }
     cancel();
-    await load();
+    // A successful write is not undone by a failed list refresh. Never invite a duplicate create.
+    try { await load(); } catch { setOperationError("refresh"); }
   }
 
   async function remove(id: number) {
@@ -151,15 +152,6 @@ export function AIModelsManager({ labels: l }: { labels: Labels }) {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ isActive: !m.isActive }),
-    });
-    await load();
-  }
-
-  async function setDefault(id: number) {
-    await fetch(`/api/admin/ai-models/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ isDefault: true }),
     });
     await load();
   }
@@ -183,6 +175,7 @@ export function AIModelsManager({ labels: l }: { labels: Labels }) {
 
   return (
     <div className="mt-6">
+      {operationError && <p role="alert" className="mb-3 text-sm text-red-600">{operationError === "save" ? l.operationFailed : l.refreshFailed}</p>}
       <div className="flex justify-end">
         <button
           type="button"
@@ -203,9 +196,8 @@ export function AIModelsManager({ labels: l }: { labels: Labels }) {
             </label>
             <label className="text-sm">
               {l.provider}
-              <select className={`mt-1 ${field}`} value={form.provider} onChange={(e) => setForm((f) => ({ ...f, provider: e.target.value }))}>
-                <option value="openai">OpenAI</option>
-                <option value="anthropic">Anthropic</option>
+              <select className={`mt-1 ${field}`} value={form.provider} onChange={(e) => setForm((f) => ({ ...f, provider: e.target.value, apiKeyEnvVar: "OPENROUTER_API_KEY_CEE" }))}>
+                {form.provider !== "openrouter" && <option value={form.provider} disabled>{form.provider} — {l.providerNotApproved}</option>}
                 <option value="openrouter">OpenRouter (Qwen, Gemini, DeepSeek, …)</option>
               </select>
             </label>
@@ -213,19 +205,19 @@ export function AIModelsManager({ labels: l }: { labels: Labels }) {
               {l.model}
               <input
                 className={`mt-1 ${field}`}
-                placeholder="gpt-4o-mini"
+                placeholder="deepseek/deepseek-chat"
                 value={form.model}
                 onChange={(e) => setForm((f) => ({ ...f, model: e.target.value }))}
               />
             </label>
             <label className="text-sm">
               {l.apiKeyEnvVar}
-              <input
-                className={`mt-1 ${field}`}
-                placeholder="OPENAI_API_KEY"
-                value={form.apiKeyEnvVar}
-                onChange={(e) => setForm((f) => ({ ...f, apiKeyEnvVar: e.target.value }))}
-              />
+              <select className={`mt-1 ${field}`} value={form.apiKeyEnvVar}
+                onChange={(event) => setForm((f) => ({ ...f, apiKeyEnvVar: event.target.value }))}>
+                {form.apiKeyEnvVar !== "OPENROUTER_API_KEY_CEE" &&
+                  <option value={form.apiKeyEnvVar} disabled>{form.apiKeyEnvVar} — {l.providerNotApproved}</option>}
+                <option value="OPENROUTER_API_KEY_CEE">OPENROUTER_API_KEY_CEE</option>
+              </select>
             </label>
             <label className="text-sm">
               {l.priority}
@@ -299,6 +291,11 @@ export function AIModelsManager({ labels: l }: { labels: Labels }) {
                       <p className="text-xs text-[var(--color-fg-muted)]">
                         {m.provider} · {m.model} · {m.apiKeyEnvVar}
                       </p>
+                      <p className="mt-1 text-xs text-[var(--color-fg-muted)]">
+                        {m.routingStatus === "configured_not_verified" ? l.configuredNotVerified :
+                          m.routingStatus === "provider_not_approved" ? l.providerNotApproved :
+                          m.routingStatus === "credential_missing" ? l.noKey : l.inactive}
+                      </p>
                     </td>
                     <td className="px-4 py-3 tabular-nums">{m.priority}</td>
                     <td className="px-4 py-3">
@@ -315,26 +312,18 @@ export function AIModelsManager({ labels: l }: { labels: Labels }) {
                       </button>
                     </td>
                     <td className="px-4 py-3">
-                      {m.isDefault ? (
+                      {m.runtimePrimary ? (
                         <span className="flex items-center gap-1 text-xs font-semibold text-[var(--color-accent-text)]">
-                          <Star size={14} fill="currentColor" aria-hidden />
-                          {l.default}
+                          <Star size={14} fill="currentColor" aria-hidden />{l.default}
                         </span>
-                      ) : (
-                        <button
-                          type="button"
-                          onClick={() => setDefault(m.id)}
-                          className="text-xs text-[var(--color-fg-placeholder)] underline-offset-2 hover:underline"
-                        >
-                          {l.setDefault}
-                        </button>
-                      )}
+                      ) : "—"}
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-end gap-1">
                         <button
                           type="button"
                           onClick={() => testConnection(m.id)}
+                          disabled={state?.status === "testing" || m.routingStatus !== "configured_not_verified"}
                           className="flex items-center gap-1 rounded-lg border border-[var(--color-line)] px-2.5 py-1.5 text-xs font-medium text-[var(--color-fg-muted)] hover:bg-[var(--color-surface)]"
                         >
                           {state?.status === "testing" && <Loader2 size={13} className="animate-spin" aria-hidden />}

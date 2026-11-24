@@ -1,3 +1,4 @@
+import { contactAddress } from "@/lib/contactAddress";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { AUDIENCES, SECTIONS } from "@/lib/nav";
@@ -17,7 +18,8 @@ export async function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2 lg:col-span-1">
           <p className="font-bold">{t("title")}</p>
-          <p className="mt-2 text-sm text-[var(--color-fg-muted)]">{c.address || t("address")}</p>
+          <p className="mt-3 text-sm text-[var(--color-fg-muted)]">{t("description")}</p>
+          <p className="mt-2 text-sm text-[var(--color-fg-muted)]">{contactAddress(c.address, t("address"))}</p>
           <ul className="mt-3 space-y-0.5">
             {c.phone && (
               <li>

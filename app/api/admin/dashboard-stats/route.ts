@@ -44,8 +44,9 @@ export async function GET() {
     })
     .from(schema.leads);
 
-  // Черга самонавчання бази знань: чернетки, які AI створив з реальних
-  // питань відвідувачів (lib/knowledge/autoDraft.ts) і які ще чекають на
+  // Existing historical AI drafts awaiting review. Public autoDraft is disabled;
+  // retain visibility of previously created drafts rather than deleting them.
+  // Чернетки, які ще чекають на
   // перевірку фахівцем у "Документи" — щоб вона не губилась поза очима.
   const [draftsRow] = await db
     .select({ count: sql<number>`count(*)` })

@@ -10,12 +10,14 @@
     "about": "About CEE",
     "contacts": "Contacts",
     "audiences": "Who we serve",
-    "developers": "RES / BESS developers",
+    "developers": "Developers and investors",
     "donors": "Donors & investors",
     "knowledge": "Knowledge base",
     "calculators": "Calculators",
     "news": "News",
-    "subscriptions": "Subscriptions"
+    "subscriptions": "Subscriptions",
+    "directions": "Engineering fields",
+    "tools": "Tools"
   },
   "Header": {
     "cta": "Get a consultation",
@@ -50,7 +52,8 @@
     "copyright": "© {year} Center for Energy Efficiency, Ladyzhyn",
     "writeUs": "Write to us",
     "audiencesTitle": "Who we serve",
-    "audiencesNav": "Audiences"
+    "audiencesNav": "Who CEE serves",
+    "description": "Electricity, heat, water supply and wastewater: from needs and metering to solutions and verification of results."
   },
   "Common": {
     "detailsMore": "Learn more →",
@@ -62,121 +65,149 @@
   },
   "HomePage": {
     "ticker": [
-      "Survey",
-      "Calculation",
-      "Design",
-      "Support"
+      "Electricity",
+      "Heat",
+      "Water supply",
+      "Wastewater"
     ],
-    "heroTitlePrefix": "A technical expert center",
-    "heroTitleHighlight": "for energy consumption optimization",
-    "heroText": "We survey, calculate, design and carry it through to a working system — ourselves or with partner contractors, while the expert and technical role stays with the Center. A single window instead of five contractors: you get a result, not a folder of documents.",
+    "heroTitlePrefix": "We work across",
+    "heroTitleHighlight": "all building and utility systems",
+    "heroText": "CEE works with the client to identify engineering needs, compare solutions and prepare a well-founded project. Our clients may be communities, businesses, homeowners’ associations, institutions, developers or private clients. We work with electricity, heat, water supply and wastewater systems. Electricity is often a practical starting point for metering, assessment and analysis, but it does not limit our scope.",
     "heroStats": [
       {
-        "value": "UAH 1,968.95 M",
-        "label": "Ladyzhyn community energy project portfolio"
+        "value": "4",
+        "label": "engineering fields"
       },
       {
-        "value": "UAH 3 M · 0%",
-        "label": "HOA loan under the 5-7-9 programme, up to 3 years"
+        "value": "1",
+        "label": "coordinated plan for each site"
       },
       {
-        "value": "3–7 years",
-        "label": "typical payback of electricity solutions"
+        "value": "Evidence",
+        "label": "the basis for assessment and verification"
       }
     ],
-    "heroStatsSource": "Source: CEE and the Entrepreneurship Development Fund · September 2026",
-    "ctaPrimary": "Get a consultation",
-    "ctaSecondary": "Programs for HOAs",
+    "heroStatsSource": "Our approach, not a savings guarantee",
+    "ctaPrimary": "Discuss your needs",
+    "ctaSecondary": "Explore engineering fields",
     "whyLabel": "Course of action",
-    "whyTitle": "Why we start with electricity",
-    "whyText": "Heat matters too — but it's more expensive, slower and harder to verify. Electricity gives us a foothold: it's visible on the meter, it reacts quickly to changes, and it's felt in the wallet.",
+    "whyTitle": "Electricity is often a practical starting point",
+    "whyText": "Electricity use is often easier to measure and relate to operating patterns. This can make early assessments faster, but site condition, safety and needs determine priorities: heat, water or wastewater may need attention first.",
     "whyItems": [
       {
-        "title": "Measurable",
-        "text": "The meter shows kilowatt-hours every day. There's a 'before' and 'after' to compare, not a guess. This data builds a calculation you can verify."
+        "title": "Accessible metering",
+        "text": "Readings and interval profiles help identify peaks, baseload and anomalies."
       },
       {
-        "title": "Faster than other solutions",
-        "text": "Equipment is installed in days or weeks, not a season. No scaffolding, no weather dependency, no disruption to the building's life."
+        "title": "Scenario comparison",
+        "text": "We compare operating patterns, tariffs and technical limits before choosing equipment."
       },
       {
-        "title": "Visible on the bill",
-        "text": "The result shows up in the next payment document. That matters when a board makes the decision: people see what they paid for."
+        "title": "Verifiable outcomes",
+        "text": "We compare before-and-after performance while accounting for changing loads and conditions."
       },
       {
-        "title": "Life support",
-        "text": "A battery storage system keeps critical loads running during outages: lighting, pumps, communications, elevators. Insulation alone never provides that."
+        "title": "Connected systems",
+        "text": "Power for pumps, controls and heat substations connects electricity with water and heat."
       }
     ],
-    "whyFooter": "This doesn't cancel out thermal modernization. It comes as the next stage — once the consumption profile is clear, there's something to confirm the effect with, and a way to fund the co-owners' contribution.",
-    "segmentsLabel": "Directions",
-    "segmentsTitle": "Different groups — different solutions",
+    "whyFooter": "Solar PV and BESS are options, not a mandatory starting point. We assess them against load profiles, connection conditions, alternatives and lifecycle costs.",
+    "segmentsLabel": "Who we serve",
+    "segmentsTitle": "Solutions shaped by the client’s needs",
     "segmentsText": "A community, a business, an HOA, a developer, a donor and a private owner all face different constraints: ownership form, decision-making, access to financing and consumption patterns. One-size-fits-all doesn't work here — so each segment has its own entry point.",
     "segments": [
       {
         "href": "/community",
-        "title": "Communities & utilities",
-        "text": "Energy diagnostics, procurement support, grant readiness, feasibility studies and energy management for communities and municipal utilities."
+        "title": "Communities and utilities",
+        "text": "Electrical and heat networks, water supply, wastewater and public-building systems."
       },
       {
         "href": "/business",
-        "title": "Business & industry",
-        "text": "Cut costs, prepare an investment project, assess BESS feasibility, improve energy resilience."
+        "title": "Business and industry",
+        "text": "Reliable engineering systems, resource balances, process requirements and investment cases."
       },
       {
         "href": "/osbb",
-        "title": "HOAs",
-        "text": "Solar and storage for the building, metering, financing programmes, then thermal solutions."
+        "title": "Homeowner associations",
+        "text": "Shared electrical, heating and water systems, metering and upgrade priorities."
       },
       {
         "href": "/developers",
-        "title": "RES / BESS developers",
-        "text": "DSO interaction, technical conditions analysis, financial model, specification and investor-ready decisions."
+        "title": "Developers and investors",
+        "text": "Engineering concepts, site constraints, specifications and staged investment preparation."
       },
       {
         "href": "/donors",
-        "title": "Donors, NGOs, investors",
-        "text": "Evidence-based projects, a structured project package, a portfolio of opportunities and a bridge to the community on the ground."
+        "title": "Donors, NGOs and investors",
+        "text": "Evidence-based engineering project preparation and verification against agreed indicators."
       },
       {
         "href": "/citizens",
         "title": "Private owners",
-        "text": "Solar and storage for a home — from calculation to a working system, turnkey."
+        "text": "Home electricity, heating, water supply and wastewater options matched to actual needs."
       }
     ],
     "competenciesLabel": "Competencies",
-    "competenciesTitle": "What the Center does",
-    "competenciesText": "A full cycle in one circuit — from measurement to a working system confirmed by metering data. What is usually torn between different contractors, we pull together.",
+    "competenciesTitle": "From survey to verification",
+    "competenciesText": "We connect technical analysis, solution preparation and support for agreed stages. Scope, responsibilities and acceptance criteria are defined before work begins.",
     "competencies": [
       {
         "n": "01",
-        "title": "Survey and measurement",
-        "text": "Consumption profile, load patterns, metering status, connection capacity, heat loss. The baseline data without which any calculation is just a guess."
+        "title": "Survey and measurements",
+        "text": "Condition of electrical, heating and water systems; metering, operating patterns, losses and critical needs.",
+        "dialog": {
+          "why": "To choose solutions based on your facility’s condition rather than a standard equipment offer. Together, we identify critical systems and gaps in the available evidence.",
+          "data": "Existing diagrams and equipment descriptions, meter readings and bills, operating patterns, reported faults and user needs. If evidence is missing, we agree what needs to be collected or measured.",
+          "result": "A description of the baseline condition, identified constraints and evidence gaps, and agreed next steps.",
+          "limits": "We agree the scope of inspection and measurements separately. A preliminary survey does not replace mandatory assessments, testing or design documentation; any need for specialist contractors is clarified before work starts.",
+          "next": "Describe your facility and the issue you want to resolve. We will agree the required inputs and the scope of the first stage."
+        }
       },
       {
         "n": "02",
-        "title": "Calculation and modeling",
-        "text": "Sizing generation capacity and storage capacity to the actual profile. Payback assessment based on current tariffs, not average figures."
+        "title": "Analysis and priorities",
+        "text": "Resource balances, scenario comparisons, risks, capital and operating costs.",
+        "dialog": {
+          "why": "To identify which measures should be considered first in light of safety, reliability, costs and the client’s needs.",
+          "data": "Survey findings, resource metering, operating patterns, technical constraints, budget expectations and reliability requirements. Assumptions and missing evidence are stated explicitly.",
+          "result": "A comparison of scenarios, a reasoned order of priorities and indicators for assessing the outcome.",
+          "limits": "The accuracy of conclusions depends on the inputs and assumptions. Preliminary calculations do not guarantee savings, a payback period or feasibility.",
+          "next": "Tell us about your main constraints and expectations. We will identify which scenarios are worth comparing."
+        }
       },
       {
         "n": "03",
-        "title": "Design solutions",
-        "text": "System architecture, equipment composition, connection scheme, stage sequencing. A technical specification you can take to a contractor or a financing program."
+        "title": "Solution preparation",
+        "text": "Concepts, pre-feasibility studies, specifications and materials for investment decisions.",
+        "dialog": {
+          "why": "To turn the selected approach into a clear brief for the next stage and an informed decision by the client.",
+          "data": "Agreed priorities, facility data, outcome requirements, site constraints, available budget and the decision-making process.",
+          "result": "An agreed set of materials: a concept, pre-feasibility study, technical brief or investment decision materials, depending on the commissioned scope.",
+          "limits": "We agree the content and level of detail before starting. Concepts and pre-feasibility studies do not replace detailed design, permits or mandatory approvals.",
+          "next": "Tell us which decision needs to be made and who will use the materials. We will agree the deliverables."
+        }
       },
       {
         "n": "04",
-        "title": "Turnkey implementation",
-        "text": "Procurement, partner contractors, compliance control against the design, sign-off and result verification against metering data. Coordination between participants sits with the Center, not with the client."
+        "title": "Support and verification",
+        "text": "Procurement support, agreed acceptance criteria and post-implementation performance monitoring.",
+        "dialog": {
+          "why": "To maintain the agreed requirements during implementation and assess the outcome using evidence after completion, rather than simply confirming that equipment has been installed.",
+          "data": "The agreed brief, contractor proposals, acceptance criteria, work schedule, baseline indicators and post-implementation metering data.",
+          "result": "Within the agreed scope: materials for comparing proposals, checking conformity with requirements and monitoring indicators, with explanations of deviations.",
+          "limits": "CEE’s role, contractors’ responsibilities and the limits of verification are agreed separately. Support does not automatically include designer or statutory technical supervision; performance is assessed in the context of operating conditions.",
+          "next": "Describe the project stage and the support you need. We will agree our role, how we work together and the verification criteria."
+        }
       }
     ],
-    "diagramLabel": "How it's arranged",
-    "diagramTitle": "Elements of the site's energy system",
-    "diagramText": "Click a node to see its role. Order matters: without measuring the consumption profile and checking connection capacity, every other decision is a guess.",
+    "diagramLabel": "An example from one field",
+    "diagramTitle": "Possible elements of an electricity system",
+    "diagramText": "This diagram covers electricity, not the full range of CEE services. Select a node to explore its role. The configuration depends on metering, loads and site constraints.",
     "ctaTitle": "Have a question about your site?",
     "ctaText": "Describe the situation — we'll tell you where to start.",
-    "toolsLabel": "Tools and subscriptions",
-    "toolsTitle": "Calculate yourself, order or subscribe",
-    "toolsText": "Free calculators give a preliminary estimate in a minute. Then — a one-off service or a retainer, depending on the task.",
+    "toolsLabel": "Tools and support",
+    "toolsTitle": "Explore the numbers, commission a service or arrange ongoing support",
+    "toolsText": "Tools help frame questions and preliminary scenarios. Calculations do not replace a site survey or a design decision.",
     "tools": [
       {
         "href": "/calculators",
@@ -187,12 +218,12 @@
       {
         "href": "/services",
         "title": "Services",
-        "text": "16 expert products: from energy diagnostics and feasibility studies to certification, tariffs, ESCO and turnkey integration.",
+        "text": "Surveys, concepts / pre-feasibility, specifications, investment preparation, procurement support and monitoring.",
         "cta": "Browse the catalogue"
       },
       {
         "href": "/subscriptions",
-        "title": "Subscriptions",
+        "title": "Ongoing support",
         "text": "Outsourced energy manager, monitoring and dashboards, regulatory support, knowledge base with the consultant.",
         "cta": "What is included"
       }
@@ -206,7 +237,18 @@
     "freshNoNews": "The first issue is in preparation.",
     "freshNoPosts": "Articles are in preparation.",
     "freshLocalTag": "Local news",
-    "freshEnergyTag": "Energy"
+    "freshEnergyTag": "Energy",
+    "directionsLabel": "Engineering fields",
+    "directionsTitle": "Four fields, one evidence-based approach",
+    "competencyDialogLabels": {
+      "open": "Learn more: {title}",
+      "close": "Close",
+      "why": "Why it matters",
+      "data": "Required inputs",
+      "result": "What the client receives",
+      "limits": "Scope and limitations",
+      "next": "Next step"
+    }
   },
   "SystemDiagram": {
     "ariaLabel": "Diagram of the site's energy system elements",
@@ -276,60 +318,56 @@
   },
   "OsbbPage": {
     "metaTitle": "For HOAs",
-    "metaDescription": "Thermal modernization financing programs for HOAs: terms, requirements, contacts and course of action.",
-    "title": "Financing for HOAs",
-    "intro": "The fastest results for an apartment building come from electricity projects: own generation, storage, and consumption management. Thermal modernization comes next — it's more expensive and pays back slower. Below are the programs currently operating in Ukraine, with their terms, requirements and contacts. We verify the data and note the check date.",
-    "whyTitle": "Why electricity comes first",
+    "metaDescription": "Shared building systems: electricity, heat, water and wastewater; metering, priorities and upgrade preparation.",
+    "title": "Engineering solutions for homeowner associations",
+    "intro": "We work with shared electrical, heat, water and wastewater systems. Electricity metering often provides a practical starting point, but failures, safety and residents’ needs determine priorities. Below are preparation steps and funding information whose terms must be checked before applying.",
+    "whyTitle": "What we assess before an upgrade",
     "whyItems": [
       {
-        "title": "Measurable",
-        "text": "The meter gives daily data. The effect can be calculated, not just estimated by eye."
+        "title": "Electricity supply",
+        "text": "Metering, power quality and reliability, load management and the case for on-site generation or backup."
       },
       {
-        "title": "Fast",
-        "text": "Installation takes days or weeks, no scaffolding and no seasonal dependency."
+        "title": "Heat supply",
+        "text": "Heat sources, distribution, control and the heating requirements of buildings and industrial processes."
       },
       {
-        "title": "Tangible",
-        "text": "The result shows up on the next bill — that's clear to a board of co-owners."
+        "title": "Water supply",
+        "text": "Reliable water delivery, metering, pressure, losses and the energy use of pumping equipment."
       },
       {
-        "title": "Life support",
-        "text": "A battery keeps lighting, pumps and communications running during outages."
+        "title": "Wastewater systems",
+        "text": "Collection, conveyance, pumping stations and preparation of treatment options suited to the site."
       }
     ],
     "programsTitle": "Financing programs",
-    "programsText": "Program terms change. Before applying, it's worth calling the administrator to confirm the current status.",
+    "programsText": "These programmes are provided by external organisations. CEE helps the client prepare the project and documents; it does not issue loans or guarantee funding. The relevant bank or Fund makes the decision. Check status and terms before applying.",
     "stepsTitle": "Course of action",
-    "stepsText": "The sequence is roughly the same for all programs.",
+    "stepsText": "The sequence is tailored to building condition, co-owner decisions and the selected programme’s requirements.",
     "steps": [
       {
-        "title": "Capture the consumption profile",
-        "text": "How much, when, and on what electricity is spent. Without this data, solar and storage capacity are sized by guesswork, and the payback calculation is unreliable."
+        "title": "Clarify needs",
+        "text": "Gather residents’ concerns, incident records and critical shared-property needs."
       },
       {
-        "title": "Check connection capacity",
-        "text": "The grid operator contract terms limit what can be installed at all and how much can be fed back into the grid."
+        "title": "Collect evidence and survey systems",
+        "text": "Metering of electricity, heat and water; condition of pumps, networks and drainage; identify gaps."
       },
       {
-        "title": "Hold a co-owners' meeting",
-        "text": "A board decision is required for any program — grant or loan. No application is accepted without minutes."
+        "title": "Compare priorities",
+        "text": "Consider safety, reliability, cost, potential benefits and operating requirements."
       },
       {
-        "title": "Prepare documents",
-        "text": "Cost estimate, design documentation, HOA financial statements, association registration documents."
+        "title": "Agree an option",
+        "text": "Prepare alternatives for co-owners and identify necessary decisions and documents."
       },
       {
-        "title": "Set the work sequence",
-        "text": "Start with what pays off fastest: metering, generation, storage, load management. Thermal modernization comes as the next stage."
+        "title": "Prepare funding and procurement",
+        "text": "Compare programme requirements, available resources and the specification."
       },
       {
-        "title": "Choose a funding source",
-        "text": "A grant, a loan, or a combination. The choice depends on the scope of work and the HOA's ability to cover its own share."
-      },
-      {
-        "title": "Apply and support the project",
-        "text": "After approval — choosing a contractor, quality control of the work, reporting to the program."
+        "title": "Verify delivery",
+        "text": "Agree acceptance criteria and ongoing performance monitoring."
       }
     ],
     "remindersTitle": "Worth remembering",
@@ -350,32 +388,34 @@
     "requirementsLabel": "What's required from the HOA",
     "contactsLabel": "Program contacts",
     "sourceLabel": "Source",
-    "checkedLabel": "Checked",
-    "staleWarning": "This data needs confirming — it hasn't been checked in over 60 days."
+    "checkedLabel": "Source reviewed",
+    "staleWarning": "This data needs confirming — it hasn't been checked in over 60 days.",
+    "ceeRole": "CEE’s role is agreed project preparation support. The relevant bank or organisation provides the loan or grant; approval and savings are not guaranteed.",
+    "sourceLink": "Official programme terms"
   },
   "AboutPage": {
     "metaTitle": "About CEE",
-    "metaDescription": "The Ladyzhyn Center for Energy Efficiency — a technical expert center for energy consumption optimization.",
+    "metaDescription": "We work across electricity, heat, water supply and wastewater systems. We start with the site’s needs and evidence, compare options and set priorities before selecting equipment.",
     "label": "About the Center",
-    "title": "A technical expert center for energy consumption optimization",
-    "intro": "The Center for Energy Efficiency in Ladyzhyn works with community facilities, businesses, HOAs and private owners: it surveys, calculates, designs solutions and carries them through to a working system — ourselves or with partner contractors, while the expert, technical and technological role stays with the Center.",
+    "title": "CEE: site engineering as a connected system",
+    "intro": "The Ladyzhyn Energy Efficiency Centre works on electricity, heat, water supply and wastewater for communities, businesses, homeowner associations and private owners. We gather evidence, prepare options and support agreed stages with defined client and contractor responsibilities.",
     "principlesTitle": "Operating principles",
     "principles": [
       {
-        "title": "Measurement first",
-        "text": "No recommendation is made without baseline data. Consumption profile, metering status, connection capacity — that's where any work begins."
+        "title": "Evidence first",
+        "text": "We distinguish measurements from assumptions and identify missing information."
       },
       {
-        "title": "Solutions built for the site",
-        "text": "No two sites are alike. What paid off in one building might not pay off next door due to a different consumption pattern or grid limits."
+        "title": "Connected systems",
+        "text": "Electrical decisions are assessed alongside heat, water and wastewater needs."
       },
       {
-        "title": "Sequence, not everything at once",
-        "text": "Work is broken into stages by speed of payback. Metering and electricity first, then thermal solutions and building envelope work."
+        "title": "Needs-based priorities",
+        "text": "Safety, reliability, asset condition and cost determine the sequence. Electricity does not always come first."
       },
       {
-        "title": "Verifiability",
-        "text": "The effect is confirmed by metering data after implementation. Every figure we publish has a source and a check date."
+        "title": "Outcome verification",
+        "text": "We agree the baseline and indicators before implementation, then check actual changes."
       }
     ],
     "channelsTitle": "How we work",
@@ -383,7 +423,7 @@
     "channels": [
       {
         "title": "On-site work",
-        "text": "Surveying, measurement, metering equipment installation, work acceptance."
+        "text": "Surveys, system inventories, agreed measurements and verification of completed work."
       },
       {
         "title": "Design materials",
@@ -399,7 +439,7 @@
       }
     ],
     "ctaTitle": "Describe your site",
-    "ctaText": "Building type, current energy source, what's already been done — that's enough to start a conversation.",
+    "ctaText": "Describe the site, its engineering systems and the problem to solve. Existing metering data will help identify the next step.",
     "ctaButton": "Get a consultation"
   },
   "ContactsPage": {
@@ -484,110 +524,102 @@
       "finance": "Please advise on financing an energy-efficiency measure (loan/lease/programme). Amount, term, expected savings: ",
       "express": "Please survey the site and prepare a full feasibility study following the express estimate on the website. Site and its consumption: "
     },
-    "serviceMessage": "I am interested in the '{service}' service/subscription. Please send the terms, price and how to start. Site: ",
+    "serviceMessage": "I am interested in the “{service}” service/subscription. Please send the terms, price and how to start. Site: ",
     "scenarioMessage": "I would like to discuss: {topic}."
   },
   "CitizensPage": {
     "heroLabel": "For Residents",
-    "heroTitle": "Energy under your roof",
-    "heroText": "Solar panels, energy storage, smart control — we size everything for your home, consumption profile, and roof. Lower your electricity bills, gain energy independence, keep the lights on during blackouts.",
+    "heroTitle": "Engineering for your home",
+    "heroText": "Electricity, heating, water and wastewater systems should work together. We help assess system condition, costs and household needs, compare options and prepare the next step. Solar PV and battery storage are only some of the possibilities.",
     "ctaPrimary": "Get a consultation",
     "ctaSecondary": "For HOAs",
     "whyLabel": "Why consider it",
-    "whyTitle": "Cheaper, more reliable, self-sufficient",
-    "whyText": "For a private house, an energy project isn't a trend — it's a smart way to cut utility costs and have power when the grid goes down.",
+    "whyTitle": "Comfort, reliability and cost control",
+    "whyText": "The home’s needs determine the solution. We do not promise autonomy or savings without assessment and a check of constraints.",
     "whyItems": [
       {
-        "title": "Lights on during blackouts",
-        "text": "The battery backup powers your home when the grid fails. Fridge, lights, pump, gas boiler — everything works as usual."
+        "title": "Household needs",
+        "text": "Temperature, water, reliable power and wastewater collection matched to occupancy patterns."
       },
       {
-        "title": "Pay less for electricity",
-        "text": "Solar generates during the day when you're home or at work. Storage captures that energy and powers the house at night cheaper than buying from the grid."
+        "title": "Evidence-based costs",
+        "text": "Metering, bills and equipment condition reveal opportunities and constraints."
       },
       {
-        "title": "Earn from extra power",
-        "text": "On sunny days, panels produce more than you need. The surplus feeds into the grid — the utility pays you under your agreement."
+        "title": "A staged approach",
+        "text": "Start with urgent risks, compare options and agree the scope of work."
       }
     ],
     "solutionsLabel": "Options",
     "solutionsTitle": "What's possible for your home",
-    "solutionsText": "Not everyone needs everything. We explain how to combine components to fit your needs and budget.",
+    "solutionsText": "We compare alternatives in each field and consider how they affect one another.",
     "solutions": [
       {
-        "title": "Solar + net metering",
-        "text": "Panels generate during the day. Surplus feeds to the grid — you receive payments from the utility."
+        "title": "Electricity supply",
+        "text": "Metering, power quality and reliability, load management and the case for on-site generation or backup."
       },
       {
-        "title": "Solar + battery storage",
-        "text": "Panels generate, battery stores it. At night you power the house with your own energy — no grid fees."
+        "title": "Heat supply",
+        "text": "Heat sources, distribution, control and the heating requirements of buildings and industrial processes."
       },
       {
-        "title": "Solar + battery + backup",
-        "text": "Complete independence — during blackouts the battery powers you, during the day panels charge, at night you use stored energy."
+        "title": "Water supply",
+        "text": "Reliable water delivery, metering, pressure, losses and the energy use of pumping equipment."
       },
       {
-        "title": "Battery only without solar",
-        "text": "If location doesn't allow panels — a battery charges from the grid at night rates and powers the house during the day at cheaper cost."
+        "title": "Wastewater systems",
+        "text": "Collection, conveyance, pumping stations and preparation of treatment options suited to the site."
       }
     ],
     "stepsLabel": "Process",
     "stepsTitle": "How it works",
-    "stepsText": "From first consultation to turning on the lights — 2-4 months depending on complexity and weather.",
+    "stepsText": "Timing and scope are defined after the task and available evidence are clarified.",
     "steps": [
       {
-        "title": "Consultation",
-        "text": "We discuss your home, roof, and electricity bills from the past year. We determine what's actually possible."
+        "title": "Needs",
+        "text": "Define the task, critical risks and the client’s expectations."
       },
       {
-        "title": "Roof survey",
-        "text": "We inspect your roof, take photos, assess orientation, shade from neighbors, and usable area for panels."
+        "title": "Metering and analysis",
+        "text": "Collect evidence, check its quality and establish a baseline."
       },
       {
-        "title": "Usage profile analysis",
-        "text": "We analyze your bills to see when you use the most energy, and how to combine generation and storage optimally."
+        "title": "Priorities",
+        "text": "Compare safety, reliability, cost and potential benefits."
       },
       {
-        "title": "Preliminary calculation",
-        "text": "Equipment cost, installation complexity, expected annual savings. We calculate exactly how many years until payback."
+        "title": "Solutions",
+        "text": "Prepare a concept, specification and implementation plan for the agreed option."
       },
       {
-        "title": "Design documentation",
-        "text": "We prepare connection drawings, diagrams, and calculations. Everything the utility and installers need."
-      },
-      {
-        "title": "Installation & connection",
-        "text": "We install panels, meter, battery, control system. We coordinate with the utility and bring your system online."
-      },
-      {
-        "title": "Training & support",
-        "text": "We explain how to use the system, what to watch for in the app, when to call for maintenance."
+        "title": "Verification",
+        "text": "Compare measured performance with the baseline and agreed criteria."
       }
     ],
     "ctaTitle": "Ready to see what it costs?",
-    "ctaText": "Tell us about your home, how many people live there, estimated roof area — we calculate the cost and show payback period."
+    "ctaText": "Tell us about the home, the system of concern, bills and expectations so we can identify what is needed for assessment."
   },
   "CommunityPage": {
     "heroLabel": "For Community & NGOs",
-    "heroTitle": "Community power",
-    "heroText": "For community centers, hospitals, schools, non-profits — we develop solutions accounting for public property specifics, grant opportunities, and energy independence needs.",
+    "heroTitle": "Resilient community infrastructure",
+    "heroText": "For communities and municipal utilities, we work across electrical and heat systems, water supply and wastewater. We consider asset condition, residents’ needs, operating capacity and decision-making procedures.",
     "ctaPrimary": "Get a consultation",
     "ctaSecondary": "About CEE",
     "whyLabel": "Why it matters",
-    "whyTitle": "Reliability + Savings + Grants",
-    "whyText": "For public facilities, energy projects work differently than private sector. There are grants, but also bureaucracy. We understand both.",
+    "whyTitle": "Service continuity and investment priorities",
+    "whyText": "We begin with evidence about assets and critical needs, rather than a specific technology or funding programme.",
     "whyItems": [
       {
-        "title": "We understand public property",
-        "text": "Decision-making is different: you need tenders, reports, approvals from authorities. We know how to structure a project so it gets approved."
+        "title": "Service priorities",
+        "text": "Assess how power, heat and water interruptions and wastewater performance affect residents and public facilities."
       },
       {
-        "title": "We know the grant programs",
-        "text": "Public facilities have special support programs. We help identify which conditions fit your facility."
+        "title": "Funding preparation",
+        "text": "Help structure the need, evidence, budget scenarios and review materials."
       },
       {
-        "title": "We ensure energy independence",
-        "text": "Medical clinics, hospitals, evacuation centers need reliable power. We design systems that work 100% during blackouts."
+        "title": "Operation after delivery",
+        "text": "Account for staff, maintenance, consumables and performance verification."
       }
     ],
     "objectsLabel": "Facilities",
@@ -595,46 +627,46 @@
     "objectsText": "Each facility type has different constraints. We design solutions for what you have.",
     "objects": [
       {
-        "title": "Medical facilities",
-        "text": "Clinics, practices, small hospitals — need backup power for equipment and refrigeration."
+        "title": "Healthcare and social facilities",
+        "text": "Critical power, heating, hot and cold water, and safe wastewater collection."
       },
       {
-        "title": "Educational institutions",
-        "text": "Schools, gymnasiums, training centers — are heavy energy users with flexible schedules and heating load shifting options."
+        "title": "Education facilities",
+        "text": "Operating patterns, comfort, resource costs and internal network condition."
       },
       {
-        "title": "Community centers",
-        "text": "Community centers, libraries, civic buildings dramatically cut utility costs through energy projects."
+        "title": "Municipal utilities",
+        "text": "Boiler houses, heat networks, water sources, pumping stations and wastewater facilities."
       },
       {
-        "title": "NGOs & volunteer centers",
-        "text": "Organizations working with distributed energy gain autonomy with solar, focusing on their mission instead of electricity bills."
+        "title": "Community and volunteer centres",
+        "text": "User needs, reliable engineering systems and a practical sequence of measures."
       }
     ],
     "ctaTitle": "Let's figure it out together",
-    "ctaText": "Tell us about your facility, how many people use it, and current energy costs — we'll help identify the most effective solution."
+    "ctaText": "Describe the assets, networks of concern, available metering and the community’s most urgent needs."
   },
   "BusinessPage": {
     "heroLabel": "For Businesses",
-    "heroTitle": "Energy independence for business",
-    "heroText": "We survey your facility, calculate ROI, design solar, storage, and energy management systems. Scale from 10 kW to several MW to match your needs.",
+    "heroTitle": "Engineering systems for business",
+    "heroText": "Electricity, process heat, water and effluent affect production costs and continuity. We analyse resource balances, constraints and risks to prioritise upgrades. Solar PV and BESS are among the options where supported by evidence.",
     "ctaPrimary": "Get a consultation",
     "ctaSecondary": "Learn more",
     "whyLabel": "Why this matters",
-    "whyTitle": "Lower electricity costs + energy reliability",
-    "whyText": "For businesses two metrics matter: production cost and stability. On-site generation delivers both.",
+    "whyTitle": "Cost, reliability and control",
+    "whyText": "Options are compared by their effect on the production process, whole-life costs and measurable indicators.",
     "whyItems": [
       {
-        "title": "Reduces production cost",
-        "text": "Electricity costs more at night and peak hours. On-site generation during the day, storage charging at night rates — baseline electricity cost."
+        "title": "Resource balances",
+        "text": "Relate electricity, heat and water use to production volumes and operating patterns."
       },
       {
-        "title": "Protects from blackouts",
-        "text": "When the grid fails, generation switches to local system. Critical equipment runs, production doesn't stop."
+        "title": "Process reliability",
+        "text": "Identify critical systems, acceptable interruptions and backup requirements."
       },
       {
-        "title": "Calculate with real numbers",
-        "text": "ROI is based on your actual consumption profile, not averages. You see exactly how many years until payback."
+        "title": "An evidence-based investment",
+        "text": "Assess alternatives and sensitivity to tariffs and utilisation; forecasts are not payback guarantees."
       }
     ],
     "scenariosLabel": "Scenarios",
@@ -642,247 +674,123 @@
     "scenariosText": "Each business has its own schedule and constraints. Here are common problems — here's how to solve them.",
     "scenarios": [
       {
-        "title": "Generation and consumption offset in time",
-        "text": "Production runs at night, solar generates only day. Battery stores daytime generation to power nighttime operations."
+        "title": "Electricity supply",
+        "text": "Metering, power quality and reliability, load management and the case for on-site generation or backup."
       },
       {
-        "title": "Connection power limits",
-        "text": "The grid operator won't allow higher connection power. Local systems handle peaks, grid supplies base load."
+        "title": "Heat supply",
+        "text": "Heat sources, distribution, control and the heating requirements of buildings and industrial processes."
       },
       {
-        "title": "Critical load during blackouts",
-        "text": "Equipment is designed for continuous operation — blackouts cause losses. A backup system switches in milliseconds to generation."
+        "title": "Water supply",
+        "text": "Reliable water delivery, metering, pressure, losses and the energy use of pumping equipment."
       },
       {
-        "title": "Understand which projects pay back fast",
-        "text": "Some facilities are built such that energy projects pay back in 1-2 years. Others take 5. We calculate exactly for each site."
+        "title": "Wastewater systems",
+        "text": "Collection, conveyance, pumping stations and preparation of treatment options suited to the site."
       }
     ],
     "ctaTitle": "Ready to get into details?",
-    "ctaText": "Describe your production type, consumption volumes, and grid constraints — we'll prepare a preliminary calculation."
+    "ctaText": "Describe the process, the system of concern, operating patterns and available metering data."
   },
   "ServicesPage": {
     "heroLabel": "Single window",
-    "heroTitle": "A result, not advice and a folder of documents",
-    "heroText": "We see it through to the end — ourselves or with partner contractors, while the expert, technical and technological role stays with the Center. You deal with a single window: survey, calculation, design, procurement, implementation and result verification — inside one circuit of responsibility.",
+    "heroTitle": "Services across all engineering fields",
+    "heroText": "Electricity, heat, water and wastewater: from surveys and concepts to investment preparation, procurement support and monitoring. We agree the scope, inputs and expected outputs for each stage.",
     "ctaPrimary": "Get a consultation",
     "windowLabel": "How it works",
-    "windowTitle": "One circuit instead of five contractors",
-    "windowText": "An energy project is usually torn between different contractors: one surveys, another calculates, a third designs, a fourth installs — and none of them answers for the final result. The Center pulls this into a single circuit.",
+    "windowTitle": "Coordinated stages and responsibilities",
+    "windowText": "CEE helps connect technical, organisational and financial tasks. Team roles, scope and specialist involvement are defined to suit each project.",
     "window": [
       {
-        "title": "One point of responsibility",
-        "text": "You talk to the Center, not to five contractors. Coordinating the stages is our job, not yours."
+        "title": "A clear task",
+        "text": "Clarify the need and agree measurable stage outputs."
       },
       {
-        "title": "The expertise stays with the Center",
-        "text": "Where hands are needed, we bring in partner contractors. The expert, technical and technological role stays with us: we set the requirements, control execution and sign off the work."
+        "title": "Transparent roles",
+        "text": "Define the responsibilities of CEE, the client and specialist contractors."
       },
       {
-        "title": "We close with a result",
-        "text": "A project ends not with a folder handed over, but with a working system whose effect is confirmed by metering data."
+        "title": "Criteria-based verification",
+        "text": "Compare outputs with the agreed specification and record constraints and deviations."
       }
     ],
     "formatsLabel": "Ways of working",
     "formatsTitle": "How deep we go",
-    "formatsText": "By default we carry a project through to the result. But if you only need an idea checked or a single stage covered — that's a normal way in too.",
+    "formatsText": "Commission an individual stage or coordinated support across several stages. Responsibilities and required approvals are agreed before work starts.",
     "formatsBadge": "Main format",
     "formats": [
       {
-        "title": "One-off consultation or expert opinion",
-        "text": "For a quick check of an idea, a risk or a specific decision.",
-        "main": false
+        "title": "A defined task",
+        "text": "A survey, analysis, concept or specification with agreed outputs."
       },
       {
-        "title": "Retainer",
-        "text": "For regular monitoring, analytics, procurement or regulatory support.",
-        "main": false
+        "title": "Project preparation",
+        "text": "A sequence from evidence and options to an investment package and procurement requirements."
       },
       {
-        "title": "Project support",
-        "text": "For a specific stage: audit, feasibility study, specification, grant, procurement, connection or financial model.",
-        "main": false
-      },
-      {
-        "title": "Turnkey project",
-        "text": "From the first survey to a working system. Complex energy, investment and infrastructure projects requiring cross-disciplinary coordination and partner contractors.",
-        "main": true
-      },
-      {
-        "title": "Strategic partnership or consortium",
-        "text": "For long development programmes, building a project portfolio and joint participation in grant or investment initiatives.",
-        "main": false
+        "title": "Support and monitoring",
+        "text": "Agreed advice, checkpoints and performance analysis during and after implementation."
       }
     ],
     "productsLabel": "What the work consists of",
-    "productsTitle": "Sixteen blocks",
-    "productsText": "These are stages inside a turnkey project and stand-alone expert products. Each can be taken separately if the rest is covered — but by default we do not stop at any of them.",
+    "productsTitle": "Six shared services",
+    "productsText": "These services apply across all four fields. Detailed outputs depend on site condition, data quality and the agreed task.",
     "resultLabel": "What this stage produces",
     "priceNote": "Cost and timelines are set by scope after an initial conversation. There is no standard price list: scope depends on the state of the site, the data available and how deep we go.",
     "products": [
       {
-        "name": "Energy Diagnostic Start",
-        "task": "Quickly understand where losses are and where to start",
+        "name": "Survey",
+        "task": "Establish system condition and gaps in the available evidence.",
         "results": [
-          "Short energy profile",
-          "List of problems",
-          "Quick measures",
-          "Savings roadmap"
+          "Site description",
+          "Measurement plan",
+          "Risk register"
         ]
       },
       {
-        "name": "Procurement Office Light",
-        "task": "Prepare a procurement without errors or delays",
+        "name": "Concept / pre-feasibility",
+        "task": "Compare technical options and preliminary economics.",
         "results": [
-          "Procurement plan",
-          "Technical specification",
-          "Market analysis",
-          "Document package",
-          "Deadline control"
+          "Scenarios",
+          "Assumptions and constraints",
+          "Priorities"
         ]
       },
       {
-        "name": "Grant Ready / Donor Ready",
-        "task": "Turn an idea into a submission-ready package",
+        "name": "Technical specification",
+        "task": "Define requirements for the next stage and acceptance criteria.",
         "results": [
-          "Project concept",
-          "Budget",
-          "Impact logic",
-          "Full donor material set"
+          "Requirements",
+          "Scope boundaries",
+          "Verification criteria"
         ]
       },
       {
-        "name": "Feasibility Study Ready",
-        "task": "Obtain a document for a decision and for financing",
+        "name": "Investment preparation",
+        "task": "Prepare material for a client, investor or funding-programme decision.",
         "results": [
-          "Feasibility study",
-          "Financial model",
-          "Risks",
-          "Scenarios"
+          "Business case",
+          "Budget scenarios",
+          "Risks and phasing"
         ]
       },
       {
-        "name": "DSO Connection Ready",
-        "task": "Reduce the risks of grid connection and DSO interaction",
+        "name": "Procurement support",
+        "task": "Help compare offers against agreed technical requirements.",
         "results": [
-          "DSO interaction package",
-          "Technical conditions analysis",
-          "Connection risks",
-          "Action plan"
+          "Technical criteria",
+          "Offer comparison",
+          "Contractor questions"
         ]
       },
       {
-        "name": "BESS Ready",
-        "task": "Test whether BESS makes economic sense and prepare the next step",
+        "name": "Monitoring and verification",
+        "task": "Assess actual system operation after implementation.",
         "results": [
-          "Preliminary feasibility",
-          "Operating modes",
-          "Payback scenarios",
-          "Specification for the next stage"
-        ]
-      },
-      {
-        "name": "Energy Manager Outsource",
-        "task": "Get systematic consumption management without building a large in-house team",
-        "results": [
-          "Monthly consumption control",
-          "Reporting",
-          "Savings measures",
-          "Project portfolio"
-        ]
-      },
-      {
-        "name": "HIOS Monitor",
-        "task": "Maintain continuous monitoring of grants, tenders and regulation",
-        "results": [
-          "Digests",
-          "Templates",
-          "Trackers",
-          "Analytics",
-          "Fast access to information"
-        ]
-      },
-      {
-        "name": "ESCO contract and energy management",
-        "task": "Pay for modernisation from savings, not from the budget",
-        "results": [
-          "3-year consumption baseline",
-          "80/20 contract terms and three scenarios",
-          "Energy management system under ISO 50001",
-          "Savings verification under IPMVP",
-          "Prozorro tender package"
-        ]
-      },
-      {
-        "name": "Building energy certification",
-        "task": "Obtain the certificate and a thermal-modernisation plan required by law",
-        "results": [
-          "Energy performance calculation (class A+–F)",
-          "Building energy certificate",
-          "Thermal-modernisation recommendations",
-          "Compliance with Law 2118-VIII, DBN V.2.6-31, DSTU 9190"
-        ]
-      },
-      {
-        "name": "Regulatory monitoring and compliance",
-        "task": "Never miss a rule change that affects your site or project",
-        "results": [
-          "Monitoring of NEURC, Parliament, Cabinet, ENTSO-E",
-          "Project compliance check against the codes",
-          "Monthly review with a 'what it means for you' conclusion",
-          "Position for appeals to the DSO and the regulator"
-        ]
-      },
-      {
-        "name": "Water supply and sewerage audit",
-        "task": "Understand the real cost and losses of a water utility before decisions",
-        "results": [
-          "Express audit (30 days) or full (2–3 months)",
-          "Cost model based on the GIZ methodology with author's coefficients",
-          "Terms of reference and commercial proposal",
-          "Express report with priorities"
-        ]
-      },
-      {
-        "name": "Tariffs: calculation, revision, justification",
-        "task": "Submit a justified tariff for heat, hot water, water or sewerage",
-        "results": [
-          "Tariff structure and cost check",
-          "Calculation and revision scenarios",
-          "Compensation of tariff difference",
-          "Package for NEURC or the local council",
-          "Term: about 20 working days"
-        ]
-      },
-      {
-        "name": "Turnkey storage and solar integration",
-        "task": "Go from survey to commissioning of storage or PV without gaps between stages",
-        "results": [
-          "Survey and effect model",
-          "Design ToR under DBN A.2.2-3",
-          "Procurement and contractor organisation",
-          "Technical supervision and acceptance",
-          "Commissioning"
-        ]
-      },
-      {
-        "name": "Dashboards and data automation",
-        "task": "See consumption and the effect of measures in real time, not once a year",
-        "results": [
-          "Data collection from AMR, meters, SCADA, APIs",
-          "KPI/EnPI indicators under ISO 50006",
-          "Interactive panels for the manager and energy manager",
-          "Hosted on site or on the client's website"
-        ]
-      },
-      {
-        "name": "Training and documentation",
-        "task": "Hand knowledge to the team and give management clear reports",
-        "results": [
-          "Technical reports and analytical notes",
-          "Presentations for HOA boards, community councils, investors",
-          "Training of energy managers and responsible staff",
-          "Templates and instructions for daily work"
+          "Baseline indicators",
+          "Reports and deviations",
+          "Follow-up measures"
         ]
       }
     ],
@@ -913,7 +821,7 @@
     ],
     "digitalFooter": "The digital circuit is what makes the promise \"we close with a result\" verifiable. It is from its data that we confirm the effect after implementation.",
     "ctaTitle": "Where should you start?",
-    "ctaText": "Describe the site and the task — we'll tell you what's needed at the start and what the path to the result looks like."
+    "ctaText": "Describe the engineering task and available evidence so we can identify the preparation stage you need."
   },
   "Placeholder": {
     "business": {
@@ -938,9 +846,9 @@
     }
   },
   "Metadata": {
-    "titleDefault": "Center for Energy Efficiency — Ladyzhyn",
+    "titleDefault": "CEE — electricity, heat, water and wastewater engineering",
     "titleTemplate": "%s | CEE Ladyzhyn",
-    "description": "Energy efficiency consulting for HOAs, businesses, non-profits and homeowners in Ladyzhyn."
+    "description": "We work across electricity, heat, water supply and wastewater systems. We start with the site’s needs and evidence, compare options and set priorities before selecting equipment."
   },
   "AIAssistant": {
     "widgetLabel": "CEE Assistant",
@@ -1052,7 +960,11 @@
     "referenceMode": "Reference mode · no AI generation",
     "requestFailed": "Could not obtain a reply. Please retry or use the Leave a contact form. A chat message is not an application.",
     "rateLimited": "Too many requests in a short period. Please try later or use the contact form.",
-    "documentsConsultant": "Consult documents and sources"
+    "documentsConsultant": "Consult documents and sources",
+    "localOnly": "Local reference without AI",
+    "localOnlyHelp": "Search of site text, not a language-model answer. Works without OpenRouter; submitting a contact request requires a connection.",
+    "contactLink": "Contacts",
+    "calculatorsLink": "Calculators"
   },
   "Admin": {
     "title": "CEE Admin Panel",
@@ -1134,7 +1046,7 @@
       "title": "Billing & company details",
       "subtitle": "Legal information, invoices and payment gateways",
       "invoiceLoadError": "Could not load billing. Check your connection and sign-in, then reload the page.",
-      "invoiceValidationError": "Check the amount: it must be positive, and the currency must be a supported ISO code. Your entries are preserved.",
+      "invoiceValidationError": "Check the client name, amount, currency and other invoice fields.",
       "invoiceSaveError": "Could not save the invoice. Your entries are preserved.",
       "invoiceSaveUnknown": "Could not confirm whether the invoice was saved. Check the invoice list before retrying. Your entries are preserved.",
       "invoiceRefreshError": "The invoice was saved, but the list could not refresh. Reload the page; do not create the invoice again.",
@@ -1182,36 +1094,53 @@
     },
     "aiModels": {
       "title": "AI Models",
-      "subtitle": "Manage the assistant's models, fallback order, and token costs",
+      "subtitle": "Primary OpenRouter models: priority and indicative cost estimates. Independent backup is configured separately on the server.",
       "addNew": "+ Add model",
       "name": "Name",
       "provider": "Provider",
       "model": "Model (ID)",
       "apiKeyEnvVar": "API key env variable",
       "priority": "Priority",
-      "priorityHint": "Lower number = higher priority (used first)",
+      "priorityHint": "Lower priority is selected first; ties use the lower ID. This selects the primary model, not retries after a paid invocation.",
       "active": "Active",
       "inactive": "Disabled",
-      "default": "Default",
+      "default": "First by priority",
       "setDefault": "Set as default",
-      "inputCost": "Input cost / 1K tokens ($)",
-      "outputCost": "Output cost / 1K tokens ($)",
-      "testConnection": "Test connection",
+      "inputCost": "Estimated USD / 1K input tokens (not a cap)",
+      "outputCost": "Estimated USD / 1K output tokens (not a cap)",
+      "testConnection": "Test one call (may incur cost)",
       "testing": "Testing…",
-      "testOk": "Working",
+      "testOk": "Last test succeeded",
       "testFail": "Connection failed",
-      "noKey": "No key set in .env.local",
+      "noKey": "Credential variable is absent from server configuration",
       "edit": "Edit",
       "delete": "Delete",
       "save": "Save",
       "cancel": "Cancel",
       "usageTitle": "Usage (recent entries)",
       "usageEmpty": "No usage recorded yet",
-      "fallbackNote": "If the default model is disabled or fails, the system silently switches to the next active model by priority.",
+      "fallbackNote": "Currently one OpenRouter call is allowed per request. Active approved models are ordered by priority, then ID for ties. A failure uses labeled local reference, not another LLM. Independent backup and five-level routing are not activated. The global allowance is 20 reserved attempts per 24 hours, not 20 guaranteed answers.",
       "status": "Status",
       "responseTime": "Response time",
       "cost": "Cost",
-      "tokens": "Tokens"
+      "tokens": "Tokens",
+      "configuredNotVerified": "Configuration allowed and credential variable present; current operation and balance not verified",
+      "providerNotApproved": "This row or credential reference is not allowed for the primary OpenRouter model; independent backup is configured separately.",
+      "operationFailed": "Saving could not be confirmed. The form is preserved. Before creating again, refresh the list and check whether the record already exists.",
+      "refreshFailed": "The list could not be refreshed. If saving already completed, do not create it again: reload and verify the record first.",
+      "backupDisabled": "Independent backup is disabled.",
+      "backupEnabled": "Independent backup is enabled by server configuration; this does not verify availability.",
+      "backupPolicy": "Backup policy order: OpenRouter → OpenAI (GPT-5.6 Luna) → Anthropic (Claude Haiku 5.5) → reference material. At most one attempt per provider, up to three overall; shared limits: 20 attempts per 24 hours, two unsettled attempts, and $2 of reserved backup usage over a rolling 24-hour window. Unknown cost stays reserved until reconciliation. Taxes, tariff changes and other applications are outside this limit. Backup requires current verified tariffs and its accounting table; reference material is not an LLM answer. Tariff validation expires at 2026-11-04 00:00 UTC; backup stops from that moment until review.",
+      "backupTestTitle": "Synthetic backup AI check",
+      "backupTestWarning": "Each click is one potentially billable call with fixed synthetic text, no customer data, and up to 64 output tokens. The shared 20-attempt and $2 backup limits apply. Another click is a separate attempt, not a replay of the same charge. Reconcile unknown outcomes before trying again; there are no automatic retries.",
+      "backupTest": "Check",
+      "backupTestSuccess": "One synthetic response was received. This does not guarantee future availability or consultation quality.",
+      "backupTestUnknown": "The outcome is unknown or incomplete; billing is possible and the reservation is retained. Repeat checks on this page are blocked pending reconciliation.",
+      "backupTestDenied": "Admission denied: check authorization and available budget. Do not retry automatically.",
+      "backupTestUnconfigured": "Backup is disabled, configuration is missing, or tariff review is required.",
+      "backupTestRefusal": "The provider refused; no fallback or retry was made. Reconcile accounting before another attempt.",
+      "backupTestAccounting": "A response was received, but accounting settlement was not confirmed: the reservation remains held. Reconcile accounting first; further checks on this page are blocked.",
+      "fallbackNoteWithBackups": "For assistant chat, the first active approved OpenRouter model is selected by priority, then ID. On an eligible failure, the server may call OpenAI then Anthropic within the shared attempt and spending limits. Security refusals, access restrictions, key/organization spending restrictions and shared application limits are not bypassed. If no LLM answer is available, labeled reference material is shown. Document/digest generation remains a separate single invocation; connection-check buttons do not trigger a retry cascade either. Configuration does not verify provider availability."
     },
     "leads": {
       "title": "Leads",
@@ -1433,16 +1362,16 @@
     }
   },
   "DevelopersPage": {
-    "metaTitle": "For RES / BESS developers",
-    "metaDescription": "Technical, documentary and technological support for RES and BESS projects: grid connection, technical conditions, financial model, quality control — a bridge between the investor and the site.",
-    "heroLabel": "For RES / BESS developers",
-    "heroTitle": "A bridge between the investment and the site",
-    "heroText": "The developer brings capital, intent and deadlines. On the ground there is a grid operator, contractors, a community and real constraints. The Center stands between them: technical, documentary and technological support from technical conditions to a working system, with a guarantee that what's on paper matches what's on site.",
+    "metaTitle": "For developers and investors",
+    "metaDescription": "We work across electricity, heat, water supply and wastewater systems. We start with the site’s needs and evidence, compare options and set priorities before selecting equipment.",
+    "heroLabel": "For developers and investors",
+    "heroTitle": "Working with developers and investors on the site’s engineering systems",
+    "heroText": "CEE works with the developer or investor as the client to identify engineering needs, compare solutions and prepare a well-founded project. We cover electricity, heat, water supply and wastewater. We consider site conditions, connection requirements, operating costs and risks. Renewables and BESS are options within the relevant field.",
     "ctaPrimary": "Discuss a project",
     "ctaSecondary": "Work blocks",
     "bridgeLabel": "How it works",
     "bridgeTitle": "What passes through the Center",
-    "bridgeText": "A RES or BESS project rarely fails on equipment. It fails on grid connection, technical conditions, an unrealistic financial model and a contractor nobody controlled. That is exactly what we carry across the bridge.",
+    "bridgeText": "We connect client needs, site conditions and funding requirements, documenting uncertainties and required checks before an option is selected.",
     "bridge": {
       "from": {
         "label": "Developer / investor",
@@ -1455,78 +1384,79 @@
       "center": {
         "label": "The Center",
         "items": [
-          "Technical conditions and connection risk analysis",
-          "DSO interaction package",
-          "Technical specification and solution architecture",
-          "Financial model, scenarios, BESS operating modes",
-          "Quality control and sign-off"
+          "Survey",
+          "Concept / pre-feasibility",
+          "Technical specification",
+          "Investment preparation",
+          "Procurement support",
+          "Monitoring and verification"
         ]
       },
       "to": {
         "label": "The site",
         "items": [
-          "Distribution system operator and connection point",
-          "Contractors",
-          "Community and local authorities",
-          "Metering data after commissioning"
+          "Utility networks and connection conditions",
+          "Contractors and operating teams",
+          "Local constraints and approvals",
+          "Post-implementation verification data"
         ]
       }
     },
     "bridgeBack": "Data, reporting, result verification",
     "bridgeFooter": "This diagram is illustrative. The scope for a specific project is set after site and technical conditions analysis.",
     "guaranteesLabel": "What we answer for",
-    "guaranteesTitle": "Three guarantees",
-    "guaranteesText": "We don't sell \"support\". We answer for three things an investor cannot verify from another city.",
+    "guaranteesTitle": "Working principles",
+    "guaranteesText": "Principles used in preparation and verification; specific commitments are defined in the agreed scope.",
     "guarantees": [
       {
-        "title": "Quality",
-        "text": "The Center sets the technical requirements and signs off the work. One criterion: as in the specification, not \"as it turned out\". The contractor knows they will be checked."
+        "title": "Connected systems",
+        "text": "Electrical decisions are assessed alongside heat, water and wastewater needs."
       },
       {
-        "title": "Adaptability",
-        "text": "The solution is fitted to real constraints: connection capacity, grid regime, site condition, budget. A copy of the neighbour's configuration doesn't work here — and we don't offer it."
+        "title": "Needs-based priorities",
+        "text": "Safety, reliability, asset condition and cost determine the sequence. Electricity does not always come first."
       },
       {
-        "title": "Realism",
-        "text": "We take on what can actually be connected, built and maintained. If a project won't fly, we say so at the analysis stage — not after design money has been spent."
+        "title": "Outcome verification",
+        "text": "We agree the baseline and indicators before implementation, then check actual changes."
       }
     ],
     "blocksLabel": "Work blocks for this segment",
     "blocksTitle": "Where developers usually start",
-    "blocksText": "These are the stages from our line most often needed at the entry to a RES or BESS project. The full list and ways of working are on the services page.",
+    "blocksText": "We select stages according to project maturity and client needs. The full shared-service list is linked below.",
     "blocks": [
       {
-        "name": "DSO Connection Ready",
-        "text": "Reduce connection risk: technical conditions analysis, DSO interaction package, connection risks, action plan."
+        "name": "Survey",
+        "text": "Establish system condition and gaps in the available evidence."
       },
       {
-        "name": "BESS Ready",
-        "text": "Test whether storage makes economic sense: feasibility, operating modes, payback scenarios, next-stage specification."
+        "name": "Concept / pre-feasibility",
+        "text": "Compare technical options and preliminary economics."
       },
       {
-        "name": "Feasibility Study Ready",
-        "text": "A document for the investor's decision: feasibility study with financial model, risks and scenarios."
+        "name": "Technical specification",
+        "text": "Define requirements for the next stage and acceptance criteria."
       },
       {
-        "name": "Turnkey project",
-        "text": "From site analysis to a working system — with partner contractors, while the Center holds the technical role."
+        "name": "Investment preparation",
+        "text": "Prepare material for a client, investor or funding-programme decision."
       }
     ],
     "blocksLink": "All services and formats →",
     "ctaTitle": "Have a site or a portfolio?",
-    "ctaText": "Describe the location, approximate capacity and current project stage — we'll tell you which risks we see first and where to start."
+    "ctaText": "Describe the site or assets, engineering needs, preparation stage and funding constraints."
   },
   "DonorsPage": {
     "metaTitle": "For donors, NGOs and investors",
-    "metaDescription": "Evidence-based projects, a structured project package and a portfolio of opportunities. The Center is a bridge between funding and the community on the ground: technical support, quality control, realism.",
+    "metaDescription": "We work across electricity, heat, water supply and wastewater systems. We start with the site’s needs and evidence, compare options and set priorities before selecting equipment.",
     "heroLabel": "For donors, NGOs and investors",
-    "heroTitle": "A bridge between funding and the community on the ground",
-    "heroText": "A donor, NGO or investor needs an evidence-based project, a structured package and confidence that money turns into a result, not a report. The Center stands between funding and the place: prepares the project package, holds the technical and documentary expertise, controls contractors and returns verified data about the result.",
+    "heroTitle": "Working with the client to prepare for financing",
+    "heroText": "We help the client prepare a project for financing: define the scope of work, expected outcome and required documents. CEE does not issue loans or guarantee funding. The relevant bank or organisation decides whether to approve a loan or grant. The client may be a community, business, homeowners’ association, institution, developer or private client. We work with electricity, heat, water supply and wastewater.",
     "ctaPrimary": "Discuss cooperation",
     "ctaSecondary": "Work blocks",
     "bridgeLabel": "How it works",
     "bridgeTitle": "What passes through the Center",
-    "bridgeText": "The most common problem of a donor project is the gap between what's written in the application and what exists on site. We know the place, so the package we prepare matches the community's reality.",
+    "bridgeText": "We connect client needs, site conditions and funding requirements, documenting uncertainties and required checks before an option is selected.",
     "bridge": {
       "from": {
         "label": "Donor / NGO / investor",
@@ -1539,11 +1469,12 @@
       "center": {
         "label": "The Center",
         "items": [
-          "Project concept, budget, impact logic",
-          "Structured submission-ready package",
-          "Portfolio of opportunities in the community",
-          "Technical and documentary implementation support",
-          "Contractor control and sign-off"
+          "Survey",
+          "Concept / pre-feasibility",
+          "Technical specification",
+          "Investment preparation",
+          "Procurement support",
+          "Monitoring and verification"
         ]
       },
       "to": {
@@ -1559,46 +1490,46 @@
     "bridgeBack": "Reporting, monitoring, impact verification",
     "bridgeFooter": "This diagram is illustrative. The package composition depends on the requirements of a specific programme or investor.",
     "guaranteesLabel": "What we answer for",
-    "guaranteesTitle": "Three guarantees",
-    "guaranteesText": "For a donor, the most expensive thing is a project that looked good in the application and doesn't work on site. We answer for that not happening.",
+    "guaranteesTitle": "Working principles",
+    "guaranteesText": "Principles used in preparation and verification; specific commitments are defined in the agreed scope.",
     "guarantees": [
       {
-        "title": "Quality",
-        "text": "The Center sets the technical requirements for equipment and works, and signs them off. The contractor knows the result will be checked against metering data, not a certificate."
+        "title": "Connected systems",
+        "text": "Electrical decisions are assessed alongside heat, water and wastewater needs."
       },
       {
-        "title": "Adaptability",
-        "text": "The package is fitted to a specific programme's format and to the community's actual capacity. The same facility is packaged differently for different donors — that's normal."
+        "title": "Needs-based priorities",
+        "text": "Safety, reliability, asset condition and cost determine the sequence. Electricity does not always come first."
       },
       {
-        "title": "Realism",
-        "text": "The portfolio contains what the community can actually implement and sustain after funding ends. If a facility isn't ready, we say so before submission, not in the report."
+        "title": "Outcome verification",
+        "text": "We agree the baseline and indicators before implementation, then check actual changes."
       }
     ],
     "blocksLabel": "Work blocks for this segment",
     "blocksTitle": "Where donors usually start",
-    "blocksText": "These are the stages from our line most often needed when preparing and supporting a donor or investment project.",
+    "blocksText": "We select stages according to project maturity and client needs. The full shared-service list is linked below.",
     "blocks": [
       {
-        "name": "Grant Ready / Donor Ready",
-        "text": "Turn an idea into a submission-ready package: project concept, budget, impact logic, full material set."
+        "name": "Survey",
+        "text": "Establish system condition and gaps in the available evidence."
       },
       {
-        "name": "Feasibility Study Ready",
-        "text": "A document for the decision: feasibility study with financial model, risks and scenarios."
+        "name": "Concept / pre-feasibility",
+        "text": "Compare technical options and preliminary economics."
       },
       {
-        "name": "Energy Manager Outsource",
-        "text": "Systematic management of the result after implementation: monthly control, reporting, portfolio of next measures."
+        "name": "Technical specification",
+        "text": "Define requirements for the next stage and acceptance criteria."
       },
       {
-        "name": "HIOS Monitor",
-        "text": "Continuous monitoring of grants, tenders and regulation: digests, trackers, analytics."
+        "name": "Investment preparation",
+        "text": "Prepare material for a client, investor or funding-programme decision."
       }
     ],
     "blocksLink": "All services and formats →",
     "ctaTitle": "Looking for projects in the community?",
-    "ctaText": "Describe the programme priorities and funding format — we'll show which facilities in the community are ready and which need preparation."
+    "ctaText": "Describe the site or assets, engineering needs, preparation stage and funding constraints."
   },
   "PrivacyPage": {
     "label": "Legal",
@@ -1745,80 +1676,60 @@
   },
   "ProjectsPage": {
     "metaTitle": "Projects and results",
-    "metaDescription": "What the client receives at each stage of working with the Center and how the result is confirmed — by metering data, not a report.",
+    "metaDescription": "Examples of preparation outputs for electricity, heat, water and wastewater projects and our approach to verification.",
     "heroLabel": "Projects",
     "heroTitle": "A result you can verify",
-    "heroText": "We don't publish case studies without the client's written consent or figures without a source. Instead we show exactly what you receive at each stage — and how we make sure the working system delivers the effect that was in the calculation.",
+    "heroText": "This page describes output types and our verification approach, not completed case studies. Real projects are published only with verified evidence and client consent. Our scope covers electricity, heat, water and wastewater.",
     "artifactsLabel": "In hand",
     "artifactsTitle": "What the client receives at each stage",
-    "artifactsText": "Not an abstract consultation but a concrete product you can present to management, a donor, an investor or a procurement team.",
+    "artifactsText": "The agreed task defines the exact deliverables and level of detail.",
     "artifacts": [
       {
-        "title": "Short energy profile",
-        "text": "Where the losses are, what consumes most, what the load pattern is. The starting point for any decision.",
-        "stage": "Diagnostics"
+        "title": "Survey",
+        "text": "Establish system condition and gaps in the available evidence. Site description, Measurement plan, Risk register.",
+        "stage": "1"
       },
       {
-        "title": "Expert opinion",
-        "text": "An answer to a specific question: does it make sense, what are the risks, what next. Brief and to the point.",
-        "stage": "Diagnostics"
+        "title": "Concept / pre-feasibility",
+        "text": "Compare technical options and preliminary economics. Scenarios, Assumptions and constraints, Priorities.",
+        "stage": "2"
       },
       {
         "title": "Technical specification",
-        "text": "Solution architecture, equipment composition, requirements for works. A document you can take to a contractor.",
-        "stage": "Design"
+        "text": "Define requirements for the next stage and acceptance criteria. Requirements, Scope boundaries, Verification criteria.",
+        "stage": "3"
       },
       {
-        "title": "Feasibility study",
-        "text": "A feasibility study with a financial model, scenarios and risks — for a management or investor decision.",
-        "stage": "Design"
+        "title": "Investment preparation",
+        "text": "Prepare material for a client, investor or funding-programme decision. Business case, Budget scenarios, Risks and phasing.",
+        "stage": "4"
       },
       {
-        "title": "Grant application",
-        "text": "Project concept, budget, impact logic, a full material set in the format of a specific programme.",
-        "stage": "Financing"
+        "title": "Procurement support",
+        "text": "Help compare offers against agreed technical requirements. Technical criteria, Offer comparison, Contractor questions.",
+        "stage": "5"
       },
       {
-        "title": "Procurement package",
-        "text": "Procurement plan, specification, market analysis, documents, deadline control — without errors or delays.",
-        "stage": "Procurement"
-      },
-      {
-        "title": "DSO interaction package",
-        "text": "Technical conditions analysis, connection risks, action plan, documents for the grid operator.",
-        "stage": "Connection"
-      },
-      {
-        "title": "Financial model",
-        "text": "Operating modes, payback scenarios, tariff sensitivity — on the actual profile, not averages.",
-        "stage": "Design"
-      },
-      {
-        "title": "Analytics dashboard",
-        "text": "Consumption, generation, battery state, deviations — online, for a director, a board or a donor.",
-        "stage": "Digital circuit"
-      },
-      {
-        "title": "A working system confirmed by metering data",
-        "text": "The project closes not with a folder handed over, but with equipment that works and meter readings that match the calculation.",
-        "stage": "Result"
+        "title": "Monitoring and verification",
+        "text": "Assess actual system operation after implementation. Baseline indicators, Reports and deviations, Follow-up measures.",
+        "stage": "6"
       }
     ],
     "proofLabel": "Verifiability",
     "proofTitle": "How we confirm the result",
-    "proofText": "The effect must be visible on the meter, not in a presentation. So measurement is both at the start and at the end.",
+    "proofText": "Indicators depend on the task: resource use, reliability, temperature, pressure, losses or effluent characteristics. We define a baseline and verification method first.",
     "proof": [
       {
-        "title": "We measure \"before\"",
-        "text": "Consumption profile, metering status, connection capacity — before any works. Without this baseline, \"savings\" remain a guess."
+        "title": "Baseline",
+        "text": "Record measured data, metering quality and operating conditions before measures."
       },
       {
-        "title": "We sign off against the specification",
-        "text": "One acceptance criterion: as in the specification, not \"as it turned out\". The contractor knows the result will be checked."
+        "title": "Agreed criteria",
+        "text": "Define requirements for deliverables, work and indicators at the relevant stage."
       },
       {
-        "title": "We compare \"after\"",
-        "text": "Metering data after commissioning against the calculation. If they diverge, we find out why and fix it — instead of writing a report."
+        "title": "Change verification",
+        "text": "Compare actual data with the baseline, account for changing conditions and explain deviations."
       }
     ],
     "casesNote": "Real case studies with figures will appear on this page once the data is confirmed by metering and clients give written consent to publication. This is our rule, not a placeholder.",
@@ -1863,11 +1774,11 @@
     "loginLink": "Sign in",
     "planLabel": "Your plan",
     "dailyLimit": "{n} consultant queries per day",
-    "unlimited": "No daily limit (fair use — up to {fair} per day)",
+    "unlimited": "Personal ceiling: up to {fair} queries per day; the shared AI generation cap also applies",
     "until": "Valid until {date}",
     "upgrade": "Subscribe",
     "todayLabel": "Used today",
-    "todayText": "The allowance resets at midnight (UTC).",
+    "todayText": "The allowance resets at midnight (UTC). AI generation has a site-wide technical cap: 20 calls per rolling 24 hours and at most 2 requests with pending or uncertain outcomes. Uncertain requests may block new calls until manual reconciliation. A personal daily allowance does not guarantee generation capacity; a subscription does not bypass the shared cap.",
     "goAsk": "Go to the consultant",
     "historyTitle": "Last 10 questions (answers and sources are not stored)",
     "signOut": "Sign out",
@@ -1878,14 +1789,14 @@
     "metaDescription": "Free access to documents and digests, legislation consultant with a daily allowance, and a subscription with analytics for teams.",
     "label": "Plans",
     "title": "Access to the knowledge base",
-    "intro": "Documents and digests are open to everyone. The legislation consultant has a daily allowance, which registration and a subscription extend. Prices for paid plans are being finalised: leave a request and we will send the terms.",
+    "intro": "Documents and digests are open to everyone. Personal query allowances depend on the account and plan; AI generation is additionally constrained by shared service capacity. Paid access terms and prices are agreed on request.",
     "recommended": "For practitioners",
     "free": "Free",
     "priceTbd": "On request",
     "priceNote": "we will send the price in reply to your request",
     "perMonth": "per month",
     "askDaily": "{n} consultant queries per day",
-    "askUnlimited": "No daily limit, fair use up to {fair} per day",
+    "askUnlimited": "Personal ceiling: up to {fair} queries per day; the shared AI generation cap also applies",
     "ctaRegister": "Register",
     "ctaGoAsk": "Go to the consultant",
     "ctaRequest": "Request terms",
@@ -1924,8 +1835,8 @@
         "a": "Paid plans launch in stages. For now we agree terms individually — leave a request and we will send the price and what is included."
       },
       {
-        "q": "What does “fair use” mean?",
-        "a": "On plans without a daily limit we do not count every query, but we protect the service from automated scripts: beyond the agreed daily volume, queries may be temporarily throttled."
+        "q": "How do personal allowances and shared limits interact?",
+        "a": "AI generation has a site-wide technical cap: 20 calls per rolling 24 hours and at most 2 requests with pending or uncertain outcomes. Uncertain requests may block new calls until manual reconciliation. A personal daily allowance does not guarantee generation capacity; a subscription does not bypass the shared cap."
       },
       {
         "q": "Is a consultation a legal opinion?",
@@ -1938,7 +1849,8 @@
     ],
     "included": "Included",
     "excluded": "Not included",
-    "notImplemented": "Not implemented in the account; scope requires separate agreement."
+    "notImplemented": "Not implemented in the account; scope requires separate agreement.",
+    "capacityNote": "AI generation has a site-wide technical cap: 20 calls per rolling 24 hours and at most 2 requests with pending or uncertain outcomes. Uncertain requests may block new calls until manual reconciliation. A personal daily allowance does not guarantee generation capacity; a subscription does not bypass the shared cap."
   },
   "Knowledge": {
     "nav": {
@@ -2110,7 +2022,7 @@
       "plans": "Plans",
       "quotaLabel": "Queries today",
       "quotaLeft": "left for today",
-      "quotaUnlimited": "no daily limit",
+      "quotaUnlimited": "subject to the plan and shared generation cap",
       "planLabel": "Plan",
       "planNames": {
         "guest": "Guest",
@@ -2119,9 +2031,9 @@
         "enterprise": "Enterprise"
       },
       "upsellGuestTitle": "More queries after registering",
-      "upsellGuestText": "Free, no card: {free} queries per day instead of {guest}, history of queries and sources in your account, unlimited subscription on request.",
-      "upsellFreeTitle": "No limit and with analytics",
-      "upsellFreeText": "A subscription removes the daily limit and adds briefs for your site.",
+      "upsellGuestText": "Registration gives a personal ceiling of {free} queries per day instead of {guest}. Generation also depends on shared capacity. Paid access terms are available on request.",
+      "upsellFreeTitle": "Extended access terms",
+      "upsellFreeText": "AI generation has a site-wide technical cap: 20 calls per rolling 24 hours and at most 2 requests with pending or uncertain outcomes. Uncertain requests may block new calls until manual reconciliation. A personal daily allowance does not guarantee generation capacity; a subscription does not bypass the shared cap.",
       "accountTitle": "Your account",
       "accountLink": "History and plan",
       "disclaimer": "Answers are generated from the CEE base and are not a legal opinion. Check the primary source before deciding."
@@ -2152,8 +2064,8 @@
         "text": "Your account shows how many queries remain today and which plan is active."
       },
       {
-        "title": "Subscription without a daily limit",
-        "text": "Premium and Enterprise are activated from your account on request: no limit, analytics for your site, API access for organisations."
+        "title": "Paid access under agreed terms",
+        "text": "AI generation has a site-wide technical cap: 20 calls per rolling 24 hours and at most 2 requests with pending or uncertain outcomes. Uncertain requests may block new calls until manual reconciliation. A personal daily allowance does not guarantee generation capacity; a subscription does not bypass the shared cap."
       },
       {
         "title": "No card, no extra data",
@@ -2168,7 +2080,7 @@
     "compactItems": [
       "{free} consultant queries per day instead of {guest}",
       "History of queries and sources in your account",
-      "Subscription without a daily limit",
+      "Paid access terms on request",
       "Free, no card required"
     ]
   },
@@ -2237,7 +2149,7 @@
         "loadE": "Evening (18–22)",
         "loadN": "Night (23–7)"
       },
-      "rdnHint": "Current day-ahead prices: oree.com.ua.",
+      "rdnHint": "Assumptions are entered manually; the calculator does not load current prices. Source checked on 22 October 2026.",
       "loadHint": "Average load per segment of the day. An energy audit gives the exact profile.",
       "results": {
         "daily": "Daily effect",
@@ -2257,7 +2169,8 @@
         "soc": "State of charge, %"
       },
       "negativeNpv": "NPV is negative at an 18% discount rate: simple payback does not imply investment attractiveness.",
-      "irrUnavailable": "Not defined"
+      "irrUnavailable": "Not defined",
+      "rdnSource": "Hourly prices — Market Operator"
     },
     "arb": {
       "title": "Day-ahead market arbitrage",
@@ -2304,7 +2217,8 @@
         "payback": "Financing payback"
       },
       "ok": "Worthwhile — repaid within the term",
-      "warn": "Increase savings or term — not repaid by the end of the contract"
+      "warn": "Increase savings or term — not repaid by the end of the contract",
+      "invalidAmount": "Enter a financing amount greater than zero."
     },
     "express": {
       "title": "60-second express estimate",
@@ -2355,7 +2269,16 @@
       "note": "Preliminary estimate. Exact figures after a site survey."
     },
     "perMonth": "/month",
-    "perYear": "/year"
+    "perYear": "/year",
+    "method": {
+      "noPayback": "Payback is undefined",
+      "bessSizing": "Illustrative capacity = peak power × 2 hours. This is not equipment selection: load profile, usable depth of discharge, efficiency and reserve are required. Use the detailed BESS calculation for economics.",
+      "solar": "Illustrative assumptions: 7 m²/kW, 1150 kWh/kW per year, UAH 22000/kW. Self-consumption share is a user assumption. A forecast requires location, shading, orientation, losses and hourly demand.",
+      "illustration": "Illustrative scenarios, not current tariffs or an offer. Enter your own prices and costs. Arbitrage uses an illustrative 24-hour profile and 92% round-trip efficiency; it is a heuristic, not a guaranteed optimum. Detailed BESS uses per-stage efficiency, 2% OPEX, 1.5% degradation from year two, 18% discount and a 15-year horizon. Annual figures assume 365 identical days; taxes, financing and replacements are excluded. Charging takes priority when selected charge/discharge hours overlap.",
+      "unbalanced": "The daily cycle does not close: annual savings and investment metrics are undefined. Adjust charging/discharging hours or power.",
+      "usdRate": "Scenario exchange rate",
+      "infeasible": "Load exceeds the connection power limit. Correct the inputs; annual economics are undefined."
+    }
   },
   "Subscriptions": {
     "metaTitle": "Subscriptions and retainer services",
@@ -2390,7 +2313,7 @@
           "Automatic data collection (meters, AMR, SCADA, APIs)",
           "Dashboards for the manager and energy manager (KPI/EnPI under ISO 50006)",
           "Alerts on deviations and anomalies",
-          "Tiers: 1 site updated every 15 min · up to 3 sites every 5 min · unlimited, real time",
+          "Number of sites and update frequency are agreed for the specific service",
           "Hosted on site or on your website"
         ],
         "price": "on request"
@@ -2426,7 +2349,7 @@
     "order": "Send a request",
     "kbLabel": "Knowledge base",
     "kbTitle": "Access to documents, digests and the consultant",
-    "kbText": "This is a website subscription, not specialists’ work. Documents and digests are open to everyone. The consultant has a daily query allowance; registration raises it, and paid plans provide higher fair-use allowances.",
+    "kbText": "This is a website subscription, not specialists’ work. Documents and digests are open to everyone. The consultant has a daily query allowance; registration raises it, and paid plans provide higher fair-use allowances. AI generation has a site-wide technical cap: 20 calls per rolling 24 hours and at most 2 requests with pending or uncertain outcomes. Uncertain requests may block new calls until manual reconciliation. A personal daily allowance does not guarantee generation capacity; a subscription does not bypass the shared cap.",
     "kbPlans": [
       {
         "name": "Basic",
@@ -2492,7 +2415,7 @@
     "scenes": {
       "business": "Industrial site with illustrated energy flows",
       "community": "City and municipal energy infrastructure",
-      "osbb": "Apartment building with rooftop solar panels",
+      "osbb": "Conceptual apartment-building symbol",
       "developers": "Solar panel installation at a construction site",
       "donors": "Solar panels and battery storage near a city",
       "citizens": "Private home and energy equipment"
@@ -2503,6 +2426,134 @@
     "videoUnavailable": "Video did not start. Try the Play video button.",
     "videoIllustration": "Illustrative video",
     "videoFiguresIllustrative": "Illustrative video · figures are not a forecast",
+    "osbbConcept": "Conceptual apartment-building symbol · not a site photo",
     "privateHouseVideo": "Private-house illustration"
+  },
+  "DirectionsPage": {
+    "title": "CEE engineering fields",
+    "intro": "We work across electricity, heat, water supply and wastewater systems. We start with the site’s needs and evidence, compare options and set priorities before selecting equipment.",
+    "tasksLabel": "Tasks we assess",
+    "dataLabel": "Inputs for assessment",
+    "resultLabel": "Preparation outputs",
+    "details": "Explore: {direction}",
+    "processTitle": "From needs to verified results",
+    "scopeNote": "The scope, responsible specialists, required approvals and acceptance criteria are defined for each site. A preliminary assessment does not replace detailed design or mandatory procedures.",
+    "cta": "Discuss your site’s needs",
+    "servicesLink": "Shared services",
+    "items": [
+      {
+        "id": "electricity",
+        "title": "Electricity supply",
+        "intro": "Metering, power quality and reliability, load management and the case for on-site generation or backup.",
+        "tasks": [
+          "Consumption profiles, peak demand, losses and operating patterns.",
+          "Critical loads, acceptable interruptions and backup scenarios.",
+          "Comparison of operational measures, solar PV, BESS and other technical options."
+        ],
+        "data": "Meter readings and bills, load profiles, network diagrams, connection conditions and a list of critical equipment.",
+        "result": "Prioritised measures, cost and benefit scenarios, requirements for the next stage and a verification plan based on metering."
+      },
+      {
+        "id": "heat",
+        "title": "Heat supply",
+        "intro": "Heat sources, distribution, control and the heating requirements of buildings and industrial processes.",
+        "tasks": [
+          "Heat and fuel metering, temperature regimes and losses.",
+          "Assessment of boiler houses, heat substations, pumps and networks.",
+          "Comparison of controls, upgrades, heat recovery and heat-pump feasibility."
+        ],
+        "data": "Heat and fuel consumption, temperatures, operating schedules, building and equipment characteristics and available energy sources.",
+        "result": "A heat balance and constraints, option comparisons, an upgrade concept and verification indicators adjusted for weather and operating conditions."
+      },
+      {
+        "id": "water",
+        "title": "Water supply",
+        "intro": "Reliable water delivery, metering, pressure, losses and the energy use of pumping equipment.",
+        "tasks": [
+          "Water balances, leaks and variable demand.",
+          "Pump operation, backup and pressure control.",
+          "Water-treatment needs and quality requirements, including necessary investigations."
+        ],
+        "data": "Supply and consumption volumes, pressures, network diagrams, pump characteristics, existing analyses and user requirements.",
+        "result": "A survey and measurement plan, priorities for reducing losses and improving reliability, and requirements for the technical solution."
+      },
+      {
+        "id": "wastewater",
+        "title": "Wastewater systems",
+        "intro": "Collection, conveyance, pumping stations and preparation of treatment options suited to the site.",
+        "tasks": [
+          "Effluent volumes and composition, variable inflows and network condition.",
+          "Wastewater pumping station operation, backup and energy use.",
+          "Treatment constraints, sludge management and required approvals."
+        ],
+        "data": "Flow measurements and effluent analyses, network and facility diagrams, operating logs, incidents and applicable acceptance or discharge requirements.",
+        "result": "Required investigations, technology options and risks, upgrade phasing and requirements for subsequent design."
+      }
+    ],
+    "process": [
+      {
+        "title": "Needs",
+        "text": "Define the task, critical risks and the client’s expectations."
+      },
+      {
+        "title": "Metering and analysis",
+        "text": "Collect evidence, check its quality and establish a baseline."
+      },
+      {
+        "title": "Priorities",
+        "text": "Compare safety, reliability, cost and potential benefits."
+      },
+      {
+        "title": "Solutions",
+        "text": "Prepare a concept, specification and implementation plan for the agreed option."
+      },
+      {
+        "title": "Verification",
+        "text": "Compare measured performance with the baseline and agreed criteria."
+      }
+    ]
+  },
+  "ClimateContent": {
+    "name": "Center for Energy Efficiency",
+    "subtitle": "Energy and climate resilience for the community",
+    "home": {
+      "title": "Energy and climate resilience for communities",
+      "body": "CEE helps communities and municipal utilities prepare well-founded solutions for electricity and heat supply, water supply and wastewater services. We analyse resource consumption, infrastructure condition and facility needs, and prepare technical requirements, preliminary technical and economic assessments, and project concepts. The aim is more reliable services, lower resource losses and a prepared portfolio of modernisation projects.",
+      "cta": "For communities and municipal utilities"
+    },
+    "community": {
+      "title": "From community needs to prepared projects",
+      "intro": "We consider electricity, heat, water supply and wastewater services as interconnected systems. Solutions for individual facilities need to take account of community needs, infrastructure condition and the practical requirements of implementation.",
+      "cta": "Discuss your community’s needs",
+      "helper": "Describe the facility or system, the main problem and the baseline information available.",
+      "developmentTitle": "Development direction: climate considerations",
+      "development": "The energy hub development concept envisages consideration of climate risks, assessment of opportunities to reduce emissions, and preparation of pilot solutions together with the community and specialist partners.",
+      "financing": "Project preparation and support in seeking funding do not guarantee a grant or investment.",
+      "items": [
+        {
+          "title": "An analytical foundation",
+          "text": "Data on resource consumption, costs, technical condition and facility needs help identify problems and modernisation priorities."
+        },
+        {
+          "title": "Preparing solutions",
+          "text": "Technical requirements, preliminary technical and economic assessments, and project concepts provide a basis for comparing options and planning next steps."
+        },
+        {
+          "title": "A project portfolio",
+          "text": "For promising projects, we structure the need, expected outcome, preliminary cost, risks and readiness status. This provides a basis for discussions with partners and preparation for seeking funding."
+        },
+        {
+          "title": "Roles and responsibilities",
+          "text": "CEE provides analytical and technical support within an agreed scope. The client sets priorities and allocates resources; specialist work is performed by appropriately qualified professionals. The scope of work and team are agreed for each project."
+        }
+      ]
+    },
+    "about": {
+      "title": "Energy hub concept for the Ladyzhyn community",
+      "body": "The concept envisages a partnership platform bringing together the community, businesses, experts, educational and research institutions, and technology and financial partners around energy transition projects. The Center for Energy Efficiency is proposed as its organisational and expert core.",
+      "development": "The energy hub development concept envisages consideration of climate risks, assessment of opportunities to reduce emissions, and preparation of pilot solutions together with the community and specialist partners.",
+      "status": "Development direction",
+      "clarification": "This describes a development concept, not the establishment of a hub or approval of its status."
+    }
   }
 }

@@ -20,7 +20,7 @@ export function LanguageSwitcher() {
       locale: next as (typeof routing.locales)[number],
     });
     const search = typeof window !== "undefined" ? window.location.search : "";
-    window.location.assign(href + search);
+    window.location.assign(href + search + window.location.hash);
   }
 
   return (

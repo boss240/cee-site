@@ -1,3 +1,7 @@
+import { NewsDigestChannel } from "@/components/ui/NewsDigestChannel";
+// Preserve published-content freshness independently of the shared contacts cache.
+export const revalidate = 600;
+
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { alternatesFor } from "@/lib/seo";
@@ -27,6 +31,8 @@ export default async function DigestsPage({ searchParams }: { searchParams: Prom
         <h1 className="mt-2">{t("title")}</h1>
         <p className="mt-4 max-w-2xl text-[var(--color-fg-muted)]">{t("intro")}</p>
       </Reveal>
+
+      <div className="mt-8"><NewsDigestChannel locale={locale} /></div>
 
       {/* Два потоки: енергетика України і місцеві новини Ладижина та громади */}
       <div role="tablist" aria-label={t("kindsAria")} className="mt-8 flex gap-2">

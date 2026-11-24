@@ -1,5 +1,11 @@
 {
   "crons": [
-    { "path": "/api/cron/fetch-news", "schedule": "0 5 * * *" }
-  ]
+    {
+      "path": "/api/cron/fetch-news",
+      "schedule": "0 5 * * *"
+    }
+  ],
+  "framework": "nextjs",
+  "installCommand": "mkdir -p .probe-home && env -i PATH=\"$PATH\" HOME=\"$PWD/.probe-home\" npm ci --ignore-scripts --no-audit --no-fund --userconfig=\"$PWD/.probe-home/.npmrc\" --globalconfig=/dev/null --cache \"$PWD/.probe-cache\"",
+  "buildCommand": "bash scripts/native-build/check-production-target.sh && env -i PATH=\"$PATH\" HOME=\"$PWD/.probe-home\" bash scripts/native-build/build-native.sh && npm run build"
 }

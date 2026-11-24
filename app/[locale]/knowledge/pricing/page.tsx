@@ -27,6 +27,7 @@ export default async function PricingPage() {
         <p className="mono-label text-[var(--color-brand-text)]">{t("label")}</p>
         <h1 className="mt-2">{t("title")}</h1>
         <p className="mt-4 max-w-2xl text-[var(--color-fg-muted)]">{t("intro")}</p>
+        <p className="mt-4 max-w-3xl rounded-lg border border-[var(--color-line)] p-4 text-sm text-[var(--color-fg-muted)]">{t("capacityNote")}</p>
       </Reveal>
 
       <ul className="mt-10 grid gap-5 lg:grid-cols-3">

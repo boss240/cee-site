@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { CheckCircle2, AlertTriangle } from "lucide-react";
+import { leadAttempt, completeLeadAttempt, postLead } from "@/lib/leadAttempt";
 import { usePathname } from "@/i18n/navigation";
 
 type Errors = Partial<Record<"name" | "contact" | "message", string>>;
@@ -23,6 +24,7 @@ export function ContactForm({ initialMessage = "", initialSegment }: { initialMe
   const [website, setWebsite] = useState(""); // honeypot — люди не бачать
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
+  const submitting = useRef(false);
 
   function validate(): Errors {
     const e: Errors = {};
@@ -38,30 +40,27 @@ export function ContactForm({ initialMessage = "", initialSegment }: { initialMe
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submitting.current) return;
     const found = validate();
     setErrors(found);
     if (Object.keys(found).length > 0) return;
 
+    submitting.current = true;
     setStatus("sending");
     try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          email: email.trim(),
-          phone: phone.trim(),
-          segment,
-          message: message.trim(),
-          source: "form",
-          page: pathname,
-          locale,
-          website,
-        }),
+      const scope = `form:${locale}:${pathname}`;
+      const body = JSON.stringify({
+        name: name.trim(), email: email.trim(), phone: phone.trim(), segment,
+        message: message.trim(), source: "form", page: pathname, locale, website,
       });
+      const key = await leadAttempt(scope, body);
+      const res = await postLead(body, key);
+      if (res.ok) completeLeadAttempt(scope, key);
       setStatus(res.ok ? "sent" : "error");
     } catch {
       setStatus("error");
+    } finally {
+      submitting.current = false;
     }
   }
 

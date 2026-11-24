@@ -1,5 +1,7 @@
 "use client";
 
+import { safeExternalUrl } from "@/lib/safeExternalUrl";
+
 import { useCallback, useEffect, useState } from "react";
 import { Plus, Pencil, Trash2, Loader2, ExternalLink, Eye, EyeOff, History, ShieldCheck, Bot } from "lucide-react";
 
@@ -229,7 +231,7 @@ export function DocumentsManager({ labels: l, kindNames, statusNames }: { labels
                   {updates.map((u) => (
                     <li key={u.id} className="flex items-start gap-3 text-sm">
                       <span className="mono-label shrink-0 text-[var(--color-fg-placeholder)]">{u.date.slice(0, 10)}</span>
-                      <span className="flex-1">{u.note}{u.sourceUrl && <a href={u.sourceUrl} target="_blank" rel="noreferrer" className="ml-2 text-xs text-[var(--color-brand-text)] underline">↗</a>}</span>
+                      <span className="flex-1">{u.note}{safeExternalUrl(u.sourceUrl) && <a href={safeExternalUrl(u.sourceUrl)!} target="_blank" rel="noreferrer" className="ml-2 text-xs text-[var(--color-brand-text)] underline">↗</a>}</span>
                       <button type="button" onClick={() => removeUpdate(u.id)} aria-label={l.delete} className="text-[var(--color-fg-placeholder)] hover:text-red-500"><Trash2 size={14} aria-hidden /></button>
                     </li>
                   ))}

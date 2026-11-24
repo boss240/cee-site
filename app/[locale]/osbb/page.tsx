@@ -9,8 +9,8 @@ import { AudienceScene } from "@/components/ui/AudienceScene";
 
 type Props = { params: Promise<{ locale: string }> };
 
-/** Статична сторінка, ISR: оновлення раз на 10 хв */
-export const revalidate = 600;
+/** Статична сторінка: запит після години запускає ISR (SWR), не таймер */
+export const revalidate = 3600;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;

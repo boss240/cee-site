@@ -9,7 +9,7 @@ seedDatabase()
     for (const line of log) console.log(line);
     process.exit(0);
   })
-  .catch((err) => {
-    console.error(err);
+  .catch(() => {
+    console.error("seed_failed_check_configuration");
     process.exit(1);
   });

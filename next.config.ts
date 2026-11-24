@@ -43,9 +43,11 @@ const nextConfig: NextConfig = {
   // Для Docker: мінімальний самодостатній білд у .next/standalone
   output: isVercel ? undefined : "standalone",
   poweredByHeader: false,
+  serverExternalPackages: ["pg", "pg-native", "libpq"],
   // Шрифти для og-картинки та PDF-рахунків читаються з диска під час виконання —
   // гарантуємо, що вони потраплять у бандл serverless-функцій на Vercel.
   outputFileTracingIncludes: {
+    "/*": ["./node_modules/libpq/build/Release/addon.node", "./node_modules/libpq/build/Release/libpq.so.5"],
     "/[locale]/opengraph-image": ["./assets/fonts/**"],
     "/api/admin/invoices/[id]/pdf": ["./assets/fonts/**"],
   },

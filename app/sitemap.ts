@@ -1,10 +1,11 @@
+import { siteOrigin } from "@/lib/siteUrl";
 import type { MetadataRoute } from "next";
 import { NAV } from "@/lib/nav";
 import { listPublishedPosts } from "@/lib/blog/queries";
 import { searchDocuments } from "@/lib/knowledge/documents";
 import { listPublishedDigests } from "@/lib/knowledge/digests";
 
-const base = (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/$/, "");
+const base = siteOrigin();
 const locales = ["uk", "en"] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

@@ -1,5 +1,6 @@
 import { drizzle } from "drizzle-orm/node-postgres";
-import { Pool } from "pg";
+import type { Pool } from "pg";
+import { createDatabasePool } from "./pool";
 import * as schema from "./schema";
 
 // Next.js завантажує .env.local автоматично для самого застосунку, але
@@ -17,15 +18,7 @@ declare global {
 
 const pool =
   global.__ceePgPool ??
-  new Pool({
-    connectionString: process.env.DATABASE_URL,
-    // Хмарний PostgreSQL (Neon, Supabase, Render…) вимагає TLS. Локальний — ні.
-    ssl:
-      process.env.DATABASE_SSL === "true" || /neon\.tech|supabase\.co|render\.com|sslmode=require/.test(process.env.DATABASE_URL ?? "")
-        ? { rejectUnauthorized: false }
-        : undefined,
-    max: Number(process.env.DATABASE_POOL_MAX ?? 5),
-  });
+  createDatabasePool(process.env.DATABASE_URL);
 
 if (process.env.NODE_ENV !== "production") {
   global.__ceePgPool = pool;

@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { getAssistantReply } from "@/lib/ai-factory";
+import { answerFromKnowledgeBase } from "@/lib/knowledgeBase";
+import { resilientReply } from "@/lib/assistant/resilientReply";
+import type { ChatResult } from "@/lib/ai-factory";
 import { clientIp, tooManyRequests } from "@/lib/rateLimit";
 
 /**
  * POST /api/chat
  * body: { message: string; locale?: "uk" | "en"; page?: string; history?: {role, text}[] }
  *
- * Відповідає через багатомодельний AI-фактор (lib/ai-factory.ts): пробує
- * активні моделі за пріоритетом з БД, і якщо жодна недоступна (немає ключа,
- * помилка мережі/провайдера) — тихо переходить на локальну базу знань.
- * Історія діалогу передається моделі, щоб помічник пам'ятав контекст розмови.
+ * At most one paid OpenRouter attempt. Any failure uses explicitly labeled static
+ * local reference. The AI/DB module is imported inside the guarded boundary.
  */
 const BodySchema = z.object({
   message: z.string().trim().min(1).max(2000),
@@ -33,7 +33,14 @@ export async function POST(req: NextRequest) {
   }
   const { message, locale, page, history } = parsed.data;
 
-  const { reply, source, modelName } = await getAssistantReply(message, locale, page, history);
+  const { reply, source, modelName, fallbackReason } = await resilientReply<ChatResult>(
+    async () => {
+      const { getAssistantReply } = await import("@/lib/ai-factory");
+      return getAssistantReply(message, locale, page, history);
+    },
+    () => ({ reply: answerFromKnowledgeBase(message, locale).answer,
+      source: "knowledge-base", fallbackReason: "runtime_unavailable" }),
+  );
 
-  return NextResponse.json({ reply, source, modelName });
+  return NextResponse.json({ reply, source, modelName, fallbackReason });
 }

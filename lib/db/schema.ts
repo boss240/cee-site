@@ -1,5 +1,9 @@
+import { sql } from "drizzle-orm";
 import {
   pgTable,
+  uuid,
+  check,
+  index,
   text,
   varchar,
   integer,
@@ -147,6 +151,16 @@ export const invoices = pgTable("invoices", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+// Rows must be provisioned explicitly after auditing issued/deleted historical numbers.
+export const invoiceNumberCounters = pgTable("invoice_number_counters", {
+  year: integer("year").primaryKey(),
+  lastNumber: integer("last_number").notNull(),
+  provisionedAt: timestamp("provisioned_at").notNull().defaultNow(),
+}, table => [
+  check("invoice_counter_year_check", sql`${table.year} BETWEEN 1 AND 9999`),
+  check("invoice_counter_nonnegative_check", sql`${table.lastNumber} >= 0`),
+]);
+
 // ---------- Платіжні шлюзи (зберігаємо лише статус підключення, ключі — в .env) ----------
 export const paymentGateways = pgTable("payment_gateways", {
   id: serial("id").primaryKey(),
@@ -172,6 +186,14 @@ export const leads = pgTable("leads", {
   adminNote: text("admin_note"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+/** Minimal replay receipts survive lead deletion without retaining contact or transcript fields. */
+export const leadSubmissions = pgTable("lead_submissions", {
+  keyHash: varchar("key_hash", { length: 64 }).primaryKey(),
+  payloadHash: varchar("payload_hash", { length: 64 }).notNull(),
+  leadId: integer("lead_id").references(() => leads.id, { onDelete: "set null" }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 // ---------- Блог ----------
@@ -293,4 +315,46 @@ export const usageEvents = pgTable("usage_events", {
   kind: varchar("kind", { length: 24 }).notNull().default("ask"),
   question: text("question"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
-});
+}, (table) => [
+  index("usage_ask_user_date_idx").on(table.userId, table.createdAt).where(sql`${table.kind} = 'ask'`),
+  index("usage_ask_guest_date_idx").on(table.anonKey, table.createdAt).where(sql`${table.kind} = 'ask' AND ${table.userId} IS NULL`),
+]);
+
+/** Global AI safety reservations, independent of end-user plan quotas. */
+export const aiCallReservations = pgTable("ai_call_reservations", {
+  id: uuid("id").primaryKey(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
+  settledAt: timestamp("settled_at", { withTimezone: true }),
+}, table => [
+  index("ai_call_recent_idx").on(table.createdAt),
+  index("ai_call_unsettled_idx").on(table.id).where(sql`${table.settledAt} IS NULL`),
+]);
+
+// Durable delivery metadata only: message bodies/transcripts remain in leads.
+// Applied only by the separately reviewed additive patch; not the historical ledger.
+import { uniqueIndex } from "drizzle-orm/pg-core";
+export const leadNotificationDeliveries = pgTable("lead_notification_deliveries", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  eventId: uuid("event_id").notNull(),
+  leadId: integer("lead_id").references(() => leads.id, { onDelete: "set null" }),
+  channel: text("channel").notNull(),
+  recipient: text("recipient").notNull(),
+  status: text("status").notNull().default("pending"),
+  attempts: integer("attempts").notNull().default(0),
+  availableAt: timestamp("available_at", { withTimezone: true }).notNull().defaultNow(),
+  leaseUntil: timestamp("lease_until", { withTimezone: true }),
+  leaseToken: uuid("lease_token"),
+  errorCode: text("error_code"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+}, table => [
+  uniqueIndex("lead_notification_identity_idx").on(table.eventId, table.channel, table.recipient),
+  index("lead_notification_ready_idx").on(table.availableAt, table.id).where(sql`${table.status} IN ('pending', 'retry')`),
+  index("lead_notification_lease_idx").on(table.leaseUntil).where(sql`${table.status} = 'leased'`),
+  check("lead_notification_channel_check", sql`${table.channel} IN ('email_client', 'email_center', 'telegram')`),
+  check("lead_notification_status_check", sql`${table.status} IN ('pending', 'retry', 'leased', 'accepted', 'blocked', 'uncertain', 'dead', 'cancelled')`),
+  check("lead_notification_attempts_check", sql`${table.attempts} >= 0`),
+  check("lead_notification_lease_check", sql`(${table.status} = 'leased' AND ${table.leaseUntil} IS NOT NULL AND ${table.leaseToken} IS NOT NULL) OR (${table.status} <> 'leased' AND ${table.leaseUntil} IS NULL AND ${table.leaseToken} IS NULL)`),
+  check("lead_notification_recipient_check", sql`length(${table.recipient}) <= 320 AND (${table.recipient} <> '' OR ${table.status} IN ('blocked', 'cancelled'))`),
+  check("lead_notification_error_check", sql`${table.errorCode} IS NULL OR ${table.errorCode} ~ '^[a-z][a-z0-9_]{0,63}$'`),
+]);

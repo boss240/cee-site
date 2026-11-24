@@ -4,6 +4,7 @@
  * послуг. Запуск: npm run db:seed або POST /api/setup (на хостингу, з SETUP_TOKEN).
  */
 import bcrypt from "bcryptjs";
+import { requireSeedAdminPassword } from "./seedCredentials";
 import { db, schema } from "./index";
 import { eq } from "drizzle-orm";
 import { SEED_POSTS } from "./seedPosts";
@@ -13,7 +14,7 @@ import { SEED_SOURCES, SEED_DIGEST } from "./seedKnowledge";
 export async function seedDatabase(): Promise<string[]> {
   const log: string[] = [];
   const adminEmail = process.env.SEED_ADMIN_EMAIL || "admin@cee.org.ua";
-  const adminPassword = process.env.SEED_ADMIN_PASSWORD || "ChangeMe123!";
+  const adminPassword = requireSeedAdminPassword();
 
   const existingAdmin = await db
     .select()

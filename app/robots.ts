@@ -1,8 +1,10 @@
+import { siteOrigin, isPreviewDeployment } from "@/lib/siteUrl";
 import type { MetadataRoute } from "next";
 
-const base = (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/$/, "");
+const base = siteOrigin();
 
 export default function robots(): MetadataRoute.Robots {
+  if (isPreviewDeployment()) return { rules: [{ userAgent: "*", disallow: "/" }] };
   return {
     rules: [{ userAgent: "*", allow: "/", disallow: ["/uk/admin", "/en/admin", "/api/"] }],
     sitemap: `${base}/sitemap.xml`,

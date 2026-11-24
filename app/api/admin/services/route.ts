@@ -15,7 +15,10 @@ export async function POST(req: NextRequest) {
   const guard = await requireAdminSession();
   if (guard.response) return guard.response;
 
-  const body = await req.json();
+  const body = await req.json().catch(() => null);
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+  }
   const [created] = await db
     .insert(schema.services)
     .values({

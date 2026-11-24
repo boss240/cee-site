@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteOrigin, isPreviewDeployment } from "@/lib/siteUrl";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -29,7 +30,8 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "Metadata" });
 
   return {
-    metadataBase: new URL((process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/$/, "")),
+    metadataBase: new URL(siteOrigin()),
+    ...(isPreviewDeployment() ? { robots: { index: false, follow: false } } : {}),
     title: {
       default: t("titleDefault"),
       template: t("titleTemplate"),
@@ -72,7 +74,7 @@ export default async function RootLayout({
   const t = await getTranslations({ locale, namespace: "Header" });
   const tMeta = await getTranslations({ locale, namespace: "Metadata" });
   const contacts = await getPublicContacts();
-  const siteUrl = (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  const siteUrl = siteOrigin();
 
   // Структуровані дані для локальної видачі Google (назва, адреса, телефон беруться з профілю в адмінці)
   const jsonLd = {

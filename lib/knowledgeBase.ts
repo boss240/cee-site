@@ -3,7 +3,7 @@
  *
  * Це "RAG-lite": підбір відповіді локальним пошуком за ключовими словами.
  * Коли є ключ LLM, ці ж тексти сайту потрапляють у системний промпт
- * (lib/assistant/siteContext.ts), а база знань лишається тихим фолбеком.
+ * (lib/assistant/siteContext.ts), а локальна довідка явно позначається як негенеративна відповідь.
  *
  * Правило: відповіді не містять цифр, цін і строків, яких немає на сайті.
  */
@@ -18,17 +18,21 @@ type Locale = "uk" | "en";
 
 const ENTRIES: Record<Locale, KBEntry[]> = {
   uk: [
+    {"id": "wastewater", "keywords": ["водовідвед", "каналіза", "стічн", "очисн"], "answer": "Водовідведення — один із напрямів ЦЕЕ. Починаємо з вихідних даних про стоки, стан мереж і обладнання та обмеження об'єкта; далі порівнюємо технічні рішення, готуємо проєкт і супроводжуємо впровадження. Склад робіт, вимоги до очищення й показники результату погоджуємо для конкретного об'єкта — без вигаданих нормативів чи гарантованої економії."},
+    {"id": "water", "keywords": ["вода", "води", "водопостач", "водозабезпеч", "питна вода", "водяний", "витоки води"], "answer": "ЦЕЕ працює з водопостачанням: аналізуємо облік і баланс води, витоки, тиск, режим роботи насосів та стан мереж. На цій основі визначаємо заходи, проєктні рішення й спосіб перевірки результату. Для оцінки потрібні доступні показники споживання, опис мережі та задача власника."},
+    {"id": "heat", "keywords": ["теплопостач", "опалення", "котельн", "тепломереж", "тепловий пункт", "тепло"], "answer": "ЦЕЕ працює з теплопостачанням та опаленням: облік тепла, аналіз втрат, режими обладнання, мережі й регулювання. Починаємо з даних та обстеження, порівнюємо варіанти, проєктуємо й супроводжуємо реалізацію. Результат перевіряємо за погодженими показниками з урахуванням погоди та режиму використання об'єкта."},
+    {"id": "electricity", "keywords": ["електри", "електро", "електропостач"], "answer": "Електрика — один із напрямів інженерії ЦЕЕ, поряд із теплом, водою та водовідведенням. Облік, оцінка й аналіз електроспоживання часто дають найшвидший старт для пошуку результату. Перевіряємо навантаження, потужність, мережі та режими роботи; СЕС і BESS розглядаємо як можливі рішення за даними об'єкта, а не як обов'язкову покупку."},
     {
       id: "pricing",
       keywords: ["вартість", "ціна", "скільки коштує", "оплата", "прайс", "бюджет", "дорого"],
       answer:
-        "Типового цінника немає — обсяг залежить від стану об'єкта, наявних даних і того, наскільки глибоко заходимо: від разового експертного висновку до проєкту під ключ. Найшвидший шлях до цифри — залишити ім'я і телефон або пошту просто тут у чаті: фахівець подивиться на вашу ситуацію і відповість протягом робочого дня.",
+        "Типового цінника немає — обсяг залежить від стану об'єкта, наявних даних і того, наскільки глибоко заходимо: від разового експертного висновку до проєкту під ключ. Найшвидший шлях до цифри — залишити ім'я і телефон або пошту просто тут у чаті: фахівець подивиться на вашу ситуацію та уточнить наступні кроки.",
     },
     {
       id: "how-it-works",
       keywords: ["як це працює", "порядок дій", "етапи", "процес", "з чого почати", "як почати", "перший крок"],
       answer:
-        "Починаємо з обстеження і вимірювання: профіль споживання, стан обліку, потужність приєднання. Далі розрахунок і моделювання, потім проєктне рішення — і впровадження під ключ: закупівля, підрядники-партнери, контроль робіт, перевірка результату за даними обліку. Ви маєте справу з одним вікном, а не з п'ятьма виконавцями.",
+        "Починаємо з обстеження і вимірювання: профілі споживання ресурсів, стан обліку, мереж і обладнання, обмеження об’єкта. Далі розрахунок і моделювання, потім проєктне рішення — і впровадження під ключ: закупівля, підрядники-партнери, контроль робіт, перевірка результату за даними обліку. Ви маєте справу з одним вікном, а не з п'ятьма виконавцями.",
     },
     {
       id: "single-window",
@@ -40,7 +44,7 @@ const ENTRIES: Record<Locale, KBEntry[]> = {
       id: "manager",
       keywords: ["менеджер", "зв'язатися", "консультація", "телефон", "людина", "передзвон", "фахівець", "спеціаліст", "поговорити"],
       answer:
-        "Найшвидше — залишити контакт просто тут: натисніть «Залишити контакт», вкажіть ім'я і телефон або пошту. Фахівець Центру зв'яжеться протягом робочого дня. Якщо зручніше — є форма на сторінці «Контакти».",
+        "Найшвидше — залишити контакт просто тут: натисніть «Залишити контакт», вкажіть ім'я і телефон або пошту. Звернення передамо фахівцю Центру. Якщо зручніше — є форма на сторінці «Контакти».",
     },
     {
       id: "support",
@@ -52,7 +56,7 @@ const ENTRIES: Record<Locale, KBEntry[]> = {
       id: "osbb-programs",
       keywords: ["осбб", "програма", "грант", "кредит", "фінансування", "гріндім", "енергодім", "5-7-9", "компенсація", "співвласник"],
       answer:
-        "Для ОСББ на сторінці «ОСББ» зібрані чинні програми фінансування з умовами, вимогами й датою перевірки даних — ми не публікуємо того, чого не перевірили. Типовий шлях: зняти профіль споживання, перевірити потужність приєднання, провести збори співвласників, підготувати документи, обрати джерело фінансування, подати заявку. Із усім цим Центр допомагає.",
+        "Для ОСББ на сторінці «ОСББ» є інформація про підготовку проєктів. Ця локальна довідка не перевіряє актуальність програм фінансування: чинні умови та доступність коштів потрібно уточнювати в адміністратора відповідної програми. Типовий шлях: зняти профіль споживання, перевірити потужність приєднання, провести збори співвласників, підготувати документи, обрати джерело фінансування, подати заявку. Із усім цим Центр допомагає.",
     },
     {
       id: "ses-bess",
@@ -88,7 +92,7 @@ const ENTRIES: Record<Locale, KBEntry[]> = {
       id: "citizens",
       keywords: ["приватний будинок", "власник", "дім", "дах", "мій будинок", "для себе", "домашня"],
       answer:
-        "Для приватного будинку робимо те саме, що й для великих об'єктів, лише в меншому масштабі: рахуємо під ваш профіль споживання і дах, підбираємо СЕС і накопичувач, доводимо до працюючої системи під ключ. Якщо вам уже щось запропонували підрядники — можемо дати експертну думку до того, як ви заплатите.",
+        "Для приватного будинку робимо те саме, що й для великих об'єктів, лише в меншому масштабі: аналізуємо електрику, опалення, водопостачання й водовідведення та погоджуємо пріоритети. СЕС і накопичувач розглядаємо за потребою та даними об’єкта. Якщо вам уже щось запропонували підрядники — можемо дати експертну думку до того, як ви заплатите.",
     },
     {
       id: "documents",
@@ -100,7 +104,7 @@ const ENTRIES: Record<Locale, KBEntry[]> = {
       id: "about",
       keywords: ["хто ви", "що таке цее", "центр", "ладижин", "про вас", "чим займаєтесь"],
       answer:
-        "Центр енергоефективності в Ладижині — технічний експертний центр, що обстежує, рахує, проєктує і доводить енергетичні рішення до працюючої системи для громад, бізнесу, ОСББ, девелоперів, донорів і приватних власників. Одне вікно замість п'яти виконавців: ви отримуєте результат, а не папку документів.",
+        "Центр енергоефективності в Ладижині — технічний експертний центр, що обстежує, рахує, проєктує і доводить інженерні рішення з електрики, тепла, водопостачання та водовідведення до працюючої системи для громад, бізнесу, ОСББ, девелоперів, донорів і приватних власників. Одне вікно замість п'яти виконавців: ви отримуєте результат, а не папку документів.",
     },
     {
       id: "energy-audit",
@@ -110,17 +114,21 @@ const ENTRIES: Record<Locale, KBEntry[]> = {
     },
   ],
   en: [
+    {"id": "wastewater", "keywords": ["wastewater", "sewer", "sewage", "effluent"], "answer": "Wastewater is one of CEE's engineering areas. We start with discharge data, network and equipment condition, and site constraints, then compare options, design and support implementation. Treatment requirements, scope and outcome measures are agreed for the specific site; we do not invent standards or guarantee savings."},
+    {"id": "water", "keywords": ["water", "water supply", "water provision", "water leak", "drinking water"], "answer": "CEE works on water supply: water metering and balances, leaks, pressure, pump operation and network condition. These findings guide the measures, design and verification of results. To scope the work, we need available consumption data, a network description and the owner's objective."},
+    {"id": "heat", "keywords": ["heating", "heat pump", "heat supply", "boiler", "district heat", "thermal"], "answer": "CEE works on heating and heat supply: heat metering, losses, equipment operation, networks and controls. We start with data and a survey, compare options, design and support implementation. Results are assessed against agreed measures, accounting for weather and how the site is used."},
+    {"id": "electricity", "keywords": ["electricity", "electrical", "power supply"], "answer": "Electricity is one of CEE's engineering areas alongside heating, water supply and wastewater. Metering, assessment and analysis of electricity use often provide the quickest starting point for finding improvements. We assess loads, capacity, networks and operating patterns; solar and BESS are options justified by site data, not mandatory purchases."},
     {
       id: "pricing",
       keywords: ["price", "cost", "how much", "payment", "quote", "budget", "expensive"],
       answer:
-        "There is no standard price list — scope depends on the state of the site, the data available and how deep we go: from a one-off expert opinion to a turnkey project. The fastest way to a number is to leave a name and phone or email right here in the chat: a specialist will look at your situation and reply within one business day.",
+        "There is no standard price list — scope depends on the state of the site, the data available and how deep we go: from a one-off expert opinion to a turnkey project. The fastest way to a number is to leave a name and phone or email right here in the chat: a specialist will look at your situation and clarify the next steps.",
     },
     {
       id: "how-it-works",
       keywords: ["how does it work", "process", "steps", "stages", "where to start", "first step"],
       answer:
-        "We start with a survey and measurement: consumption profile, metering status, connection capacity. Then calculation and modelling, then a design solution — and turnkey implementation: procurement, partner contractors, works control, result verification against metering data. You deal with a single window, not five contractors.",
+        "We start with a survey and measurement: resource consumption profiles, metering, networks, equipment and site constraints. Then calculation and modelling, then a design solution — and turnkey implementation: procurement, partner contractors, works control, result verification against metering data. You deal with a single window, not five contractors.",
     },
     {
       id: "single-window",
@@ -132,7 +140,7 @@ const ENTRIES: Record<Locale, KBEntry[]> = {
       id: "manager",
       keywords: ["manager", "contact", "consultation", "phone", "talk to a person", "call me", "specialist"],
       answer:
-        "The fastest way is to leave a contact right here: press \"Leave a contact\", enter a name and a phone or email. A Center specialist will get back to you within one business day. The form on the Contacts page works too.",
+        "The fastest way is to leave a contact right here: press \"Leave a contact\", enter a name and a phone or email. Your enquiry will be passed to a Center specialist. The form on the Contacts page works too.",
     },
     {
       id: "support",
@@ -144,7 +152,7 @@ const ENTRIES: Record<Locale, KBEntry[]> = {
       id: "osbb-programs",
       keywords: ["hoa", "program", "programme", "grant", "loan", "financing", "grindim", "energodim", "co-owners"],
       answer:
-        "For HOAs, the HOAs page lists the current financing programmes with conditions, requirements and the date the data was verified — we don't publish what we haven't checked. The typical path: measure the consumption profile, check connection capacity, hold a co-owners' meeting, prepare documents, choose a funding source, submit. The Center helps with all of it.",
+        "For HOAs, the HOAs page describes project preparation. This local reference does not verify current funding programmes: confirm current terms and availability with the programme administrator. The typical path: measure the consumption profile, check connection capacity, hold a co-owners' meeting, prepare documents, choose a funding source, submit. The Center helps with all of it.",
     },
     {
       id: "ses-bess",
@@ -180,7 +188,7 @@ const ENTRIES: Record<Locale, KBEntry[]> = {
       id: "citizens",
       keywords: ["private house", "my house", "homeowner", "roof", "for myself", "home"],
       answer:
-        "For a private house we do the same as for large sites, just at a smaller scale: we size to your consumption profile and roof, select solar and storage, and carry it through to a working system, turnkey. If contractors have already made you an offer, we can give an expert opinion before you pay.",
+        "For a private house we do the same as for large sites, just at a smaller scale: we assess electricity, heating, water supply and wastewater and agree priorities. Solar and storage are considered where supported by the site data and needs. If contractors have already made you an offer, we can give an expert opinion before you pay.",
     },
     {
       id: "documents",
@@ -192,7 +200,7 @@ const ENTRIES: Record<Locale, KBEntry[]> = {
       id: "about",
       keywords: ["who are you", "what is cee", "the center", "ladyzhyn", "about you", "what do you do"],
       answer:
-        "The Center for Energy Efficiency in Ladyzhyn is a technical expert center that surveys, calculates, designs and carries energy solutions through to a working system for communities, businesses, HOAs, developers, donors and private owners. A single window instead of five contractors: you get a result, not a folder of documents.",
+        "The Center for Energy Efficiency in Ladyzhyn is a technical expert center that surveys, calculates, designs and carries electricity, heating, water supply and wastewater solutions through to a working system for communities, businesses, HOAs, developers, donors and private owners. A single window instead of five contractors: you get a result, not a folder of documents.",
     },
     {
       id: "energy-audit",
@@ -204,8 +212,8 @@ const ENTRIES: Record<Locale, KBEntry[]> = {
 };
 
 const NO_MATCH: Record<Locale, string> = {
-  uk: "Гарне питання — і чесна відповідь: у мене немає точних даних, щоб на нього відповісти, а вигадувати я не буду. Залиште контакт тут у чаті (ім'я і телефон або пошта) — фахівець Центру відповість протягом робочого дня. Або спитайте про порядок дій, програми для ОСББ, СЕС і накопичувачі, формати співпраці.",
-  en: "Good question — and the honest answer is that I don't have exact data to answer it, and I won't make it up. Leave a contact here in the chat (a name and a phone or email) — a Center specialist will reply within one business day. Or ask about the process, HOA programmes, solar and storage, or ways of working.",
+  uk: "Гарне питання — і чесна відповідь: у мене немає точних даних, щоб на нього відповісти, а вигадувати я не буду. Залиште контакт тут у чаті (ім'я і телефон або пошта) — щоб фахівець Центру міг уточнити вашу задачу. Або спитайте про порядок дій, електрику, тепло, водопостачання й водовідведення, СЕС і накопичувачі або формати співпраці.",
+  en: "Good question — and the honest answer is that I don't have exact data to answer it, and I won't make it up. Leave a contact here in the chat (a name and a phone or email) — so a Center specialist can clarify your task. Or ask about the process, electricity, heating, water supply, wastewater, solar and storage, or ways of working.",
 };
 
 function normalize(s: string) {
@@ -215,7 +223,7 @@ function normalize(s: string) {
 export function answerFromKnowledgeBase(
   message: string,
   locale: Locale
-): { answer: string; matched: boolean } {
+): { answer: string; matched: boolean; topic: string | null } {
   const entries = ENTRIES[locale] ?? ENTRIES.uk;
   const q = normalize(message);
 
@@ -223,7 +231,14 @@ export function answerFromKnowledgeBase(
   for (const entry of entries) {
     let score = 0;
     for (const kw of entry.keywords) {
-      if (q.includes(normalize(kw))) score += kw.split(" ").length;
+      const needle = normalize(kw);
+      // Ukrainian entries intentionally contain stems; English keywords are whole words.
+      // Never match "water" inside "wastewater" or "heat" inside "cheat".
+      const escaped = needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const boundary = locale === "en" ? "(?![\\p{L}\\p{N}])" : "";
+      if (new RegExp(`(?:^|[^\\p{L}\\p{N}])${escaped}${boundary}`, "u").test(q)) {
+        score += kw.split(" ").length;
+      }
     }
     if (score > 0 && (!best || score > best.score)) {
       best = { entry, score };
@@ -231,7 +246,7 @@ export function answerFromKnowledgeBase(
   }
 
   if (best) {
-    return { answer: best.entry.answer, matched: true };
+    return { answer: best.entry.answer, matched: true, topic: best.entry.id };
   }
-  return { answer: NO_MATCH[locale] ?? NO_MATCH.uk, matched: false };
+  return { answer: NO_MATCH[locale] ?? NO_MATCH.uk, matched: false, topic: null };
 }

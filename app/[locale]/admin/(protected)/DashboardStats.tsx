@@ -215,7 +215,7 @@ export function DashboardStats({ labels }: { labels: Labels }) {
         <p className="font-semibold">{labels.errorLog}</p>
         <p className="mt-2 text-sm text-[var(--color-fg-muted)]">
           {hasErrors
-            ? `${stats?.errorsLast24h} помилок AI-провайдерів за останні 24 години (система автоматично перемкнулась на резервну модель)`
+            ? `${stats?.errorsLast24h} помилок AI-провайдерів за останні 24 години. Повторний платний виклик автоматично не запускається; перевірте безпечні коди діагностики.`
             : labels.noErrors}
         </p>
         {stats && stats.totalCostUsd > 0 && (

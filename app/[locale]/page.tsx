@@ -1,8 +1,6 @@
+import { NewsDigestChannel } from "@/components/ui/NewsDigestChannel";
+import { ClimateContent, ClimateBrandIntroduction } from "@/components/ui/ClimateContent";
 import {
-  Ruler,
-  Calculator,
-  FileCode2,
-  Wrench,
   Users,
   Factory,
   Building2,
@@ -24,12 +22,13 @@ import { Ticker } from "@/components/ui/Ticker";
 import { SystemDiagram } from "@/components/ui/SystemDiagram";
 import { GeneralHeroVideo } from "@/components/ui/GeneralHeroVideo";
 import { DeferredEnergyField } from "@/components/ui/DeferredEnergyField";
+import { EngineeringDirections, EngineeringProcess } from "@/components/ui/EngineeringDirections";
+import { CompetencyCards } from "@/components/ui/CompetencyCards";
 import { HomeFresh } from "@/components/home/HomeFresh";
 
 const WHY_ICONS = [Gauge, Timer, Receipt, ShieldCheck];
 /* Порядок збігається з HomePage.segments: громади, бізнес, ОСББ, девелопери, донори, власники */
 const SEGMENT_ICONS = [Users, Factory, Building2, BatteryCharging, HandCoins, HomeIcon];
-const COMPETENCY_ICONS = [Ruler, Calculator, FileCode2, Wrench];
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -50,7 +49,6 @@ export default async function HomePage({ params }: Props) {
 
   const whyItems = t.raw("whyItems") as { title: string; text: string }[];
   const segments = t.raw("segments") as { href: string; title: string; text: string }[];
-  const competencies = t.raw("competencies") as { n: string; title: string; text: string }[];
   const ticker = t.raw("ticker") as string[];
   const heroStats = t.raw("heroStats") as { value: string; label: string }[];
 
@@ -70,6 +68,7 @@ export default async function HomePage({ params }: Props) {
           </div>
 
           <div className="hero-in" style={{ animationDelay: "80ms" }}>
+            <ClimateBrandIntroduction />
             <h1 className="hero-title max-w-5xl">
               {t("heroTitlePrefix")}{" "}
               <span className="hero-highlight">{t("heroTitleHighlight")}</span>
@@ -91,7 +90,7 @@ export default async function HomePage({ params }: Props) {
                 {t("ctaPrimary")}
               </Link>
               <Link
-                href="/osbb"
+                href="/directions"
                 className="rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)]/70 px-7 py-3.5 font-semibold text-[var(--color-brand-text)] backdrop-blur transition hover:bg-[var(--color-surface)]"
               >
                 {t("ctaSecondary")}
@@ -121,6 +120,13 @@ export default async function HomePage({ params }: Props) {
         >
           <ChevronDown size={20} />
         </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <p className="mono-label text-[var(--color-brand-text)]">{t("directionsLabel")}</p>
+        <h2 className="mt-2">{t("directionsTitle")}</h2>
+        <EngineeringDirections />
+        <EngineeringProcess />
       </section>
 
       {/* Чому електроенергія */}
@@ -214,35 +220,7 @@ export default async function HomePage({ params }: Props) {
             </p>
           </Reveal>
 
-          <ul className="mt-10 grid gap-5 sm:grid-cols-2">
-            {competencies.map(({ n, title, text }, i) => {
-              const Icon = COMPETENCY_ICONS[i];
-              return (
-                <Reveal as="li" key={n} delay={i * 90}>
-                  <div className="lift h-full rounded-xl border border-[var(--color-line)] bg-[var(--color-bg)] p-6">
-                    <div className="flex items-center justify-between">
-                      <span
-                        aria-hidden="true"
-                        className="flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--color-line)] text-[var(--color-brand-text)]"
-                      >
-                        <Icon size={20} />
-                      </span>
-                      <span
-                        aria-hidden="true"
-                        className="mono-label text-[var(--color-fg-placeholder)]"
-                      >
-                        {n}
-                      </span>
-                    </div>
-                    <h3 className="mt-4">{title}</h3>
-                    <p className="mt-2 text-sm text-[var(--color-fg-muted)]">
-                      {text}
-                    </p>
-                  </div>
-                </Reveal>
-              );
-            })}
-          </ul>
+          <CompetencyCards />
         </div>
       </section>
 
@@ -287,7 +265,12 @@ export default async function HomePage({ params }: Props) {
       </section>
 
       {/* Свіжі новини й статті — з БД, за 10 хв кешу ISR */}
+      <section className="mx-auto max-w-6xl px-4 py-10">
+        <NewsDigestChannel locale={locale} />
+      </section>
       <HomeFresh locale={locale} />
+
+      <ClimateContent variant="home" />
 
       {/* CTA */}
       <section className="mx-auto max-w-6xl px-4 py-20">

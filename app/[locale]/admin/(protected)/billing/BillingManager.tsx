@@ -137,7 +137,7 @@ export function BillingManager({ labels: l }: { labels: Labels }) {
         return;
       }
       if (!response.ok) {
-        setInvoiceError(response.status === 400 ? l.invoiceValidationError : l.invoiceSaveError);
+        setInvoiceError(response.status === 400 ? l.invoiceValidationError : response.status === 503 ? l.invoiceSaveUnknown : l.invoiceSaveError);
         return;
       }
       setAddingInvoice(false);

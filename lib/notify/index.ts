@@ -1,3 +1,4 @@
+import { siteOrigin } from "@/lib/siteUrl";
 import { randomUUID } from "node:crypto";
 import { isEmailConfigured, notifyRecipients, sendEmail } from "./email";
 import { isTelegramConfigured, sendTelegram } from "./telegram";
@@ -11,7 +12,7 @@ export type NotifyReport = { clientEmail: ChannelStatus; centerEmail: ChannelSta
 /** No contact details, content, provider errors, tokens or message IDs in logs. */
 export async function notifyNewLead(lead: LeadForMail, attemptId = randomUUID()): Promise<NotifyReport> {
   const started = Date.now();
-  const url = (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  const url = siteOrigin();
   const report: NotifyReport = { clientEmail: "skipped", centerEmail: "skipped", telegram: "skipped" };
   console.info(JSON.stringify({ event: "lead_notification_started", leadId: lead.id, attemptId }));
   await Promise.all([

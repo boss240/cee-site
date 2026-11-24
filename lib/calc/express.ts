@@ -12,32 +12,30 @@ function requirePercentage(value: number) {
  */
 export function expressBess(consMwhMonth: number, peakKw: number, tariff: number) {
   requireNonnegative(consMwhMonth, peakKw, tariff);
-  if (consMwhMonth === 0 || peakKw === 0) return {
-    bessKwh: 0, peakShaveMonth: 0, arbYear: 0, yearly: 0, capex: 0, payback: 0, consMwhMonth, feasible: false,
-  };
-  const bessKwh = Math.round(peakKw * 2); // 2 год розряду на пік
-  const peakShaveMonth = Math.round((peakKw * 0.3 * tariff * 30 * 4) / 1000) * 1000; // ~30 % піку, 4 год/день
-  const arbYear = Math.round((bessKwh * 0.85 * 3.5 * 365) / 1000) * 1000; // спред ~3,5 грн
-  const yearly = peakShaveMonth * 12 + arbYear;
-  const capex = bessKwh * 4500;
-  return { bessKwh, peakShaveMonth, arbYear, yearly, capex, payback: yearly > 0 ? capex / yearly : 0, consMwhMonth, feasible: true };
+  // Two-hour illustrative nameplate sizing, not an economic or engineering recommendation.
+  const bessKwh = peakKw * 2;
+  if (!Number.isFinite(bessKwh)) throw new RangeError("Result exceeds numeric range");
+  return { bessKwh: consMwhMonth > 0 ? bessKwh : 0, consMwhMonth, feasible: consMwhMonth > 0 && peakKw > 0 };
+
 }
 
 export function expressSolar(roofM2: number, daytimePct: number, tariff: number) {
   requireNonnegative(roofM2, tariff);
   requirePercentage(daytimePct);
-  const kwp = Math.round(roofM2 / 7); // ~7 м² на 1 кВт
-  const gen = Math.round(kwp * 1150); // кВт·год/рік для України
-  const selfUse = Math.round((gen * Math.min(daytimePct, 95)) / 100);
-  const save = Math.round((selfUse * tariff) / 1000) * 1000;
+  const kwp = roofM2 / 7; // ~7 м² на 1 кВт
+  const gen = kwp * 1150; // Illustrative specific yield, not a location-specific forecast
+  const selfUse = gen * daytimePct / 100;
+  const save = selfUse * tariff;
   const capex = kwp * 22000;
-  return { kwp, gen, selfUse, save, capex, payback: save > 0 ? capex / save : 0 };
+  requireNonnegative(kwp, gen, selfUse, save, capex, save > 0 ? capex / save : 0);
+  return { kwp, gen, selfUse, save, capex, payback: save > 0 && capex > 0 ? capex / save : null };
 }
 
 export function expressDsm(consMwhMonth: number, shiftPct: number, diffUah: number) {
   requireNonnegative(consMwhMonth, diffUah);
   requirePercentage(shiftPct);
   const shifted = (consMwhMonth * 1000 * shiftPct) / 100; // кВт·год/міс
-  const saveMonth = Math.round((shifted * diffUah) / 1000) * 1000;
+  const saveMonth = shifted * diffUah;
+  requireNonnegative(shifted, saveMonth, saveMonth * 12);
   return { shifted, saveMonth, saveYear: saveMonth * 12 };
 }

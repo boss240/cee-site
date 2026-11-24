@@ -7,7 +7,7 @@ import { authOptions, type SessionUser } from "./options";
  * Публічний користувач (role "user") сюди не проходить.
  */
 export async function requireAdminSession() {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions).catch(() => null);
   const role = (session?.user as SessionUser | undefined)?.role;
   if (!session || role !== "admin") {
     return { session: null, response: NextResponse.json({ error: "Unauthorized" }, { status: 401 }) };
@@ -17,8 +17,8 @@ export async function requireAdminSession() {
 
 /** Сесія публічного користувача (для бази знань). Повертає null для гостя. */
 export async function getUserSession() {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions).catch(() => null);
   const u = session?.user as SessionUser | undefined;
-  if (!session || !u) return null;
+  if (!session || !u || !["admin", "user"].includes(u.role ?? "")) return null;
   return { session, user: u };
 }

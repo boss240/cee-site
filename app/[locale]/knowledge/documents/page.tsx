@@ -1,3 +1,7 @@
+// Preserve published-content freshness independently of the shared contacts cache.
+export const revalidate = 600;
+
+import { SourceLink } from "@/components/ui/SourceLink";
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { alternatesFor } from "@/lib/seo";
@@ -103,9 +107,9 @@ export default async function DocumentsPage({ searchParams }: Props) {
                   <div className="mt-4 flex items-center justify-between gap-3 border-t border-[var(--color-line)] pt-3 text-xs text-[var(--color-fg-placeholder)]">
                     <span>{d.issuer ?? ""}{d.checkedAt ? ` · ${t("checked")} ${fmt(d.checkedAt)}` : ""}</span>
                     {d.sourceUrl && (
-                      <a href={d.sourceUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-[var(--color-brand-text)] hover:underline">
+                      <SourceLink href={d.sourceUrl} locale={locale} className="inline-flex items-center gap-1 text-[var(--color-brand-text)] hover:underline">
                         {t("source")} <ExternalLink size={12} aria-hidden />
-                      </a>
+                      </SourceLink>
                     )}
                   </div>
                 </article>

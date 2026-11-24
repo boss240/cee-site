@@ -1,3 +1,5 @@
+import { ServiceCatalogCards } from "@/components/ui/ServiceCatalogCards";
+import { serviceDescriptions } from "@/lib/serviceDescriptions";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { alternatesFor } from "@/lib/seo";
@@ -15,8 +17,8 @@ const WINDOW_ICONS = [CircleDot, Handshake, CheckCheck];
 
 type Props = { params: Promise<{ locale: string }> };
 
-/** Статична сторінка, ISR: оновлення раз на 10 хв */
-export const revalidate = 600;
+/** Статична сторінка: запит після години запускає ISR (SWR), не таймер */
+export const revalidate = 3600;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -77,7 +79,7 @@ export default async function ServicesPage({ params }: Props) {
               const Icon = WINDOW_ICONS[i] ?? CircleDot;
               return (
                 <Reveal as="li" key={item.title} delay={i * 90}>
-                  <div className="lift h-full rounded-xl border border-[var(--color-line)] bg-[var(--color-bg)] p-6">
+                  <div className="h-full rounded-xl border border-[var(--color-line)] bg-[var(--color-bg)] p-6">
                     <span
                       aria-hidden="true"
                       className="flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--color-line)] text-[var(--color-brand-text)]"
@@ -106,7 +108,7 @@ export default async function ServicesPage({ params }: Props) {
           {formats.map((format, i) => (
             <Reveal as="li" key={format.title} delay={i * 70}>
               <div
-                className={`lift flex flex-col gap-3 rounded-xl border bg-[var(--color-bg)] p-5 sm:flex-row sm:items-center sm:gap-6 ${
+                className={`flex flex-col gap-3 rounded-xl border bg-[var(--color-bg)] p-5 sm:flex-row sm:items-center sm:gap-6 ${
                   format.main
                     ? "border-[var(--color-brand)] shadow-lg shadow-emerald-900/10"
                     : "border-[var(--color-line)]"
@@ -151,36 +153,7 @@ export default async function ServicesPage({ params }: Props) {
             <p className="mt-4 max-w-2xl text-[var(--color-fg-muted)]">{t("productsText")}</p>
           </Reveal>
 
-          <ul className="mt-10 grid gap-5 lg:grid-cols-2">
-            {products.map((product, i) => (
-              <Reveal as="li" key={product.name} delay={(i % 2) * 90}>
-                <article className="lift flex h-full flex-col rounded-xl border border-[var(--color-line)] bg-[var(--color-bg)] p-6">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <h3 className="font-semibold text-[var(--color-fg)]">{product.name}</h3>
-                    <span aria-hidden="true" className="mono-label text-[var(--color-fg-placeholder)]">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-
-                  <p className="mt-3 text-sm text-[var(--color-fg-muted)]">{product.task}</p>
-
-                  <div className="mt-5 border-t border-[var(--color-line)] pt-4">
-                    <p className="mono-label text-[var(--color-brand-text)]">{t("resultLabel")}</p>
-                    <ul className="mt-3 flex flex-wrap gap-2">
-                      {product.results.map((result) => (
-                        <li
-                          key={result}
-                          className="rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-1 text-xs text-[var(--color-fg-muted)]"
-                        >
-                          {result}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </ul>
+          <ServiceCatalogCards products={products} descriptions={serviceDescriptions(locale)} />
 
           <Reveal delay={120}>
             <p className="mt-8 max-w-3xl border-l-2 border-[var(--color-brand)] pl-5 text-sm text-[var(--color-fg-muted)]">

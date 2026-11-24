@@ -1,6 +1,5 @@
 import { generateWithModels } from "@/lib/ai-factory";
 import { retrieveForAsk, type DocRow } from "./documents";
-import { draftKnowledgeCandidate } from "./autoDraft";
 
 export type AskCitation = { slug: string; title: string; number: string | null; kind: string };
 export type AskAnswer = {
@@ -28,12 +27,7 @@ export async function answerQuestion(question: string, locale: "uk" | "en"): Pro
   const citations: AskCitation[] = docs.map((d) => ({ slug: d.slug, title: d.title, number: d.number, kind: d.kind }));
 
   if (docs.length === 0) {
-    // Прогалина в базі: жодного документа ЦЕЕ за цим питанням. Не чекаємо
-    // на відповідь (не блокуємо й не сповільнюємо користувача) — паралельно
-    // просимо AI підготувати чернетку майбутньої статті на перевірку
-    // фахівцю. Так база документів поповнюється сама з реальних питань
-    // відвідувачів, а не тільки вручну.
-    void draftKnowledgeCandidate(question, locale).catch(() => {});
+    // A retrieval miss must not trigger a hidden paid generation or database write.
     return {
       mode: "retrieval",
       citations: [],
@@ -48,7 +42,7 @@ export async function answerQuestion(question: string, locale: "uk" | "en"): Pro
     locale,
     page: "knowledge/ask",
     maxTokens: 1200,
-    system: `Ти консультант Центру енергоефективності (ЦЕЕ) з енергетичного законодавства України. Відповідай ${locale === "en" ? "англійською" : "українською"} у Markdown.
+    system: `Ти консультант Центру енергоефективності (ЦЕЕ) з нормативних вимог України до електрики, теплопостачання, водопостачання та водовідведення. Відповідай ${locale === "en" ? "англійською" : "українською"} у Markdown.
 Правила:
 - Спирайся ТІЛЬКИ на надані витяги з документів. Якщо у витягах немає відповіді — так і скажи, і порадь, куди дивитися (первинне джерело, фахівець ЦЕЕ).
 - Коли посилаєшся на документ, вказуй його ідентифікатор у квадратних дужках, як у витягу: наприклад [zakon-2019-viii]. Ідентифікатор пиши точно.
@@ -69,8 +63,8 @@ export async function answerQuestion(question: string, locale: "uk" | "en"): Pro
   });
   const head =
     locale === "en"
-      ? "AI drafting is not enabled on this site yet, so here are the documents from the CEE base that match your question, with their key points:"
-      : "AI-формулювання відповіді на сайті ще не увімкнено, тому нижче — документи з бази ЦЕЕ, що стосуються вашого питання, з ключовими положеннями:";
+      ? "An AI-generated answer is unavailable for this request, so here are the documents from the CEE base that match your question, with their key points:"
+      : "AI-відповідь на цей запит недоступна, тому нижче — документи з бази ЦЕЕ, що стосуються вашого питання, з ключовими положеннями:";
   const tail =
     locale === "en"
       ? "Open a document card for the summary, the change log and the link to the primary source. For a project-specific answer, contact a CEE specialist."

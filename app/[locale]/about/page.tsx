@@ -1,3 +1,4 @@
+import { ClimateContent, ClimateBrandIntroduction } from "@/components/ui/ClimateContent";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { alternatesFor } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -8,8 +9,8 @@ import { DeferredEnergyField } from "@/components/ui/DeferredEnergyField";
 
 type Props = { params: Promise<{ locale: string }> };
 
-/** Статична сторінка, ISR: оновлення раз на 10 хв */
-export const revalidate = 600;
+/** Статична сторінка: запит після години запускає ISR (SWR), не таймер */
+export const revalidate = 3600;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -33,6 +34,7 @@ export default async function AboutPage({ params }: Props) {
         <div aria-hidden="true" className="hero-vignette absolute inset-0" />
         <div className="relative mx-auto max-w-5xl px-4 py-16 sm:py-24">
           <p className="mono-label text-[var(--color-brand-text)]">{t("label")}</p>
+          <ClimateBrandIntroduction />
           <h1 className="mt-3">{t("title")}</h1>
           <p className="mt-5 max-w-2xl text-lg text-[var(--color-fg-muted)]">
             {t("intro")}
@@ -78,6 +80,8 @@ export default async function AboutPage({ params }: Props) {
           </dl>
         </div>
       </section>
+
+      <ClimateContent variant="about" />
 
       <section className="mx-auto max-w-5xl px-4 pb-16">
         <Reveal>

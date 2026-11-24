@@ -1,12 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Battery, TrendingUp, Landmark, Zap } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { bessDispatch, bessEco, bessVerdict, rdnProfile, loadProfile } from "@/lib/calc/bess";
 import { arbitrage, type ArbProfile } from "@/lib/calc/arbitrage";
-import { finance } from "@/lib/calc/finance";
+import { financePreview } from "@/lib/calc/finance";
 import { expressBess, expressSolar, expressDsm } from "@/lib/calc/express";
 
 type Tab = "bess" | "arb" | "finance" | "express";
@@ -21,11 +21,11 @@ const field = "w-full rounded-lg border border-[var(--color-line)] bg-[var(--col
 const card = "rounded-xl border border-[var(--color-line)] bg-[var(--color-bg)] p-5";
 const verdictCls: Record<string, string> = { loss: "text-red-700 dark:text-red-400", high: "text-[var(--color-brand-text)]", ok: "text-[var(--color-accent-text)]", long: "text-red-700 dark:text-red-400" };
 
-function Num({ id, label, unit, value, onChange, step = 1, min = 0, max = 1e9 }: { id: string; label: string; unit?: string; value: number; onChange: (v: number) => void; step?: number; min?: number; max?: number }) {
+function Num({ id, label, unit, value, onChange, step = 1, min = 0, max = 1e9, preserveInvalid = false }: { id: string; label: string; unit?: string; value: number; onChange: (v: number) => void; step?: number; min?: number; max?: number; preserveInvalid?: boolean }) {
   return (
     <label htmlFor={id} className="block">
       <span className="mb-1 block text-xs font-semibold text-[var(--color-fg-muted)]">{label}{unit ? <span className="ml-1 font-normal text-[var(--color-fg-placeholder)]">({unit})</span> : null}</span>
-      <input id={id} type="number" inputMode="decimal" className={field} value={Number.isFinite(value) ? value : ""} step={step} min={min} max={max} onChange={(e) => { const n = Number(e.target.value); onChange(Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : min); }} />
+      <input id={id} type="number" inputMode="decimal" className={field} value={Number.isFinite(value) ? value : ""} step={step} min={min} max={max} aria-invalid={preserveInvalid && !(value > 0) ? true : undefined} aria-describedby={preserveInvalid && !(value > 0) ? `${id}-error` : undefined} onChange={(e) => { const n = preserveInvalid && e.target.value === "" ? NaN : Number(e.target.value); onChange(preserveInvalid ? (Number.isFinite(n) ? Math.min(max, n) : NaN) : (Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : min)); }} />
     </label>
   );
 }
@@ -73,8 +73,9 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
   const t = useTranslations("Calculators");
   const locale = useLocale();
   const [tab, setTab] = useState<Tab>(initialTab);
-  const fmt = (n: number, d = 0) => n.toLocaleString(locale === "en" ? "en-GB" : "uk-UA", { maximumFractionDigits: d, minimumFractionDigits: d });
-  const uah = (n: number) => `₴ ${fmt(n)}`;
+  const tabsId = useId();
+  const fmt = (n: number, d?: number) => n.toLocaleString(locale === "en" ? "en-GB" : "uk-UA", { maximumFractionDigits: d ?? 3, minimumFractionDigits: d ?? 0 });
+  const uah = (n: number) => Math.abs(n) > 0 && Math.abs(n) < 0.01 ? `${n < 0 ? "−" : ""}₴ < ${fmt(0.01, 2)}` : `₴ ${fmt(n, 2)}`;
 
   // ---- BESS ----
   const [b, setB] = useState({ cap: 200, inv: 100, gridLim: 100, rdnLim: 50, nCharge: 4, nDischarge: 4, gridFee: 5.3, capexPer: 8000, eff: 92.7, night: 8700, half: 1250, peak: 8700, loadD: 50, loadE: 53, loadN: 30 });
@@ -86,13 +87,13 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
   const bv = bessVerdict(bess.eco);
 
   // ---- Arbitrage ----
-  const [a, setA] = useState({ gridLimit: 80, baseLoad: 30, profile: "office" as ArbProfile, gridFee: 5.3, capexUsd: 280 });
-  const arb = useMemo(() => arbitrage({ gridLimit: a.gridLimit, baseLoad: a.baseLoad, profile: a.profile, gridFee: a.gridFee, capexUsdPerKwh: a.capexUsd }), [a]);
+  const [a, setA] = useState({ gridLimit: 80, baseLoad: 30, profile: "office" as ArbProfile, gridFee: 5.3, capexUsd: 280, usdRate: 41.5 });
+  const arb = useMemo(() => arbitrage({ gridLimit: a.gridLimit, baseLoad: a.baseLoad, profile: a.profile, gridFee: a.gridFee, capexUsdPerKwh: a.capexUsd, usdRate: a.usdRate }), [a]);
   const av = arb.dailyP <= 0 ? "loss" : arb.payback <= 4.5 ? "high" : arb.payback <= 7 ? "ok" : "long";
 
   // ---- Finance ----
   const [f, setF] = useState({ amount: 500, rate: 6, years: 7, savings: 120 });
-  const fin = useMemo(() => finance({ amount: f.amount * 1000, ratePct: f.rate, years: f.years, annualSavings: f.savings * 1000 }), [f]);
+  const fin = useMemo(() => financePreview({ amount: f.amount * 1000, ratePct: f.rate, years: f.years, annualSavings: f.savings * 1000 }), [f]);
 
   // ---- Express ----
   const [e1, setE1] = useState({ cons: 100, peak: 200, tariff: 5.3, done: false });
@@ -112,12 +113,25 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
     <div>
       <div role="tablist" aria-label={t("title")} className="flex gap-2 overflow-x-auto pb-2 [scrollbar-width:none]">
         {TABS.map(({ id, Icon }) => (
-          <button key={id} role="tab" type="button" aria-selected={tab === id} onClick={() => setTab(id)} className={`inline-flex shrink-0 items-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-semibold transition ${tab === id ? "border-[var(--color-brand)] bg-[var(--color-brand)] text-white" : "border-[var(--color-line)] text-[var(--color-fg-muted)] hover:bg-[var(--color-surface)]"}`}>
+          <button key={id} id={`${tabsId}-${id}`} role="tab" type="button" aria-selected={tab === id}
+            aria-controls={`${tabsId}-panel`} tabIndex={tab === id ? 0 : -1}
+            onKeyDown={(event) => {
+              const index = TABS.findIndex((item) => item.id === id);
+              const next = event.key === "ArrowRight" ? (index + 1) % TABS.length
+                : event.key === "ArrowLeft" ? (index + TABS.length - 1) % TABS.length
+                : event.key === "Home" ? 0 : event.key === "End" ? TABS.length - 1 : null;
+              if (next === null) return;
+              event.preventDefault();
+              setTab(TABS[next].id);
+              event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[next]?.focus();
+            }} onClick={() => setTab(id)} className={`inline-flex shrink-0 items-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-semibold transition ${tab === id ? "border-[var(--color-brand)] bg-[var(--color-brand)] text-white" : "border-[var(--color-line)] text-[var(--color-fg-muted)] hover:bg-[var(--color-surface)]"}`}>
             <Icon size={16} aria-hidden />{t(`tabs.${id}`)}
           </button>
         ))}
       </div>
 
+      <div id={`${tabsId}-panel`} role="tabpanel" aria-labelledby={`${tabsId}-${tab}`} tabIndex={0}>
+      <p className="mt-4 text-sm text-[var(--color-fg-muted)]">{t("method.illustration")}</p>
       {tab === "bess" && (
         <section className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
           <div className="space-y-5">
@@ -143,7 +157,9 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
                 <Num id="b-half" label={t("bess.fields.half")} unit={u("uahMwh")} value={b.half} onChange={bindB("half")} step={50} />
                 <Num id="b-peak" label={t("bess.fields.peak")} unit={u("uahMwh")} value={b.peak} onChange={bindB("peak")} step={50} />
               </div>
-              <p className="mt-2 text-xs text-[var(--color-fg-placeholder)]">{t("bess.rdnHint")}</p>
+              <p className="mt-2 text-xs text-[var(--color-fg-placeholder)]">{t("bess.rdnHint")}{" "}
+                <a href="https://www.oree.com.ua/index.php/pricectr" target="_blank" rel="noopener noreferrer" className="text-[var(--color-brand-text)] underline underline-offset-2">{t("bess.rdnSource")}</a>
+              </p>
             </div>
             <div className={card}>
               <p className="mono-label mb-3 text-[var(--color-brand-text)]">{t("bess.groups.load")}</p>
@@ -156,16 +172,16 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
             </div>
           </div>
           <div className={`${card} lg:sticky lg:top-24 lg:self-start`}>
-            <p className={`text-lg font-bold ${verdictCls[bv]}`}>{t(`verdict.${bv}`, { pay: bess.eco.pay.toFixed(1) })}</p>
+            <p className={`text-lg font-bold ${verdictCls[bv]}`}>{!bess.eco.feasible ? t("method.infeasible") : !bess.eco.balanced ? t("method.unbalanced") : bess.eco.capex === 0 ? t("method.noPayback") : t(`verdict.${bv}`, { pay: bess.eco.pay.toFixed(1) })}</p>
             <p className="mt-1 text-xs text-[var(--color-fg-muted)]">{t("bess.dispatch", { c: bess.eco.chargeHours, d: bess.eco.dischargeHours })}</p>
-            {bess.eco.npv < 0 && <p role="status" className="mt-3 text-sm text-[var(--color-accent-text)]">{t("bess.negativeNpv")}</p>}
+            {bess.eco.balanced && bess.eco.feasible && bess.eco.npv < 0 && <p role="status" className="mt-3 text-sm text-[var(--color-accent-text)]">{t("bess.negativeNpv")}</p>}
             <dl className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
               <Stat label={t("bess.results.daily")} value={uah(bess.eco.daily)} accent />
-              <Stat label={t("bess.results.yearly")} value={uah(bess.eco.yearly)} accent />
+              <Stat label={t("bess.results.yearly")} value={bess.eco.balanced && bess.eco.feasible ? uah(bess.eco.yearly) : "—"} accent />
               <Stat label={t("bess.results.capex")} value={uah(bess.eco.capex)} />
               <Stat label={t("bess.results.pay")} value={bess.eco.pay > 0 ? `${bess.eco.pay.toFixed(1)} ${u("years")}` : "—"} />
-              <Stat label={t("bess.results.npv")} value={`${bess.eco.npv >= 0 ? "+" : ""}${uah(bess.eco.npv)}`} />
-              <Stat label={t("bess.results.irr")} value={bess.eco.irr === null ? t("bess.irrUnavailable") : `${(bess.eco.irr * 100).toFixed(1)}%`} />
+              <Stat label={t("bess.results.npv")} value={bess.eco.balanced && bess.eco.feasible ? `${bess.eco.npv >= 0 ? "+" : ""}${uah(bess.eco.npv)}` : "—"} />
+              <Stat label={t("bess.results.irr")} value={!bess.eco.balanced || !bess.eco.feasible || bess.eco.irr === null ? t("bess.irrUnavailable") : `${(bess.eco.irr * 100).toFixed(1)}%`} />
               <Stat label={t("bess.results.cycEff")} value={`${(bess.eco.cycEff * 100).toFixed(1)}%`} />
               <Stat label={t("bess.results.yld")} value={`${bess.eco.yld.toFixed(2)} ${u("uahKwh")}`} />
             </dl>
@@ -190,16 +206,17 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
                 </select>
               </label>
               <Num id="a-gf" label={t("arb.fields.gridFee")} unit={u("uahKwh")} value={a.gridFee} onChange={(v) => setA((s) => ({ ...s, gridFee: v }))} step={0.1} />
+              <Num id="a-fx" label={t("method.usdRate")} unit="UAH/USD" value={a.usdRate} onChange={(v) => setA((s) => ({ ...s, usdRate: v }))} step={0.1} />
               <Num id="a-cx" label={t("arb.fields.capexUsd")} unit={u("usdKwh")} value={a.capexUsd} onChange={(v) => setA((s) => ({ ...s, capexUsd: v }))} step={10} />
             </div>
           </div>
           <div className={`${card} lg:sticky lg:top-24 lg:self-start`}>
-            <p className={`text-lg font-bold ${verdictCls[av]}`}>{t(`verdict.${av}`, { pay: arb.payback.toFixed(1) })}</p>
+            <p className={`text-lg font-bold ${verdictCls[av]}`}>{!arb.feasible ? t("method.infeasible") : !arb.balanced ? t("method.unbalanced") : arb.capexUah === 0 ? t("method.noPayback") : t(`verdict.${av}`, { pay: arb.payback.toFixed(1) })}</p>
             <p className="mt-1 text-xs text-[var(--color-fg-muted)]">{t("arb.details", { cycles: arb.cycles.toFixed(2), pct: arb.intPct })}</p>
             <dl className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
               <Stat label={t("arb.results.inv")} value={`${arb.invKw} ${u("kw")}`} />
               <Stat label={t("arb.results.cap")} value={`${arb.capKwh} ${u("kwh")}`} />
-              <Stat label={t("arb.results.yearly")} value={uah(arb.yearlyP)} accent />
+              <Stat label={t("arb.results.yearly")} value={arb.balanced && arb.feasible ? uah(arb.yearlyP) : "—"} accent />
               <Stat label={t("arb.results.intRev")} value={uah(arb.intRev)} />
               <Stat label={t("arb.results.extRev")} value={uah(arb.extRev)} />
               <Stat label={t("arb.results.chargeCost")} value={uah(arb.chargeCost)} />
@@ -218,21 +235,23 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
           <div className="space-y-5">
             <div><h2 className="text-xl">{t("finance.title")}</h2><p className="mt-2 text-sm text-[var(--color-fg-muted)]">{t("finance.text")}</p></div>
             <div className={`${card} grid grid-cols-2 gap-3`}>
-              <Num id="f-amt" label={t("finance.fields.amount")} unit={u("kUah")} value={f.amount} onChange={(v) => setF((s) => ({ ...s, amount: v }))} step={10} />
+              <Num id="f-amt" label={t("finance.fields.amount")} unit={u("kUah")} value={f.amount} onChange={(v) => setF((s) => ({ ...s, amount: v }))} step={10} preserveInvalid />
               <Num id="f-rate" label={t("finance.fields.rate")} unit={u("pct")} value={f.rate} onChange={(v) => setF((s) => ({ ...s, rate: v }))} max={100} step={0.5} />
               <Num id="f-years" label={t("finance.fields.years")} unit={u("years")} value={f.years} onChange={(v) => setF((s) => ({ ...s, years: v }))} min={1} max={100} />
               <Num id="f-sav" label={t("finance.fields.savings")} unit={u("kUahYear")} value={f.savings} onChange={(v) => setF((s) => ({ ...s, savings: v }))} step={10} />
             </div>
           </div>
           <div className={card}>
+            {fin === null ? <p id="f-amt-error" role="alert" className="text-lg font-bold text-[var(--color-accent-text)]">{t("finance.invalidAmount")}</p> : <>
             <p className={`text-lg font-bold ${fin.withinTerm ? "text-[var(--color-brand-text)]" : "text-[var(--color-accent-text)]"}`}>{fin.withinTerm ? t("finance.ok") : t("finance.warn")}</p>
             <dl className="mt-4 grid grid-cols-2 gap-3">
               <Stat label={t("finance.results.monthly")} value={uah(fin.monthly)} accent />
               <Stat label={t("finance.results.total")} value={uah(fin.total)} />
               <Stat label={t("finance.results.overpay")} value={uah(fin.overpay)} />
               <Stat label={t("finance.results.savings")} value={uah(f.savings * 1000)} />
-              <Stat label={t("finance.results.payback")} value={fin.payback < 50 ? `${fin.payback.toFixed(1)} ${u("years")}` : "> 50"} />
+              <Stat label={t("finance.results.payback")} value={fin.payback === null ? t("method.noPayback") : fin.payback < 50 ? `${fin.payback.toFixed(1)} ${u("years")}` : "> 50"} />
             </dl>
+            </>}
             {cta("finance")}
           </div>
         </section>
@@ -245,25 +264,23 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
           <div className="mt-5 grid gap-5 md:grid-cols-3">
             <div className={card}>
               <h3>{t("express.bess.title")}</h3>
+              <p className="mt-2 text-sm">{t("method.bessSizing")}</p>
+              <button type="button" className="mt-2 underline" onClick={() => setTab("bess")}>{t("tabs.bess")}</button>
               <div className="mt-3 space-y-3">
                 <Num id="x1-c" label={t("express.bess.cons")} unit={u("mwhMonth")} value={e1.cons} onChange={(v) => setE1((s) => ({ ...s, cons: v }))} />
                 <Num id="x1-p" label={t("express.bess.peak")} unit={u("kw")} value={e1.peak} onChange={(v) => setE1((s) => ({ ...s, peak: v }))} />
-                <Num id="x1-t" label={t("express.bess.tariff")} unit={u("uahKwh")} value={e1.tariff} onChange={(v) => setE1((s) => ({ ...s, tariff: v }))} step={0.1} />
               </div>
               <button type="button" onClick={() => setE1((s) => ({ ...s, done: true }))} className="mt-4 w-full rounded-lg bg-[var(--color-brand)] px-4 py-2.5 text-sm font-semibold text-white">{t("express.bess.run")}</button>
               {e1.done && !x1.feasible && <p role="status" className="mt-4 text-sm">{t("express.bess.noConsumption")}</p>}
               {e1.done && x1.feasible && (
                 <dl className="mt-4 space-y-1.5 text-sm">
                   <div className="flex justify-between gap-2"><dt className="text-[var(--color-fg-muted)]">{t("express.bess.out.size")}</dt><dd className="font-semibold">{fmt(x1.bessKwh)} {u("kwh")}</dd></div>
-                  <div className="flex justify-between gap-2"><dt className="text-[var(--color-fg-muted)]">{t("express.bess.out.peak")}</dt><dd className="font-semibold">~{uah(x1.peakShaveMonth)}{t("perMonth")}</dd></div>
-                  <div className="flex justify-between gap-2"><dt className="text-[var(--color-fg-muted)]">{t("express.bess.out.arb")}</dt><dd className="font-semibold">~{uah(x1.arbYear)}{t("perYear")}</dd></div>
-                  <div className="flex justify-between gap-2"><dt className="text-[var(--color-fg-muted)]">{t("express.bess.out.total")}</dt><dd className="font-bold text-[var(--color-brand-text)]">~{uah(x1.yearly)}{t("perYear")}</dd></div>
-                  <div className="flex justify-between gap-2"><dt className="text-[var(--color-fg-muted)]">{t("express.bess.out.payback")}</dt><dd className="font-semibold">~{x1.payback.toFixed(1)} {u("years")}</dd></div>
                 </dl>
               )}
             </div>
             <div className={card}>
               <h3>{t("express.solar.title")}</h3>
+              <p className="mt-2 text-sm">{t("method.solar")}</p>
               <div className="mt-3 space-y-3">
                 <Num id="x2-a" label={t("express.solar.area")} unit={u("m2")} value={e2.area} onChange={(v) => setE2((s) => ({ ...s, area: v }))} step={10} />
                 <Num id="x2-d" label={t("express.solar.day")} unit={u("pct")} value={e2.day} onChange={(v) => setE2((s) => ({ ...s, day: v }))} max={100} />
@@ -277,7 +294,7 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
                   <div className="flex justify-between gap-2"><dt className="text-[var(--color-fg-muted)]">{t("express.solar.out.self")}</dt><dd className="font-semibold">~{fmt(x2.selfUse)} {u("kwh")}{t("perYear")}</dd></div>
                   <div className="flex justify-between gap-2"><dt className="text-[var(--color-fg-muted)]">{t("express.solar.out.save")}</dt><dd className="font-bold text-[var(--color-brand-text)]">~{uah(x2.save)}{t("perYear")}</dd></div>
                   <div className="flex justify-between gap-2"><dt className="text-[var(--color-fg-muted)]">{t("express.solar.out.capex")}</dt><dd className="font-semibold">~{uah(x2.capex)}</dd></div>
-                  <div className="flex justify-between gap-2"><dt className="text-[var(--color-fg-muted)]">{t("express.solar.out.payback")}</dt><dd className="font-semibold">~{x2.payback.toFixed(1)} {u("years")}</dd></div>
+                  <div className="flex justify-between gap-2"><dt className="text-[var(--color-fg-muted)]">{t("express.solar.out.payback")}</dt><dd className="font-semibold">{x2.payback === null ? t("method.noPayback") : `~${x2.payback.toFixed(1)} ${u("years")}`}</dd></div>
                 </dl>
               )}
             </div>
@@ -303,6 +320,7 @@ export function CalculatorsClient({ initialTab }: { initialTab: Tab }) {
           {cta("express")}
         </section>
       )}
+      </div>
     </div>
   );
 }

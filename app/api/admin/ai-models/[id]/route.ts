@@ -1,5 +1,6 @@
+import { validateModelInput } from "@/lib/assistant/modelPolicy";
 import { NextRequest, NextResponse } from "next/server";
-import { eq, ne, and } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { requireAdminSession } from "@/lib/auth/requireAdmin";
 
@@ -9,33 +10,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 
   const { id } = await params;
   const modelId = Number(id);
-  const body = await req.json();
-
-  // isDefault=true має "монопольно" вимкнути прапорець в усіх інших моделях —
-  // саме цей механізм гарантує, що резервна модель однозначно визначена.
-  if (body.isDefault === true) {
-    await db
-      .update(schema.aiModels)
-      .set({ isDefault: false })
-      .where(and(ne(schema.aiModels.id, modelId), eq(schema.aiModels.isDefault, true)));
-  }
-
-  const updatable: Record<string, unknown> = {};
-  for (const key of [
-    "name",
-    "provider",
-    "model",
-    "apiKeyEnvVar",
-    "priority",
-    "isActive",
-    "isDefault",
-    "inputCostPer1kTokens",
-    "outputCostPer1kTokens",
-    "systemPrompt",
-  ]) {
-    if (key in body) updatable[key] = body[key];
-  }
-  updatable.updatedAt = new Date();
+  if (!Number.isSafeInteger(modelId) || modelId < 1) return NextResponse.json({ error: "Invalid model ID" }, { status:400 });
+  const parsed=validateModelInput(await req.json().catch(() => null), false);
+  if (!parsed.ok) return NextResponse.json({ error: parsed.error }, { status:400 });
+  const updatable={ ...parsed.value, updatedAt:new Date() };
 
   const [updated] = await db
     .update(schema.aiModels)

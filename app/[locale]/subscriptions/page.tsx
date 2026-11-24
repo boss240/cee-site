@@ -12,7 +12,7 @@ type KbPlan = { name: string; price: string; text: string };
 type Step = { title: string; text: string };
 type Faq = { q: string; a: string };
 
-export const revalidate = 600;
+export const revalidate = 3600;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;

@@ -1,4 +1,10 @@
 import { z } from "zod";
+import { safeExternalUrl } from "../safeExternalUrl";
+
+const optionalSourceUrl = z.string().trim().max(500).refine(
+  value => value === "" || safeExternalUrl(value) !== null,
+  "Expected an absolute HTTP/HTTPS URL without credentials",
+).optional().nullable();
 import { DOC_KINDS } from "./documents";
 
 export const DocumentSchema = z.object({
@@ -12,7 +18,7 @@ export const DocumentSchema = z.object({
   summary: z.string().max(100_000).default(""),
   keyPoints: z.array(z.string().trim().min(1).max(1000)).max(40).default([]),
   tags: z.array(z.string().trim().min(1).max(60)).max(30).default([]),
-  sourceUrl: z.string().trim().max(500).optional().nullable(),
+  sourceUrl: optionalSourceUrl,
   checked: z.boolean().default(false), // true → checkedAt = now
   published: z.boolean().default(false),
 });
@@ -20,12 +26,12 @@ export const DocumentSchema = z.object({
 export const DocumentUpdateSchema = z.object({
   date: z.string().trim().optional().nullable(),
   note: z.string().trim().min(2).max(5000),
-  sourceUrl: z.string().trim().max(500).optional().nullable(),
+  sourceUrl: optionalSourceUrl,
 });
 
 export const SourceSchema = z.object({
   name: z.string().trim().min(2).max(160),
-  url: z.string().trim().url().max(500),
+  url: z.string().trim().max(500).refine(value => safeExternalUrl(value) !== null, "Expected an absolute HTTP/HTTPS URL without credentials"),
   category: z.enum(["regulator", "government", "operator", "market", "media", "local"]).default("media"),
   enabled: z.boolean().default(false),
 });

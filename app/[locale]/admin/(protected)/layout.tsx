@@ -8,6 +8,7 @@ import { authOptions } from "@/lib/auth/options";
 const NAV = [
   { href: "/admin", key: "dashboard", Icon: LayoutDashboard },
   { href: "/admin/leads", key: "leads", Icon: Inbox },
+  { href: "/admin/notifications", key: "notifications", Icon: Inbox },
   { href: "/admin/blog", key: "blog", Icon: Newspaper },
   { href: "/admin/knowledge/documents", key: "documents", Icon: FileText },
   { href: "/admin/knowledge/digests", key: "digests", Icon: Rss },
@@ -50,7 +51,7 @@ export default async function AdminLayout({
                 className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-[var(--color-fg-muted)] transition hover:bg-[var(--color-surface)] hover:text-[var(--color-brand-text)]"
               >
                 <Icon size={16} aria-hidden />
-                {t(`nav.${key}`)}
+                {key === "notifications" ? (locale === "en" ? "Notifications" : "Сповіщення") : t(`nav.${key}`)}
               </Link>
             ))}
           </nav>
@@ -91,7 +92,7 @@ export default async function AdminLayout({
             className="flex min-w-16 shrink-0 flex-col items-center gap-0.5 px-2 py-1 text-[10px] text-[var(--color-fg-muted)]"
           >
             <Icon size={18} aria-hidden />
-            {t(`nav.${key}`)}
+            {key === "notifications" ? (locale === "en" ? "Notifications" : "Сповіщення") : t(`nav.${key}`)}
           </Link>
         ))}
       </nav>

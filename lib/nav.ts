@@ -1,4 +1,5 @@
 export type NavKey =
+  | "directions"
   | "community"
   | "business"
   | "osbb"
@@ -24,7 +25,7 @@ export type NavItem = {
 };
 
 /**
- * Напрями — для кого працює Центр.
+ * Аудиторії — для кого працює Центр.
  * У шапці згорнуті в один пункт «Для кого», щоб не роздувати меню.
  */
 export const AUDIENCES: NavItem[] = [
@@ -38,6 +39,7 @@ export const AUDIENCES: NavItem[] = [
 
 /** Решта розділів */
 export const SECTIONS: NavItem[] = [
+  { href: "/directions", key: "directions", ready: true },
   { href: "/services", key: "services", ready: true },
   { href: "/subscriptions", key: "subscriptions", ready: true },
   { href: "/calculators", key: "calculators", ready: true },
@@ -52,7 +54,15 @@ export const SECTIONS: NavItem[] = [
 /** Повний перелік — використовується у футері */
 export const NAV: NavItem[] = [...AUDIENCES, ...SECTIONS];
 
-/** Пункти верхнього рівня в шапці (напрями йдуть окремим списком) */
-export const HEADER_NAV: NavItem[] = SECTIONS.filter((i) =>
-  ["/services", "/subscriptions", "/calculators", "/knowledge", "/knowledge/digests", "/blog", "/contacts"].includes(i.href)
-);
+/** Existing useful URLs remain reachable through the tools disclosure and footer. */
+export const TOOLS = SECTIONS.filter((item) => ["calculators", "knowledge", "news", "blog", "subscriptions"].includes(item.key));
+
+export const HEADER_NAV: { key: NavKey | "audiences" | "tools"; href?: string }[] = [
+  { key: "directions", href: "/directions" },
+  { key: "services", href: "/services" },
+  { key: "audiences" },
+  { key: "projects", href: "/projects" },
+  { key: "tools" },
+  { key: "about", href: "/about" },
+  { key: "contacts", href: "/contacts" },
+];

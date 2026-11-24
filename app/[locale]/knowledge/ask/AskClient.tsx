@@ -70,11 +70,16 @@ export function AskClient({ initialQuestion = "" }: { initialQuestion?: string }
     }
   }
 
+  const latestTurn = turns.at(-1);
+  const announcement = busy ? t("thinking") : latestTurn?.error
+    ? t(latestTurn.error === "quota" ? "quotaTitle" : latestTurn.error === "burst" ? "burst" : "error")
+    : latestTurn?.answer ?? "";
   const exhausted = quota?.remaining !== null && quota?.remaining !== undefined && quota.remaining <= 0;
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_300px]">
       <div className="min-w-0">
+        <p role="status" aria-live="polite" aria-atomic="true" className="sr-only">{announcement}</p>
         {/* Діалог */}
         <div className="space-y-6">
           {turns.length === 0 && (

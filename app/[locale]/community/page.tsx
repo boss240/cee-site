@@ -1,3 +1,4 @@
+import { ClimateContent } from "@/components/ui/ClimateContent";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { alternatesFor } from "@/lib/seo";
@@ -8,8 +9,8 @@ import { Users, Home, Zap, CheckCircle2, ChevronRight } from "lucide-react";
 
 type Props = { params: Promise<{ locale: string }> };
 
-/** Статична сторінка, ISR: оновлення раз на 10 хв */
-export const revalidate = 600;
+/** Статична сторінка: запит після години запускає ISR (SWR), не таймер */
+export const revalidate = 3600;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -129,6 +130,8 @@ export default async function CommunityPage({ params }: Props) {
           ))}
         </div>
       </section>
+
+      <ClimateContent variant="community" />
 
       {/* CTA */}
       <section className="mx-auto max-w-6xl px-4 py-20">
