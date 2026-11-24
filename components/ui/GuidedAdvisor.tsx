@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowLeft, ArrowRight, RotateCcw, UserRound } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
@@ -15,8 +15,7 @@ type Topic = "power" | "heat" | "water" | "general";
 
 /** Перше питання визначає тему відповіді. Ключі варіантів — у AIAssistant.guide.flows.<audience>.questions.0.options */
 const TOPIC_OF: Record<string, Topic> = { power: "power", outages: "power", bills: "power", heat: "heat", water: "water", unknown: "general" };
-/** Наявні тематичні відео сайту (public/assets/thematic-video/*). Власник може замінити їх пояснювальними роликами. */
-const VIDEO_OF: Record<Audience, string> = { osbb: "home-osbb", home: "home-osbb", business: "business", community: "community" };
+/** Пояснювальні ролики ~30 с: public/assets/guide-video/<audience>-<uk|en>.mp4 (+ .jpg обкладинка). */
 /** Сегмент заявки — як у формі контактів */
 export const SEGMENT_OF: Record<Audience, string> = { osbb: "osbb", business: "business", home: "citizen", community: "community" };
 
@@ -24,6 +23,7 @@ type Question = { q: string; options: Record<string, string> };
 
 export function GuidedAdvisor({ onLead, disabled }: { onLead: (audience: Audience, summary: string) => void; disabled?: boolean }) {
   const t = useTranslations("AIAssistant.guide");
+  const lang = useLocale() === "en" ? "en" : "uk";
   const [audience, setAudience] = useState<Audience | null>(null);
   const [answers, setAnswers] = useState<string[]>([]);
 
@@ -69,7 +69,7 @@ export function GuidedAdvisor({ onLead, disabled }: { onLead: (audience: Audienc
   const topic = TOPIC_OF[main] ?? "general";
   const result = t.raw(`flows.${audience}.results.${main}`) as { do: string[]; prepare: string[]; first: string };
   const diagram = t.raw(`diagrams.${topic}`) as string[];
-  const video = VIDEO_OF[audience];
+  const video = `/assets/guide-video/${audience}-${lang}`;
   const summary = [
     `${t("summaryAudience")}: ${t(`audiences.${audience}`)}`,
     ...questions.map((q, i) => `${q.q} — ${q.options[answers[i]]}`),
@@ -98,8 +98,8 @@ export function GuidedAdvisor({ onLead, disabled }: { onLead: (audience: Audienc
       <p className="mt-1">{result.first}</p>
 
       <video className="mt-3 w-full rounded-lg border border-[var(--color-line)]" controls muted playsInline preload="none"
-        poster={`/assets/thematic-video/${video}/mobile.webp`} aria-label={t("videoLabel")}>
-        <source src={`/assets/thematic-video/${video}/mobile.mp4`} type="video/mp4" />
+        poster={`${video}.jpg`} aria-label={t("videoLabel")}>
+        <source src={`${video}.mp4`} type="video/mp4" />
       </video>
 
       <p className="mt-3 text-xs text-[var(--color-fg-muted)]">{t("note")}</p>
