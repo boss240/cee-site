@@ -4,6 +4,7 @@ import { alternatesFor } from "@/lib/seo";
 import { FileSearch, FileCheck2, FileCode2, Landmark, FileSignature, ShoppingCart, PlugZap, LineChart, LayoutDashboard, Zap, ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/Reveal";
+import { PlaceholderInline } from "@/components/ui/Placeholder";
 import { EnergyField } from "@/components/ui/EnergyField";
 import { DeferredEnergyField } from "@/components/ui/DeferredEnergyField";
 
@@ -100,7 +101,7 @@ export default async function ProjectsPage({ params }: Props) {
             ))}
           </ol>
           <Reveal delay={300}>
-            <p className="mt-8 max-w-3xl border-l-2 border-[var(--color-brand)] pl-5 text-sm text-[var(--color-fg-muted)]">{t("casesNote")}</p>
+            <div className="mt-8 max-w-3xl"><PlaceholderInline hint={t("casesNote")} /></div>
           </Reveal>
         </div>
       </section>

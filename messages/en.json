@@ -2098,7 +2098,7 @@
         "text": "Compare actual data with the baseline, account for changing conditions and explain deviations."
       }
     ],
-    "casesNote": "Real case studies with figures will appear on this page once the data is confirmed by metering and clients give written consent to publication. This is our rule, not a placeholder.",
+    "casesNote": "Photos and results of real sites are coming soon. We publish them once clients agree.",
     "ctaTitle": "Want this kind of result for your site?",
     "ctaText": "Describe the situation — we'll tell you which stage to start from and what you'll receive first.",
     "ctaPrimary": "Get a consultation"
@@ -2287,8 +2287,8 @@
       "recentDigests": "Latest digests",
       "all": "All",
       "checked": "checked",
-      "emptyDocs": "No documents published yet.",
-      "emptyDigests": "No digests published yet."
+      "emptyDocs": "Documents are coming soon.",
+      "emptyDigests": "Digests are coming soon."
     },
     "documents": {
       "metaTitle": "Regulatory and technical documentation — CEE",
@@ -2945,6 +2945,6 @@
     "tagLocal": "Local news",
     "read": "Read",
     "inUkrainian": "In Ukrainian",
-    "empty": "The first materials will appear here soon."
+    "empty": "We're preparing the first materials."
   }
 }

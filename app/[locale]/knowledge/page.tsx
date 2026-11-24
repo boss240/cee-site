@@ -14,6 +14,7 @@ import { searchDocuments } from "@/lib/knowledge/documents";
 import { listPublishedDigests } from "@/lib/knowledge/digests";
 import { PLANS } from "@/lib/knowledge/plans";
 import { AccountBenefits } from "@/components/account/AccountBenefits";
+import { PlaceholderInline } from "@/components/ui/Placeholder";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Knowledge.hub");
@@ -122,7 +123,7 @@ export default async function KnowledgeHub() {
               <Link href="/knowledge/documents" className="text-sm font-semibold text-[var(--color-brand-text)] hover:underline">{t("all")} →</Link>
             </div>
             <ul className="mt-5 divide-y divide-[var(--color-line)] rounded-xl border border-[var(--color-line)]">
-              {recentDocs.length === 0 && <li className="p-5 text-sm text-[var(--color-fg-muted)]">{t("emptyDocs")}</li>}
+              {recentDocs.length === 0 && <li className="p-5"><PlaceholderInline hint={t("emptyDocs")} /></li>}
               {recentDocs.map((d) => (
                 <li key={d.id}>
                   <Link href={`/knowledge/documents/${d.slug}`} className="flex flex-col gap-1 px-5 py-4 transition hover:bg-[var(--color-surface)]">
@@ -139,7 +140,7 @@ export default async function KnowledgeHub() {
               <Link href="/news?type=digests" className="text-sm font-semibold text-[var(--color-brand-text)] hover:underline">{t("all")} →</Link>
             </div>
             <ul className="mt-5 divide-y divide-[var(--color-line)] rounded-xl border border-[var(--color-line)]">
-              {recentDigests.length === 0 && <li className="p-5 text-sm text-[var(--color-fg-muted)]">{t("emptyDigests")}</li>}
+              {recentDigests.length === 0 && <li className="p-5"><PlaceholderInline hint={t("emptyDigests")} /></li>}
               {recentDigests.map((g) => (
                 <li key={g.id}>
                   <Link href={`/knowledge/digests/${g.slug}`} className="flex flex-col gap-1 px-5 py-4 transition hover:bg-[var(--color-surface)]">

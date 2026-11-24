@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { alternatesFor } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/Reveal";
+import { PlaceholderInline } from "@/components/ui/Placeholder";
 import { TelegramChannel } from "@/components/ui/TelegramChannel";
 import { listPublishedDigests, type DigestKind } from "@/lib/knowledge/digests";
 import { listPublishedPosts } from "@/lib/blog/queries";
@@ -67,7 +68,7 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
       </nav>
 
       {items.length === 0 ? (
-        <p className="mt-10 rounded-xl border border-dashed border-[var(--color-line)] p-8 text-[var(--color-fg-muted)]">{t("empty")}</p>
+        <div className="mt-10"><PlaceholderInline hint={t("empty")} /></div>
       ) : (
         <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item, i) => (
