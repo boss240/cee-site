@@ -7,6 +7,7 @@ import { useHydrated } from "@/lib/hooks/browser";
 import { useLocale, useTranslations } from "next-intl";
 import { MessageCircle, X, Send, Sparkles, UserRound, Check } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
+import { GuidedAdvisor, SEGMENT_OF, type Audience } from "@/components/ui/GuidedAdvisor";
 
 type ChatMessage = {
   id: string;
@@ -14,7 +15,7 @@ type ChatMessage = {
   text: string;
   source?: "ai" | "knowledge-base";
   /** системна картка всередині стрічки: форма контакту або підтвердження */
-  kind?: "lead-form" | "lead-done";
+  kind?: "lead-form" | "lead-done" | "guide";
 };
 
 type StoredChat = { path: string; messages: ChatMessage[] };
@@ -83,6 +84,8 @@ function AssistantClient() {
   const [thinking, setThinking] = useState(false);
   const [referenceOnly, setReferenceOnly] = useState(false);
   const [nudge, setNudge] = useState(false);
+  /** Відповіді з помічника-провідника — додаються до заявки */
+  const [guided, setGuided] = useState<{ audience: Audience; summary: string } | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -177,6 +180,15 @@ function AssistantClient() {
     });
   }, [t]);
 
+  function startGuide() {
+    setMessages((m) => m.some((x) => x.kind === "guide") ? m : [...m, { id: uid(), role: "assistant", text: "", kind: "guide" }]);
+  }
+
+  function leadFromGuide(audience: Audience, summary: string) {
+    setGuided({ audience, summary });
+    openLeadForm();
+  }
+
   async function send(text: string) {
     const trimmed = text.trim();
     if (!trimmed || trimmed.length > 2000 || thinking) return;
@@ -234,8 +246,10 @@ function AssistantClient() {
           name: lead.name,
           email: isEmail ? lead.contact : "",
           phone: isEmail ? "" : lead.contact,
-          segment: segmentForPath(key),
-          message: t("leadMessagePrefix", { page: pageLabel || pathname }),
+          segment: guided ? SEGMENT_OF[guided.audience] : segmentForPath(key),
+          message: guided
+            ? `${t("leadMessagePrefix", { page: pageLabel || pathname })}\n\n${guided.summary}`.slice(0, 5000)
+            : t("leadMessagePrefix", { page: pageLabel || pathname }),
           source: "chat",
           page: pathname,
           locale,
@@ -296,6 +310,8 @@ function AssistantClient() {
             {messages.map((m) =>
               m.kind === "lead-form" ? (
                 <LeadCard key={m.id} intro={m.text} onSubmit={submitLead} t={t} />
+              ) : m.kind === "guide" ? (
+                <GuidedAdvisor key={m.id} onLead={leadFromGuide} disabled={leadDone} />
               ) : (
                 <div key={m.id} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
                   <p
@@ -352,6 +368,17 @@ function AssistantClient() {
                 >
                   <UserRound size={12} aria-hidden />
                   {t("leadButton")}
+                </button>
+              )}
+              {!messages.some((m) => m.kind === "guide") && (
+                <button
+                  type="button"
+                  onClick={startGuide}
+                  disabled={thinking}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-brand)] px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-[var(--color-brand-hover)] disabled:opacity-50"
+                >
+                  <Sparkles size={12} aria-hidden />
+                  {t("guide.start")}
                 </button>
               )}
               {messages.length <= 1 && quickReplies.map((q) => (

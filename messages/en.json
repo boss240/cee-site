@@ -946,7 +946,391 @@
     "localOnly": "Local reference without AI",
     "localOnlyHelp": "Search of site text, not a language-model answer. Works without OpenRouter; submitting a contact request requires a connection.",
     "contactLink": "Contacts",
-    "calculatorsLink": "Calculators"
+    "calculatorsLink": "Calculators",
+    "guide": {
+      "start": "Find a solution in a minute",
+      "who": "Who are you?",
+      "audiences": {
+        "osbb": "Homeowners’ association",
+        "business": "Business",
+        "home": "Private house",
+        "community": "Community or institution"
+      },
+      "step": "Question {n} of {total}",
+      "back": "Back",
+      "restart": "Start again",
+      "lead": "Send a request with these answers",
+      "calculators": "Calculators",
+      "resultTitle": "What can be done",
+      "diagramTitle": "How it works",
+      "prepareTitle": "What to prepare",
+      "firstStepTitle": "First step",
+      "note": "This is general guidance, not a calculation. A survey gives the precise answer. The guide works without AI and is free.",
+      "videoLabel": "Video",
+      "summaryAudience": "Who is asking",
+      "diagrams": {
+        "power": [
+          "Grid",
+          "Switchboard and meter",
+          "Equipment",
+          "Backup"
+        ],
+        "heat": [
+          "Heat source",
+          "Heat substation",
+          "Pipes",
+          "Radiators"
+        ],
+        "water": [
+          "Water source",
+          "Pump",
+          "Pipes",
+          "Users"
+        ],
+        "general": [
+          "Task",
+          "Data",
+          "Options",
+          "Solution"
+        ]
+      },
+      "flows": {
+        "osbb": {
+          "questions": [
+            {
+              "q": "What worries you most?",
+              "options": {
+                "heat": "Cold flats or expensive heating",
+                "water": "Low pressure or leaks",
+                "power": "Lighting, lifts, pumps",
+                "unknown": "I don’t know where to start"
+              }
+            },
+            {
+              "q": "How many flats are in the building?",
+              "options": {
+                "s": "Up to 50",
+                "m": "50–150",
+                "l": "More than 150"
+              }
+            },
+            {
+              "q": "Are there building-wide meters?",
+              "options": {
+                "yes": "Yes",
+                "partly": "Partly",
+                "no": "No or not sure"
+              }
+            }
+          ],
+          "results": {
+            "heat": {
+              "do": [
+                "Check the heat substation and heating controls.",
+                "Find where the building loses heat.",
+                "Compare options: tuning, upgrading the substation, insulation."
+              ],
+              "prepare": [
+                "Heating bills for 1–2 seasons.",
+                "Readings of the building heat meter, if there is one.",
+                "Residents’ complaints: which flats are cold."
+              ],
+              "first": "Send a request and we will arrange an inspection of the heat substation."
+            },
+            "water": {
+              "do": [
+                "Check the pumps and the pressure on upper floors.",
+                "Find leaks and problem sections of pipe.",
+                "Compare repairing and replacing pumping equipment."
+              ],
+              "prepare": [
+                "Water bills and meter readings.",
+                "Which floors have low pressure.",
+                "Incidents over the last year."
+              ],
+              "first": "Send a request and we will start by inspecting the pumps and basement pipes."
+            },
+            "power": {
+              "do": [
+                "Check switchboards, lighting and power for lifts and pumps.",
+                "Find what uses the most.",
+                "Assess backup during outages."
+              ],
+              "prepare": [
+                "Electricity bills for shared areas.",
+                "A list of pumps, lifts and lighting.",
+                "What stops working during outages."
+              ],
+              "first": "Send a request and we will start with metering and the switchboard room."
+            },
+            "unknown": {
+              "do": [
+                "List the building’s problems.",
+                "Check metering and bills.",
+                "Decide what to repair first."
+              ],
+              "prepare": [
+                "Heating, water and electricity bills.",
+                "Residents’ complaints.",
+                "Any building documents you already have."
+              ],
+              "first": "Send a request and we will work out together where to start."
+            }
+          }
+        },
+        "business": {
+          "questions": [
+            {
+              "q": "What worries you most?",
+              "options": {
+                "bills": "High electricity bills",
+                "outages": "Outages and downtime",
+                "heat": "Heat for workshops or processes",
+                "water": "Water or wastewater"
+              }
+            },
+            {
+              "q": "How does the business operate?",
+              "options": {
+                "one": "One shift",
+                "two": "Two shifts",
+                "cont": "Around the clock"
+              }
+            },
+            {
+              "q": "Do you have hourly electricity metering?",
+              "options": {
+                "yes": "Yes",
+                "no": "No",
+                "unknown": "Not sure"
+              }
+            }
+          ],
+          "results": {
+            "bills": {
+              "do": [
+                "Look at the consumption profile and peaks.",
+                "Find what can be shifted to cheaper hours.",
+                "Work out whether a solar plant or a battery would pay off."
+              ],
+              "prepare": [
+                "Bills for 12 months.",
+                "Hourly meter data, if available.",
+                "A list of the most powerful equipment."
+              ],
+              "first": "Send a request and we will start by analysing your bills and consumption profile."
+            },
+            "outages": {
+              "do": [
+                "Identify equipment that must always keep running.",
+                "Estimate what an hour of downtime costs.",
+                "Compare a generator, a battery and a combination of both."
+              ],
+              "prepare": [
+                "A list of critical equipment and its power.",
+                "How often and how long outages last.",
+                "Grid connection conditions."
+              ],
+              "first": "Send a request and we will determine what needs backup."
+            },
+            "heat": {
+              "do": [
+                "Work out how much heat is needed and where the losses are.",
+                "Check the boiler house and heating networks.",
+                "Assess reusing waste heat from equipment."
+              ],
+              "prepare": [
+                "Bills for gas or other fuel.",
+                "Operating schedule and workshop temperatures.",
+                "Data on boilers and equipment."
+              ],
+              "first": "Send a request and we will start with a heat balance."
+            },
+            "water": {
+              "do": [
+                "Draw up a water balance: how much comes in and where it goes.",
+                "Check pumps and metering.",
+                "Assess wastewater requirements and possible solutions."
+              ],
+              "prepare": [
+                "Water and wastewater bills.",
+                "A diagram of networks and pumps.",
+                "Discharge requirements, if any."
+              ],
+              "first": "Send a request and we will start with a water balance."
+            }
+          }
+        },
+        "home": {
+          "questions": [
+            {
+              "q": "What worries you most?",
+              "options": {
+                "bills": "High bills",
+                "outages": "Power cuts",
+                "heat": "The house is cold",
+                "water": "Water or sewerage"
+              }
+            },
+            {
+              "q": "What is the floor area of the house?",
+              "options": {
+                "small": "Up to 100 m²",
+                "mid": "100–200 m²",
+                "big": "More than 200 m²"
+              }
+            },
+            {
+              "q": "How do you heat it?",
+              "options": {
+                "gas": "Gas",
+                "electric": "Electricity",
+                "solid": "Wood, coal, pellets",
+                "other": "Other"
+              }
+            }
+          ],
+          "results": {
+            "bills": {
+              "do": [
+                "Find out what costs you the most.",
+                "Check heating and hot water — they are often the biggest costs.",
+                "Work out whether solar panels pay off for you."
+              ],
+              "prepare": [
+                "Bills for a year.",
+                "Which appliances run the most.",
+                "Photos of the switchboard and the boiler."
+              ],
+              "first": "Send a request and we will go through the bills together."
+            },
+            "outages": {
+              "do": [
+                "Decide what must work without mains power: boiler, pump, fridge.",
+                "Work out the backup power you need.",
+                "Compare a battery, a generator and solar panels."
+              ],
+              "prepare": [
+                "A list of appliances you need during outages.",
+                "How long outages usually last.",
+                "A photo of the switchboard."
+              ],
+              "first": "Send a request and we will size the backup for your appliances."
+            },
+            "heat": {
+              "do": [
+                "Find where the house loses heat.",
+                "Check the boiler, radiators and controls.",
+                "Compare: tuning, a new boiler, a heat pump."
+              ],
+              "prepare": [
+                "Heating bills.",
+                "Photos of the boiler and its rating plate.",
+                "Which rooms are cold."
+              ],
+              "first": "Send a request and we will start by inspecting the heating system."
+            },
+            "water": {
+              "do": [
+                "Check the pump and pressure.",
+                "Assess the septic tank or sewer connection.",
+                "Suggest which water tests to do."
+              ],
+              "prepare": [
+                "Where the water comes from: a well or the mains.",
+                "What exactly is wrong: pressure, quality, blockages.",
+                "Photos of the pump and filters."
+              ],
+              "first": "Send a request and we will suggest what to check first."
+            }
+          }
+        },
+        "community": {
+          "questions": [
+            {
+              "q": "What is needed most?",
+              "options": {
+                "power": "Power and backup for institutions",
+                "heat": "Heating for buildings and boiler houses",
+                "water": "Water supply and sewerage",
+                "unknown": "Preparing a project for funding"
+              }
+            },
+            {
+              "q": "Which facility is it?",
+              "options": {
+                "school": "School or kindergarten",
+                "hospital": "Hospital or social facility",
+                "utility": "Municipal utility",
+                "several": "Several facilities"
+              }
+            },
+            {
+              "q": "Is there metering data?",
+              "options": {
+                "yes": "Yes",
+                "partly": "Partly",
+                "no": "No"
+              }
+            }
+          ],
+          "results": {
+            "power": {
+              "do": [
+                "Decide what must keep working during outages.",
+                "Assess backup power and on-site generation.",
+                "Prepare technical requirements for procurement."
+              ],
+              "prepare": [
+                "Bills and meter readings.",
+                "A list of critical equipment.",
+                "How often outages happen."
+              ],
+              "first": "Send a request and we will start with a site visit."
+            },
+            "heat": {
+              "do": [
+                "Find losses in the boiler house, networks and building.",
+                "Compare modernisation options.",
+                "Prepare a concept for the budget or a donor."
+              ],
+              "prepare": [
+                "Fuel and heat consumption.",
+                "Data on boilers and networks.",
+                "Indoor temperatures and complaints."
+              ],
+              "first": "Send a request and we will start with a heat balance."
+            },
+            "water": {
+              "do": [
+                "Draw up a water balance and find the losses.",
+                "Check the pumps and their electricity use.",
+                "Determine which studies are needed for wastewater."
+              ],
+              "prepare": [
+                "Water supplied and billed.",
+                "A diagram of networks and pumping stations.",
+                "An incident log."
+              ],
+              "first": "Send a request and we will start with a water balance."
+            },
+            "unknown": {
+              "do": [
+                "Describe the need and the expected result.",
+                "Estimate the preliminary cost and risks.",
+                "Collect documents for a donor or programme."
+              ],
+              "prepare": [
+                "What exactly is needed and for whom.",
+                "Existing data and documents for the facility.",
+                "A possible co-financing share."
+              ],
+              "first": "Send a request and we will suggest how to start preparing."
+            }
+          }
+        }
+      }
+    }
   },
   "Admin": {
     "title": "CEE Admin Panel",
