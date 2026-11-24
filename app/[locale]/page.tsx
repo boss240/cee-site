@@ -1,4 +1,4 @@
-import { NewsDigestChannel } from "@/components/ui/NewsDigestChannel";
+import { TelegramChannel } from "@/components/ui/TelegramChannel";
 import { ClimateContent, ClimateBrandIntroduction } from "@/components/ui/ClimateContent";
 import {
   Users,
@@ -50,7 +50,6 @@ export default async function HomePage({ params }: Props) {
   const whyItems = t.raw("whyItems") as { title: string; text: string }[];
   const segments = t.raw("segments") as { href: string; title: string; text: string }[];
   const ticker = t.raw("ticker") as string[];
-  const heroStats = t.raw("heroStats") as { value: string; label: string }[];
 
   return (
     <>
@@ -96,21 +95,6 @@ export default async function HomePage({ params }: Props) {
                 {t("ctaSecondary")}
               </Link>
             </div>
-          </div>
-        </div>
-
-        {/* Рядок показників — як технічна специфікація Megapack */}
-        <div className="hero-in" style={{ animationDelay: "320ms" }}>
-          <div className="relative mx-auto w-full max-w-6xl px-4 pb-7">
-            <dl className="grid gap-5 border-t border-[var(--color-line)] pt-5 sm:grid-cols-3 sm:gap-8">
-              {heroStats.map(({ value, label }) => (
-                <div key={label} className="flex flex-col gap-2">
-                  <dd className="stat-num text-[var(--color-fg)]">{value}</dd>
-                  <dt className="text-sm text-[var(--color-fg-muted)]">{label}</dt>
-                </div>
-              ))}
-            </dl>
-            <p className="mono-label mt-3 text-[var(--color-fg-placeholder)]">{t("heroStatsSource")}</p>
           </div>
         </div>
 
@@ -264,11 +248,11 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
-      {/* Свіжі новини й статті — з БД, за 10 хв кешу ISR */}
-      <section className="mx-auto max-w-6xl px-4 py-10">
-        <NewsDigestChannel locale={locale} />
-      </section>
+      {/* Новини і статті — з БД, за 10 хв кешу ISR; Telegram-канал ЦЕЕ — коли задано посилання */}
       <HomeFresh locale={locale} />
+      <section className="mx-auto max-w-6xl px-4 pb-10 empty:hidden">
+        <TelegramChannel />
+      </section>
 
       <ClimateContent variant="home" />
 

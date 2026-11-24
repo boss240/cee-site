@@ -32,7 +32,7 @@ export default async function PostPage({ params }: Params) {
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-16">
-      <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-brand-text)]">
+      <Link href="/news?type=articles" className="inline-flex items-center gap-1.5 text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-brand-text)]">
         <ArrowLeft size={14} aria-hidden /> {t("backToList")}
       </Link>
       <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-1">

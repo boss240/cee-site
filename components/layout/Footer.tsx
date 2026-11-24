@@ -3,12 +3,15 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { AUDIENCES, SECTIONS } from "@/lib/nav";
 import { getPublicContacts } from "@/lib/publicProfile";
+import { ceeTelegramUrl } from "@/lib/telegram";
+import { TelegramIcon } from "@/components/ui/TelegramIcon";
 
 export async function Footer() {
   const year = new Date().getFullYear();
   const t = await getTranslations("Footer");
   const tNav = await getTranslations("Nav");
   const c = await getPublicContacts();
+  const telegram = ceeTelegramUrl();
 
   // inline-block + py-2: зона дотику ≥ 36px на телефоні (посилання самі по собі 19px)
   const linkCls = "inline-block py-2 text-sm text-[var(--color-fg-muted)] transition hover:text-[var(--color-brand-text)]";
@@ -40,6 +43,14 @@ export async function Footer() {
                 {t("writeUs")}
               </Link>
             </li>
+            {telegram && (
+              <li>
+                <a href={telegram} target="_blank" rel="noopener noreferrer" className={`${linkCls} inline-flex items-center gap-2`}>
+                  <TelegramIcon size={16} /> {t("telegram")}
+                  <span className="sr-only">{t("newTab")}</span>
+                </a>
+              </li>
+            )}
           </ul>
         </div>
 

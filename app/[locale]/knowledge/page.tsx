@@ -42,7 +42,7 @@ export default async function KnowledgeHub() {
 
   const cards = [
     { href: "/knowledge/documents", Icon: FileText, title: t("cards.documents.title"), text: t("cards.documents.text"), meta: t("cards.documents.meta", { n: n.documents }) },
-    { href: "/knowledge/digests", Icon: Newspaper, title: t("cards.digests.title"), text: t("cards.digests.text"), meta: t("cards.digests.meta", { n: n.digests }) },
+    { href: "/news?type=digests", Icon: Newspaper, title: t("cards.digests.title"), text: t("cards.digests.text"), meta: t("cards.digests.meta", { n: n.digests }) },
     { href: "/knowledge/ask", Icon: MessageSquareText, title: t("cards.ask.title"), text: t("cards.ask.text"), meta: t("cards.ask.meta", { guest: PLANS.guest.dailyAsk ?? 0, free: PLANS.free.dailyAsk ?? 0 }) },
   ];
 
@@ -136,7 +136,7 @@ export default async function KnowledgeHub() {
           <Reveal delay={90}>
             <div className="flex items-baseline justify-between gap-4">
               <h2>{t("recentDigests")}</h2>
-              <Link href="/knowledge/digests" className="text-sm font-semibold text-[var(--color-brand-text)] hover:underline">{t("all")} →</Link>
+              <Link href="/news?type=digests" className="text-sm font-semibold text-[var(--color-brand-text)] hover:underline">{t("all")} →</Link>
             </div>
             <ul className="mt-5 divide-y divide-[var(--color-line)] rounded-xl border border-[var(--color-line)]">
               {recentDigests.length === 0 && <li className="p-5 text-sm text-[var(--color-fg-muted)]">{t("emptyDigests")}</li>}

@@ -8,6 +8,10 @@ import { AUDIENCES, HEADER_NAV, TOOLS } from "@/lib/nav";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { AccountLink } from "@/components/layout/AccountLink";
+import { TelegramIcon } from "@/components/ui/TelegramIcon";
+import { ceeTelegramUrl } from "@/lib/telegram";
+
+const TELEGRAM_URL = ceeTelegramUrl();
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -69,14 +73,14 @@ export function Header() {
       <Link href="/" onClick={closeMenus} className="flex shrink-0 items-center gap-2 font-bold"><span aria-hidden className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--color-brand)] text-lg">🌱</span><span>ЦЕЕ</span></Link>
       <nav aria-label={t("mainNav")} className="hidden xl:block"><ul className="flex items-center gap-1">{navigation(false)}</ul></nav>
       <div className="flex items-center gap-2">
-        <div className="hidden items-center gap-2 sm:flex"><AccountLink className="hidden xl:inline-flex" /><LanguageSwitcher /><ThemeToggle /></div>
+        <div className="hidden items-center gap-2 sm:flex"><AccountLink className="hidden xl:inline-flex" />{TELEGRAM_URL && <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label={t("telegram")} title={t("telegram")} className="flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--color-line)] text-[var(--color-brand-text)] hover:bg-[var(--color-surface)]"><TelegramIcon size={18} /></a>}<LanguageSwitcher /><ThemeToggle /></div>
         <Link href="/contacts" className="hidden rounded-lg bg-[var(--color-brand)] px-3 py-2 text-sm font-semibold text-white hover:bg-[var(--color-brand-hover)] 2xl:inline-block">{t("cta")}</Link>
         <button ref={toggleRef} type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? t("closeMenu") : t("openMenu")} className="flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--color-line)] xl:hidden">{open ? <X size={20} aria-hidden /> : <Menu size={20} aria-hidden />}</button>
       </div>
     </div>
     {open && <nav id="mobile-nav" aria-label={t("mobileNav")} className="max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain border-t border-[var(--color-line)] bg-[var(--color-surface)] xl:hidden">
       <div className="mx-auto max-w-7xl px-4 py-3">
-        <div className="mb-3 flex flex-wrap items-center gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] p-2"><AccountLink className="mr-auto" onClick={closeMenus} /><LanguageSwitcher /><ThemeToggle /></div>
+        <div className="mb-3 flex flex-wrap items-center gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] p-2"><AccountLink className="mr-auto" onClick={closeMenus} />{TELEGRAM_URL && <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label={t("telegram")} className="flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--color-line)] text-[var(--color-brand-text)]"><TelegramIcon size={18} /></a>}<LanguageSwitcher /><ThemeToggle /></div>
         <ul>{navigation(true)}</ul>
       </div>
     </nav>}

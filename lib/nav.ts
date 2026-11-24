@@ -45,8 +45,7 @@ export const SECTIONS: NavItem[] = [
   { href: "/calculators", key: "calculators", ready: true },
   { href: "/projects", key: "projects", ready: true },
   { href: "/knowledge", key: "knowledge", ready: true },
-  { href: "/knowledge/digests", key: "news", ready: true },
-  { href: "/blog", key: "blog", ready: true },
+  { href: "/news", key: "news", ready: true },
   { href: "/about", key: "about", ready: true },
   { href: "/contacts", key: "contacts", ready: true },
 ];
@@ -55,7 +54,7 @@ export const SECTIONS: NavItem[] = [
 export const NAV: NavItem[] = [...AUDIENCES, ...SECTIONS];
 
 /** Existing useful URLs remain reachable through the tools disclosure and footer. */
-export const TOOLS = SECTIONS.filter((item) => ["calculators", "knowledge", "news", "blog", "subscriptions"].includes(item.key));
+export const TOOLS = SECTIONS.filter((item) => ["calculators", "knowledge", "news", "subscriptions"].includes(item.key));
 
 export const HEADER_NAV: { key: NavKey | "audiences" | "tools"; href?: string }[] = [
   { key: "directions", href: "/directions" },

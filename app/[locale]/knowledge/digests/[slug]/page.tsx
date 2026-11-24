@@ -29,7 +29,7 @@ export default async function DigestPage({ params }: Params) {
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-14">
-      <Link href="/knowledge/digests" className="inline-flex items-center gap-1.5 text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-brand-text)]">
+      <Link href="/news?type=digests" className="inline-flex items-center gap-1.5 text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-brand-text)]">
         <ArrowLeft size={14} aria-hidden /> {t("back")}
       </Link>
       <p className="mono-label mt-6 text-[var(--color-fg-placeholder)]">

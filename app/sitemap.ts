@@ -9,7 +9,7 @@ const base = siteOrigin();
 const locales = ["uk", "en"] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticPaths = ["/", ...NAV.map((n) => n.href), "/knowledge/documents", "/knowledge/digests", "/knowledge/ask", "/knowledge/pricing", "/privacy", "/terms"];
+  const staticPaths = ["/", ...NAV.map((n) => n.href), "/knowledge/documents", "/knowledge/ask", "/knowledge/pricing", "/privacy", "/terms"];
   const entries: MetadataRoute.Sitemap = [];
 
   for (const path of new Set(staticPaths)) {

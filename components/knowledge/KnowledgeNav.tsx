@@ -7,7 +7,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 const ITEMS = [
   { href: "/knowledge", key: "hub", Icon: BookOpenText, exact: true },
   { href: "/knowledge/documents", key: "documents", Icon: FileText, exact: false },
-  { href: "/knowledge/digests", key: "digests", Icon: Newspaper, exact: false },
+  { href: "/news?type=digests", key: "digests", Icon: Newspaper, exact: false },
   { href: "/knowledge/ask", key: "ask", Icon: MessageSquareText, exact: false },
   { href: "/knowledge/pricing", key: "pricing", Icon: BadgeCheck, exact: false },
 ] as const;

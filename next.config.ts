@@ -51,6 +51,14 @@ const nextConfig: NextConfig = {
     "/[locale]/opengraph-image": ["./assets/fonts/**"],
     "/api/admin/invoices/[id]/pdf": ["./assets/fonts/**"],
   },
+  // Блог, новини й дайджести об'єднано в один розділ «Новини і статті» (/news).
+  // Старі адреси списків ведуть туди назавжди; сторінки окремих матеріалів не змінилися.
+  async redirects() {
+    return [
+      { source: "/:locale(uk|en)/blog", destination: "/:locale/news?type=articles", permanent: true },
+      { source: "/:locale(uk|en)/knowledge/digests", destination: "/:locale/news?type=digests", permanent: true },
+    ];
+  },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },

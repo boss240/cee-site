@@ -14,7 +14,7 @@
     "donors": "Donors & investors",
     "knowledge": "Knowledge base",
     "calculators": "Calculators",
-    "news": "News",
+    "news": "News & articles",
     "subscriptions": "Subscriptions",
     "directions": "Engineering fields",
     "tools": "Tools"
@@ -28,7 +28,8 @@
     "skipToContent": "Skip to main content",
     "login": "Sign in",
     "account": "Account",
-    "admin": "Admin"
+    "admin": "Admin",
+    "telegram": "CEE Telegram channel"
   },
   "Theme": {
     "light": "Light theme",
@@ -53,7 +54,9 @@
     "writeUs": "Write to us",
     "audiencesTitle": "Who we serve",
     "audiencesNav": "Who CEE serves",
-    "description": "Electricity, heat, water supply and wastewater: from needs and metering to solutions and verification of results."
+    "description": "Electricity, heat and water: from the problem to a verified result.",
+    "telegram": "CEE Telegram channel",
+    "newTab": " (opens in a new tab)"
   },
   "Common": {
     "detailsMore": "Learn more →",
@@ -70,176 +73,155 @@
       "Water supply",
       "Wastewater"
     ],
-    "heroTitlePrefix": "We work across",
-    "heroTitleHighlight": "all building and utility systems",
-    "heroText": "CEE works with the client to identify engineering needs, compare solutions and prepare a well-founded project. Our clients may be communities, businesses, homeowners’ associations, institutions, developers or private clients. We work with electricity, heat, water supply and wastewater systems. Electricity is often a practical starting point for metering, assessment and analysis, but it does not limit our scope.",
-    "heroStats": [
-      {
-        "value": "4",
-        "label": "engineering fields"
-      },
-      {
-        "value": "1",
-        "label": "coordinated plan for each site"
-      },
-      {
-        "value": "Evidence",
-        "label": "the basis for assessment and verification"
-      }
-    ],
-    "heroStatsSource": "Our approach, not a savings guarantee",
+    "heroTitlePrefix": "We help with",
+    "heroTitleHighlight": "electricity, heat and water",
+    "heroText": "We find where you overpay for electricity, heat and water, compare the options and prepare the project. We work with communities, businesses, homeowners’ associations and homeowners.",
     "ctaPrimary": "Discuss your needs",
-    "ctaSecondary": "Explore engineering fields",
-    "whyLabel": "Course of action",
-    "whyTitle": "Electricity is often a practical starting point",
-    "whyText": "Electricity use is often easier to measure and relate to operating patterns. This can make early assessments faster, but site condition, safety and needs determine priorities: heat, water or wastewater may need attention first.",
+    "ctaSecondary": "What we do",
+    "whyLabel": "Where to start",
+    "whyTitle": "Electricity is the easiest place to start",
+    "whyText": "It is easy to measure: there is a meter and there are bills. But if heating or water is the problem, we start there.",
     "whyItems": [
       {
-        "title": "Accessible metering",
-        "text": "Readings and interval profiles help identify peaks, baseload and anomalies."
+        "title": "The meter is already there",
+        "text": "Readings and bills show when and how much you use."
       },
       {
-        "title": "Scenario comparison",
-        "text": "We compare operating patterns, tariffs and technical limits before choosing equipment."
+        "title": "We compare options",
+        "text": "We work out several solutions before any equipment is bought."
       },
       {
-        "title": "Verifiable outcomes",
-        "text": "We compare before-and-after performance while accounting for changing loads and conditions."
+        "title": "We check the result",
+        "text": "We compare costs before and after the changes."
       },
       {
-        "title": "Connected systems",
-        "text": "Power for pumps, controls and heat substations connects electricity with water and heat."
+        "title": "Everything is connected",
+        "text": "Pumps and boilers run on electricity, so a change in one system affects the others."
       }
     ],
-    "whyFooter": "Solar PV and BESS are options, not a mandatory starting point. We assess them against load profiles, connection conditions, alternatives and lifecycle costs.",
+    "whyFooter": "We suggest solar panels and batteries only when the numbers show they pay off for you.",
     "segmentsLabel": "Who we serve",
-    "segmentsTitle": "Solutions shaped by the client’s needs",
-    "segmentsText": "A community, a business, an HOA, a developer, a donor and a private owner all face different constraints: ownership form, decision-making, access to financing and consumption patterns. One-size-fits-all doesn't work here — so each segment has its own entry point.",
+    "segmentsTitle": "Who we help",
+    "segmentsText": "Everyone has their own tasks and budget, so each has its own section.",
     "segments": [
       {
         "href": "/community",
         "title": "Communities and utilities",
-        "text": "Electrical and heat networks, water supply, wastewater and public-building systems."
+        "text": "Networks, boiler houses, water supply and sewerage, schools and hospitals."
       },
       {
         "href": "/business",
         "title": "Business and industry",
-        "text": "Reliable engineering systems, resource balances, process requirements and investment cases."
+        "text": "Reliable power, heat and water for production without unnecessary costs."
       },
       {
         "href": "/osbb",
         "title": "Homeowner associations",
-        "text": "Shared electrical, heating and water systems, metering and upgrade priorities."
+        "text": "Shared building systems, metering and a repair plan."
       },
       {
         "href": "/developers",
         "title": "Developers and investors",
-        "text": "Engineering concepts, site constraints, specifications and staged investment preparation."
+        "text": "Engineering solutions for a new site before design starts."
       },
       {
         "href": "/donors",
         "title": "Donors, NGOs and investors",
-        "text": "Evidence-based engineering project preparation and verification against agreed indicators."
+        "text": "Projects with a clear goal and a verified result."
       },
       {
         "href": "/citizens",
         "title": "Private owners",
-        "text": "Home electricity, heating, water supply and wastewater options matched to actual needs."
+        "text": "Electricity, heating and water in your home."
       }
     ],
-    "competenciesLabel": "Competencies",
-    "competenciesTitle": "From survey to verification",
-    "competenciesText": "We connect technical analysis, solution preparation and support for agreed stages. Scope, responsibilities and acceptance criteria are defined before work begins.",
+    "competenciesLabel": "How we work",
+    "competenciesTitle": "Four steps",
+    "competenciesText": "Before we start, we agree on what we do, who is responsible for what and how we will check the result.",
     "competencies": [
       {
         "n": "01",
-        "title": "Survey and measurements",
-        "text": "Condition of electrical, heating and water systems; metering, operating patterns, losses and critical needs.",
+        "title": "Survey",
+        "text": "We look at how electricity, heat and water work, where the losses are and what is missing.",
         "dialog": {
-          "why": "To choose solutions based on your facility’s condition rather than a standard equipment offer. Together, we identify critical systems and gaps in the available evidence.",
-          "data": "Existing diagrams and equipment descriptions, meter readings and bills, operating patterns, reported faults and user needs. If evidence is missing, we agree what needs to be collected or measured.",
-          "result": "A description of the baseline condition, identified constraints and evidence gaps, and agreed next steps.",
-          "limits": "We agree the scope of inspection and measurements separately. A preliminary survey does not replace mandatory assessments, testing or design documentation; any need for specialist contractors is clarified before work starts.",
-          "next": "Describe your facility and the issue you want to resolve. We will agree the required inputs and the scope of the first stage."
+          "why": "To choose a solution for your site, not for equipment someone wants to sell.",
+          "data": "Drawings, meter readings, bills, operating schedule, a list of problems. If something is missing, we tell you what to collect.",
+          "result": "A description of how the systems work now, a list of problems and a plan of next steps.",
+          "limits": "A survey does not replace mandatory inspections or design documents.",
+          "next": "Describe the site and the problem, and we will agree on the first step."
         }
       },
       {
         "n": "02",
-        "title": "Analysis and priorities",
-        "text": "Resource balances, scenario comparisons, risks, capital and operating costs.",
+        "title": "Analysis",
+        "text": "We compare options by cost, reliability and benefit.",
         "dialog": {
-          "why": "To identify which measures should be considered first in light of safety, reliability, costs and the client’s needs.",
-          "data": "Survey findings, resource metering, operating patterns, technical constraints, budget expectations and reliability requirements. Assumptions and missing evidence are stated explicitly.",
-          "result": "A comparison of scenarios, a reasoned order of priorities and indicators for assessing the outcome.",
-          "limits": "The accuracy of conclusions depends on the inputs and assumptions. Preliminary calculations do not guarantee savings, a payback period or feasibility.",
-          "next": "Tell us about your main constraints and expectations. We will identify which scenarios are worth comparing."
+          "why": "To understand what to do first.",
+          "data": "Survey results, metering data, constraints and budget.",
+          "result": "A comparison of options and the order of measures.",
+          "limits": "A preliminary calculation is an estimate, not a guarantee of savings or payback.",
+          "next": "Tell us what matters most to you, and we will compare the options."
         }
       },
       {
         "n": "03",
-        "title": "Solution preparation",
-        "text": "Concepts, pre-feasibility studies, specifications and materials for investment decisions.",
+        "title": "Solution",
+        "text": "We prepare a concept, a technical specification and calculations for an investor or a programme.",
         "dialog": {
-          "why": "To turn the selected approach into a clear brief for the next stage and an informed decision by the client.",
-          "data": "Agreed priorities, facility data, outcome requirements, site constraints, available budget and the decision-making process.",
-          "result": "An agreed set of materials: a concept, pre-feasibility study, technical brief or investment decision materials, depending on the commissioned scope.",
-          "limits": "We agree the content and level of detail before starting. Concepts and pre-feasibility studies do not replace detailed design, permits or mandatory approvals.",
-          "next": "Tell us which decision needs to be made and who will use the materials. We will agree the deliverables."
+          "why": "To have a clear document for a decision, a tender or fundraising.",
+          "data": "The chosen option, site data, budget and who makes the decision.",
+          "result": "A concept, pre-feasibility study or technical specification — we agree on which one in advance.",
+          "limits": "These documents do not replace design work or permits.",
+          "next": "Tell us what decision needs to be made, and we will prepare the documents."
         }
       },
       {
         "n": "04",
-        "title": "Support and verification",
-        "text": "Procurement support, agreed acceptance criteria and post-implementation performance monitoring.",
+        "title": "Support",
+        "text": "We help with procurement and check the result after the works.",
         "dialog": {
-          "why": "To maintain the agreed requirements during implementation and assess the outcome using evidence after completion, rather than simply confirming that equipment has been installed.",
-          "data": "The agreed brief, contractor proposals, acceptance criteria, work schedule, baseline indicators and post-implementation metering data.",
-          "result": "Within the agreed scope: materials for comparing proposals, checking conformity with requirements and monitoring indicators, with explanations of deviations.",
-          "limits": "CEE’s role, contractors’ responsibilities and the limits of verification are agreed separately. Support does not automatically include designer or statutory technical supervision; performance is assessed in the context of operating conditions.",
-          "next": "Describe the project stage and the support you need. We will agree our role, how we work together and the verification criteria."
+          "why": "To get what you ordered and see the effect in numbers.",
+          "data": "Specification, contractor offers, work schedule, metering before and after.",
+          "result": "A comparison of offers, a check of the works and a report on the result.",
+          "limits": "Our role and the contractors' responsibilities are set out in the contract.",
+          "next": "Tell us what stage the project is at, and we will suggest how we can help."
         }
       }
     ],
-    "diagramLabel": "An example from one field",
-    "diagramTitle": "Possible elements of an electricity system",
-    "diagramText": "This diagram covers electricity, not the full range of CEE services. Select a node to explore its role. The configuration depends on metering, loads and site constraints.",
+    "diagramLabel": "Example",
+    "diagramTitle": "What a power supply system can look like",
+    "diagramText": "Click an element of the diagram to see what it does. Your site will have its own set.",
     "ctaTitle": "Have a question about your site?",
     "ctaText": "Describe the situation — we'll tell you where to start.",
-    "toolsLabel": "Tools and support",
-    "toolsTitle": "Explore the numbers, commission a service or arrange ongoing support",
-    "toolsText": "Tools help frame questions and preliminary scenarios. Calculations do not replace a site survey or a design decision.",
+    "toolsLabel": "Tools",
+    "toolsTitle": "Calculate it yourself or order a service",
+    "toolsText": "Calculators give a first estimate. A survey gives the precise answer.",
     "tools": [
       {
         "href": "/calculators",
         "title": "Effect calculators",
-        "text": "BESS optimiser, day-ahead arbitrage, financing, express estimates for solar and demand management.",
+        "text": "A quick estimate for a solar plant, battery, financing and consumption.",
         "cta": "Calculate"
       },
       {
         "href": "/services",
         "title": "Services",
-        "text": "Surveys, concepts / pre-feasibility, specifications, investment preparation, procurement support and monitoring.",
+        "text": "Survey, calculations, technical specification, procurement support and checking the result.",
         "cta": "Browse the catalogue"
       },
       {
         "href": "/subscriptions",
         "title": "Ongoing support",
-        "text": "Outsourced energy manager, monitoring and dashboards, regulatory support, knowledge base with the consultant.",
+        "text": "An outsourced energy manager, consumption monitoring and consultations.",
         "cta": "What is included"
       }
     ],
-    "freshLabel": "Fresh",
+    "freshLabel": "Latest",
     "freshTitle": "News and articles",
-    "freshNews": "News digests",
-    "freshBlog": "Articles",
-    "freshAll": "All",
+    "freshAll": "All materials",
     "freshRead": "Read",
-    "freshNoNews": "The first issue is in preparation.",
-    "freshNoPosts": "Articles are in preparation.",
-    "freshLocalTag": "Local news",
-    "freshEnergyTag": "Energy",
     "directionsLabel": "Engineering fields",
-    "directionsTitle": "Four fields, one evidence-based approach",
+    "directionsTitle": "What we do",
     "competencyDialogLabels": {
       "open": "Learn more: {title}",
       "close": "Close",
@@ -318,67 +300,67 @@
   },
   "OsbbPage": {
     "metaTitle": "For HOAs",
-    "metaDescription": "Shared building systems: electricity, heat, water and wastewater; metering, priorities and upgrade preparation.",
-    "title": "Engineering solutions for homeowner associations",
-    "intro": "We work with shared electrical, heat, water and wastewater systems. Electricity metering often provides a practical starting point, but failures, safety and residents’ needs determine priorities. Below are preparation steps and funding information whose terms must be checked before applying.",
-    "whyTitle": "What we assess before an upgrade",
+    "metaDescription": "Electricity, heating, water and sewerage in your building: what to check, what to repair first and where to find funding.",
+    "title": "We help homeowners’ associations with building systems",
+    "intro": "Electricity, heating, water and sewerage in shared areas. We help decide what to repair first and prepare documents for financing programmes.",
+    "whyTitle": "What we check in the building",
     "whyItems": [
       {
-        "title": "Electricity supply",
-        "text": "Metering, power quality and reliability, load management and the case for on-site generation or backup."
+        "title": "Electricity",
+        "text": "Switchboards, stairwell lighting, lifts and pumps, metering."
       },
       {
-        "title": "Heat supply",
-        "text": "Heat sources, distribution, control and the heating requirements of buildings and industrial processes."
+        "title": "Heating",
+        "text": "Heat substation, risers, controls, heat losses."
       },
       {
-        "title": "Water supply",
-        "text": "Reliable water delivery, metering, pressure, losses and the energy use of pumping equipment."
+        "title": "Water",
+        "text": "Pressure on upper floors, pumps, metering, leaks."
       },
       {
-        "title": "Wastewater systems",
-        "text": "Collection, conveyance, pumping stations and preparation of treatment options suited to the site."
+        "title": "Sewerage",
+        "text": "Condition of basement pipes, blockages, pumps if there are any."
       }
     ],
     "programsTitle": "Financing programs",
-    "programsText": "These programmes are provided by external organisations. CEE helps the client prepare the project and documents; it does not issue loans or guarantee funding. The relevant bank or Fund makes the decision. Check status and terms before applying.",
-    "stepsTitle": "Course of action",
-    "stepsText": "The sequence is tailored to building condition, co-owner decisions and the selected programme’s requirements.",
+    "programsText": "Bank and fund programmes through which associations can get money for repairs. We help prepare the project and documents. The bank or fund decides on financing — check the terms before applying.",
+    "stepsTitle": "How it works",
+    "stepsText": "The steps may change depending on the building and the owners’ decisions.",
     "steps": [
       {
-        "title": "Clarify needs",
-        "text": "Gather residents’ concerns, incident records and critical shared-property needs."
+        "title": "What is wrong",
+        "text": "We collect residents’ complaints and emergency problems."
       },
       {
-        "title": "Collect evidence and survey systems",
-        "text": "Metering of electricity, heat and water; condition of pumps, networks and drainage; identify gaps."
+        "title": "Survey",
+        "text": "We check metering, pumps, networks and sewerage."
       },
       {
-        "title": "Compare priorities",
-        "text": "Consider safety, reliability, cost, potential benefits and operating requirements."
+        "title": "What comes first",
+        "text": "We compare options by safety, cost and benefit."
       },
       {
-        "title": "Agree an option",
-        "text": "Prepare alternatives for co-owners and identify necessary decisions and documents."
+        "title": "Owners’ decision",
+        "text": "We prepare options for the owners and the necessary documents."
       },
       {
-        "title": "Prepare funding and procurement",
-        "text": "Compare programme requirements, available resources and the specification."
+        "title": "Funding and contractor",
+        "text": "We find a financing programme and prepare the technical specification."
       },
       {
-        "title": "Verify delivery",
-        "text": "Agree acceptance criteria and ongoing performance monitoring."
+        "title": "Check",
+        "text": "We check the works and the result using metering data."
       }
     ],
-    "remindersTitle": "Worth remembering",
+    "remindersTitle": "Good to know",
     "reminders": [
-      "The information on this page is for guidance only. Final terms are set by the program administrator.",
-      "Submitting an application doesn't guarantee approval. The decision is made by the program's committee.",
-      "We don't publish approval statistics or savings examples we can't back with a source.",
-      "Before making financial decisions, we recommend confirming the terms directly with the program administrator or bank."
+      "Programme terms are set by the programme administrator — this page is for information only.",
+      "Submitting an application does not mean it will be approved.",
+      "We do not publish savings examples until we can back them up with documents.",
+      "Before making financial decisions, check the terms with the bank or programme administrator."
     ],
     "ctaTitle": "Not sure where to start?",
-    "ctaText": "Describe the building's condition and what's already been done — we'll suggest the right path for your HOA.",
+    "ctaText": "Tell us what worries you about the building and what has already been done, and we will suggest where to start.",
     "ctaButton": "Get a consultation"
   },
   "ProgramCard": {
@@ -528,170 +510,170 @@
     "scenarioMessage": "I would like to discuss: {topic}."
   },
   "CitizensPage": {
-    "heroLabel": "For Residents",
-    "heroTitle": "Engineering for your home",
-    "heroText": "Electricity, heating, water and wastewater systems should work together. We help assess system condition, costs and household needs, compare options and prepare the next step. Solar PV and battery storage are only some of the possibilities.",
+    "heroLabel": "For homeowners",
+    "heroTitle": "Electricity, heat and water in your home",
+    "heroText": "We help you understand where your money for power, heating and water goes and what is worth changing. Solar panels and a battery are just one of the options.",
     "ctaPrimary": "Get a consultation",
     "ctaSecondary": "For HOAs",
-    "whyLabel": "Why consider it",
-    "whyTitle": "Comfort, reliability and cost control",
-    "whyText": "The home’s needs determine the solution. We do not promise autonomy or savings without assessment and a check of constraints.",
+    "whyLabel": "Why it matters",
+    "whyTitle": "Heat, light and control over costs",
+    "whyText": "We choose solutions for your home. We do not promise savings without a calculation.",
     "whyItems": [
       {
-        "title": "Household needs",
-        "text": "Temperature, water, reliable power and wastewater collection matched to occupancy patterns."
+        "title": "What your family needs",
+        "text": "Heat, water and light — based on how you live."
       },
       {
-        "title": "Evidence-based costs",
-        "text": "Metering, bills and equipment condition reveal opportunities and constraints."
+        "title": "Bills and metering",
+        "text": "Bills and readings show where you can save."
       },
       {
-        "title": "A staged approach",
-        "text": "Start with urgent risks, compare options and agree the scope of work."
+        "title": "Step by step",
+        "text": "The most important things first, the rest later, within your budget."
       }
     ],
     "solutionsLabel": "Options",
-    "solutionsTitle": "What's possible for your home",
-    "solutionsText": "We compare alternatives in each field and consider how they affect one another.",
+    "solutionsTitle": "What can be done at home",
+    "solutionsText": "A change in one system affects the others, so we look at the whole house.",
     "solutions": [
       {
-        "title": "Electricity supply",
-        "text": "Metering, power quality and reliability, load management and the case for on-site generation or backup."
+        "title": "Electricity",
+        "text": "Reliable wiring, metering, backup during outages, solar panels."
       },
       {
-        "title": "Heat supply",
-        "text": "Heat sources, distribution, control and the heating requirements of buildings and industrial processes."
+        "title": "Heating",
+        "text": "A boiler or heat pump, radiators, controls, heat losses."
       },
       {
-        "title": "Water supply",
-        "text": "Reliable water delivery, metering, pressure, losses and the energy use of pumping equipment."
+        "title": "Water",
+        "text": "A well or mains water, a pump, pressure, filters."
       },
       {
-        "title": "Wastewater systems",
-        "text": "Collection, conveyance, pumping stations and preparation of treatment options suited to the site."
+        "title": "Sewerage",
+        "text": "A septic tank or sewer connection, a pump, maintenance."
       }
     ],
     "stepsLabel": "Process",
     "stepsTitle": "How it works",
-    "stepsText": "Timing and scope are defined after the task and available evidence are clarified.",
+    "stepsText": "We give timelines and costs once we understand the task.",
     "steps": [
       {
-        "title": "Needs",
-        "text": "Define the task, critical risks and the client’s expectations."
+        "title": "Task",
+        "text": "What worries you and what you want to achieve."
       },
       {
-        "title": "Metering and analysis",
-        "text": "Collect evidence, check its quality and establish a baseline."
+        "title": "Data",
+        "text": "Bills, meter readings, information about the equipment."
       },
       {
-        "title": "Priorities",
-        "text": "Compare safety, reliability, cost and potential benefits."
+        "title": "Options",
+        "text": "We compare cost, reliability and benefit."
       },
       {
-        "title": "Solutions",
-        "text": "Prepare a concept, specification and implementation plan for the agreed option."
+        "title": "Solution",
+        "text": "A work plan for the chosen option."
       },
       {
-        "title": "Verification",
-        "text": "Compare measured performance with the baseline and agreed criteria."
+        "title": "Check",
+        "text": "We compare costs before and after."
       }
     ],
-    "ctaTitle": "Ready to see what it costs?",
-    "ctaText": "Tell us about the home, the system of concern, bills and expectations so we can identify what is needed for assessment."
+    "ctaTitle": "Want to know how much it will cost?",
+    "ctaText": "Tell us about your home, your bills and what worries you, and we will tell you what we need for an estimate."
   },
   "CommunityPage": {
     "heroLabel": "For Community & NGOs",
-    "heroTitle": "Resilient community infrastructure",
-    "heroText": "For communities and municipal utilities, we work across electrical and heat systems, water supply and wastewater. We consider asset condition, residents’ needs, operating capacity and decision-making procedures.",
+    "heroTitle": "Reliable services for the community",
+    "heroText": "Electricity, heat, water and sewerage for public buildings and municipal utilities. We take into account the state of the networks, residents’ needs and the community budget.",
     "ctaPrimary": "Get a consultation",
     "ctaSecondary": "About CEE",
     "whyLabel": "Why it matters",
-    "whyTitle": "Service continuity and investment priorities",
-    "whyText": "We begin with evidence about assets and critical needs, rather than a specific technology or funding programme.",
+    "whyTitle": "Uninterrupted services and sensible investment",
+    "whyText": "We start from the needs and data of the facilities, not from equipment or a grant programme.",
     "whyItems": [
       {
-        "title": "Service priorities",
-        "text": "Assess how power, heat and water interruptions and wastewater performance affect residents and public facilities."
+        "title": "What matters most",
+        "text": "We assess how power, heat and water outages affect people and institutions."
       },
       {
-        "title": "Funding preparation",
-        "text": "Help structure the need, evidence, budget scenarios and review materials."
+        "title": "Finding funding",
+        "text": "We prepare the project description, calculations and documents for donors and programmes."
       },
       {
-        "title": "Operation after delivery",
-        "text": "Account for staff, maintenance, consumables and performance verification."
+        "title": "Operation after launch",
+        "text": "We take into account who will maintain the equipment and with what money."
       }
     ],
     "objectsLabel": "Facilities",
-    "objectsTitle": "Who we work with",
-    "objectsText": "Each facility type has different constraints. We design solutions for what you have.",
+    "objectsTitle": "Facilities we work with",
+    "objectsText": "Each type of building has its own requirements.",
     "objects": [
       {
-        "title": "Healthcare and social facilities",
-        "text": "Critical power, heating, hot and cold water, and safe wastewater collection."
+        "title": "Hospitals and social facilities",
+        "text": "Backup power, heating, hot and cold water, sewerage."
       },
       {
-        "title": "Education facilities",
-        "text": "Operating patterns, comfort, resource costs and internal network condition."
+        "title": "Schools and kindergartens",
+        "text": "Heat and light during classes, resource costs, the state of the networks."
       },
       {
         "title": "Municipal utilities",
-        "text": "Boiler houses, heat networks, water sources, pumping stations and wastewater facilities."
+        "text": "Boiler houses, heating networks, water intakes, pumping and treatment facilities."
       },
       {
         "title": "Community and volunteer centres",
-        "text": "User needs, reliable engineering systems and a practical sequence of measures."
+        "text": "Reliable light, heat and water for the people who come there."
       }
     ],
     "ctaTitle": "Let's figure it out together",
-    "ctaText": "Describe the assets, networks of concern, available metering and the community’s most urgent needs."
+    "ctaText": "Describe the facilities, the problem networks and the community’s priority needs."
   },
   "BusinessPage": {
     "heroLabel": "For Businesses",
-    "heroTitle": "Engineering systems for business",
-    "heroText": "Electricity, process heat, water and effluent affect production costs and continuity. We analyse resource balances, constraints and risks to prioritise upgrades. Solar PV and BESS are among the options where supported by evidence.",
+    "heroTitle": "Electricity, heat and water for business",
+    "heroText": "Outages and unnecessary resource costs hit your profit. We find where money is lost and what to do first. We suggest a solar plant or a battery only if the numbers show a benefit.",
     "ctaPrimary": "Get a consultation",
     "ctaSecondary": "Learn more",
-    "whyLabel": "Why this matters",
-    "whyTitle": "Cost, reliability and control",
-    "whyText": "Options are compared by their effect on the production process, whole-life costs and measurable indicators.",
+    "whyLabel": "Why it matters",
+    "whyTitle": "Lower costs and no downtime",
+    "whyText": "We compare options by their effect on production and their full cost.",
     "whyItems": [
       {
-        "title": "Resource balances",
-        "text": "Relate electricity, heat and water use to production volumes and operating patterns."
+        "title": "What you spend",
+        "text": "We compare electricity, heat and water costs with production volume."
       },
       {
-        "title": "Process reliability",
-        "text": "Identify critical systems, acceptable interruptions and backup requirements."
+        "title": "No downtime",
+        "text": "We identify what must always keep running and how to provide backup."
       },
       {
-        "title": "An evidence-based investment",
-        "text": "Assess alternatives and sensitivity to tariffs and utilisation; forecasts are not payback guarantees."
+        "title": "A sound investment",
+        "text": "We calculate the payback of several options. It is a forecast, not a guarantee."
       }
     ],
-    "scenariosLabel": "Scenarios",
-    "scenariosTitle": "Typical business challenges",
-    "scenariosText": "Each business has its own schedule and constraints. Here are common problems — here's how to solve them.",
+    "scenariosLabel": "What we do",
+    "scenariosTitle": "Typical tasks",
+    "scenariosText": "These are the questions businesses ask us most often.",
     "scenarios": [
       {
-        "title": "Electricity supply",
-        "text": "Metering, power quality and reliability, load management and the case for on-site generation or backup."
+        "title": "Electricity",
+        "text": "Peak loads, power quality, backup during outages, on-site generation."
       },
       {
-        "title": "Heat supply",
-        "text": "Heat sources, distribution, control and the heating requirements of buildings and industrial processes."
+        "title": "Heat",
+        "text": "Heating of workshops and process heat, boiler houses, waste-heat recovery."
       },
       {
-        "title": "Water supply",
-        "text": "Reliable water delivery, metering, pressure, losses and the energy use of pumping equipment."
+        "title": "Water",
+        "text": "Process water, pumps, metering and losses."
       },
       {
-        "title": "Wastewater systems",
-        "text": "Collection, conveyance, pumping stations and preparation of treatment options suited to the site."
+        "title": "Wastewater",
+        "text": "Industrial wastewater, pumping stations, discharge requirements."
       }
     ],
-    "ctaTitle": "Ready to get into details?",
-    "ctaText": "Describe the process, the system of concern, operating patterns and available metering data."
+    "ctaTitle": "Shall we discuss your business?",
+    "ctaText": "Tell us what you produce, which system is causing problems and what metering data you have."
   },
   "ServicesPage": {
     "heroLabel": "Single window",
@@ -2430,86 +2412,86 @@
     "privateHouseVideo": "Private-house illustration"
   },
   "DirectionsPage": {
-    "title": "CEE engineering fields",
-    "intro": "We work across electricity, heat, water supply and wastewater systems. We start with the site’s needs and evidence, compare options and set priorities before selecting equipment.",
-    "tasksLabel": "Tasks we assess",
-    "dataLabel": "Inputs for assessment",
-    "resultLabel": "Preparation outputs",
+    "title": "What we do",
+    "intro": "Electricity, heat, water and sewerage. First we understand your needs and data, then we choose the equipment.",
+    "tasksLabel": "What we look at",
+    "dataLabel": "What we need from you",
+    "resultLabel": "What you get",
     "details": "Explore: {direction}",
-    "processTitle": "From needs to verified results",
-    "scopeNote": "The scope, responsible specialists, required approvals and acceptance criteria are defined for each site. A preliminary assessment does not replace detailed design or mandatory procedures.",
-    "cta": "Discuss your site’s needs",
-    "servicesLink": "Shared services",
+    "processTitle": "From the task to the result",
+    "scopeNote": "We define the scope of work and who is responsible for each site separately. A preliminary estimate does not replace a design.",
+    "cta": "Discuss your task",
+    "servicesLink": "All services",
     "items": [
       {
         "id": "electricity",
         "title": "Electricity supply",
-        "intro": "Metering, power quality and reliability, load management and the case for on-site generation or backup.",
+        "intro": "Metering, reliable power, consumption peaks, backup and on-site generation.",
         "tasks": [
-          "Consumption profiles, peak demand, losses and operating patterns.",
-          "Critical loads, acceptable interruptions and backup scenarios.",
-          "Comparison of operational measures, solar PV, BESS and other technical options."
+          "When and how much you use, where the peaks and losses are.",
+          "What must always keep running and how to provide backup.",
+          "Comparing options: changing operating modes, a solar plant, a battery and more."
         ],
-        "data": "Meter readings and bills, load profiles, network diagrams, connection conditions and a list of critical equipment.",
-        "result": "Prioritised measures, cost and benefit scenarios, requirements for the next stage and a verification plan based on metering."
+        "data": "Meter readings, bills, network diagram, connection conditions, a list of important equipment.",
+        "result": "What to do first, what it costs, what benefit it brings and how to check it."
       },
       {
         "id": "heat",
         "title": "Heat supply",
-        "intro": "Heat sources, distribution, control and the heating requirements of buildings and industrial processes.",
+        "intro": "Boilers and boiler houses, heating networks, control and heat losses.",
         "tasks": [
-          "Heat and fuel metering, temperature regimes and losses.",
-          "Assessment of boiler houses, heat substations, pumps and networks.",
-          "Comparison of controls, upgrades, heat recovery and heat-pump feasibility."
+          "Heat and fuel metering, temperatures, losses.",
+          "How the boiler house, heat substation, pumps and networks work.",
+          "Comparing options: controls, modernisation, a heat pump."
         ],
-        "data": "Heat and fuel consumption, temperatures, operating schedules, building and equipment characteristics and available energy sources.",
-        "result": "A heat balance and constraints, option comparisons, an upgrade concept and verification indicators adjusted for weather and operating conditions."
+        "data": "Heat and fuel use, temperatures, operating schedule, building and equipment data.",
+        "result": "Where heat is lost, a comparison of options and a modernisation plan."
       },
       {
         "id": "water",
         "title": "Water supply",
-        "intro": "Reliable water delivery, metering, pressure, losses and the energy use of pumping equipment.",
+        "intro": "Water supply and pressure, metering, losses and pumping costs.",
         "tasks": [
-          "Water balances, leaks and variable demand.",
-          "Pump operation, backup and pressure control.",
-          "Water-treatment needs and quality requirements, including necessary investigations."
+          "How much water is supplied and how much arrives, where the leaks are.",
+          "How the pumps, backup and pressure work.",
+          "Whether water treatment is needed and which tests to do."
         ],
-        "data": "Supply and consumption volumes, pressures, network diagrams, pump characteristics, existing analyses and user requirements.",
-        "result": "A survey and measurement plan, priorities for reducing losses and improving reliability, and requirements for the technical solution."
+        "data": "Supply and consumption volumes, pressure, network diagram, pump data, water tests.",
+        "result": "A measurement plan and what to do to cut losses and supply water without interruptions."
       },
       {
         "id": "wastewater",
         "title": "Wastewater systems",
-        "intro": "Collection, conveyance, pumping stations and preparation of treatment options suited to the site.",
+        "intro": "Sewer networks, pumping stations and wastewater treatment.",
         "tasks": [
-          "Effluent volumes and composition, variable inflows and network condition.",
-          "Wastewater pumping station operation, backup and energy use.",
-          "Treatment constraints, sludge management and required approvals."
+          "How much wastewater there is, what kind, and the state of the networks.",
+          "How the pumping stations work, backup and electricity use.",
+          "What treatment requires and which approvals are needed."
         ],
-        "data": "Flow measurements and effluent analyses, network and facility diagrams, operating logs, incidents and applicable acceptance or discharge requirements.",
-        "result": "Required investigations, technology options and risks, upgrade phasing and requirements for subsequent design."
+        "data": "Wastewater volumes and tests, diagram of networks and facilities, incident logs, discharge requirements.",
+        "result": "Which studies are needed, solution options, risks and the order of works."
       }
     ],
     "process": [
       {
-        "title": "Needs",
-        "text": "Define the task, critical risks and the client’s expectations."
+        "title": "Task",
+        "text": "We find out what the problem is and what matters most to you."
       },
       {
-        "title": "Metering and analysis",
-        "text": "Collect evidence, check its quality and establish a baseline."
+        "title": "Data",
+        "text": "We collect readings, bills and information about the equipment."
       },
       {
-        "title": "Priorities",
-        "text": "Compare safety, reliability, cost and potential benefits."
+        "title": "Options",
+        "text": "We compare them by safety, reliability, cost and benefit."
       },
       {
-        "title": "Solutions",
-        "text": "Prepare a concept, specification and implementation plan for the agreed option."
+        "title": "Solution",
+        "text": "We prepare a concept, a specification and a work plan."
       },
       {
-        "title": "Verification",
-        "text": "Compare measured performance with the baseline and agreed criteria."
+        "title": "Check",
+        "text": "We compare the result after the works with how things were before."
       }
     ]
   },
@@ -2518,7 +2500,7 @@
     "subtitle": "Energy and climate resilience for the community",
     "home": {
       "title": "Energy and climate resilience for communities",
-      "body": "CEE helps communities and municipal utilities prepare well-founded solutions for electricity and heat supply, water supply and wastewater services. We analyse resource consumption, infrastructure condition and facility needs, and prepare technical requirements, preliminary technical and economic assessments, and project concepts. The aim is more reliable services, lower resource losses and a prepared portfolio of modernisation projects.",
+      "body": "We help communities and municipal utilities with electricity, heat, water and sewerage: we analyse consumption and the state of the networks, compare options and prepare technical requirements and concepts. The goal is more reliable services, lower losses and ready projects for modernisation.",
       "cta": "For communities and municipal utilities"
     },
     "community": {
@@ -2555,5 +2537,30 @@
       "status": "Development direction",
       "clarification": "This describes a development concept, not the establishment of a hub or approval of its status."
     }
+  },
+  "Telegram": {
+    "title": "CEE on Telegram",
+    "text": "News, tips and announcements — short and to the point.",
+    "button": "Subscribe",
+    "newTab": " (opens in a new tab)"
+  },
+  "NewsPage": {
+    "metaTitle": "News & articles — CEE",
+    "metaDescription": "Energy news, local news from Ladyzhyn and CEE articles in plain language — all in one section.",
+    "label": "News & articles",
+    "title": "News & articles",
+    "intro": "What is changing in energy and what it means for you. Articles explain things in plain language; digests sum up the news with links to sources.",
+    "filtersAria": "What to show",
+    "filters": {
+      "all": "All",
+      "articles": "Articles",
+      "digests": "News digests"
+    },
+    "tagArticle": "Article",
+    "tagDigest": "Digest",
+    "tagLocal": "Local news",
+    "read": "Read",
+    "inUkrainian": "In Ukrainian",
+    "empty": "The first materials will appear here soon."
   }
 }
