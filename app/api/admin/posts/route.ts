@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
 import { desc } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { requireAdminSession } from "@/lib/auth/requireAdmin";
 import { PostSchema } from "@/lib/blog/postSchema";
+import { autoPublish } from "@/lib/telegram/channel";
 
 export async function GET() {
   const guard = await requireAdminSession();
@@ -22,6 +23,7 @@ export async function POST(req: NextRequest) {
       .insert(schema.posts)
       .values({ ...d, tag: d.tag || null, publishedAt: d.published ? new Date() : null })
       .returning();
+    if (created?.published) after(() => autoPublish("post", created.id));
     return NextResponse.json({ post: created }, { status: 201 });
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);

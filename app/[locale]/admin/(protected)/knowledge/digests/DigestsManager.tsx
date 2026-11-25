@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Plus, Pencil, Trash2, Loader2, ExternalLink, Eye, EyeOff, RefreshCw, Radio, Wand2, Newspaper, Rss } from "lucide-react";
+import { TelegramPublishButton } from "../../TelegramPublishButton";
 
 type Source = { id: number; name: string; url: string; category: string | null; enabled: boolean; lastFetchedAt: string | null; lastStatus: string | null; itemsCount: number };
 type News = { id: number; title: string; url: string; publishedAt: string | null; fetchedAt: string; summary: string | null; digestId: number | null; sourceName: string };
@@ -229,6 +230,7 @@ export function DigestsManager({ labels: l, categoryNames }: { labels: DigestLab
                   </span>
                   <span className="flex shrink-0 items-center gap-1">
                     {d.published && <a href={`/uk/knowledge/digests/${d.slug}`} target="_blank" rel="noreferrer" aria-label={l.open} className={iconBtn}><ExternalLink size={16} aria-hidden /></a>}
+                    {d.published && <TelegramPublishButton kind="digest" id={d.id} className={iconBtn} />}
                     <button type="button" onClick={() => togglePublish(d)} aria-label={d.published ? l.unpublish : l.publish} className={iconBtn}>{d.published ? <EyeOff size={16} aria-hidden /> : <Eye size={16} aria-hidden />}</button>
                     <button type="button" onClick={() => startEdit(d)} aria-label={l.edit} className={iconBtn}><Pencil size={16} aria-hidden /></button>
                     <button type="button" onClick={() => removeDigest(d)} aria-label={l.delete} className={`${iconBtn} hover:text-red-500`}><Trash2 size={16} aria-hidden /></button>

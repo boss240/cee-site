@@ -358,3 +358,20 @@ export const leadNotificationDeliveries = pgTable("lead_notification_deliveries"
   check("lead_notification_recipient_check", sql`length(${table.recipient}) <= 320 AND (${table.recipient} <> '' OR ${table.status} IN ('blocked', 'cancelled'))`),
   check("lead_notification_error_check", sql`${table.errorCode} IS NULL OR ${table.errorCode} ~ '^[a-z][a-z0-9_]{0,63}$'`),
 ]);
+
+// Публікації в публічний Telegram-канал ЦЕЕ: один запис на матеріал — захист від повторів.
+export const telegramChannelPosts = pgTable("telegram_channel_posts", {
+  id: serial("id").primaryKey(),
+  kind: varchar("kind", { length: 16 }).notNull(), // post | digest
+  itemId: integer("item_id").notNull(),
+  status: varchar("status", { length: 16 }).notNull().default("sending"), // sending | sent | failed | uncertain
+  attempts: integer("attempts").notNull().default(1),
+  messageId: integer("message_id"),
+  errorCode: varchar("error_code", { length: 64 }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+}, table => [
+  uniqueIndex("telegram_channel_posts_item_idx").on(table.kind, table.itemId),
+  check("telegram_channel_posts_kind_check", sql`${table.kind} IN ('post', 'digest')`),
+  check("telegram_channel_posts_status_check", sql`${table.status} IN ('sending', 'sent', 'failed', 'uncertain')`),
+]);

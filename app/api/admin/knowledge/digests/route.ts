@@ -1,9 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
 import { desc } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { requireAdminSession } from "@/lib/auth/requireAdmin";
 import { DigestSchema, toDate } from "@/lib/knowledge/adminSchemas";
 import { assignNewsToDigest } from "@/lib/knowledge/digests";
+import { autoPublish } from "@/lib/telegram/channel";
 
 export async function GET() {
   const guard = await requireAdminSession();
@@ -24,6 +25,7 @@ export async function POST(req: NextRequest) {
       .values({ ...d, periodFrom: toDate(periodFrom), periodTo: toDate(periodTo), publishedAt: d.published ? new Date() : null })
       .returning();
     if (newsIds?.length) await assignNewsToDigest(created.id, newsIds);
+    if (created?.published) after(() => autoPublish("digest", created.id));
     return NextResponse.json({ digest: created }, { status: 201 });
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);

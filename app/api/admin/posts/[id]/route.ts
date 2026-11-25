@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { requireAdminSession } from "@/lib/auth/requireAdmin";
 import { PostSchema } from "@/lib/blog/postSchema";
+import { autoPublish } from "@/lib/telegram/channel";
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const guard = await requireAdminSession();
@@ -29,6 +30,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     })
     .where(eq(schema.posts.id, postId))
     .returning();
+  if (becomesPublished && updated) after(() => autoPublish("post", updated.id));
   return NextResponse.json({ post: updated });
 }
 

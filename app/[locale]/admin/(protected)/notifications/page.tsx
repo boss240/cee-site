@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { requireAdminSession } from "@/lib/auth/requireAdmin";
 import { readOutboxHealth } from "@/lib/notify/outboxHealth";
 import { Link } from "@/i18n/navigation";
+import { TelegramChannelCard } from "./TelegramChannelCard";
 
 export const dynamic = "force-dynamic";
 const copy = {
@@ -54,6 +55,7 @@ export default async function NotificationsPage({ params }: { params: Promise<{ 
       <div><h1 className="text-2xl font-bold">{t.title}</h1><p className="mt-2 text-sm text-[var(--color-fg-muted)]">{t.intro}</p></div>
       <div className="flex items-center gap-4"><Link href="/admin/leads" className="text-sm underline">{t.leads}</Link><form method="get"><button type="submit" className="rounded border px-3 py-2 text-sm">{t.refresh}</button></form></div>
     </header>
+    <TelegramChannelCard locale={locale} />
     <div role="status" className="rounded-lg border p-4">
       <p className="font-semibold">{health.state === "ready" ? t.ready : health.state === "not_configured" ? t.absent : t.unavailable}</p>
       <p className="mt-2 text-sm">{t.flags}: {[health.captureEnabled, health.dispatchEnabled, health.scheduledTriggerEnabled].map(v => v ? t.on : t.off).join(" / ")}</p>

@@ -21,6 +21,15 @@ const list = (value?: string) => (value ?? "").split(",").map(v => v.trim()).fil
 const email = (value: string) => value.length <= 255 && /^[^\s<>@,;]+@[^\s<>@,;]+\.[^\s<>@,;]+$/.test(value);
 const record = (value: unknown): Record<string, unknown> => value !== null && typeof value === "object" ? value as Record<string, unknown> : {};
 
+/** Публічний канал ЦЕЕ — ніколи не адресат заявок (там контакти людей). */
+function isPublicChannel(chat: string): boolean {
+  const norm = (v: string) => v.trim().toLowerCase();
+  const url = process.env.NEXT_PUBLIC_TELEGRAM_CHANNEL_URL?.trim();
+  const fromUrl = url && /^https:\/\/t\.me\/[A-Za-z0-9_]{5,32}\/?$/.test(url) ? "@" + url.replace(/\/$/, "").split("/").pop() : "";
+  const blocked = [process.env.TELEGRAM_CHANNEL_ID ?? "", fromUrl].map(norm).filter(Boolean);
+  return blocked.includes(norm(chat));
+}
+
 /** One target only. Acceptance means provider acceptance, never inbox delivery/exactly-once. */
 export async function deliverTarget(target: DeliveryTarget, lead: LeadForMail): Promise<DeliveryOutcome> {
   if (!target.recipient) return result("blocked", "missing_recipient");
@@ -31,6 +40,7 @@ export async function deliverTarget(target: DeliveryTarget, lead: LeadForMail): 
   if (target.channel === "telegram") {
     if (!process.env.TELEGRAM_BOT_TOKEN || !process.env.TELEGRAM_CHAT_ID) return result("blocked", "missing_telegram_config");
     if (!list(process.env.TELEGRAM_CHAT_ID).includes(target.recipient)) return result("blocked", "recipient_config_changed");
+    if (isPublicChannel(target.recipient)) return result("blocked", "public_channel_recipient");
     if (!/^(?:-?\d+|@[A-Za-z][A-Za-z0-9_]{4,31})$/.test(target.recipient)) return result("dead", "invalid_recipient");
     try {
       const response = await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`, {

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Plus, Pencil, Trash2, Loader2, ExternalLink, Eye, EyeOff } from "lucide-react";
+import { TelegramPublishButton } from "../TelegramPublishButton";
 
 type Post = {
   id: number;
@@ -109,6 +110,9 @@ export function BlogManager({ labels: l }: { labels: Labels }) {
                   <span className="flex shrink-0 items-center gap-1">
                     {p.published && (
                       <a href={`/uk/blog/${p.slug}`} target="_blank" rel="noreferrer" aria-label={l.open} className="flex h-9 w-9 items-center justify-center rounded-lg text-[var(--color-fg-placeholder)] hover:bg-[var(--color-surface)] hover:text-[var(--color-brand-text)]"><ExternalLink size={16} aria-hidden /></a>
+                    )}
+                    {p.published && (
+                      <TelegramPublishButton kind="post" id={p.id} className="flex h-9 w-9 items-center justify-center rounded-lg text-[var(--color-fg-placeholder)] hover:bg-[var(--color-surface)] hover:text-[var(--color-brand-text)]" />
                     )}
                     <button type="button" onClick={() => togglePublish(p)} aria-label={p.published ? l.unpublish : l.publish} className="flex h-9 w-9 items-center justify-center rounded-lg text-[var(--color-fg-placeholder)] hover:bg-[var(--color-surface)] hover:text-[var(--color-brand-text)]">{p.published ? <EyeOff size={16} aria-hidden /> : <Eye size={16} aria-hidden />}</button>
                     <button type="button" onClick={() => startEdit(p)} aria-label={l.edit} className="flex h-9 w-9 items-center justify-center rounded-lg text-[var(--color-fg-placeholder)] hover:bg-[var(--color-surface)] hover:text-[var(--color-brand-text)]"><Pencil size={16} aria-hidden /></button>

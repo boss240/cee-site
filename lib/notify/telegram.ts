@@ -5,6 +5,15 @@
  *   TELEGRAM_BOT_TOKEN — токен бота від @BotFather
  *   TELEGRAM_CHAT_ID   — id чату або групи, куди писати (можна кілька через кому)
  */
+/** Публічний канал ЦЕЕ — ніколи не адресат заявок (там контакти людей). */
+function isPublicChannel(chat: string): boolean {
+  const norm = (v: string) => v.trim().toLowerCase();
+  const url = process.env.NEXT_PUBLIC_TELEGRAM_CHANNEL_URL?.trim();
+  const fromUrl = url && /^https:\/\/t\.me\/[A-Za-z0-9_]{5,32}\/?$/.test(url) ? "@" + url.replace(/\/$/, "").split("/").pop() : "";
+  const blocked = [process.env.TELEGRAM_CHANNEL_ID ?? "", fromUrl].map(norm).filter(Boolean);
+  return blocked.includes(norm(chat));
+}
+
 export function isTelegramConfigured() {
   return Boolean(process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID);
 }
@@ -12,7 +21,7 @@ export function isTelegramConfigured() {
 export async function sendTelegram(html: string) {
   if (!isTelegramConfigured()) return { skipped: true as const };
   const token = process.env.TELEGRAM_BOT_TOKEN!;
-  const chats = process.env.TELEGRAM_CHAT_ID!.split(",").map((s) => s.trim()).filter(Boolean);
+  const chats = process.env.TELEGRAM_CHAT_ID!.split(",").map((s) => s.trim()).filter(Boolean).filter((c) => !isPublicChannel(c));
 
   const results = await Promise.all(
     chats.map(async (chat_id) => {

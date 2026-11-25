@@ -351,4 +351,23 @@ CREATE INDEX "ai_call_unsettled_idx" ON "ai_call_reservations" ("id") WHERE "set
       "created_at" timestamptz NOT NULL DEFAULT now()
     );`,
   },
+  {
+    id: "0008_telegram_channel_posts",
+    // Additive only: records which site materials were posted to the public CEE channel.
+    sql: String.raw`CREATE TABLE "telegram_channel_posts" (
+      "id" serial PRIMARY KEY,
+      "kind" varchar(16) NOT NULL,
+      "item_id" integer NOT NULL,
+      "status" varchar(16) NOT NULL DEFAULT 'sending',
+      "attempts" integer NOT NULL DEFAULT 1,
+      "message_id" integer,
+      "error_code" varchar(64),
+      "created_at" timestamptz NOT NULL DEFAULT now(),
+      "updated_at" timestamptz NOT NULL DEFAULT now(),
+      CONSTRAINT "telegram_channel_posts_kind_check" CHECK ("kind" IN ('post', 'digest')),
+      CONSTRAINT "telegram_channel_posts_status_check" CHECK ("status" IN ('sending', 'sent', 'failed', 'uncertain'))
+    );
+--> statement-breakpoint
+CREATE UNIQUE INDEX "telegram_channel_posts_item_idx" ON "telegram_channel_posts" ("kind", "item_id");`,
+  },
 ];

@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { requireAdminSession } from "@/lib/auth/requireAdmin";
 import { DigestSchema, toDate } from "@/lib/knowledge/adminSchemas";
+import { autoPublish } from "@/lib/telegram/channel";
 
 type Ctx = { params: Promise<{ id: string }> };
 
@@ -22,6 +23,7 @@ export async function PUT(req: NextRequest, { params }: Ctx) {
   if (d.published && !current.publishedAt) patch.publishedAt = new Date();
   try {
     const [updated] = await db.update(schema.digests).set(patch).where(eq(schema.digests.id, id)).returning();
+    if (d.published && !current.publishedAt && updated) after(() => autoPublish("digest", updated.id));
     return NextResponse.json({ digest: updated });
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
